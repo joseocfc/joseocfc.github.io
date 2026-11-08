@@ -1,0 +1,69 @@
+{
+  "generated": "2026-11-07",
+  "source": "research/bakery-case-study.md Part 5 §g 'Launch week (2026-11-01 → 11-05)', from STATUS.md:161-183 in joseocfc/cfc-bakery-orders",
+  "launch": {
+    "date": "2026-11-01",
+    "time_note": "Evening, Pacific; deploy and lint workflows green at 01:56 UTC on 2 November",
+    "url": "https://communityfood.coop/bakery-orders/",
+    "commit": "0c0f9bb",
+    "quote": "bakery is live",
+    "quote_path": "STATUS.md:161"
+  },
+  "holiday_opening": "2026-11-04",
+  "schedule": {
+    "first_commit": "2026-06-12",
+    "target": "2026-08-15",
+    "target_source": "docs/build-roadmap.md:12 ('tested, debugged, and running by 2026-08-15')",
+    "actual": "2026-11-01",
+    "days_after_target": 78,
+    "days_from_first_commit": 142,
+    "scope_note": "The deli holiday layer (18 tickets, #38–#55) was added in October, after the bakery storefront was essentially done."
+  },
+  "columns": [
+    { "key": "date", "label": "Date" },
+    { "key": "event", "label": "Event" }
+  ],
+  "rows": [
+    {
+      "date": "2026-11-01",
+      "date_label": "11-01 evening",
+      "event": "Live on production; launch-fixes round N1/N4/N6 built overnight, two lanes both reviewed 9/10",
+      "items": ["Live on production", "Launch fixes N1, N4, N6 built overnight in two lanes", "Both lanes reviewed 9/10"],
+      "tickets": [],
+      "commits": ["0c0f9bb"]
+    },
+    {
+      "date": "2026-11-02",
+      "date_label": "11-02",
+      "event": "#26 checkout half built, reviewed, browser-passed, then José's five staging notes B1–B5; on production the same evening (87addcc)",
+      "items": ["#26 site-wide checkout built, reviewed and browser-passed", "José's five staging notes B1–B5 fixed", "On production the same evening"],
+      "tickets": [26],
+      "commits": ["87addcc"]
+    },
+    {
+      "date": "2026-11-03",
+      "date_label": "11-03",
+      "event": "#66 size price push: first version failed José's staging walk, rebuilt, on production the same day; Thanksgiving content regenerated from the copy doc; holiday walk PASSED, 18 holiday tickets closed",
+      "items": ["#66 size price push failed José's staging walk, was rebuilt, and reached production the same day", "Thanksgiving content regenerated from the copy doc", "Holiday walk PASSED; 18 holiday tickets closed"],
+      "tickets": [66],
+      "commits": []
+    },
+    {
+      "date": "2026-11-04",
+      "date_label": "11-04",
+      "event": "Holiday opens; #67 walk notes built 00:10–07:10 by an orchestrator + five Terminal lanes, \"all passed. push to main\"; nine never-reviewed holiday features reviewed read-only by nine fresh sessions, all 9/10; #69 allergens on production (\"stagging passed. push to main\")",
+      "items": ["Thanksgiving ordering opens", "#67 walk notes built 00:10–07:10 by an orchestrator and five lanes: \"all passed. push to main\"", "Nine holiday features built without a scored review, reviewed read-only by nine fresh sessions: all 9/10", "#69 allergens on production: \"stagging passed. push to main\""],
+      "tickets": [67, 69],
+      "commits": []
+    },
+    {
+      "date": "2026-11-05",
+      "date_label": "11-05",
+      "event": "#68 Health tab on staging; harness at 6089 assertion lines",
+      "items": ["#68 Health tab on staging", "Harness at 6,089 assertion lines"],
+      "tickets": [68],
+      "commits": []
+    }
+  ],
+  "volume_note": "No production order count exists in the repo; WooCommerce on production holds the real count. Do not chart order volume from this data."
+}

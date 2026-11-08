@@ -1,0 +1,143 @@
+<!-- bakery-architecture-wide.svg · lane A3 · Paste inline inside <figure class="diagram">, followed by bakery-architecture-narrow.svg. Below 1000px the narrow variant replaces this one (CSS below). Source: data/architecture.json (cfc-bakery-orders @ f28ff68). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 24 1120 360" class="dgm dgm--wide dgm-arch" role="img" aria-labelledby="dgmArchW-t dgmArchW-d">
+  <title id="dgmArchW-t">How a bakery order moves through the system</title>
+  <desc id="dgmArchW-d">A customer builds a cake in the storefront, pickup first, then checks out; the date and store are re-checked at the click and WooCommerce creates the order. Each status change (to make, ready, picked up, or cancelled with a refund) drives the emails, the print list and the staff dashboards. Admin settings, catalogs and imports feed the builder. One token map feeds every surface: live CSS variables on the storefront, a snapshot in admin and print, inline literal values in email.</desc>
+  <style>
+    .dgm{color:var(--ink-3,#7A807B);font-family:var(--font-text,Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif)}
+    .dgm text{font-family:inherit}
+    .dgm .nd{fill:var(--paper,#F6F5F1);stroke:var(--line-strong,#C6C1B5);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .nd-acc{fill:var(--accent-soft,#DCE9F8);stroke:var(--accent,#2A78D6)}
+    .dgm .nd-ink{fill:var(--ink,#121412);stroke:var(--ink,#121412)}
+    .dgm .grp{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 4}
+    .dgm .pill{fill:var(--paper-2,#EDEBE4);stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .pill-x{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 3}
+    .dgm .rule{fill:none;stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .t{font-size:15px;font-weight:600;letter-spacing:-.01em;fill:var(--ink,#121412)}
+    .dgm .s{font-size:12.5px;fill:var(--ink-2,#4A4F4B)}
+    .dgm .s-ink{font-size:12.5px;font-weight:500;fill:var(--ink,#121412)}
+    .dgm .p{font-size:12px;font-weight:500;fill:var(--ink-2,#4A4F4B)}
+    .dgm .p-x{font-size:12px;fill:var(--ink-meta,#646A66)}
+    .dgm .m,.dgm .el{font-family:var(--font-mono,"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace);font-size:10.5px;fill:var(--ink-meta,#646A66)}
+    .dgm .m{letter-spacing:.08em}
+    .dgm .el{letter-spacing:.02em}
+    .dgm .acc{fill:var(--accent-ink,#1C5CAB)}
+    .dgm .on-ink{fill:var(--paper,#F6F5F1)}
+    .dgm .on-ink-2{fill:var(--paper,#F6F5F1);opacity:.7}
+    .dgm .e{fill:none;stroke:currentColor;stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-acc{fill:none;stroke:var(--accent,#2A78D6);stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-loop{stroke-dasharray:4 4}
+    .dgm .ah{fill:currentColor}
+    .dgm .ah-acc{fill:var(--accent,#2A78D6)}
+    .dgm .live{fill:var(--good,#1a7f37)}
+    .dgm .pulse{fill:var(--accent,#2A78D6)}
+    @media (prefers-reduced-motion:reduce){.dgm .pulse{display:none}}
+    .diagram .dgm--wide~.dgm--narrow{display:none}
+    @media (max-width:999.98px){.diagram .dgm--wide:has(~.dgm--narrow){display:none}.diagram .dgm--wide~.dgm--narrow{display:block;width:100%;max-width:480px;margin-inline:auto}}
+  </style>
+  <defs>
+    <marker id="dgmArchW-ah" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmArchW-aha" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah-acc" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmArchW-ahs" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+  </defs>
+
+  <!-- Row 1 · the order path -->
+  <rect class="nd" x="0.5" y="32.5" width="140" height="96" rx="10"/>
+  <text class="m" x="16" y="54">CUSTOMER</text>
+  <text class="t" x="16" y="76">Orders a cake</text>
+  <text class="s" x="16" y="96">Phone or laptop,</text>
+  <text class="s" x="16" y="112">picks up in store</text>
+
+  <rect class="nd" x="172.5" y="32.5" width="256" height="96" rx="10"/>
+  <text class="m" x="188" y="54">STOREFRONT</text>
+  <text class="t" x="188" y="76">Cake builder</text>
+  <text class="s" x="188" y="96">Pickup first, then size,</text>
+  <text class="s" x="188" y="112">flavour, frosting, extras</text>
+
+  <rect class="nd" x="460.5" y="32.5" width="192" height="96" rx="10"/>
+  <text class="m" x="476" y="54">STOREFRONT</text>
+  <text class="t" x="476" y="76">Cart and checkout</text>
+  <text class="s" x="476" y="96">Date and store are</text>
+  <text class="s" x="476" y="112">re-checked at the click</text>
+
+  <rect class="nd" x="684.5" y="32.5" width="435" height="96" rx="10"/>
+  <text class="m" x="700" y="54">WOOCOMMERCE</text>
+  <text class="t" x="700" y="76">Order and status</text>
+  <rect class="pill" x="700.5" y="88.5" width="70" height="24" rx="12"/>
+  <text class="p" x="735.5" y="104.5" text-anchor="middle">To make</text>
+  <path class="e" d="M771 100.5H791" marker-end="url(#dgmArchW-ahs)"/>
+  <rect class="pill" x="792.5" y="88.5" width="58" height="24" rx="12"/>
+  <text class="p" x="821.5" y="104.5" text-anchor="middle">Ready</text>
+  <path class="e" d="M851 100.5H871" marker-end="url(#dgmArchW-ahs)"/>
+  <rect class="pill" x="872.5" y="88.5" width="82" height="24" rx="12"/>
+  <text class="p" x="913.5" y="104.5" text-anchor="middle">Picked up</text>
+  <rect class="pill-x" x="970.5" y="88.5" width="132" height="24" rx="12"/>
+  <text class="p-x" x="1036.5" y="104.5" text-anchor="middle">Cancelled · refund</text>
+
+  <path class="e" d="M141 80.5H171" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M429 80.5H459" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M653 80.5H683" marker-end="url(#dgmArchW-ah)"/>
+
+  <!-- Each status change fans out -->
+  <path class="e" d="M902.5 129V164.5M560.5 164.5H1020.5"/>
+  <path class="e" d="M560.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M790.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M1020.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="910" y="152">each status change</text>
+
+  <!-- Row 2 · what an order triggers -->
+  <rect class="nd" x="460.5" y="200.5" width="200" height="96" rx="10"/>
+  <text class="m" x="476" y="222">NOTIFICATIONS</text>
+  <text class="t" x="476" y="244">Emails</text>
+  <text class="s" x="476" y="264">Confirmed, ready,</text>
+  <text class="s" x="476" y="280">changed, cancelled</text>
+
+  <rect class="nd" x="690.5" y="200.5" width="200" height="96" rx="10"/>
+  <text class="m" x="706" y="222">PRINTING</text>
+  <text class="t" x="706" y="244">Print list</text>
+  <text class="s" x="706" y="264">A click queues a job;</text>
+  <text class="s" x="706" y="280">a runner prints it</text>
+
+  <rect class="nd" x="920.5" y="200.5" width="199" height="96" rx="10"/>
+  <text class="m" x="936" y="222">STAFF</text>
+  <text class="t" x="936" y="244">Dashboards</text>
+  <text class="s" x="936" y="264">Bakery and deli,</text>
+  <text class="s" x="936" y="280">refresh every 60 s</text>
+
+  <!-- Admin feeds the builder -->
+  <rect class="grp" x="0.5" y="200.5" width="268" height="156" rx="12"/>
+  <text class="m" x="16" y="222">ADMIN · WP-ADMIN</text>
+  <rect class="nd" x="12.5" y="234.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="254">Settings</text>
+  <text class="el" x="244" y="254" text-anchor="end">10 tabs</text>
+  <rect class="nd" x="12.5" y="272.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="292">Catalogs and sizes</text>
+  <text class="el" x="244" y="292" text-anchor="end">9 catalogs</text>
+  <rect class="nd" x="12.5" y="310.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="330">Imports</text>
+  <text class="el" x="244" y="330" text-anchor="end">dry run → plan → apply</text>
+  <path class="e" d="M220.5 199.5V129.5" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="212" y="168" text-anchor="end">catalogs, sizes, prices</text>
+
+  <!-- One token map feeds every surface -->
+  <rect class="nd nd-acc" x="292.5" y="200.5" width="136" height="96" rx="10"/>
+  <text class="m acc" x="308" y="222">DESIGN TOKENS</text>
+  <text class="t" x="308" y="244">Token map</text>
+  <text class="s" x="308" y="264">tokens.php,</text>
+  <text class="s" x="308" y="280">200 names</text>
+  <path class="e-acc" d="M360.5 199.5V129.5" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el acc" x="368" y="168">LIVE</text>
+  <path class="e-acc" d="M360.5 297V324.5H1020.5"/>
+  <path class="e-acc" d="M560.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <path class="e-acc" d="M790.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <path class="e-acc" d="M1020.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el acc" x="568" y="316">INLINE</text>
+  <text class="el acc" x="798" y="316">SNAPSHOT</text>
+  <text class="el acc" x="1028" y="316">SNAPSHOT</text>
+
+  <!-- Legend -->
+  <path class="e" d="M0.5 372.5H26" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="34" y="376">order data</text>
+  <path class="e-acc" d="M112.5 372.5H138" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el" x="146" y="376">design tokens · LIVE on the storefront, SNAPSHOT in admin and print, INLINE in email</text>
+  <text class="el" x="1119" y="376" text-anchor="end">cfc-bakery-orders @ f28ff68</text>
+</svg>

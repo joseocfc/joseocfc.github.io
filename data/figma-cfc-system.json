@@ -1,0 +1,230 @@
+{
+  "generated": "2026-11-07",
+  "source": "research/figma-cfc-system.md (read-only Figma MCP pass: get_metadata, get_variable_defs, get_screenshot, get_design_context), cross-checked against the cfc-theme repo (theme.json, guides/design-system/token-system.md, figma-parity.md, figma-parity-check.py)",
+  "file": {
+    "name": "CFC System",
+    "key": "EMQTwlYkvcjG7cVJVi980v",
+    "url": "https://www.figma.com/design/EMQTwlYkvcjG7cVJVi980v/CFC-System",
+    "cover_stamp": "FROZEN v1.0 · 2026-07-17 · theme.json @ 1a43808 · PROVISIONAL until Jose ratifies",
+    "contract_version_now": "v1.1",
+    "ratified": "2026-07-18",
+    "ratified_source": "guides/design-system/token-system.md §7 (cfc-theme repo)",
+    "direction_of_truth": "ONE system in both directions: Figma-first drafts compose ONLY from these variables/components; code-first builds mirror any new design fact back here the same session.",
+    "direction_of_truth_source": "Cover card 171:9",
+    "naming_rule": {
+      "rule": "Figma variable = the token path after the WordPress prefix, slash-separated, slugs verbatim. Every variable's WEB code syntax is the exact emitted CSS variable, which is the join key the parity script uses.",
+      "source": "Cover card 171:15",
+      "examples": [
+        { "css": "--wp--preset--color--primary", "figma": "color/primary" },
+        { "css": "--wp--preset--spacing--60", "figma": "spacing/60" },
+        { "css": "--wp--preset--font-size--x-large", "figma": "font-size/x-large" },
+        { "css": "--wp--custom--radius--sm", "figma": "radius/sm" },
+        { "css": "--wp--custom--color--errorBg (emits error-bg)", "figma": "semantic/error-bg" }
+      ]
+    }
+  },
+  "pages": [
+    { "order": 1, "id": "0:1", "name": "Cover", "emoji": "📘", "kind": "system", "summary": "Contract stamp and the rules of the file: what this file is, pages, the naming rule, what is deliberately not a variable, and the pre-session rule." },
+    { "order": 2, "id": "158:2", "name": "CFC Design System", "emoji": "🎨", "kind": "system", "summary": "The one-canvas design system in nine numbered sections: colors, typography, spacing and radius, elevation, buttons, header and footer, icons, cards and forms (placeholders), usage and rules.", "frames": 186, "components": 116, "text_nodes": 288 },
+    { "order": 3, "id": "701:2", "name": "Token Board — ownership & sync", "emoji": "🗺", "kind": "governance", "summary": "Every token in exactly one of three buckets: THEME (frozen), BAKERY-ONLY (plugin-owned) and PROPOSED. Last synced 2026-08-07, 0 open sync bugs." },
+    { "order": 4, "id": "158:3", "name": "Changelog", "emoji": "🗓", "kind": "governance", "summary": "Dated change entries, newest first, in the format date · contract version · what · why · who.", "entries": 5 },
+    { "order": 5, "id": "180:2", "name": "Online bakery", "emoji": null, "kind": "product", "summary": "The full product-design workspace for bakery online ordering, June to October 2026: wireframes, a 13-screen mobile journey, the component kit, desktop A/B pairs, emails, a copy pass and a client feedback round.", "frames": 3073, "instances": 1029, "components": 82, "text_nodes": 3560 },
+    { "order": 6, "id": "295:1238", "name": "Homepage", "emoji": null, "kind": "product", "summary": "Newsletter pop-up, round 1: three layouts (split, one column, bottom bar) built from Popup input components and Button instances." },
+    { "order": 7, "id": "231:1196", "name": "Email", "emoji": null, "kind": "product", "summary": "New-product newsletter in three directions, with desktop and mobile columns.", "instances": 35 },
+    { "order": 8, "id": "348:1448", "name": "Search Function", "emoji": null, "kind": "empty", "summary": "Empty page." },
+    { "order": 9, "id": "357:81", "name": "Board of Directors", "emoji": null, "kind": "product", "summary": "Four website pages at 1440, each reusing Header / V2, Footer / B and Button instances from the library." },
+    { "order": 10, "id": "12:13", "name": "ARCHIVE pre-v1.0 · Zone A — Tokens", "emoji": "🗄", "kind": "archive", "summary": "Pre-freeze token specimens." },
+    { "order": 11, "id": "12:14", "name": "ARCHIVE pre-v1.0 · Zone A — Button System", "emoji": "🗄", "kind": "archive", "summary": "The old 6×3 button set, light and dark state matrices, a WCAG contrast table." },
+    { "order": 12, "id": "12:15", "name": "ARCHIVE pre-v1.0 · Zone B — Buttons", "emoji": "🗄", "kind": "archive", "summary": "Decision boards D1–D8 with PICK chips, closed 2026-07-03." },
+    { "order": 13, "id": "49:2", "name": "ARCHIVE pre-v1.0 · Zone B — Phase 3 · Header options", "emoji": "🗄", "kind": "archive", "summary": "Header redesign rounds: four options, six 'outside the box' options with cited research, a polish round, two finalists reconciled 2026-07-07.", "frames": 428 },
+    { "order": 14, "id": "109:2", "name": "ARCHIVE pre-v1.0 · Zone B — Phase 3 · Footer options", "emoji": "🗄", "kind": "archive", "summary": "Footer A (editorial) against B (soft panel), responsive variants of B, B picked." }
+  ],
+  "page_counts": { "total": 14, "system": 2, "governance": 2, "product": 4, "empty": 1, "archive": 5 },
+  "variable_collections": [
+    {
+      "n": 1, "name": "Primitives", "count": 46, "count_at_freeze": 43, "modes": ["Default"], "owner": "theme",
+      "contents": "10 brand colors (no senary), 4 neutrals + 3 v1.1 neutrals, 6 spacing steps (8–64), 6 radii, 5 alpha steps, layout/page 1280, 11 button scalars"
+    },
+    {
+      "n": 2, "name": "Semantic", "count": 6, "count_at_freeze": 8, "modes": ["Default"], "owner": "theme",
+      "contents": "error, error-text, error-bg, success, success-text, success-bg, aliased to primitives",
+      "note": "The notice / notice-bg pair was withdrawn at ratification on 2026-07-18."
+    },
+    {
+      "n": 3, "name": "Type", "count": 8, "count_at_freeze": 8, "modes": ["Mobile", "Desktop"], "owner": "theme",
+      "contents": "6 fluid font sizes + 2 families",
+      "mode_values_px": [
+        { "token": "small", "mobile": 14, "desktop": 15 },
+        { "token": "medium", "mobile": 16, "desktop": 17 },
+        { "token": "large", "mobile": 20, "desktop": 24 },
+        { "token": "x-large", "mobile": 24, "desktop": 32 },
+        { "token": "xx-large", "mobile": 30, "desktop": 44 },
+        { "token": "xxx-large", "mobile": 36, "desktop": 75 }
+      ],
+      "note": "Modes are the clamp() endpoints: Mobile = min, Desktop = max."
+    },
+    {
+      "n": 4, "name": "Bakery Type (proposed)", "count": 12, "count_at_freeze": null, "modes": ["Mobile", "Desktop"], "owner": "bakery plugin",
+      "contents": "12 bakery type sizes (price, price-total, tag, section-title, option-label, header-title, header-eyebrow, step-label, description, drawer-title, drawer-description, summary-row); code syntax --cfc-bakery-font-size-*",
+      "created": "2026-08-07",
+      "note": "Still named 'proposed' although the ramp was approved 2026-08-07."
+    },
+    {
+      "n": 5, "name": "Bakery (plugin-owned)", "count": 12, "count_at_freeze": null, "modes": ["Default"], "owner": "bakery plugin",
+      "contents": "5 bakery colors (cream, oat, body, muted, mint), text-xs, text-ui, radius-field, 4 admin layout sizes",
+      "created": "2026-08-07"
+    }
+  ],
+  "variable_totals": {
+    "all_collections": 84,
+    "theme_contract_collections": 60,
+    "theme_contract_note": "Collections 1–3 = 46 + 6 + 8 = 60, matching the Token Board's '60 variables + 5 shadow effect styles'.",
+    "at_freeze_2026_07_17": 59,
+    "effect_styles": 5,
+    "effect_style_names": ["shadow/drop", "shadow/sticky", "shadow/float", "shadow/lift", "shadow/sticky-up"],
+    "text_styles_role_map": 11,
+    "text_styles_bakery_approx": 12
+  },
+  "parity_runs": [
+    { "date": "2026-07-17", "event": "Full rebuild at the freeze", "result": "PASS", "contract_tokens": 92, "mirrored": 59, "documented_not_mirrored": 33, "deltas": 0, "source": "Changelog 2026-07-17" },
+    { "date": "2026-07-17", "event": "Online bakery page added", "result": "PASS", "contract_tokens": 90, "mirrored": 57, "documented_not_mirrored": 33, "deltas": 0, "source": "Changelog 2026-07-17 (second entry)" }
+  ],
+  "parity_checker": {
+    "path": "guides/design-system/figma-parity-check.py",
+    "lines": 221,
+    "language": "Python 3, standard library",
+    "how": "Dumps Figma variables through the MCP plugin API, joins on WEB code syntax, converts rem/em to px, alpha % to 0–1, fluid sizes to Mobile = min / Desktop = max, color-mix to flat hex, and checks the 5 effect styles.",
+    "pass_means": "exit 0, zero unexplained deltas in both directions",
+    "cover_rule": "Run the parity check — PASS required before designing."
+  },
+  "deliberately_not_variables": [
+    { "item": "z ladder (base 1 · raised 10 · sticky 50 · header 100 · modal 1000 · toast 1100)", "why": "Figma has no z axis — a bound-to-nothing number var is drift by construction" },
+    { "item": "transitions (250 / 200 / 300 / 400 ms)", "why": "no time axis in Figma" },
+    { "item": "line-height and tracking scalars", "why": "they ride text styles" },
+    { "item": "state/disabledOpacity 0.45", "why": null },
+    { "item": "button padding-top/bottom em pairs", "why": null },
+    { "item": "radius/round 50%", "why": null },
+    { "item": "contentSize 55em", "why": null },
+    { "item": "breakpoints 600 / 782 / 1024 / 1200", "why": null }
+  ],
+  "deliberately_not_variables_source": "Cover card 171:18; NOT_MIRRORED in figma-parity-check.py lines 19–57 (each entry names its reason; reasons quoted where the research records them)",
+  "components": {
+    "button_set": {
+      "id": "165:286",
+      "total_variants": 105,
+      "variants": 7,
+      "sizes": 3,
+      "states": 5,
+      "formula": "7 variants × 3 sizes × 5 states = 105",
+      "variant_names": ["Primary", "Secondary", "Tertiary", "Outline", "Accent", "Text", "Outline Inverse"],
+      "size_names": ["Small", "Medium", "Large"],
+      "size_min_height_px": { "Small": 44, "Medium": 48, "Large": 56 },
+      "state_names": ["Default", "Hover", "Focus", "Active", "Disabled"],
+      "boolean_props": ["Loading"],
+      "bound_to_variables": ["fill", "radius", "padding-x", "min-height"],
+      "focus_ring": "3px per-variant hue + 2px offset, no inner band (decision D6)",
+      "code_mapping": ".wp-block-button__link + is-style-{secondary|tertiary|outline|outline-inverse|accent|text} + .is-btn-{sm|lg}",
+      "history": [
+        { "date": "2026-07-17", "event": "Built at the freeze: 6 variants × 3 sizes × 5 states = 90", "components": 90 },
+        { "date": "2026-08-21", "event": "Outline Inverse added: 3 sizes × 5 states", "components_added": 15 }
+      ],
+      "contrast_examples": [
+        { "pair": "Primary", "ratio": "7.83:1", "level": "AAA" },
+        { "pair": "Accent", "ratio": "9.40:1", "level": "AAA" }
+      ],
+      "placement_rules": ["≤1 Primary per section", "Tertiary never beside Primary — two greens compete"]
+    },
+    "library": [
+      { "name": "Header / V2", "id": "168:9", "size": "1280×84", "note": "nests Header / Dropdown (Moss card) 169:5; JOIN and Sign-up are Button instances" },
+      { "name": "Footer / B", "id": "169:16", "size": "1280×350" },
+      { "name": "icon/*", "count": 8, "note": "search, burger, close, close-stroke, chevron-left, chevron-right, arrow-left, arrow-right; traced 1:1 from the theme's blocks, colorize via currentColor" },
+      { "name": "08 · Cards & Forms", "count": 0, "note": "Placeholder section; real card and form components live page-locally (bakery/final/*, Popup/*)" }
+    ],
+    "page_kits": [
+      { "page": "Online bakery", "name": "bakery/final/*", "count_approx": 36, "examples": ["option-card (Radio|Checkbox × Default|Selected)", "calendar + calendar-day (3 states)", "wizard-progress (5 segments)", "build-summary (Drawer / Sheet / Review: one component, three variants, one data model)", "cart-row", "express-pay", "status-chip"] },
+      { "page": "Homepage", "name": "Popup/*", "count": 3, "examples": ["Popup / Input · boxed", "Popup / Select · boxed", "Popup / Input · line"] }
+    ]
+  },
+  "instances_and_frames": [
+    { "page": "Online bakery", "frames": 3073, "instances": 1029, "components": 82, "text_nodes": 3560 },
+    { "page": "CFC Design System", "frames": 186, "instances": null, "components": 116, "text_nodes": 288 },
+    { "page": "Email", "frames": null, "instances": 35, "components": null, "text_nodes": null },
+    { "page": "ARCHIVE · Phase 3 · Header options", "frames": 428, "instances": null, "components": null, "text_nodes": null }
+  ],
+  "auto_layout_evidence": {
+    "inspected_nodes": ["165:17 Button Primary/Medium/Default", "620:2126 bakery/final/option-card", "636:2392 F5 · Builder · Step 1 — Pickup (full mobile screen)"],
+    "finding": "Flex (auto-layout) at every level; fills, strokes, radii, paddings and font sizes resolve to CSS variables. Literal px values appear only for component-internal micro-spacing. The only absolute positioning is inside the calendar grid rows.",
+    "max_instance_nesting": 3,
+    "nesting_example": "I636:2393;673:2037;621:2121"
+  },
+  "changelog": [
+    {
+      "date": "2026-08-21", "version": "v1.1",
+      "title": "Button variant 7: Outline Inverse",
+      "what": "Primary's colors plus a 2px color/tertiary inside border, for dark and Moss surfaces; hover is Primary's invert. 15 components added (3 sizes × 5 states). Code landed first, the same session. Zero new variables.",
+      "why": "A button for dark surfaces; both color pairs measure 7.83:1 (AAA).",
+      "who": "Claude (Fable), Jose's spec + in-session approval."
+    },
+    {
+      "date": "2026-07-24", "version": "v1.1",
+      "title": "Four additive tokens",
+      "what": "color/surface-mint, color/line-moss and color/text-muted promoted from component-local mixes, plus the effect style shadow/sticky-up. theme.json landed first (commit b015cdf).",
+      "why": "Close the mix loophole (José's decision of 2026-07-22). Additive minor: no renames, no removals.",
+      "who": null
+    },
+    {
+      "date": "2026-07-18", "version": "v1.0",
+      "title": "Online bakery V2 polish pass",
+      "what": "All 16 bakery frames re-issued after a product-design audit: mobile type follows the Type collection's Mobile values, UI weight to SemiBold, selected option-cards tinted, REQUIRED chips demoted, builder buttons at Small. Zero new variables.",
+      "why": "Mobile frames had been set with desktop-size type.",
+      "who": null
+    },
+    {
+      "date": "2026-07-17", "version": "v1.0",
+      "title": "Online bakery page added",
+      "what": "The bakery mobile flow rebuilt into the system overnight: 10 mobile frames and 6 desktop frames at 1280 with Header V2 and Footer B, a numbered 5-step stepper, composed only from library variables, role text styles and Button instances. Zero new variables.",
+      "why": null,
+      "who": null,
+      "parity": "PASS (90 contract tokens · 57 mirrored · 33 documented-not-mirrored · 0 deltas)"
+    },
+    {
+      "date": "2026-07-17", "version": "v1.0",
+      "title": "Full rebuild at the freeze",
+      "what": "Deleted the pre-freeze July set (4 collections, 56 variables, 11 styles) and rebuilt 3 collections / 59 variables to the frozen contract (1a43808), 4 shadow styles, 11 text styles, the Button set with every fill, radius, padding-x and min-height bound, Header V2, Footer B, 8 icons, sections 01–09 and a new Cover.",
+      "why": "Mirror the frozen theme.json contract exactly.",
+      "who": null,
+      "parity": "PASS (92 · 59 · 33 · 0)"
+    }
+  ],
+  "changelog_source": "Changelog page 158:3, frame 171:22. Fields summarise each entry; 'who' is quoted only where the entry states it in the research.",
+  "dated_events_outside_changelog": [
+    { "date": "2026-07-03", "event": "Button decisions D1–D8 closed", "where": "ARCHIVE page 12:15" },
+    { "date": "2026-07-07", "event": "Header and footer rounds reconciled (Finalist A + B)", "where": "ARCHIVE pages 49:2, 109:2" },
+    { "date": "2026-07-29", "event": "Bakery stakeholder meeting deck", "where": "417:1196" },
+    { "date": "2026-08-07", "event": "Token Board synced; collections 4 and 5 created", "where": "708:41, 711:11" },
+    { "date": "2026-08-11", "event": "Copy pass", "where": "926:2150" },
+    { "date": "2026-10-14", "event": "Client feedback screenshots", "where": "1874:5160" }
+  ],
+  "weaknesses": [
+    "The Cover still says 'PROVISIONAL until Jose ratifies' and v1.0, although ratification was recorded 2026-07-18 and the file is at v1.1.",
+    "The Changelog stops at 2026-08-21; the 2026-08-07 creation of collections 4 and 5 is only on the Token Board.",
+    "An empty 'Search Function' page and a typo ('Most updated Desing') on a prominent frame.",
+    "Section 08 · Cards & Forms is a placeholder; the library is button-complete, not component-complete.",
+    "Five ARCHIVE pages are still in the file.",
+    "Collection 4 is still named 'proposed' although approved 2026-08-07."
+  ],
+  "images": {
+    "cover": "/assets/img/figma/ds-cover-frozen-v1.0.jpg",
+    "colors": "/assets/img/figma/ds-colors.jpg",
+    "typography": "/assets/img/figma/ds-typography.jpg",
+    "spacing_radius": "/assets/img/figma/ds-spacing-radius.png",
+    "elevation": "/assets/img/figma/ds-elevation-effects.jpg",
+    "buttons": "/assets/img/figma/ds-buttons-105-variants.jpg",
+    "header_footer": "/assets/img/figma/ds-header-footer.jpg",
+    "icons": "/assets/img/figma/ds-icons.jpg",
+    "usage_rules": "/assets/img/figma/ds-usage-rules.jpg",
+    "token_board": "/assets/img/figma/token-board.jpg",
+    "changelog": "/assets/img/figma/changelog.jpg",
+    "thumbnail": "/assets/img/figma/file-thumbnail-cfc-web-design-2026.jpg"
+  }
+}

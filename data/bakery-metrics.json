@@ -1,0 +1,1993 @@
+{
+ "generated": "2026-11-07",
+ "repo": "joseocfc/cfc-bakery-orders",
+ "method": "git log --all (1503 commits, local time), gh issue list --state all, git ls-files + wc -l, git log -p on tests/cli/README.md and docs/assumptions-register.md",
+ "timeline": {
+  "first_commit": "2026-06-12",
+  "last_commit": "2026-11-05",
+  "launch": "2026-11-01",
+  "holiday_opening": "2026-11-04",
+  "days_to_launch": 142,
+  "total_commits": 1503,
+  "active_days": 59,
+  "contributors": 1,
+  "contributor_note": "every commit is authored joseocfc <joseo@communityfood.coop>; the agents commit under José's identity",
+  "branches": {
+   "local": 61,
+   "remote": 41
+  },
+  "plugin_version": "0.6.0",
+  "original_target_date": "2026-08-15",
+  "original_target_source": "docs/build-roadmap.md:12 — \"Target: tested, debugged, and running by 2026-08-15\"",
+  "days_late_vs_target": 78
+ },
+ "commits_by_day": [
+  {
+   "date": "2026-06-12",
+   "count": 1
+  },
+  {
+   "date": "2026-06-13",
+   "count": 0
+  },
+  {
+   "date": "2026-06-14",
+   "count": 0
+  },
+  {
+   "date": "2026-06-15",
+   "count": 0
+  },
+  {
+   "date": "2026-06-16",
+   "count": 0
+  },
+  {
+   "date": "2026-06-17",
+   "count": 0
+  },
+  {
+   "date": "2026-06-18",
+   "count": 0
+  },
+  {
+   "date": "2026-06-19",
+   "count": 0
+  },
+  {
+   "date": "2026-06-20",
+   "count": 0
+  },
+  {
+   "date": "2026-06-21",
+   "count": 0
+  },
+  {
+   "date": "2026-06-22",
+   "count": 0
+  },
+  {
+   "date": "2026-06-23",
+   "count": 0
+  },
+  {
+   "date": "2026-06-24",
+   "count": 1
+  },
+  {
+   "date": "2026-06-25",
+   "count": 1
+  },
+  {
+   "date": "2026-06-26",
+   "count": 0
+  },
+  {
+   "date": "2026-06-27",
+   "count": 0
+  },
+  {
+   "date": "2026-06-28",
+   "count": 0
+  },
+  {
+   "date": "2026-06-29",
+   "count": 0
+  },
+  {
+   "date": "2026-06-30",
+   "count": 0
+  },
+  {
+   "date": "2026-07-01",
+   "count": 0
+  },
+  {
+   "date": "2026-07-02",
+   "count": 0
+  },
+  {
+   "date": "2026-07-03",
+   "count": 0
+  },
+  {
+   "date": "2026-07-04",
+   "count": 0
+  },
+  {
+   "date": "2026-07-05",
+   "count": 0
+  },
+  {
+   "date": "2026-07-06",
+   "count": 3
+  },
+  {
+   "date": "2026-07-07",
+   "count": 2
+  },
+  {
+   "date": "2026-07-08",
+   "count": 0
+  },
+  {
+   "date": "2026-07-09",
+   "count": 1
+  },
+  {
+   "date": "2026-07-10",
+   "count": 0
+  },
+  {
+   "date": "2026-07-11",
+   "count": 0
+  },
+  {
+   "date": "2026-07-12",
+   "count": 0
+  },
+  {
+   "date": "2026-07-13",
+   "count": 1
+  },
+  {
+   "date": "2026-07-14",
+   "count": 1
+  },
+  {
+   "date": "2026-07-15",
+   "count": 0
+  },
+  {
+   "date": "2026-07-16",
+   "count": 0
+  },
+  {
+   "date": "2026-07-17",
+   "count": 3
+  },
+  {
+   "date": "2026-07-18",
+   "count": 7
+  },
+  {
+   "date": "2026-07-19",
+   "count": 0
+  },
+  {
+   "date": "2026-07-20",
+   "count": 5
+  },
+  {
+   "date": "2026-07-21",
+   "count": 0
+  },
+  {
+   "date": "2026-07-22",
+   "count": 0
+  },
+  {
+   "date": "2026-07-23",
+   "count": 0
+  },
+  {
+   "date": "2026-07-24",
+   "count": 0
+  },
+  {
+   "date": "2026-07-25",
+   "count": 0
+  },
+  {
+   "date": "2026-07-26",
+   "count": 0
+  },
+  {
+   "date": "2026-07-27",
+   "count": 0
+  },
+  {
+   "date": "2026-07-28",
+   "count": 2
+  },
+  {
+   "date": "2026-07-29",
+   "count": 10
+  },
+  {
+   "date": "2026-07-30",
+   "count": 0
+  },
+  {
+   "date": "2026-07-31",
+   "count": 0
+  },
+  {
+   "date": "2026-08-01",
+   "count": 0
+  },
+  {
+   "date": "2026-08-02",
+   "count": 0
+  },
+  {
+   "date": "2026-08-03",
+   "count": 0
+  },
+  {
+   "date": "2026-08-04",
+   "count": 1
+  },
+  {
+   "date": "2026-08-05",
+   "count": 3
+  },
+  {
+   "date": "2026-08-06",
+   "count": 6
+  },
+  {
+   "date": "2026-08-07",
+   "count": 12
+  },
+  {
+   "date": "2026-08-08",
+   "count": 3
+  },
+  {
+   "date": "2026-08-09",
+   "count": 0
+  },
+  {
+   "date": "2026-08-10",
+   "count": 13
+  },
+  {
+   "date": "2026-08-11",
+   "count": 2
+  },
+  {
+   "date": "2026-08-12",
+   "count": 0
+  },
+  {
+   "date": "2026-08-13",
+   "count": 0
+  },
+  {
+   "date": "2026-08-14",
+   "count": 0
+  },
+  {
+   "date": "2026-08-15",
+   "count": 0
+  },
+  {
+   "date": "2026-08-16",
+   "count": 0
+  },
+  {
+   "date": "2026-08-17",
+   "count": 0
+  },
+  {
+   "date": "2026-08-18",
+   "count": 0
+  },
+  {
+   "date": "2026-08-19",
+   "count": 0
+  },
+  {
+   "date": "2026-08-20",
+   "count": 0
+  },
+  {
+   "date": "2026-08-21",
+   "count": 0
+  },
+  {
+   "date": "2026-08-22",
+   "count": 0
+  },
+  {
+   "date": "2026-08-23",
+   "count": 0
+  },
+  {
+   "date": "2026-08-24",
+   "count": 0
+  },
+  {
+   "date": "2026-08-25",
+   "count": 0
+  },
+  {
+   "date": "2026-08-26",
+   "count": 2
+  },
+  {
+   "date": "2026-08-27",
+   "count": 0
+  },
+  {
+   "date": "2026-08-28",
+   "count": 0
+  },
+  {
+   "date": "2026-08-29",
+   "count": 0
+  },
+  {
+   "date": "2026-08-30",
+   "count": 0
+  },
+  {
+   "date": "2026-08-31",
+   "count": 0
+  },
+  {
+   "date": "2026-09-01",
+   "count": 1
+  },
+  {
+   "date": "2026-09-02",
+   "count": 0
+  },
+  {
+   "date": "2026-09-03",
+   "count": 0
+  },
+  {
+   "date": "2026-09-04",
+   "count": 0
+  },
+  {
+   "date": "2026-09-05",
+   "count": 0
+  },
+  {
+   "date": "2026-09-06",
+   "count": 0
+  },
+  {
+   "date": "2026-09-07",
+   "count": 0
+  },
+  {
+   "date": "2026-09-08",
+   "count": 5
+  },
+  {
+   "date": "2026-09-09",
+   "count": 0
+  },
+  {
+   "date": "2026-09-10",
+   "count": 5
+  },
+  {
+   "date": "2026-09-11",
+   "count": 0
+  },
+  {
+   "date": "2026-09-12",
+   "count": 0
+  },
+  {
+   "date": "2026-09-13",
+   "count": 0
+  },
+  {
+   "date": "2026-09-14",
+   "count": 0
+  },
+  {
+   "date": "2026-09-15",
+   "count": 11
+  },
+  {
+   "date": "2026-09-16",
+   "count": 0
+  },
+  {
+   "date": "2026-09-17",
+   "count": 0
+  },
+  {
+   "date": "2026-09-18",
+   "count": 3
+  },
+  {
+   "date": "2026-09-19",
+   "count": 11
+  },
+  {
+   "date": "2026-09-20",
+   "count": 0
+  },
+  {
+   "date": "2026-09-21",
+   "count": 0
+  },
+  {
+   "date": "2026-09-22",
+   "count": 21
+  },
+  {
+   "date": "2026-09-23",
+   "count": 0
+  },
+  {
+   "date": "2026-09-24",
+   "count": 0
+  },
+  {
+   "date": "2026-09-25",
+   "count": 15
+  },
+  {
+   "date": "2026-09-26",
+   "count": 0
+  },
+  {
+   "date": "2026-09-27",
+   "count": 4
+  },
+  {
+   "date": "2026-09-28",
+   "count": 0
+  },
+  {
+   "date": "2026-09-29",
+   "count": 0
+  },
+  {
+   "date": "2026-09-30",
+   "count": 0
+  },
+  {
+   "date": "2026-10-01",
+   "count": 5
+  },
+  {
+   "date": "2026-10-02",
+   "count": 0
+  },
+  {
+   "date": "2026-10-03",
+   "count": 0
+  },
+  {
+   "date": "2026-10-04",
+   "count": 0
+  },
+  {
+   "date": "2026-10-05",
+   "count": 0
+  },
+  {
+   "date": "2026-10-06",
+   "count": 29
+  },
+  {
+   "date": "2026-10-07",
+   "count": 0
+  },
+  {
+   "date": "2026-10-08",
+   "count": 13
+  },
+  {
+   "date": "2026-10-09",
+   "count": 5
+  },
+  {
+   "date": "2026-10-10",
+   "count": 20
+  },
+  {
+   "date": "2026-10-11",
+   "count": 12
+  },
+  {
+   "date": "2026-10-12",
+   "count": 22
+  },
+  {
+   "date": "2026-10-13",
+   "count": 74
+  },
+  {
+   "date": "2026-10-14",
+   "count": 39
+  },
+  {
+   "date": "2026-10-15",
+   "count": 0
+  },
+  {
+   "date": "2026-10-16",
+   "count": 0
+  },
+  {
+   "date": "2026-10-17",
+   "count": 9
+  },
+  {
+   "date": "2026-10-18",
+   "count": 58
+  },
+  {
+   "date": "2026-10-19",
+   "count": 27
+  },
+  {
+   "date": "2026-10-20",
+   "count": 78
+  },
+  {
+   "date": "2026-10-21",
+   "count": 27
+  },
+  {
+   "date": "2026-10-22",
+   "count": 50
+  },
+  {
+   "date": "2026-10-23",
+   "count": 15
+  },
+  {
+   "date": "2026-10-24",
+   "count": 25
+  },
+  {
+   "date": "2026-10-25",
+   "count": 92
+  },
+  {
+   "date": "2026-10-26",
+   "count": 307
+  },
+  {
+   "date": "2026-10-27",
+   "count": 1
+  },
+  {
+   "date": "2026-10-28",
+   "count": 71
+  },
+  {
+   "date": "2026-10-29",
+   "count": 74
+  },
+  {
+   "date": "2026-10-30",
+   "count": 81
+  },
+  {
+   "date": "2026-10-31",
+   "count": 40
+  },
+  {
+   "date": "2026-11-01",
+   "count": 29
+  },
+  {
+   "date": "2026-11-02",
+   "count": 12
+  },
+  {
+   "date": "2026-11-03",
+   "count": 66
+  },
+  {
+   "date": "2026-11-04",
+   "count": 36
+  },
+  {
+   "date": "2026-11-05",
+   "count": 30
+  },
+  {
+   "date": "2026-11-06",
+   "count": 0
+  },
+  {
+   "date": "2026-11-07",
+   "count": 0
+  }
+ ],
+ "commits_by_type": {
+  "docs": 734,
+  "merge": 45,
+  "other": 37,
+  "feat": 294,
+  "test": 166,
+  "fix": 211,
+  "chore": 16
+ },
+ "commits_by_hour": [
+  {
+   "hour": 0,
+   "count": 203
+  },
+  {
+   "hour": 1,
+   "count": 88
+  },
+  {
+   "hour": 2,
+   "count": 112
+  },
+  {
+   "hour": 3,
+   "count": 54
+  },
+  {
+   "hour": 4,
+   "count": 67
+  },
+  {
+   "hour": 5,
+   "count": 35
+  },
+  {
+   "hour": 6,
+   "count": 23
+  },
+  {
+   "hour": 7,
+   "count": 23
+  },
+  {
+   "hour": 8,
+   "count": 27
+  },
+  {
+   "hour": 9,
+   "count": 16
+  },
+  {
+   "hour": 10,
+   "count": 30
+  },
+  {
+   "hour": 11,
+   "count": 98
+  },
+  {
+   "hour": 12,
+   "count": 58
+  },
+  {
+   "hour": 13,
+   "count": 73
+  },
+  {
+   "hour": 14,
+   "count": 83
+  },
+  {
+   "hour": 15,
+   "count": 56
+  },
+  {
+   "hour": 16,
+   "count": 40
+  },
+  {
+   "hour": 17,
+   "count": 28
+  },
+  {
+   "hour": 18,
+   "count": 11
+  },
+  {
+   "hour": 19,
+   "count": 25
+  },
+  {
+   "hour": 20,
+   "count": 31
+  },
+  {
+   "hour": 21,
+   "count": 54
+  },
+  {
+   "hour": 22,
+   "count": 125
+  },
+  {
+   "hour": 23,
+   "count": 143
+  }
+ ],
+ "commits_by_weekday": {
+  "Thu": 185,
+  "Wed": 189,
+  "Tue": 294,
+  "Mon": 390,
+  "Sun": 195,
+  "Sat": 115,
+  "Fri": 135
+ },
+ "commits_by_month": {
+  "2026-06": 3,
+  "2026-07": 35,
+  "2026-08": 42,
+  "2026-09": 76,
+  "2026-10": 1174,
+  "2026-11": 173
+ },
+ "busiest_days": [
+  {
+   "date": "2026-10-26",
+   "count": 307
+  },
+  {
+   "date": "2026-10-25",
+   "count": 92
+  },
+  {
+   "date": "2026-10-30",
+   "count": 81
+  },
+  {
+   "date": "2026-10-20",
+   "count": 78
+  },
+  {
+   "date": "2026-10-29",
+   "count": 74
+  },
+  {
+   "date": "2026-10-13",
+   "count": 74
+  },
+  {
+   "date": "2026-10-28",
+   "count": 71
+  },
+  {
+   "date": "2026-11-03",
+   "count": 66
+  }
+ ],
+ "issues": [
+  {
+   "number": 1,
+   "title": "Spec: catalog-driven bakery backend (final wireframe decisions, 2026-08-05)",
+   "created": "2026-08-06",
+   "closed": null,
+   "state": "open",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 2,
+   "title": "Ticket 01: Catalog storage foundation (expand) + committed test harness",
+   "created": "2026-08-06",
+   "closed": "2026-09-15",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 3,
+   "title": "Ticket 02: Catalog admin CRUD screens",
+   "created": "2026-08-06",
+   "closed": "2026-09-22",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 4,
+   "title": "Ticket 03: Pickup-first wizard reorder",
+   "created": "2026-08-06",
+   "closed": "2026-09-15",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 5,
+   "title": "Ticket 04: Dietary defaults, conditional section, compatibility enforcement",
+   "created": "2026-08-06",
+   "closed": "2026-09-16",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 6,
+   "title": "Ticket 05: Size-based and negative pricing with itemized breakdown",
+   "created": "2026-08-06",
+   "closed": "2026-09-19",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 7,
+   "title": "Ticket 06: Decoration sub-choice dropdowns",
+   "created": "2026-08-06",
+   "closed": "2026-09-22",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 8,
+   "title": "Ticket 07: Custom message presets + per-size character limit",
+   "created": "2026-08-06",
+   "closed": "2026-09-19",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 9,
+   "title": "Ticket 08: Stale-selection invalidation reporting",
+   "created": "2026-08-06",
+   "closed": "2026-09-23",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 10,
+   "title": "Ticket 09: Simple items: configurable flag + quantity",
+   "created": "2026-08-06",
+   "closed": "2026-09-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 11,
+   "title": "Ticket 10: Featured module (landing + cart cross-sell)",
+   "created": "2026-08-06",
+   "closed": "2026-09-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 12,
+   "title": "Ticket 11: Settings content blocks: builder banner + confirmation email",
+   "created": "2026-08-06",
+   "closed": "2026-09-23",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 13,
+   "title": "Ticket 12: Checkout: express pay verified on production + member number on the 80mm ticket (after #19)",
+   "created": "2026-08-06",
+   "closed": "2026-10-10",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 14,
+   "title": "Ticket 13: Confirmation screen: read-only pickup + multi-provider add-to-calendar",
+   "created": "2026-08-06",
+   "closed": "2026-10-01",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 15,
+   "title": "Ticket 14: Menu template + filter row (one template, filter states, search)",
+   "created": "2026-09-10",
+   "closed": "2026-10-06",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 16,
+   "title": "Ticket 15: Product page + menu card render the item fields",
+   "created": "2026-09-10",
+   "closed": "2026-09-26",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 17,
+   "title": "Ticket 16: Menu Configuration import — sizes, prices, options and GF / vegan from the Menu Configuration file, with the Bakery Menu Copy doc re-run (A89)",
+   "created": "2026-09-15",
+   "closed": "2026-10-19",
+   "state": "closed",
+   "labels": []
+  },
+  {
+   "number": 18,
+   "title": "Ticket 17: Cart page (F11): custom-rendered cart on WooCommerce",
+   "created": "2026-09-15",
+   "closed": "2026-10-08",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 19,
+   "title": "Ticket 18: Checkout page (F12): custom-rendered classic checkout, required fields only, styled to Figma",
+   "created": "2026-09-15",
+   "closed": "2026-10-10",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 20,
+   "title": "Ticket 19: Storefront parity sweep against the Figma wireframe — the 375px pass (desktop = #28)",
+   "created": "2026-09-15",
+   "closed": "2026-10-21",
+   "state": "closed",
+   "labels": []
+  },
+  {
+   "number": 21,
+   "title": "Ticket 20: Admin catalog polish after launch (delete retired entries, drag-and-drop board)",
+   "created": "2026-09-22",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 22,
+   "title": "Ticket 21: Product photos: bulk import by filename + per-item photo manager (hero · detail · extra)",
+   "created": "2026-09-25",
+   "closed": "2026-10-18",
+   "state": "closed",
+   "labels": []
+  },
+  {
+   "number": 23,
+   "title": "Ticket 22: Bakery orders identifiable in the Woo Orders list (post-launch, accounting)",
+   "created": "2026-09-27",
+   "closed": "2026-10-19",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 24,
+   "title": "Ticket 23: Customer self-service — change or cancel an order from the confirmation link (post-launch)",
+   "created": "2026-09-27",
+   "closed": "2026-10-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 25,
+   "title": "Ticket 24: Catalog content import — copy doc + compatibility matrix as a committed JSON, imported on Local and production (no inventions)",
+   "created": "2026-10-06",
+   "closed": "2026-10-10",
+   "state": "closed",
+   "labels": []
+  },
+  {
+   "number": 26,
+   "title": "Ticket 25: The bakery cart and checkout replace /cart and /checkout for every cart once launched and approved (post-launch)",
+   "created": "2026-10-06",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 27,
+   "title": "Ticket 26: Theme (cfc-theme repo — pointer): the checkout heading (launch) + confirm before a membership or event clears a bakery cart (upgrade)",
+   "created": "2026-10-06",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 28,
+   "title": "Ticket 27: Storefront desktop pass (after #20's 375px sweep, before launch)",
+   "created": "2026-10-11",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 29,
+   "title": "Ticket 29: Launch hardening — the checks and chores between staging and main (security review, staging payments, settings export, dev tools off)",
+   "created": "2026-10-20",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 30,
+   "title": "Ticket 30: Storefront loading feedback — the leaving state, the wait card, the fade",
+   "created": "2026-10-21",
+   "closed": "2026-10-21",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 31,
+   "title": "Ticket 31: Admin polish — the dashboard before launch (day rail, status names, Ticket / Next step columns, items accordion, cancel & refund)",
+   "created": "2026-10-22",
+   "closed": "2026-10-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 32,
+   "title": "Ticket 32: Self-service detailing — the change journey's confirmation step, screens and emails (José's staging notes 2026-10-24)",
+   "created": "2026-10-25",
+   "closed": "2026-10-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 33,
+   "title": "Ticket 33: Dashboard detailing — badges, dates, order links, the run lock, Settings → Content as tabs (José's staging notes 2026-10-24)",
+   "created": "2026-10-25",
+   "closed": "2026-10-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 34,
+   "title": "Ticket 34: Dashboard orders list view — every order as it came, filters, collapsible day and month dividers",
+   "created": "2026-10-25",
+   "closed": "2026-10-25",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 35,
+   "title": "Ticket 35: The final menu load — the Bakery Menu Copy doc re-run (new categories, José's order), the Menu Configuration file corrected (no Naked Cake / no message on cupcakes), both files prepped for staging",
+   "created": "2026-10-25",
+   "closed": "2026-10-26",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 36,
+   "title": "Ticket 36: Brand case — no all-caps Lovechild anywhere (storefront, dashboard, ticket); the cart button reads CHECK OUT",
+   "created": "2026-10-25",
+   "closed": "2026-10-26",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 37,
+   "title": "Ticket 37: Notifications — several bakery addresses (backups + the bakery admin)",
+   "created": "2026-10-25",
+   "closed": "2026-10-26",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 38,
+   "title": "Ticket 38: Prefactor: a department on products and orders, the 31 callers sorted, a cart kind",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 39,
+   "title": "Ticket 39: The season record and the layer switch: a holiday season on, a bundle that checks out as a holiday order, the test-week seed on staging",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 40,
+   "title": "Ticket 40: Kurt's screen: the list view with a department",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 41,
+   "title": "Ticket 41: Totals, the cooking page and the season order list: Kurt's letter prints",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 42,
+   "title": "Ticket 42: Slots, order sheets and the pickup list",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 43,
+   "title": "Ticket 43: The holiday importer: two files per season, and the Holiday Menu Configuration file",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 44,
+   "title": "Ticket 44: The landing in season",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 45,
+   "title": "Ticket 45: The bundle page; the protein and pie pages",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 46,
+   "title": "Ticket 46: Step 1 on the holiday calendar",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 47,
+   "title": "Ticket 47: The Protein & Dessert step",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 48,
+   "title": "Ticket 48: The turkey tracker and the stop",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 49,
+   "title": "Ticket 49: Mixed cart: holiday is the third kind, and the department is decided at checkout",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 50,
+   "title": "Ticket 50: Holiday confirmation, the emails with holiday copy, Kurt's notification emails",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 51,
+   "title": "Ticket 51: Self-service for holiday orders with its own 72-hour window",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 52,
+   "title": "Ticket 52: The cart carousels: Add protein, Add pie",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 53,
+   "title": "Ticket 53: The bakery's pie row, the pie ticket, the pies-only email, the printer's day list",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 54,
+   "title": "Ticket 54: Mark ready and picked up, and the ready email",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 55,
+   "title": "Ticket 55: Not picked up: the roll-over and the last-day rule",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 56,
+   "title": "Two lanes, never mixed: bakery-lane screens keep the bakery header in season; a pie in the cart becomes the add-on pie when a bundle is added (U37)",
+   "created": "2026-10-26",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 57,
+   "title": "Cut-off time + lead days + full-month calendars (launch polish, lane A)",
+   "created": "2026-10-28",
+   "closed": "2026-10-29",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 58,
+   "title": "Pickup window + department phone as copy variables (launch polish, lane B)",
+   "created": "2026-10-28",
+   "closed": "2026-10-29",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 59,
+   "title": "Small launch notes: banner switch, Go to store, Print store, ticket message line, add-to-cart loader (lane C)",
+   "created": "2026-10-28",
+   "closed": "2026-10-29",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 60,
+   "title": "One email shell for the seven bakery emails: logo, white footer, product thumbnails (option A)",
+   "created": "2026-10-29",
+   "closed": "2026-10-29",
+   "state": "closed",
+   "labels": []
+  },
+  {
+   "number": 61,
+   "title": "Customer email copy board in Figma: every variation as an image with its editable fields beside it",
+   "created": "2026-10-29",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 62,
+   "title": "Ticket 62: Holiday feedback round — cart buttons above the carousels, preview add-on lines, Kurt's table width, cancel phone fallback, add-on pie row, pounds wording and count, wp-admin cancel email, slot 1 glyph, the \"..\", the Ready email queued for the pickup day",
+   "created": "2026-10-29",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 63,
+   "title": "Ticket 63: The holiday ordering wall — pickup days close like the bakery's lead time (noon split, 2/3 days, all settings), the season cut-off stays the hard stop, slots number at that close",
+   "created": "2026-10-29",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 64,
+   "title": "Ticket 64: Deli dashboard refresh — Bakery | Deli tabs, the admin-bar menu, the season day rail with one sticky bar per day, prints that follow the day, the turkey strip, the customer's email, the first-name search",
+   "created": "2026-10-31",
+   "closed": "2026-11-01",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 65,
+   "title": "Ticket 65: Post-demo holiday changes — the 9 pm cut-off stops placing only, change/cancel on the noon rule, the Ready email at 7 am for 10 am, Not picked up stays on its day with a pickup-list section, whole-pound turkey, service-desk copy, the Figma email copy, the day view's rail at 1280",
+   "created": "2026-10-31",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 66,
+   "title": "Ticket 66: A size's catalog price pushes to the bakery variations — Settings → Catalogs → Sizes base price becomes the one place a size is priced",
+   "created": "2026-11-03",
+   "closed": "2026-11-03",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent"
+   ]
+  },
+  {
+   "number": 67,
+   "title": "Ticket 67: Holiday walk notes of 2026-11-03 — the leaf strip, the cart's foot, the season rail's narrow form, the emails' pounds, the Protein & Dessert cards (three options for José's pick)",
+   "created": "2026-11-04",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": [
+    "ready-for-agent",
+    "holiday"
+   ]
+  },
+  {
+   "number": 68,
+   "title": "Ticket 68: Health tab — one glance says the store is fine, one button copies the evidence",
+   "created": "2026-11-04",
+   "closed": null,
+   "state": "open",
+   "labels": []
+  },
+  {
+   "number": 69,
+   "title": "Ticket 69: Bundle page — each side's allergens below its ingredients (blank reads None)",
+   "created": "2026-11-04",
+   "closed": "2026-11-04",
+   "state": "closed",
+   "labels": []
+  }
+ ],
+ "issues_summary": {
+  "total": 69,
+  "closed": 61,
+  "open": 8,
+  "first_created": "2026-08-06",
+  "last_created": "2026-11-04",
+  "median_days_to_close": 9,
+  "mean_days_to_close": 17.3,
+  "closed_same_day": 8,
+  "opened_2026-08-06": 14,
+  "opened_2026-10-26": 19
+ },
+ "loc_by_language": {
+  "php": 118918,
+  "js": 8259,
+  "css": 11569,
+  "md": 52636,
+  "json": 20391,
+  "py": 2043,
+  "html": 1467,
+  "sh": 325
+ },
+ "loc_by_area": {
+  "includes_php": 50116,
+  "tests_php": 62396,
+  "docs_md": 51114,
+  "assets_css": 11015,
+  "assets_js": 8201,
+  "STATUS_md": 999,
+  "assumptions_register_md": 1685,
+  "CLAUDE_md": 129
+ },
+ "file_counts": {
+  "tracked_files": 711,
+  "php": 195,
+  "js": 19,
+  "css": 10,
+  "md": 265,
+  "png": 171,
+  "json": 13,
+  "py": 5,
+  "includes_php_modules": 64,
+  "templates": 63,
+  "docs_files": 459,
+  "docs_md_files": 258,
+  "tests_files": 73,
+  "check_files": 60,
+  "session_prompts": 89,
+  "screen_prompts": 23,
+  "handoff_files": 70,
+  "review_files": 10
+ },
+ "harness": {
+  "check_files": 60,
+  "check_numbering": "01–63 with gaps (27–29 unused)",
+  "latest_count_line": "6089 assertion lines in a full run with the theme on, 6084 with it off (6088 passed, 1 failed theme on · 6083 passed, 1 failed theme off — observed 2026-11-05)",
+  "latest_count_source": "tests/cli/README.md:135",
+  "standing_red": "check 18, A349 — José's six seasonal products on Local",
+  "run_modes": [
+   "tests/cli/run.sh",
+   "tests/cli/run.sh --no-theme",
+   "--only <n>"
+  ]
+ },
+ "assertion_count_over_time": [
+  {
+   "date": "2026-09-22",
+   "assertions": 860
+  },
+  {
+   "date": "2026-09-25",
+   "assertions": 1027
+  },
+  {
+   "date": "2026-09-27",
+   "assertions": 1154
+  },
+  {
+   "date": "2026-10-01",
+   "assertions": 1156
+  },
+  {
+   "date": "2026-10-06",
+   "assertions": 1421
+  },
+  {
+   "date": "2026-10-08",
+   "assertions": 1590
+  },
+  {
+   "date": "2026-10-09",
+   "assertions": 1736
+  },
+  {
+   "date": "2026-10-10",
+   "assertions": 1822
+  },
+  {
+   "date": "2026-10-11",
+   "assertions": 1929
+  },
+  {
+   "date": "2026-10-12",
+   "assertions": 2072
+  },
+  {
+   "date": "2026-10-13",
+   "assertions": 2434
+  },
+  {
+   "date": "2026-10-14",
+   "assertions": 2611
+  },
+  {
+   "date": "2026-10-17",
+   "assertions": 2876
+  },
+  {
+   "date": "2026-10-18",
+   "assertions": 3085
+  },
+  {
+   "date": "2026-10-19",
+   "assertions": 3176
+  },
+  {
+   "date": "2026-10-20",
+   "assertions": 3401
+  },
+  {
+   "date": "2026-10-21",
+   "assertions": 4272
+  },
+  {
+   "date": "2026-10-22",
+   "assertions": 3561
+  },
+  {
+   "date": "2026-10-23",
+   "assertions": 3562
+  },
+  {
+   "date": "2026-10-24",
+   "assertions": 3895
+  },
+  {
+   "date": "2026-10-25",
+   "assertions": 4197
+  },
+  {
+   "date": "2026-10-26",
+   "assertions": 5163
+  },
+  {
+   "date": "2026-10-28",
+   "assertions": 5380
+  },
+  {
+   "date": "2026-10-29",
+   "assertions": 5511
+  },
+  {
+   "date": "2026-10-30",
+   "assertions": 5643
+  },
+  {
+   "date": "2026-10-31",
+   "assertions": 5732
+  },
+  {
+   "date": "2026-11-01",
+   "assertions": 5772
+  },
+  {
+   "date": "2026-11-02",
+   "assertions": 5829
+  },
+  {
+   "date": "2026-11-03",
+   "assertions": 5867
+  },
+  {
+   "date": "2026-11-04",
+   "assertions": 5904
+  },
+  {
+   "date": "2026-11-05",
+   "assertions": 6089
+  }
+ ],
+ "assumptions_register": {
+  "highest_a_number": 2121,
+  "rows_in_file": 1594,
+  "note": "rows are numbered A1–A2121; 1594 table rows present (some ranges superseded/merged)",
+  "columns": [
+   "#",
+   "Assumption",
+   "Where it lives",
+   "Status"
+  ],
+  "started": "2026-07-07"
+ },
+ "assumptions_register_rows_over_time": [
+  {
+   "date": "2026-07-07",
+   "highest_a_number": 18
+  },
+  {
+   "date": "2026-07-18",
+   "highest_a_number": 29
+  },
+  {
+   "date": "2026-07-20",
+   "highest_a_number": 37
+  },
+  {
+   "date": "2026-07-28",
+   "highest_a_number": 46
+  },
+  {
+   "date": "2026-07-29",
+   "highest_a_number": 74
+  },
+  {
+   "date": "2026-08-04",
+   "highest_a_number": 79
+  },
+  {
+   "date": "2026-08-07",
+   "highest_a_number": 85
+  },
+  {
+   "date": "2026-09-01",
+   "highest_a_number": 85
+  },
+  {
+   "date": "2026-09-10",
+   "highest_a_number": 99
+  },
+  {
+   "date": "2026-09-15",
+   "highest_a_number": 118
+  },
+  {
+   "date": "2026-09-18",
+   "highest_a_number": 126
+  },
+  {
+   "date": "2026-09-19",
+   "highest_a_number": 143
+  },
+  {
+   "date": "2026-09-22",
+   "highest_a_number": 182
+  },
+  {
+   "date": "2026-09-25",
+   "highest_a_number": 204
+  },
+  {
+   "date": "2026-09-27",
+   "highest_a_number": 216
+  },
+  {
+   "date": "2026-10-01",
+   "highest_a_number": 218
+  },
+  {
+   "date": "2026-10-06",
+   "highest_a_number": 278
+  },
+  {
+   "date": "2026-10-08",
+   "highest_a_number": 298
+  },
+  {
+   "date": "2026-10-09",
+   "highest_a_number": 329
+  },
+  {
+   "date": "2026-10-10",
+   "highest_a_number": 359
+  },
+  {
+   "date": "2026-10-11",
+   "highest_a_number": 384
+  },
+  {
+   "date": "2026-10-12",
+   "highest_a_number": 399
+  },
+  {
+   "date": "2026-10-13",
+   "highest_a_number": 414
+  },
+  {
+   "date": "2026-10-14",
+   "highest_a_number": 468
+  },
+  {
+   "date": "2026-10-17",
+   "highest_a_number": 488
+  },
+  {
+   "date": "2026-10-18",
+   "highest_a_number": 516
+  },
+  {
+   "date": "2026-10-19",
+   "highest_a_number": 597
+  },
+  {
+   "date": "2026-10-20",
+   "highest_a_number": 635
+  },
+  {
+   "date": "2026-10-21",
+   "highest_a_number": 963
+  },
+  {
+   "date": "2026-10-22",
+   "highest_a_number": 963
+  },
+  {
+   "date": "2026-10-23",
+   "highest_a_number": 963
+  },
+  {
+   "date": "2026-10-24",
+   "highest_a_number": 963
+  },
+  {
+   "date": "2026-10-25",
+   "highest_a_number": 980
+  },
+  {
+   "date": "2026-10-26",
+   "highest_a_number": 1490
+  },
+  {
+   "date": "2026-10-27",
+   "highest_a_number": 1491
+  },
+  {
+   "date": "2026-10-28",
+   "highest_a_number": 1614
+  },
+  {
+   "date": "2026-10-29",
+   "highest_a_number": 1702
+  },
+  {
+   "date": "2026-10-30",
+   "highest_a_number": 1828
+  },
+  {
+   "date": "2026-10-31",
+   "highest_a_number": 1870
+  },
+  {
+   "date": "2026-11-01",
+   "highest_a_number": 1902
+  },
+  {
+   "date": "2026-11-02",
+   "highest_a_number": 1936
+  },
+  {
+   "date": "2026-11-03",
+   "highest_a_number": 2012
+  },
+  {
+   "date": "2026-11-04",
+   "highest_a_number": 2034
+  },
+  {
+   "date": "2026-11-05",
+   "highest_a_number": 2121
+  }
+ ],
+ "review_gate": {
+  "rule": "9/10 passes, below 9 fails and loops fix → new review, at most 5 rounds",
+  "source": "CLAUDE.md Review gate; docs/agents/review-loop.md",
+  "mentions_in_records": {
+   "9/10 in 1 round": 90,
+   "9/10 in 2 rounds": 69,
+   "9/10 in 3 rounds": 18,
+   "9/10 in 4 rounds": 2,
+   "9/10 in 5 rounds": 9,
+   "10/10": 4
+  },
+  "mentions_note": "grep counts of the phrase across STATUS.md, docs/agents, docs/parity — a ticket can be mentioned several times; use as relative shape, not a ticket count",
+  "read_only_review_2026-11-04": "nine holiday features reviewed by nine fresh sessions, all 9/10 PASS in round 1 (STATUS.md:175)"
+ },
+ "sessions": {
+  "distinct_session_names_in_records": 47,
+  "note": "grep of cfc-bakery-orders-xx / deli-ordering-xx / holiday-xx names across STATUS.md and docs/agents"
+ },
+ "production_volume": {
+  "orders": null,
+  "note": "No production order count is recorded in the repo. Local held 0 real orders (handoffs/ticket-65-orchestrator.md:51); the real-money proof was a live test order on staging 2026-10-22 (STATUS.md:482)."
+ },
+ "milestones": [
+  {
+   "date": "2026-06-12",
+   "label": "First commit: plugin scaffold + WP Engine deploy workflows",
+   "source": "git b943fc1"
+  },
+  {
+   "date": "2026-06-25",
+   "label": "CLAUDE.md + docs (build plan, token strategy); first (empty) production deploy",
+   "source": "git 2439495; STATUS.md:161"
+  },
+  {
+   "date": "2026-07-06",
+   "label": "build-roadmap locked decisions, confrontational pre-build audit, backend P0–P2 skeleton incl. prototype/, storefront templates, capacity, dashboard, emails",
+   "source": "git bfb61f4, a6a33a6, 1114ec1"
+  },
+  {
+   "date": "2026-07-07",
+   "label": "Assumptions register starts (A1–A18) after José's first sign-off review",
+   "source": "git cc61848; docs/assumptions-register.md:1-12"
+  },
+  {
+   "date": "2026-07-13",
+   "label": "Menu import: Catapult (POS) extraction 47/47 products",
+   "source": "git 6fca8b9"
+  },
+  {
+   "date": "2026-07-29",
+   "label": "Admin redesign spec + meeting brief",
+   "source": "docs/archive/admin-redesign-spec-2026-07-29.md"
+  },
+  {
+   "date": "2026-08-06",
+   "label": "GitHub spec #1 + tickets #2–#14 opened in one day",
+   "source": "gh issue list"
+  },
+  {
+   "date": "2026-09-01",
+   "label": "STATUS.md becomes the single source of truth",
+   "source": "git 3cbe87b"
+  },
+  {
+   "date": "2026-09-08",
+   "label": "Figma workstream records under docs/figma/; the fork decision B",
+   "source": "git f012653; STATUS.md §3"
+  },
+  {
+   "date": "2026-09-10",
+   "label": "CLI check harness (tests/cli/run.sh), scored review gate and first session prompt land",
+   "source": "git 4b5b60f, b75d740"
+  },
+  {
+   "date": "2026-09-15",
+   "label": "First tickets closed (#2 catalog storage, #4 pickup-first); plugin active on Local",
+   "source": "gh issues 2, 4"
+  },
+  {
+   "date": "2026-09-22",
+   "label": "First recorded harness Count: 860 assertions",
+   "source": "tests/cli/README.md history"
+  },
+  {
+   "date": "2026-10-12",
+   "label": "Storefront on the staging site; José reviews the 375px pass screen by screen on a real phone",
+   "source": "STATUS.md:23-27"
+  },
+  {
+   "date": "2026-10-22",
+   "label": "First hand-off file (the 40% context rule) and the real-money proof on staging",
+   "source": "git 2444be0; STATUS.md:482"
+  },
+  {
+   "date": "2026-10-26",
+   "label": "Holiday build: 18 tickets #38–#55 built overnight by chained orchestrators; 307 commits in one day",
+   "source": "gh issues 38–55; commits_by_day"
+  },
+  {
+   "date": "2026-10-29",
+   "label": "Deli demo for Kurt; email shell #60 closed same day",
+   "source": "gh issue 60; STATUS.md"
+  },
+  {
+   "date": "2026-11-01",
+   "label": "BAKERY LIVE on production (main = staging = 0c0f9bb), communityfood.coop/bakery-orders/",
+   "source": "STATUS.md:161"
+  },
+  {
+   "date": "2026-11-02",
+   "label": "Checkout site-wide (#26) on production the day after launch",
+   "source": "STATUS.md:167-169"
+  },
+  {
+   "date": "2026-11-03",
+   "label": "Holiday walk on staging PASSED; the 18 holiday tickets closed; size price push #66 same day",
+   "source": "STATUS.md:171-173"
+  },
+  {
+   "date": "2026-11-04",
+   "label": "Thanksgiving ordering opens (season show-from 4 Nov); #67 and #69 on production the same day; nine read-only reviews all 9/10",
+   "source": "STATUS.md:175-181; docs/agents/handoffs/holiday-changes-2026-10-30-orchestrator.md:111"
+  },
+  {
+   "date": "2026-11-05",
+   "label": "Health tab (#68) on staging; harness at 6089 assertion lines",
+   "source": "STATUS.md:183; tests/cli/README.md:135"
+  }
+ ],
+ "ai_coauthorship": {
+  "commits_with_claude_coauthor_trailer": 1482,
+  "total_commits": 1503,
+  "share": 0.986,
+  "by_model": {
+   "Claude Fable 5.1": 1051,
+   "Claude Opus 5.5": 238,
+   "Claude Opus 5.5 (1M context)": 117,
+   "Claude Fable 5": 58,
+   "Claude Opus 5 (1M context)": 14,
+   "Claude Opus 4.8 (1M context)": 4
+  },
+  "method": "git log --all --format='%(trailers:key=Co-Authored-By,valueonly)'"
+ }
+}

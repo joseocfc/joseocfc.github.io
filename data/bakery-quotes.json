@@ -1,0 +1,130 @@
+{
+  "generated": "2026-11-07",
+  "source": "research/bakery-case-study.md Part 5 §h 'Ten pull-quotes (verbatim, with path)' and Part 4 §8 'José's standing orders, in his own words'",
+  "repo": "joseocfc/cfc-bakery-orders",
+  "verbatim_note": "Quotes are verbatim, José's spelling kept as typed. Backticks mark code spans as they appear in the source; render them as <code>. 'path' is repo-relative in the plugin repo.",
+  "pull_quotes": [
+    {
+      "n": 1,
+      "quote": "An undocumented assumption is a bug.",
+      "speaker": "CLAUDE.md (project rule)",
+      "speaker_kind": "rule",
+      "date": null,
+      "path": "CLAUDE.md:74",
+      "also": ["docs/assumptions-register.md:8"],
+      "context": "The rule behind 2,121 numbered register rows."
+    },
+    {
+      "n": 2,
+      "quote": "all passed. push to main",
+      "speaker": "José",
+      "speaker_kind": "jose",
+      "date": "2026-11-04",
+      "path": "STATUS.md:179",
+      "context": "The four words that deploy to a live store."
+    },
+    {
+      "n": 3,
+      "quote": "the allergens should be below ingredients. blank should be None",
+      "speaker": "José",
+      "speaker_kind": "jose",
+      "date": "2026-11-04",
+      "path": "STATUS.md:746",
+      "also": ["docs/assumptions-register.md:1619 (A2032)"],
+      "context": "José's whole spec for ticket #69. Built, reviewed and on production the same day."
+    },
+    {
+      "n": 4,
+      "quote": "your recommendation sound good only if we keep the quality of work.",
+      "speaker": "José",
+      "speaker_kind": "jose",
+      "date": "2026-10-13",
+      "path": "docs/agents/faster-rounds.md:7-8",
+      "context": "The condition on which the faster review rounds were accepted."
+    },
+    {
+      "n": 5,
+      "quote": "It does not trust the builder's word.",
+      "speaker": "docs/agents/review-loop.md (on the fresh reviewer)",
+      "speaker_kind": "rule",
+      "date": null,
+      "path": "docs/agents/review-loop.md:28",
+      "paired_with": { "quote": "The reviewer's harness run is the one that counts.", "path": "docs/agents/review-loop.md:79" },
+      "context": "On the fresh reviewer, which runs the harness itself."
+    },
+    {
+      "n": 6,
+      "quote": "i dont want tickets to automatically print when an order gets confirmed. just when me admin or a user (not yet created, bakery) clicks print",
+      "speaker": "José",
+      "speaker_kind": "jose",
+      "date": "2026-10-20",
+      "path": "docs/assumptions-register.md:913 (A960)",
+      "context": "It reversed the plan's auto-print into a Print click, a print list and a runner beside the Epson."
+    },
+    {
+      "n": 7,
+      "quote": "Never hand-author a brand value. No raw `#284734`, no `1.19rem`, ever, in CSS or templates",
+      "speaker": "docs/design-tokens.md (token rule)",
+      "speaker_kind": "rule",
+      "date": null,
+      "path": "docs/design-tokens.md:21",
+      "context": "Why the 200 --cfc-bakery-* tokens exist."
+    },
+    {
+      "n": 8,
+      "quote": "no formula on any sheet references another sheet. Every sheet is an island",
+      "speaker": "Analysis of the deli's 25-sheet Thanksgiving workbook",
+      "speaker_kind": "research",
+      "date": null,
+      "path": "docs/deli/order-board-analysis.md:46",
+      "context": "The problem the deli dashboard replaced."
+    },
+    {
+      "n": 9,
+      "quote": "A one-character typo pushed to `main` white-screens the production site",
+      "speaker": "Pre-build audit, first hazard",
+      "speaker_kind": "research",
+      "date": "2026-07-06",
+      "path": "docs/archive/audit-2026-07-06.md:16",
+      "context": "It put a PHP 7.4 lint gate in front of every deploy."
+    },
+    {
+      "n": 10,
+      "quote": "you are the orchestrator … starting as many sessions as you need / I will leave this plugged in until you are done",
+      "parts": ["you are the orchestrator … starting as many sessions as you need", "I will leave this plugged in until you are done"],
+      "speaker": "José",
+      "speaker_kind": "jose",
+      "date": "2026-10-25",
+      "path": "docs/agents/handoffs/holiday-orchestrator.md:11-14",
+      "context": "José's standing orders for the overnight holiday build. Result: 18 tickets, 307 commits on 2026-10-26."
+    }
+  ],
+  "runners_up": [
+    { "quote": "bakery is live", "speaker": "José", "speaker_kind": "jose", "date": "2026-11-01", "path": "STATUS.md:161" },
+    { "quote": "Nothing was applied. No node was mutated. No Figma comment was posted.", "speaker": "Figma copy-pass report", "speaker_kind": "rule", "date": "2026-10-01", "path": "docs/figma/copy-pass-report-2026-10-01.md:7" },
+    { "quote": "liste them all at once with your recomendation. i will approve in bulk", "speaker": "José", "speaker_kind": "jose", "date": null, "path": "STATUS.md:556" },
+    { "quote": "Migrating to WooCommerce saves tens of thousands in annual licensing.", "speaker": "Architecture plan", "speaker_kind": "research", "date": null, "path": "docs/archive/architecture-plan.snapshot.md:22" },
+    { "quote": "`main` is a live store now.", "speaker": "CLAUDE.md", "speaker_kind": "rule", "date": "2026-11-01", "path": "CLAUDE.md:22" }
+  ],
+  "standing_orders": [
+    { "quote": "all passed. push to main", "date": "2026-11-04", "path": "STATUS.md:179", "context": "#67, morning" },
+    { "quote": "stagging passed. push to main", "date": "2026-11-04", "path": "STATUS.md:181", "context": "#69, afternoon" },
+    { "quote": "bakery is live", "date": "2026-11-01", "path": "STATUS.md:161" },
+    { "quote": "i ran the import on production all passed. close it", "date": null, "path": "STATUS.md:181" },
+    { "quote": "your recommendation sound good only if we keep the quality of work.", "date": "2026-10-13", "path": "docs/agents/faster-rounds.md:7-8" },
+    { "quote": "this is taking an absurd amount of time, just to create the notes of one screen. why this is taking so muchh and what can we do to keep the quiality of build but go faster withthe other screens. ?", "date": "2026-10-13", "path": "docs/agents/faster-rounds.md:3-5", "context": "About 3.5 hours into screen 1" },
+    { "quote": "i what the faster rounds for the screen pormpts. the ticket prompts how we have been doing them are good.", "date": "2026-10-13", "path": "docs/agents/faster-rounds.md:11-12" },
+    { "quote": "with the loops", "date": "2026-10-14", "path": "docs/agents/review-loop.md:3", "context": "Adding #17 to the review gate" },
+    { "quote": "make sure you use as much subagents as possible so the session does not burn all the context", "date": "2026-10-10", "path": "STATUS.md:553" },
+    { "quote": "lets divide this in 2. lets make sure everything passes in mobile.. then the second part will be desktop", "date": "2026-10-10", "path": "STATUS.md:553" },
+    { "quote": "create the ticket then the prompt, then you are the orchestrator… push to staging", "date": "2026-10-29", "path": "STATUS.md:151", "context": "#60" },
+    { "quote": "never past 30 % of your window", "date": "2026-11-02", "path": "docs/agents/session-prompts/ticket-68-health-tab.md:13", "context": "The rule as recorded" },
+    { "quote": "no bug fix now", "date": "2026-10-13", "path": "STATUS.md:40" },
+    { "quote": "in the order and the ticket the correct flavors, fillins and stuff selected should be display as selected... the bakery needs to know exactly what to bake", "date": "2026-10-18", "path": "STATUS.md:429" },
+    { "quote": "why you set that comment all the way to 13? ive not review those", "date": null, "path": "STATUS.md:573", "context": "On a review page over-reach" },
+    { "quote": "everything passed on my iPhone", "date": "2026-10-20", "path": "STATUS.md:200" },
+    { "quote": "passed on both", "date": "2026-10-24", "path": "STATUS.md:60", "context": "#31 + #24 on staging" },
+    { "quote": "the verdict is correct", "date": "2026-11-03", "path": "STATUS.md:244", "context": "The holiday walk, about 10:20 pm" }
+  ],
+  "standing_orders_note": "A selection of the 27 standing orders in Part 4 §8, chosen for the process page; the full list stays in the research file."
+}

@@ -1,0 +1,175 @@
+{
+  "generated": "2026-11-07",
+  "source": "research/bakery-case-study.md Part 1 §c 'Insights (non-obvious findings that shaped the design)'",
+  "repo": "joseocfc/cfc-bakery-orders",
+  "paths_note": "source_path is repo-relative in the plugin repo (HEAD f28ff68); line ranges as cited in the research. 'also' lists the supporting paths.",
+  "featured_note": "SPEC §7 picks five for the case study: capacity counter, cut-off minute, pickup-first, print click, one breakpoint. 'featured_order' is the suggested reading order.",
+  "insights": [
+    {
+      "n": 1,
+      "title": "Run the counter, don't enforce the cap",
+      "summary": "The daily order cap shipped switched off, but the counter ran from day one, derived from real orders on demand so there is no stored number to drift. Nobody had to guess a limit the bakery didn't have, and the deli later confirmed the only real cap was turkey supply.",
+      "source_path": "includes/class-capacity.php:2-17",
+      "also": ["docs/archive/architecture-plan.snapshot.md:190", "docs/deli/conversation-digest.md:298", "docs/deli/requirements.md:84"],
+      "tags": ["capacity", "data model"],
+      "featured": true,
+      "featured_order": 1
+    },
+    {
+      "n": 2,
+      "title": "The cut-off is a minute, not a day",
+      "summary": "Lead time moved from hours to 'lead days plus a cut-off time' (2 days, 12:00 pm), and the order day flips at the cut-off's exact minute. The server re-checks on submit, so a customer who opens the picker at 11:55 and submits at 12:05 is refused, by design, with no client timer.",
+      "source_path": "includes/helpers.php:907-911",
+      "also": ["docs/assumptions-register.md:1287-1292 (A1500–A1505)", "STATUS.md:124-125"],
+      "tags": ["calendar", "rules"],
+      "featured": true,
+      "featured_order": 2
+    },
+    {
+      "n": 3,
+      "title": "A holiday day closes the day before",
+      "summary": "Read literally, the deli's single season cut-off would have sold a 16 November pickup on the 20th, so each pickup day closes at the earlier of its cut-off and the end of the day before. Two more rounds followed from real kitchen statements, an ordering wall and a placing-only freeze, each kept as a settings edit.",
+      "source_path": "includes/class-holiday-calendar.php:7-35",
+      "also": ["docs/assumptions-register.md:1090 (A1201)"],
+      "tags": ["calendar", "holiday"],
+      "featured": false
+    },
+    {
+      "n": 4,
+      "title": "Holiday is a layer with seasons",
+      "summary": "Holiday ordering is a layer that turns on and off once per season, with three states (off, preparing, on) so Christmas can be prepared while Thanksgiving is selling. Bundles have fixed sides with the protein as the only choice, and weights stay decimal because WooCommerce rounds quantities to whole numbers.",
+      "source_path": "includes/class-season.php:6-36",
+      "also": ["docs/deli/requirements.md:29", "STATUS.md:77", "STATUS.md:307-309"],
+      "tags": ["holiday", "data model"],
+      "featured": false
+    },
+    {
+      "n": 5,
+      "title": "In a mixed cart, the newest item wins",
+      "summary": "A cart can't mix a cake with groceries: adding one kind removes lines of the other kind, and the pickup with them. That keeps one order to one pickup to one ticket, and holiday became a third kind decided per order at checkout.",
+      "source_path": "docs/assumptions-register.md:343 (A254)",
+      "also": ["includes/class-cart.php:13-17", "includes/class-department.php:32-39", "docs/archive/project-status-2026-07-28.md:71"],
+      "tags": ["cart", "rules"],
+      "featured": false
+    },
+    {
+      "n": 6,
+      "title": "The catalog price wins everywhere",
+      "summary": "After launch, editing a size's catalog price changed nothing customers paid, because WooCommerce charges the variation's own price. The first fix failed José's staging walk; the rule became 'the catalog wins everywhere', with a per-product switch for six own-priced items, and it was on production the same night.",
+      "source_path": "STATUS.md:946",
+      "also": ["STATUS.md:169", "includes/class-product-setup.php:546-553", "docs/assumptions-register.md:1533 (A1940)"],
+      "tags": ["pricing", "admin"],
+      "featured": false
+    },
+    {
+      "n": 7,
+      "title": "Print on a click, not on payment",
+      "summary": "The plan printed a ticket on every payment, but the host can't reach the bakery's network printer and José ruled that printing should follow a person's click. A Print click now writes a job to a print list that a small runner beside the receipt printer polls, renders and prints.",
+      "source_path": "docs/assumptions-register.md:913 (A960)",
+      "also": ["includes/class-print-agent.php:2-33", "tools/print-agent/README.md:3-20", "docs/launch/staff-rules.md:21-26"],
+      "tags": ["printing", "operations"],
+      "featured": true,
+      "featured_order": 4
+    },
+    {
+      "n": 8,
+      "title": "Emails carry literal values, zero var()",
+      "summary": "Email clients have no CSS custom properties and no viewport, so transactional emails inline literal brand values resolved to the mobile end of each clamp(). It is a Definition-of-Done line and a harness assertion, and the only place literal brand values are allowed.",
+      "source_path": "docs/design-tokens.md:82",
+      "also": ["docs/design-tokens.md:108-109", "CLAUDE.md (Definition of Done)", "docs/deli/spec.md:22"],
+      "tags": ["tokens", "email"],
+      "featured": false
+    },
+    {
+      "n": 9,
+      "title": "Tokens resolve by context",
+      "summary": "Theme variables only exist on the storefront, so the storefront reads them live while the admin, the print ticket and email get a snapshot. The drift is expected and shown on the settings page, so nobody chases a phantom 'admin looks different' bug.",
+      "source_path": "docs/design-tokens.md:73-87",
+      "also": ["docs/archive/architecture-plan.snapshot.md:10-18", "docs/archive/architecture-plan.snapshot.md:395"],
+      "tags": ["tokens", "design system"],
+      "featured": false
+    },
+    {
+      "n": 10,
+      "title": "The 'too big' fallback bug",
+      "summary": "Every font size in the theme stores the clamp maximum, so a frozen fallback rendered desktop sizes in email receipts and print tickets. Fallbacks are now taken from the computed clamp(), and the same bug turned up in Figma as desktop text styles on 375px frames.",
+      "source_path": "docs/design-tokens.md:24-29",
+      "also": ["docs/design-tokens.md:97-102", "docs/archive/overnight-design-v2-review.md:11-14"],
+      "tags": ["tokens", "typography"],
+      "featured": false
+    },
+    {
+      "n": 11,
+      "title": "One breakpoint, at 782px",
+      "summary": "Desktop starts at the theme's one existing breakpoint, and the storefront stylesheet holds exactly one @media block. A check pins every byte outside that block by md5, so the 375px layout José approved on his phone could not move by accident.",
+      "source_path": "tests/cli/checks/33-desktop-pass.php:3-19",
+      "also": ["docs/parity/28/ledger.md:42", "docs/parity/28/ledger.md:79-81", "assets/css/storefront.css:3238"],
+      "tags": ["responsive", "testing"],
+      "featured": true,
+      "featured_order": 5
+    },
+    {
+      "n": 12,
+      "title": "Pickup comes first",
+      "summary": "The builder asks for the store and the pickup date before size, flavour and filling, and the calendar has exactly three day states. The server re-checks the date at add-to-cart, so a customer never designs a cake for a day the bakery can't make.",
+      "source_path": "docs/figma/figma-final-wireframe-plan.md:37-39",
+      "also": ["tests/cli/checks/06-pickup-first.php:3-6", "docs/archive/overnight-plan-2026-07-17.md:9"],
+      "tags": ["flow", "calendar"],
+      "featured": true,
+      "featured_order": 3
+    },
+    {
+      "n": 13,
+      "title": "The change window is the ordering rule",
+      "summary": "A customer can change or cancel while the pickup date is still orderable today and the order is still 'To make'. A change is a full rebuild at today's prices, and the planned order-lookup page was dropped: the button in the email is the only door.",
+      "source_path": "docs/agents/session-prompts/ticket-24-self-service.md:97-147",
+      "also": ["includes/class-cancellation.php:5-16", "includes/class-change.php:9-32"],
+      "tags": ["self-service", "rules"],
+      "featured": false
+    },
+    {
+      "n": 14,
+      "title": "The same autop bug, twice",
+      "summary": "WordPress's Shortcode block ran its line-break filter over the finished storefront and injected breaks that looked like a CSS fault on staging. The plugin now guards its own output, so the host page's block type no longer matters.",
+      "source_path": "tests/cli/checks/24-host-page-blocks.php:3-13",
+      "also": ["docs/archive/overnight-design-review.md:35", "STATUS.md:32-34", "includes/class-storefront.php:53-60"],
+      "tags": ["platform", "debugging"],
+      "featured": false
+    },
+    {
+      "n": 15,
+      "title": "Department is a mark on the order, not a filter",
+      "summary": "One 'is this a bakery order?' check had about 30 callers and let holiday orders leak into the bakery's dashboard, prints and emails. It was split into two questions and stored on the order at checkout, because a screen filter would never reach prints, capacity and emails.",
+      "source_path": "includes/class-department.php:2-17",
+      "also": ["docs/deli/plugin-reuse-map.md:12-20", "includes/class-department.php:19-44"],
+      "tags": ["data model", "holiday"],
+      "featured": false
+    },
+    {
+      "n": 16,
+      "title": "Every sheet is an island",
+      "summary": "The deli's 2025 Thanksgiving workbook linked no sheet to any other, took 23 manual steps and held totals that were wrong in ways nobody could see. Cooking totals are now computed from order lines, sheets are per day and store, and a cancellation keeps the order instead of deleting cells.",
+      "source_path": "docs/deli/order-board-analysis.md:45-46",
+      "also": ["docs/deli/order-board-analysis.md:286-292", "docs/deli/order-board-analysis.md:364-365", "docs/deli/requirements.md:80"],
+      "points": [
+        "No formula on any sheet references another sheet; anything in two sheets was typed twice.",
+        "A 2 lb item was counted, not doubled: the master showed 9 where the weight was 18 lb.",
+        "Demand is a spike: 62% of active orders were picked up on the last day, 79% in the last two.",
+        "Only 20 of 44 rows carried the website's order code.",
+        "'No pie' and 'no protein' are real choices: 11 of 32 bundles took each.",
+        "Cancellations were handled by deleting cells, with no record of what was ordered."
+      ],
+      "tags": ["research", "holiday"],
+      "featured": false
+    },
+    {
+      "n": 17,
+      "title": "Phone orders go through the storefront",
+      "summary": "An order typed into WooCommerce's admin has no pickup day or store, so it never reaches the dashboard and no ticket prints; staff take phone orders through the storefront instead. Staff orders need no extra fields either: the system infers them from the logged-in user.",
+      "source_path": "docs/launch/staff-rules.md:17-19",
+      "also": ["docs/archive/project-status-2026-07-28.md:72", "docs/archive/architecture-plan.snapshot.md:362"],
+      "tags": ["operations"],
+      "featured": false
+    }
+  ]
+}

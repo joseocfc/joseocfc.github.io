@@ -1,0 +1,142 @@
+{
+ "generated": "2026-11-08T00:56:35-08:00",
+ "note": "Start/end from the first and last line of each lane's log. Research lanes ran on Fable 5.1 before Jos\u00e9 asked for Opus 5.5 workers; every later worker is Opus 5.5. The orchestrator row spans the session.",
+ "phases": [
+  "research",
+  "orchestration",
+  "build A",
+  "build B",
+  "qa",
+  "figma"
+ ],
+ "lanes": [
+  {
+   "id": "orchestrator",
+   "label": "Orchestrator",
+   "model": "Fable 5.1",
+   "phase": "orchestration",
+   "start": "2026-11-07T21:50:00-08:00",
+   "end": "2026-11-08T00:05:44-08:00"
+  },
+  {
+   "id": "A1-shell",
+   "label": "Design system + shell",
+   "model": "Opus 5.5",
+   "phase": "build A",
+   "start": "2026-11-07T22:22:02-08:00",
+   "end": "2026-11-07T22:49:44-08:00"
+  },
+  {
+   "id": "A2-charts",
+   "label": "Chart system (11 renderers)",
+   "model": "Opus 5.5",
+   "phase": "build A",
+   "start": "2026-11-07T22:22:03-08:00",
+   "end": "2026-11-07T22:58:12-08:00"
+  },
+  {
+   "id": "A3-data",
+   "label": "Data files, images, diagrams",
+   "model": "Opus 5.5",
+   "phase": "build A",
+   "start": "2026-11-07T22:22:04-08:00",
+   "end": "2026-11-07T22:52:34-08:00"
+  },
+  {
+   "id": "A4-epoch",
+   "label": "Epoch explorer study",
+   "model": "Opus 5.5",
+   "phase": "build A",
+   "start": "2026-11-07T22:22:05-08:00",
+   "end": "2026-11-07T23:03:09-08:00"
+  },
+  {
+   "id": "A5-copy",
+   "label": "Copy for every page",
+   "model": "Opus 5.5",
+   "phase": "build A",
+   "start": "2026-11-07T22:22:06-08:00",
+   "end": "2026-11-07T22:43:39-08:00"
+  },
+  {
+   "id": "B1-bakery",
+   "label": "Bakery case-study page",
+   "model": "Opus 5.5",
+   "phase": "build B",
+   "start": "2026-11-07T23:03:35-08:00",
+   "end": "2026-11-07T23:24:02-08:00"
+  },
+  {
+   "id": "B2-design-system",
+   "label": "Design-system page",
+   "model": "Opus 5.5",
+   "phase": "build B",
+   "start": "2026-11-07T23:03:36-08:00",
+   "end": "2026-11-07T23:20:08-08:00"
+  },
+  {
+   "id": "B3-process",
+   "label": "Process page + prompts",
+   "model": "Opus 5.5",
+   "phase": "build B",
+   "start": "2026-11-07T23:03:38-08:00",
+   "end": "2026-11-07T23:24:36-08:00"
+  },
+  {
+   "id": "B4-home-about",
+   "label": "Home, About, 404",
+   "model": "Opus 5.5",
+   "phase": "build B",
+   "start": "2026-11-07T23:03:39-08:00",
+   "end": "2026-11-07T23:23:38-08:00"
+  },
+  {
+   "id": "C1-qa",
+   "label": "QA audit + fixes",
+   "model": "Opus 5.5",
+   "phase": "qa",
+   "start": "2026-11-07T23:25:00-08:00",
+   "end": "2026-11-07T23:55:41-08:00"
+  },
+  {
+   "id": "D1-figma",
+   "label": "Figma file (system + screens)",
+   "model": "Opus 5.5",
+   "phase": "figma",
+   "start": "2026-11-07T23:25:08-08:00",
+   "end": "2026-11-08T00:05:44-08:00"
+  },
+  {
+   "id": "lane1",
+   "label": "Epoch AI research",
+   "model": "Fable 5.1",
+   "phase": "research",
+   "start": "2026-11-07T21:59:31-08:00",
+   "end": "2026-11-07T22:11:35-08:00"
+  },
+  {
+   "id": "lane2",
+   "label": "Bakery case-study research",
+   "model": "Fable 5.1",
+   "phase": "research",
+   "start": "2026-11-07T21:59:32-08:00",
+   "end": "2026-11-07T22:14:57-08:00"
+  },
+  {
+   "id": "lane3",
+   "label": "Design-system research",
+   "model": "Fable 5.1",
+   "phase": "research",
+   "start": "2026-11-07T21:59:34-08:00",
+   "end": "2026-11-07T22:12:06-08:00"
+  },
+  {
+   "id": "lane4",
+   "label": "Other projects + profile",
+   "model": "Fable 5.1",
+   "phase": "research",
+   "start": "2026-11-07T21:59:35-08:00",
+   "end": "2026-11-07T22:07:19-08:00"
+  }
+ ]
+}

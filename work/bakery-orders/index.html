@@ -1,0 +1,1445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
+<title>Bakery ordering, shipped by directing AI agents — José Ochoa</title>
+<meta name="description" content="How one designer took Community Food Co-op’s bakery orders from inbox and carbon tickets to a live store in 142 days, with 6,089 assertions behind it.">
+<meta name="author" content="José Ochoa">
+<link rel="canonical" href="https://joseocfc.github.io/work/bakery-orders/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="José Ochoa">
+<meta property="og:title" content="Bakery ordering, designed and shipped by one designer">
+<meta property="og:description" content="1,503 commits, 69 tickets, a fresh-reviewer gate at 9/10 and a live store on 1 November 2026. The full case, with the data behind every chart.">
+<meta property="og:url" content="https://joseocfc.github.io/work/bakery-orders/">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
+     preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/charts.css">
+<!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
+<link rel="preload" as="image" href="/assets/img/bakery/storefront-landing-1440.jpg" fetchpriority="high">
+<style>
+/* ==========================================================================
+   /work/bakery-orders/ — page-scoped styles (lane B1). Every rule is scoped to
+   .bk-page or a .bk-* class, reads tokens only, and changes nothing site-wide.
+   ========================================================================== */
+
+/* ---- Hero ---------------------------------------------------------------- */
+.bk-hero .hero__title { font-size: clamp(2.25rem, 1.2rem + 3.7vw, 4.25rem); line-height: 1.02; max-width: 16em; }
+.bk-hero .hero__dek { max-width: 40em; }
+.bk-hero .stat-grid { margin-top: clamp(var(--space-7), 5vw, var(--space-8)); }
+.bk-hero .stat-value { font-size: clamp(2.5rem, 2rem + 1.6vw, 3.5rem); }
+.bk-hero .stat-claim { font-size: var(--fs-small); }
+.bk-hero .stat-grid--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .bk-hero .stat-grid--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Desktop + phone captures side by side; overlapped on phones. */
+.bk-duo { margin-top: clamp(var(--space-7), 6vw, var(--space-8)); }
+.bk-duo__frames { display: grid; grid-template-columns: minmax(0, 1fr) 25%; gap: var(--space-5); align-items: end; }
+.bk-duo .media img { background: var(--paper); }
+.bk-duo__desk img { aspect-ratio: 1440 / 1000; object-fit: cover; object-position: top center; }
+.bk-duo__phone { max-width: none; margin: 0; }
+.bk-duo__phone img { aspect-ratio: 375 / 812; object-fit: cover; object-position: top center; }
+.bk-duo__caps { display: grid; grid-template-columns: minmax(0, 1fr) 25%; gap: var(--space-5); margin-top: var(--space-4); }
+.bk-duo__caps p { font-size: var(--fs-small); line-height: 1.5; color: var(--ink-meta); }
+.bk-duo__caps p:last-child { text-align: center; }
+.bk-tag {
+  display: block; margin-bottom: 2px;
+  font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: var(--track-meta);
+  text-transform: uppercase; color: var(--ink-2);
+}
+@media (max-width: 899.98px) {
+  .bk-duo__caps { grid-template-columns: 1fr; gap: var(--space-2); }
+  .bk-duo__caps p:last-child { text-align: left; }
+  .bk-tag { display: inline; margin: 0 .6em 0 0; }
+}
+@media (max-width: 599.98px) {
+  .bk-duo__frames { position: relative; display: block; aspect-ratio: 1 / .9; }
+  .bk-duo__desk { width: 84%; }
+  .bk-duo__desk::before { height: 18px; }
+  .bk-duo__desk img { aspect-ratio: 1440 / 1120; }
+  .bk-duo__phone { position: absolute; right: 0; bottom: 0; width: 37%; }
+  .bk-duo__phone img { border-radius: 16px; box-shadow: 0 0 0 4px var(--paper-2), 0 0 0 5px var(--line); margin: 5px; width: calc(100% - 10px); }
+  .bk-duo__caps { grid-template-columns: 1fr; gap: var(--space-2); }
+  .bk-duo__caps p:last-child { text-align: left; }
+  .bk-tag { display: inline; margin: 0 .6em 0 0; }
+}
+
+/* ---- Case body: sections, rhythm ----------------------------------------- */
+.bk-page .case-layout { padding-top: var(--space-2); }
+.bk-sec { scroll-margin-top: calc(var(--header-h) + var(--space-5)); }
+.bk-sec + .bk-sec { margin-top: clamp(var(--space-9), 11vw, var(--space-10)); }
+.bk-sec > .bk-num { color: var(--ink-meta); }
+.bk-sec > .bk-num + h2 { margin-top: var(--space-4); }
+.bk-sec > h2 { max-width: 19em; }
+@media (max-width: 1023.98px) {
+  .bk-page .toc { margin-bottom: var(--space-8); }
+}
+.bk-page .prose > .bk-wide { max-width: none; }
+
+/* Lists that carry their own layout inside .prose */
+.bk-page .prose :is(.findings, .bk-users, .bk-modules, .bk-tokens__list) { padding-left: 0; }
+.bk-page .prose :is(.findings, .bk-users, .bk-modules, .bk-tokens__list) > li + li { margin-top: 0; }
+
+/* ---- Problem: who uses it ------------------------------------------------- */
+.bk-users { list-style: none; display: grid; gap: 0 var(--space-6); }
+.bk-users li { padding-block: var(--space-4); border-top: 1px solid var(--line); font-size: .975rem; line-height: 1.5; }
+.bk-users li strong { display: block; margin-bottom: 2px; font-weight: var(--fw-semi); }
+@media (min-width: 640px) { .bk-users { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---- Tables --------------------------------------------------------------- */
+.bk-page .prose > .table-wrap { max-width: none; }
+.bk-table td:first-child { width: 46%; }
+.bk-table caption, .bk-launch caption { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: .02em; }
+.bk-reg { max-width: none !important; }
+.bk-reg table { width: 100%; font-size: var(--fs-small); line-height: 1.45; }
+.bk-reg th, .bk-reg td { padding: 11px var(--space-4) 11px 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.bk-reg th { padding-top: 10px; padding-bottom: 9px; font-family: var(--font-mono); font-size: var(--fs-micro); font-weight: var(--fw-regular); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); border-bottom-color: var(--line-strong); }
+.bk-reg :is(th, td):first-child { padding-left: var(--space-5); width: 4.5rem; }
+.bk-reg :is(th, td):last-child { padding-right: var(--space-5); width: 30%; }
+.bk-reg tbody tr:last-child td { border-bottom: 0; }
+.bk-reg td { color: var(--ink-2); }
+.bk-reg td:first-child { font-family: var(--font-mono); font-size: .8125rem; color: var(--accent-ink); white-space: nowrap; }
+.bk-ok { color: var(--ink); }
+.bk-ok::before { content: "\2713" / ""; margin-right: .35em; color: var(--good); font-weight: var(--fw-semi); }
+@media (max-width: 599.98px) {
+  .bk-reg :is(th, td):first-child { padding-left: var(--space-4); width: 3.75rem; }
+  .bk-reg :is(th, td):last-child { padding-right: var(--space-4); width: 34%; }
+  .bk-reg td { font-size: .85rem; }
+}
+.bk-launch td:first-child { width: 8.5rem; font-family: var(--font-mono); font-size: .8125rem; color: var(--ink); }
+@media (max-width: 599.98px) { .bk-launch td:first-child { width: 5.5rem; white-space: normal; } }
+
+/* ---- Insights: findings with an inline screen ----------------------------- */
+.bk-page .findings { margin-top: var(--space-6); border-bottom: 1px solid var(--line); }
+.bk-page .finding { padding-block: var(--space-6); }
+.bk-page .finding__title { font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: -.012em; margin-bottom: var(--space-2); }
+.bk-page .finding__text { color: var(--ink-2); font-size: var(--fs-body); line-height: var(--lh-body); }
+.bk-page .finding__source { margin-top: var(--space-3); }
+.bk-page .finding::before { line-height: 2.6; }
+.bk-page .finding > .media { margin-top: var(--space-5); }
+
+/* ---- Design: Figma pair (component sheet + one phone frame) --------------- */
+.bk-pair { display: grid; grid-template-columns: minmax(0, 2.8fr) minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+.bk-pair .media img, .bk-plain img { background: var(--paper); }
+@media (max-width: 599.98px) {
+  .bk-pair { grid-template-columns: 1fr; gap: var(--space-6); }
+  .bk-side { display: grid; grid-template-columns: 50% minmax(0, 1fr); gap: var(--space-4); align-items: end; }
+  .bk-side figcaption { margin-top: 0; }
+}
+
+/* ---- Build: module groups as a tiny bar list ------------------------------ */
+.bk-modules { list-style: none; display: grid; gap: 0 var(--space-6); max-width: none !important; }
+.bk-modules li {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; column-gap: var(--space-4);
+  padding: 10px 0 12px; border-top: 1px solid var(--line); font-size: .9375rem; line-height: 1.4; color: var(--ink);
+}
+.bk-modules li::after {
+  content: ""; grid-column: 1 / -1; height: 3px; margin-top: 8px; border-radius: 0 2px 2px 0;
+  width: calc(var(--n) / 14 * 100%); background: var(--accent);
+}
+.bk-modules__n { font-family: var(--font-mono); font-size: .8125rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+@media (min-width: 640px) { .bk-modules { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: column; grid-template-rows: repeat(5, auto); } }
+
+/* ---- Build: token contexts (one name, three resolutions) ------------------ */
+.bk-tokens { color: var(--ink-2); }
+.bk-tokens__src { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2) var(--space-3); }
+.bk-tokens__name {
+  padding: 6px 14px; border: 1px solid var(--accent); border-radius: var(--r-pill);
+  background: var(--accent-soft); color: var(--accent-ink);
+  font-family: var(--font-mono); font-size: .8125rem; letter-spacing: 0;
+}
+.bk-tokens__note { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: .02em; color: var(--ink-meta); }
+.bk-tokens__list { position: relative; list-style: none; display: grid; gap: var(--space-4); margin: 40px 0 0; }
+.bk-ctx {
+  position: relative; display: grid; gap: var(--space-2); align-content: start;
+  padding: var(--space-4); border: 1px solid var(--line-strong); border-radius: 10px; background: var(--paper);
+}
+.bk-ctx__mode { font-family: var(--font-mono); font-size: var(--fs-meta); letter-spacing: var(--track-meta); text-transform: uppercase; color: var(--accent-ink); }
+.bk-ctx__surface { font-size: 1rem; font-weight: var(--fw-semi); line-height: 1.35; color: var(--ink); }
+.bk-ctx__how { font-size: var(--fs-small); line-height: 1.5; color: var(--ink-2); }
+.bk-ctx__how code { font-size: .8em; }
+.bk-ctx__code {
+  display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-1);
+  padding: 8px 10px; border-radius: 6px; background: var(--paper-2);
+  font-family: var(--font-mono); font-size: .72rem; line-height: 1.45; color: var(--ink); overflow-wrap: anywhere;
+}
+.bk-swatch { flex: none; width: 10px; height: 10px; border-radius: 2px; background: #284734; box-shadow: 0 0 0 1px var(--line-strong); }
+/* connectors: a fork on wide screens, a left rail on narrow ones */
+.bk-tokens__list::before, .bk-tokens__list::after, .bk-ctx::before, .bk-ctx::after { content: ""; position: absolute; border: 0 solid var(--ink-3); pointer-events: none; }
+@media (min-width: 720px) {
+  .bk-tokens__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bk-tokens__list::after { top: -40px; left: 50%; height: 20px; border-left-width: 1.25px; }
+  .bk-tokens__list::before {
+    top: -20px; height: 20px;
+    left: calc((100% - 2 * var(--space-4)) / 6); right: calc((100% - 2 * var(--space-4)) / 6);
+    border-width: 1.25px 1.25px 0; border-radius: 8px 8px 0 0;
+  }
+  .bk-ctx:nth-child(2)::before { top: -20px; left: 50%; height: 20px; border-left-width: 1.25px; }
+}
+@media (max-width: 719.98px) {
+  .bk-tokens__src { justify-content: flex-start; }
+  .bk-tokens__list { margin-top: var(--space-4); padding-left: 22px; }
+  .bk-ctx::before { left: -16px; top: calc(-1 * var(--space-4)); width: 15px; height: calc(var(--space-4) + 26px); border-left-width: 1.25px; border-bottom-width: 1.25px; border-bottom-left-radius: 6px; }
+  .bk-ctx:not(:last-child)::after { left: -16px; top: 26px; bottom: calc(-1 * var(--space-4)); border-left-width: 1.25px; }
+}
+
+/* ---- Diagrams: full width over the TOC rail on desktop, full bleed on phones */
+@media (min-width: 1024px) {
+  .bk-page .prose > .bk-over-toc {
+    position: relative; z-index: calc(var(--z-sticky) + 1);
+    width: calc(100% + var(--toc-w) + var(--space-8));
+    margin-left: calc(-1 * (var(--toc-w) + var(--space-8)));
+  }
+  .bk-page .toc { transition: opacity var(--dur-base) var(--ease-out); }
+  .bk-page .toc.bk-toc-off { opacity: 0; pointer-events: none; }
+}
+@media (max-width: 599.98px) {
+  .bk-page .prose > .bk-edge { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; border-inline: 0; padding-inline: 12px; }
+  .bk-page .prose > .bk-edge figcaption { padding-inline: calc(var(--gutter) - 12px); }
+}
+
+/* ---- Artefacts: prompt headings, hand-back, register --------------------- */
+.bk-page .prose > .artefact { max-width: none; }
+.bk-lines { margin: 0; padding: var(--space-4) var(--space-5); font-family: var(--font-mono); font-size: .8125rem; line-height: 1.6; color: var(--ink); }
+.bk-lines > span { display: block; padding-left: 3ch; text-indent: -3ch; overflow-wrap: anywhere; }
+.bk-lines > span + span { margin-top: 4px; }
+.bk-lines .bk-h1 { font-weight: var(--fw-medium); }
+.bk-lines .bk-dim { color: var(--ink-meta); }
+@media (max-width: 599.98px) { .bk-lines { padding: var(--space-3) var(--space-4); font-size: .75rem; } }
+
+/* ---- Figures: two-up on wide screens -------------------------------------- */
+.bk-page .prose > .figure-pair { max-width: none; margin-block: var(--space-7); }
+
+/* ---- Outcome gallery: 2 × 2 grid; a swipe strip on phones ----------------- */
+.bk-page .prose > .bk-gallery { max-width: none; }
+.bk-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7) var(--space-5); }
+.bk-gallery img, .bk-crop { aspect-ratio: 1265 / 1622; }
+.bk-gallery img { object-fit: cover; object-position: top center; background: var(--paper); }
+.bk-crop { overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-media); background: #fff; }
+.bk-page .bk-crop img { width: var(--z, 100%); max-width: none; height: auto; aspect-ratio: auto; margin: var(--y, 0) 0 0 var(--x, 0); border: 0; border-radius: 0; object-fit: fill; }
+@media (max-width: 599.98px) {
+  .bk-gallery {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; gap: var(--space-4);
+    margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) var(--space-2);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .bk-gallery::-webkit-scrollbar { display: none; }
+  .bk-gallery > * { scroll-snap-align: start; }
+  .bk-gallery .media--browser::before { height: 18px; }
+}
+.bk-gallery:focus-visible { outline-offset: 4px; }
+.bk-swipe { display: none; }
+@media (max-width: 599.98px) {
+  .bk-swipe { display: block; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: var(--track-meta); text-transform: uppercase; color: var(--ink-meta); }
+}
+
+/* ---- Fixes after the first screenshot pass ------------------------------ */
+.bk-page .finding > .media { grid-column: 2; }
+.bk-page .quote cite { display: inline-block; }
+.bk-page code.bk-nw { white-space: nowrap; }
+.bk-page .prose > :is(.bk-pair, .bk-gallery) { margin-block: var(--space-7); }
+.bk-page .table-wrap th { white-space: normal; }
+@media (max-width: 599.98px) {
+  .bk-page .prose > .bk-edge { width: auto; }
+  .bk-page .prose > .bk-swipe { margin-top: var(--space-7); }
+  .bk-page .prose > .bk-swipe + .bk-gallery { margin-top: var(--space-3); }
+  .bk-modules li { padding: 8px 0 9px; }
+  .bk-modules li::after { margin-top: 6px; }
+}
+
+/* Screenshots are light UI; take the glare off them in the dark theme. */
+:root[data-theme="dark"] .bk-page main :is(.media, .bk-crop) img { filter: brightness(.9); }
+
+/* ---- Retro --------------------------------------------------------------- */
+.bk-page .prose > .kcd { max-width: none; margin-block: var(--space-6) var(--space-7); }
+.bk-page .kcd__col li { font-size: .975rem; }
+.bk-page .kcd__label { font-weight: var(--fw-regular); }
+.bk-page .prose > .case-nav { max-width: none; margin-top: clamp(var(--space-9), 10vw, var(--space-10)); }
+</style>
+</head>
+<body class="bk-page">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/" aria-label="José Ochoa, home">
+      <svg class="wordmark__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 5.5v14a6.5 6.5 0 0 1-6.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21.5" cy="19.5" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      <span class="wordmark__name">José Ochoa</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        <li class="site-nav__item site-nav__item--menu">
+          <button class="site-nav__link site-nav__trigger" type="button" aria-expanded="false" aria-controls="work-menu">
+            Work
+            <svg class="site-nav__chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="site-nav__group" aria-hidden="true">Work</p>
+          <ul class="site-nav__menu" id="work-menu" aria-label="Work">
+            <li><a class="site-nav__menu-link" href="/work/bakery-orders/">
+              <span class="site-nav__menu-title">Bakery Orders</span>
+              <span class="site-nav__menu-desc">An ordering system shipped by one designer directing AI agents</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/design-system/">
+              <span class="site-nav__menu-title">Design system</span>
+              <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
+              <span class="site-nav__menu-title">Epoch explorer study</span>
+              <span class="site-nav__menu-desc">Notable AI models, redrawn for a phone</span>
+            </a></li>
+          </ul>
+        </li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/process/">Process</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/about/">About</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme">
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+<!-- PAGE CONTENT -->
+<!-- /work/bakery-orders/ · lane B1 (Opus 5.5) · assembled 2026-11-07 from content/bakery-orders.md (copy lane A5).
+     Figures: A2 chart runtime. Diagrams: A3's SVGs inlined (architecture, orchestration); token contexts drawn here.
+     Images: A3's optimised copies (site/assets/img/MANIFEST.md). Page-only styles: the <style> block in <head>. -->
+
+<section class="hero bk-hero container" aria-labelledby="hero-title">
+  <p class="eyebrow hero__eyebrow">Case study · Community Food Co-op · Jun–Nov 2026</p>
+  <h1 class="hero__title" id="hero-title">A bakery ordering system, designed and shipped by one designer directing AI&nbsp;agents</h1>
+  <p class="lead hero__dek">Community Food Co-op’s custom cake orders arrived in a shared inbox and were copied by hand onto carbon tickets. I replaced that with a WooCommerce plugin: a pickup-first cake builder, staff dashboards, printed tickets, emails and a Thanksgiving deli layer, live since 1&nbsp;November&nbsp;2026.</p>
+  <!-- src: docs/archive/architecture-plan.snapshot.md:22, :273; docs/archive/meeting-2026-07-29-brief.md:74-76; STATUS.md:161 -->
+
+  <div class="stat-grid stat-grid--compact">
+    <article class="stat-card">
+      <p class="stat-label">Days</p>
+      <p class="stat-value"><span data-count="142">142</span></p>
+      <p class="stat-claim">From first commit to a live store.</p>
+      <footer class="stat-meta">git log · STATUS.md:161</footer>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Commits</p>
+      <p class="stat-value"><span data-count="1503">1,503</span></p>
+      <p class="stat-claim">1,482 of them with a Claude co-author trailer.</p>
+      <footer class="stat-meta">git log --all · <span class="nowrap">2026-11-07</span></footer>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Assertions</p>
+      <p class="stat-value"><span data-count="6089">6,089</span></p>
+      <p class="stat-claim">In a full test run, 1 known red.</p>
+      <footer class="stat-meta">tests/cli/README.md · <span class="nowrap">2026-11-05</span></footer>
+    </article>
+    <article class="stat-card">
+      <p class="stat-label">Tickets</p>
+      <p class="stat-value"><span data-count="69">69</span></p>
+      <p class="stat-claim">61 closed, median 9 days to close.</p>
+      <footer class="stat-meta">gh issue list · <span class="nowrap">2026-11-07</span></footer>
+    </article>
+  </div>
+
+  <figure class="bk-duo">
+    <div class="bk-duo__frames">
+      <div class="media media--browser bk-duo__desk">
+        <img src="/assets/img/bakery/storefront-landing-1440.jpg" width="1440" height="1527" fetchpriority="high" decoding="async" alt="Bakery ordering landing page at desktop width: hero copy on the left, three seasonal specials, and category cards with photos.">
+      </div>
+      <div class="media media--phone bk-duo__phone">
+        <img src="/assets/img/bakery/storefront-landing-375.jpg" width="750" height="2268" decoding="async" alt="The bakery landing page on a phone: header, seasonal specials and a list of bakery categories with photos.">
+      </div>
+    </div>
+    <figcaption class="bk-duo__caps">
+      <p><span class="bk-tag">Desktop</span>The landing page at 1440&nbsp;px, from the desktop pass.</p>
+      <p><span class="bk-tag">Phone</span>The same landing at 375&nbsp;px, the width every screen was designed at first.</p>
+    </figcaption>
+  </figure>
+</section>
+
+<div class="container case-layout">
+  <nav class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ol class="toc__list">
+      <li><a class="toc__link" href="#problem"><span class="toc__num">01</span>The problem</a></li>
+      <li><a class="toc__link" href="#research"><span class="toc__num">02</span>Research and requirements</a></li>
+      <li><a class="toc__link" href="#insights"><span class="toc__num">03</span>Insights</a></li>
+      <li><a class="toc__link" href="#design"><span class="toc__num">04</span>Design</a></li>
+      <li><a class="toc__link" href="#build"><span class="toc__num">05</span>Build</a></li>
+      <li><a class="toc__link" href="#workflow"><span class="toc__num">06</span>The AI workflow</a></li>
+      <li><a class="toc__link" href="#outcome"><span class="toc__num">07</span>Outcome</a></li>
+      <li><a class="toc__link" href="#retro"><span class="toc__num">08</span>What I’d change</a></li>
+    </ol>
+  </nav>
+
+  <div class="bk-body">
+
+<!-- ======================================================================= 01 -->
+<section class="prose bk-sec" id="problem" aria-labelledby="problem-title">
+  <p class="eyebrow eyebrow--rule bk-num">01 · The problem</p>
+  <h2 id="problem-title">Orders arrived as email and were copied onto carbon tickets by hand</h2>
+
+  <p>The co-op sold custom cakes through Catapult/WebCart, its POS vendor’s storefront. Each order landed in a shared inbox and was re-keyed onto a three-colour carbon ticket: white for the store, yellow for the deli, pink for the bakery. Cancellations were phone calls.</p>
+  <!-- src: README.md:3-5; docs/archive/architecture-plan.snapshot.md:273, :464; docs/archive/meeting-2026-07-29-brief.md:74-76 -->
+
+
+  <p>In October the deli joined the project. Until then the deli lead had run Thanksgiving pre-orders alone: every order arrived as an email that couldn’t be searched, and each one was typed three times, into a season master, a pickup-day sheet and the store’s guide.</p>
+  <!-- src: docs/deli/requirements.md:37-40 -->
+
+  <p>The deli’s 25-sheet workbook showed why the numbers drifted. No formula on any sheet referenced another, so anything that appeared twice had been typed twice. The 2025 season had 42 orders; as the spec put it, “its cost is the retyping, not the volume.”</p>
+  <!-- src: docs/deli/order-board-analysis.md:3-4, :45-46; docs/deli/spec.md:50-51 -->
+
+  <figure class="quote reveal">
+    <blockquote><p>“The amount of hours that I put in, putting this in here, is ridiculous.”</p></blockquote>
+    <figcaption>— The deli lead, discovery interview, October 2026 · <cite>docs/deli/conversation-digest.md:162-178</cite></figcaption>
+  </figure>
+
+  <p>Four groups use the system:</p>
+  <ul class="bk-users">
+    <li><strong>Customers</strong>ordering a cake on a phone.</li>
+    <li><strong>Bakery staff</strong>who print and progress orders, and enter phone orders through the same storefront.</li>
+    <li><strong>Deli staff</strong>at two stores, from the deli lead to the service desk, each with their own view and print button.</li>
+    <li><strong>Marketing</strong>who own descriptions and photos; the bakery owns price, availability and allergens.</li>
+  </ul>
+  <!-- src: docs/archive/architecture-plan.snapshot.md:163-181, :350; docs/deli/requirements.md:31; docs/build-roadmap.md:89-91 -->
+</section>
+
+<!-- ======================================================================= 02 -->
+<section class="prose bk-sec" id="research" aria-labelledby="research-title">
+  <p class="eyebrow eyebrow--rule bk-num">02 · Research and requirements</p>
+  <h2 id="research-title">Decisions were made before the build, one question at a time</h2>
+
+  <p>Before any feature, I ran “grills”: the agent puts each open decision to me, one at a time, with a recommended answer. The grill of 6 July locked 12 product decisions and 8 build phases. Every later ticket opened the same way.</p>
+  <!-- src: docs/build-roadmap.md:3-4, :66-118, :131-281; docs/parity/28/ledger.md:19-88 -->
+
+  <p>Two of the twelve shaped everything after: size is the only variation axis, with every other choice stored as structured data, “never a text blob”; and the browser “is fast but never trusted”.</p>
+  <!-- src: docs/build-roadmap.md:72-76, :94-96, :114-118 -->
+
+  <p>Six hard rules open the agents’ manual. One says the plugin must still render correctly with the theme switched off.</p>
+  <!-- src: CLAUDE.md Golden Rules 1 and 3 (CLAUDE.md:30-88) -->
+
+  <p>Requirements argue from real examples. The deli’s 2025 order board was read cell by cell, and each finding became a rule:</p>
+
+  <div class="table-wrap reveal">
+    <table class="table bk-table">
+      <caption>Source: docs/deli/order-board-analysis.md · docs/deli/requirements.md:80 · includes/class-cancellation.php:19-30</caption>
+      <thead><tr><th scope="col">What the 2025 workbook showed</th><th scope="col">The rule it became</th></tr></thead>
+      <tbody>
+        <tr><td>A 2&nbsp;lb side was counted, not doubled: the master showed 9 where the weight was 18&nbsp;lb</td><td>Cooking totals are computed from order lines and a side-amounts table, never typed</td></tr>
+        <tr><td>26 of 42 orders were picked up on the last day</td><td>Per-day, per-store sheets with slot numbers</td></tr>
+        <tr><td>Only 20 of 44 guide rows carried the website’s order code</td><td>The order number and slot print on every sheet</td></tr>
+        <tr><td>11 of 32 bundles took no pie, and 11 took no protein</td><td>Protein &amp; Dessert is an optional step with counters</td></tr>
+        <tr><td>Cancellations were deleted cells with “Cancelled” typed in</td><td>Cancel is a status plus a full refund, and the order is kept</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- src: docs/deli/order-board-analysis.md:286, :364-365, :375-392, :418-428, :687-688; docs/deli/requirements.md:80; includes/class-cancellation.php:19-30 (research/bakery-case-study.md §c.16) -->
+
+  <p>The rule that kept the agents honest is one sentence: “An undocumented assumption is a bug.” Any session that assumes something the docs don’t decide adds a numbered row before it commits, and I sign it off, supersede it or leave it pending.</p>
+  <!-- src: CLAUDE.md:74 (Golden Rule 6); docs/assumptions-register.md:3-8 -->
+
+  <figure class="artefact bk-reg reveal">
+    <figcaption class="artefact__head"><span class="artefact__path">docs/assumptions-register.md</span><span>5 of 1,594 rows</span></figcaption>
+    <table>
+      <thead><tr><th scope="col">#</th><th scope="col">Assumption (trimmed)</th><th scope="col">Decided</th></tr></thead>
+      <tbody>
+        <tr><td>A3</td><td>72-hour lead time means “today + 3 calendar days”, not a rolling clock; the hours are editable in Settings</td><td><span class="bk-ok">Signed off <span class="nowrap">2026-07-07</span></span></td></tr>
+        <tr><td>A349</td><td>Check 18 fails on six seasonal products that carry the Seasonal category but no season: “a finding, not fixed here”</td><td>Recorded; the data is mine to fix</td></tr>
+        <tr><td>A960</td><td>“Nothing prints on its own; a Print click goes on the site’s print list and a runner next to the Epson prints it”</td><td>José, <span class="nowrap">2026-10-20</span></td></tr>
+        <tr><td>A1306</td><td>An Undo doesn’t ask the holiday calendar; the checkout gate does</td><td>“José’s call, as built first”, <span class="nowrap">2026-10-26</span></td></tr>
+        <tr><td>A2032</td><td>Each holiday side’s allergens sit below its ingredients; a blank one reads “None”</td><td>José, <span class="nowrap">2026-11-04</span></td></tr>
+      </tbody>
+    </table>
+  </figure>
+  <!-- src: docs/assumptions-register.md:14, :438, :913, :1176, :1619 (research/bakery-case-study.md Part 4 §4) -->
+
+  <p>The register holds 1,594 rows, numbered up to A2121 because each ticket prompt reserves a block of numbers.</p>
+  <!-- src: research/bakery-metrics.json assumptions_register; holiday-ticket-12-mixed-cart.md:17 ("Register rows A1290–A1319") -->
+
+  <figure class="figure reveal" data-chart="growth" data-src="/data/bakery-metrics.json" id="fig-growth">
+    <header>
+      <p class="eyebrow">Figure 1 · Test suite and register over time</p>
+      <h3 class="figure-title">The rulebook and the test suite grew together</h3>
+      <p class="figure-sub">Left, assertion lines in a full test run. Right, the highest row number in the assumptions register. Same dates, separate scales.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two step charts on a shared date axis. Assertions climb from 860 in late September to 6,089 on 5 November. The register’s highest row climbs from A18 in July to A2121 on 5 November. Both rise steepest in October."></div>
+    <figcaption>Both took off in October: the register went from A218 to A2121, the suite from 1,156 to 6,089 assertions.</figcaption>
+    <footer class="figure-foot"><span>Source: git log -p on tests/cli/README.md and docs/assumptions-register.md, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+  <!-- src: bakery-metrics.json assumption_count_over_time (2026-10-01 = 1156) and assumptions_register_rows_over_time (2026-10-01 = 218) -->
+</section>
+
+<!-- ======================================================================= 03 -->
+<section class="prose bk-sec" id="insights" aria-labelledby="insights-title">
+  <p class="eyebrow eyebrow--rule bk-num">03 · Insights</p>
+  <h2 id="insights-title">Five research findings changed what customers and staff actually do</h2>
+
+  <p>The research produced 17 findings that changed the build. These five matter most to the people using it.</p>
+
+  <ol class="findings">
+    <li class="finding">
+      <h3 class="finding__title">Run the counter, not the cap</h3>
+      <p class="finding__text">The bakery had no daily limit to give me, so the cap launched switched off while a counter ran from day one, derived from real orders with no stored total to drift. A real cap can come later, from data.</p>
+      <p class="finding__source">includes/class-capacity.php:2-17 · docs/build-roadmap.md:94-96</p>
+    </li>
+    <li class="finding">
+      <h3 class="finding__title">The cut-off is a minute, not a day</h3>
+      <p class="finding__text">Lead time moved from 72 hours to two days with a 12:00&nbsp;pm cut-off: an order placed before noon counts from today, and from noon it counts from tomorrow. A customer who opens the calendar at 11:55 and submits at 12:05 is refused by the server’s recheck, “as designed, no client timer”.</p>
+      <p class="finding__source">includes/helpers.php:907-911 · docs/assumptions-register.md:1291-1292 (A1504–A1505)</p>
+    </li>
+    <li class="finding">
+      <h3 class="finding__title">Pickup comes first</h3>
+      <p class="finding__text">Step 1 is the pickup: a store, then a calendar with exactly three day states, and the step can’t advance without a date the server marks open. A customer never designs a cake for a day the bakery can’t make.</p>
+      <p class="finding__source">docs/figma/figma-final-wireframe-plan.md:37-39 · tests/cli/checks/06-pickup-first.php:3-6</p>
+      <!-- B1 addition for pacing (not in the copy file): A3's MANIFEST assigns this capture to the 'pickup first' insight; caption from its description. -->
+      <figure class="media media--browser reveal">
+        <img src="/assets/img/bakery/storefront-builder-step-1-pickup-1280.jpg" width="1280" height="919" loading="lazy" decoding="async" alt="Step one of the cake builder: a pickup calendar with available, unavailable and selected days, two store cards, and a running summary of the order.">
+        <figcaption>Builder step 1 at 1280&nbsp;px: the calendar’s three day states, the store choice and the running summary.</figcaption>
+      </figure>
+    </li>
+    <li class="finding">
+      <h3 class="finding__title">Tickets print on a click, not on payment</h3>
+      <p class="finding__text">The plan said auto-print, but the web host can’t reach a printer on the store network, and on 20 October I ruled it out: “i dont want tickets to automatically print when an order gets confirmed.” Now a Print click puts the job on a list, and a small runner beside the receipt printer prints it.</p>
+      <p class="finding__source">docs/assumptions-register.md:913 (A960) · includes/class-print-agent.php:2-33</p>
+    </li>
+    <li class="finding">
+      <h3 class="finding__title">One breakpoint, at 782&nbsp;px</h3>
+      <p class="finding__text">The storefront CSS has exactly one media query, at 782&nbsp;px; there’s no tablet layout. A check hashes every byte outside that block, so the 375&nbsp;px layout I approved on my phone can’t move by accident.</p>
+      <p class="finding__source">docs/parity/28/ledger.md:42-43 · tests/cli/checks/33-desktop-pass.php:3-19</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ======================================================================= 04 -->
+<section class="prose bk-sec" id="design" aria-labelledby="design-title">
+  <p class="eyebrow eyebrow--rule bk-num">04 · Design</p>
+  <h2 id="design-title">The Figma journey was the spec, and every deviation was logged</h2>
+
+  <p>The flow was designed at 375&nbsp;px in the co-op’s design-system file, from library tokens and components only, with each backend rule annotated on its frame in Dev Mode.</p>
+  <!-- src: research/figma-cfc-system.md §1 row 5, §3; docs/figma/figma-build-report.md:8-21 -->
+
+  <!-- The copy's three-up Figma media row is split for pacing: the journey runs wide here, the sheet and one frame pair up below. -->
+  <figure class="media bk-plain bk-wide reveal">
+    <img src="/assets/img/figma/bakery-final-journey-375.jpg" width="1800" height="1365" loading="lazy" decoding="async" alt="Thirteen mobile screens in a row in Figma, joined by flow arrows, from the bakery landing to the order confirmation.">
+    <figcaption>The final journey at 375&nbsp;px: 13 screens from Landing to Confirmed, with the flow drawn between them.</figcaption>
+  </figure>
+
+  <p>An overnight agent run on 5–6 August built 30 components, a 97-row copy map and 13 screens with 35 annotations. Its audit read 0 raw fills, 0 raw strokes, 0 raw font sizes and 0 raw radii.</p>
+  <!-- src: docs/figma/figma-build-report.md:8-21, :82-98, :119-123 -->
+
+  <p>I approved the structure and sent back the styling. The diff became a register of 30 deviations, 16 global and 14 per screen, plus seven calls left for me that would be “chipped, not silently decided”. An earlier pass had felt “too big, too bold-y”; the audit traced it to desktop text styles on 375&nbsp;px frames.</p>
+  <!-- src: docs/figma/figma-visual-review-feedback.md:3-6; docs/figma/figma-deviation-register.md:134-150, :278-408, :432; docs/archive/overnight-design-v2-review.md:3-4, :11-16 -->
+
+  <p>The copywriters edited a duplicate of the journey. A read-only diff compared 691 text layers, found 91 copy edits and 54 comment threads, and changed nothing until I approved: “No node was mutated.”</p>
+  <!-- src: docs/figma/copy-pass-report-2026-10-01.md:7-20 -->
+
+  <div class="bk-pair bk-wide reveal">
+    <figure class="media bk-plain">
+      <img src="/assets/img/figma/bakery-components-final.jpg" width="1800" height="1950" loading="lazy" decoding="async" alt="A Figma sheet of bakery components: tags, option cards, calendar days, headers, menu cards and summary panels.">
+      <figcaption>The component sheet: option cards, a three-state calendar, and one build summary in three variants.</figcaption>
+    </figure>
+    <figure class="media bk-plain bk-side">
+      <img src="/assets/img/figma/bakery-f5-builder-pickup-375.jpg" width="375" height="1162" loading="lazy" decoding="async" alt="A mobile builder screen with a five-step progress bar, a pickup calendar, two store cards and a Select Size button.">
+      <figcaption>Step 1, Pickup: three day states, store cards, and the price drawer.</figcaption>
+    </figure>
+  </div>
+
+  <p>The token rule is one line: “Never hand-author a brand value.” The plugin reads 200 <code class="bk-nw">--cfc-bakery-*</code> names, and one file, <code>tokens.php</code>, is the only place they meet the theme’s tokens.</p>
+  <!-- src: docs/design-tokens.md:21; CLAUDE.md Golden Rule 3; research/bakery-case-study.md Part 3 §4 (200 names, includes/tokens.php) -->
+
+  <p>In code, every screen was compared with its frame at 375&nbsp;px in 96 screenshots, until all 13 read “self-review passed”. The last gate was my own phone: “everything passed on my iPhone.”</p>
+  <!-- src: docs/parity/20/ledger.md:15-16; STATUS.md:200 (2026-10-20) -->
+</section>
+
+<!-- ======================================================================= 05 -->
+<section class="prose bk-sec" id="build" aria-labelledby="build-title">
+  <p class="eyebrow eyebrow--rule bk-num">05 · Build</p>
+  <h2 id="build-title">WooCommerce does the plumbing; 64 modules do the bakery</h2>
+
+  <p>The plugin doesn’t rebuild commerce. WooCommerce handles payment, cart and checkout; the plugin adds the builder, capacity, order statuses, tickets, emails and the staff screens.</p>
+  <!-- src: README.md:24; CLAUDE.md Golden Rule 1 -->
+
+  <figure class="diagram bleed bk-over-toc bk-edge reveal">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 24 1120 360" class="dgm dgm--wide dgm-arch" role="img" aria-labelledby="dgmArchW-t dgmArchW-d">
+  <title id="dgmArchW-t">How a bakery order moves through the system</title>
+  <desc id="dgmArchW-d">A customer builds a cake in the storefront, pickup first, then checks out; the date and store are re-checked at the click and WooCommerce creates the order. Each status change (to make, ready, picked up, or cancelled with a refund) drives the emails, the print list and the staff dashboards. Admin settings, catalogs and imports feed the builder. One token map feeds every surface: live CSS variables on the storefront, a snapshot in admin and print, inline literal values in email.</desc>
+  <style>
+    .dgm{color:var(--ink-3,#7A807B);font-family:var(--font-text,Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif)}
+    .dgm text{font-family:inherit}
+    .dgm .nd{fill:var(--paper,#F6F5F1);stroke:var(--line-strong,#C6C1B5);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .nd-acc{fill:var(--accent-soft,#DCE9F8);stroke:var(--accent,#2A78D6)}
+    .dgm .nd-ink{fill:var(--ink,#121412);stroke:var(--ink,#121412)}
+    .dgm .grp{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 4}
+    .dgm .pill{fill:var(--paper-2,#EDEBE4);stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .pill-x{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 3}
+    .dgm .rule{fill:none;stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .t{font-size:15px;font-weight:600;letter-spacing:-.01em;fill:var(--ink,#121412)}
+    .dgm .s{font-size:12.5px;fill:var(--ink-2,#4A4F4B)}
+    .dgm .s-ink{font-size:12.5px;font-weight:500;fill:var(--ink,#121412)}
+    .dgm .p{font-size:12px;font-weight:500;fill:var(--ink-2,#4A4F4B)}
+    .dgm .p-x{font-size:12px;fill:var(--ink-meta,#646A66)}
+    .dgm .m,.dgm .el{font-family:var(--font-mono,"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace);font-size:10.5px;fill:var(--ink-meta,#646A66)}
+    .dgm .m{letter-spacing:.08em}
+    .dgm .el{letter-spacing:.02em}
+    .dgm .acc{fill:var(--accent-ink,#1C5CAB)}
+    .dgm .on-ink{fill:var(--paper,#F6F5F1)}
+    .dgm .on-ink-2{fill:var(--paper,#F6F5F1);opacity:.7}
+    .dgm .e{fill:none;stroke:currentColor;stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-acc{fill:none;stroke:var(--accent,#2A78D6);stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-loop{stroke-dasharray:4 4}
+    .dgm .ah{fill:currentColor}
+    .dgm .ah-acc{fill:var(--accent,#2A78D6)}
+    .dgm .live{fill:var(--good,#1a7f37)}
+    .dgm .pulse{fill:var(--accent,#2A78D6)}
+    @media (prefers-reduced-motion:reduce){.dgm .pulse{display:none}}
+    .diagram .dgm--wide~.dgm--narrow{display:none}
+    @media (max-width:999.98px){.diagram .dgm--wide:has(~.dgm--narrow){display:none}.diagram .dgm--wide~.dgm--narrow{display:block;width:100%;max-width:480px;margin-inline:auto}}
+  </style>
+  <defs>
+    <marker id="dgmArchW-ah" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmArchW-aha" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah-acc" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmArchW-ahs" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+  </defs>
+
+  <!-- Row 1 · the order path -->
+  <rect class="nd" x="0.5" y="32.5" width="140" height="96" rx="10"/>
+  <text class="m" x="16" y="54">CUSTOMER</text>
+  <text class="t" x="16" y="76">Orders a cake</text>
+  <text class="s" x="16" y="96">Phone or laptop,</text>
+  <text class="s" x="16" y="112">picks up in store</text>
+
+  <rect class="nd" x="172.5" y="32.5" width="256" height="96" rx="10"/>
+  <text class="m" x="188" y="54">STOREFRONT</text>
+  <text class="t" x="188" y="76">Cake builder</text>
+  <text class="s" x="188" y="96">Pickup first, then size,</text>
+  <text class="s" x="188" y="112">flavour, frosting, extras</text>
+
+  <rect class="nd" x="460.5" y="32.5" width="192" height="96" rx="10"/>
+  <text class="m" x="476" y="54">STOREFRONT</text>
+  <text class="t" x="476" y="76">Cart and checkout</text>
+  <text class="s" x="476" y="96">Date and store are</text>
+  <text class="s" x="476" y="112">re-checked at the click</text>
+
+  <rect class="nd" x="684.5" y="32.5" width="435" height="96" rx="10"/>
+  <text class="m" x="700" y="54">WOOCOMMERCE</text>
+  <text class="t" x="700" y="76">Order and status</text>
+  <rect class="pill" x="700.5" y="88.5" width="70" height="24" rx="12"/>
+  <text class="p" x="735.5" y="104.5" text-anchor="middle">To make</text>
+  <path class="e" d="M771 100.5H791" marker-end="url(#dgmArchW-ahs)"/>
+  <rect class="pill" x="792.5" y="88.5" width="58" height="24" rx="12"/>
+  <text class="p" x="821.5" y="104.5" text-anchor="middle">Ready</text>
+  <path class="e" d="M851 100.5H871" marker-end="url(#dgmArchW-ahs)"/>
+  <rect class="pill" x="872.5" y="88.5" width="82" height="24" rx="12"/>
+  <text class="p" x="913.5" y="104.5" text-anchor="middle">Picked up</text>
+  <rect class="pill-x" x="970.5" y="88.5" width="132" height="24" rx="12"/>
+  <text class="p-x" x="1036.5" y="104.5" text-anchor="middle">Cancelled · refund</text>
+
+  <path class="e" d="M141 80.5H171" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M429 80.5H459" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M653 80.5H683" marker-end="url(#dgmArchW-ah)"/>
+
+  <!-- Each status change fans out -->
+  <path class="e" d="M902.5 129V164.5M560.5 164.5H1020.5"/>
+  <path class="e" d="M560.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M790.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <path class="e" d="M1020.5 164.5V199.5" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="910" y="152">each status change</text>
+
+  <!-- Row 2 · what an order triggers -->
+  <rect class="nd" x="460.5" y="200.5" width="200" height="96" rx="10"/>
+  <text class="m" x="476" y="222">NOTIFICATIONS</text>
+  <text class="t" x="476" y="244">Emails</text>
+  <text class="s" x="476" y="264">Confirmed, ready,</text>
+  <text class="s" x="476" y="280">changed, cancelled</text>
+
+  <rect class="nd" x="690.5" y="200.5" width="200" height="96" rx="10"/>
+  <text class="m" x="706" y="222">PRINTING</text>
+  <text class="t" x="706" y="244">Print list</text>
+  <text class="s" x="706" y="264">A click queues a job;</text>
+  <text class="s" x="706" y="280">a runner prints it</text>
+
+  <rect class="nd" x="920.5" y="200.5" width="199" height="96" rx="10"/>
+  <text class="m" x="936" y="222">STAFF</text>
+  <text class="t" x="936" y="244">Dashboards</text>
+  <text class="s" x="936" y="264">Bakery and deli,</text>
+  <text class="s" x="936" y="280">refresh every 60 s</text>
+
+  <!-- Admin feeds the builder -->
+  <rect class="grp" x="0.5" y="200.5" width="268" height="156" rx="12"/>
+  <text class="m" x="16" y="222">ADMIN · WP-ADMIN</text>
+  <rect class="nd" x="12.5" y="234.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="254">Settings</text>
+  <text class="el" x="244" y="254" text-anchor="end">10 tabs</text>
+  <rect class="nd" x="12.5" y="272.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="292">Catalogs and sizes</text>
+  <text class="el" x="244" y="292" text-anchor="end">9 catalogs</text>
+  <rect class="nd" x="12.5" y="310.5" width="244" height="30" rx="6"/>
+  <text class="s-ink" x="24" y="330">Imports</text>
+  <text class="el" x="244" y="330" text-anchor="end">dry run → plan → apply</text>
+  <path class="e" d="M220.5 199.5V129.5" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="212" y="168" text-anchor="end">catalogs, sizes, prices</text>
+
+  <!-- One token map feeds every surface -->
+  <rect class="nd nd-acc" x="292.5" y="200.5" width="136" height="96" rx="10"/>
+  <text class="m acc" x="308" y="222">DESIGN TOKENS</text>
+  <text class="t" x="308" y="244">Token map</text>
+  <text class="s" x="308" y="264">tokens.php,</text>
+  <text class="s" x="308" y="280">200 names</text>
+  <path class="e-acc" d="M360.5 199.5V129.5" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el acc" x="368" y="168">LIVE</text>
+  <path class="e-acc" d="M360.5 297V324.5H1020.5"/>
+  <path class="e-acc" d="M560.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <path class="e-acc" d="M790.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <path class="e-acc" d="M1020.5 324.5V297.5" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el acc" x="568" y="316">INLINE</text>
+  <text class="el acc" x="798" y="316">SNAPSHOT</text>
+  <text class="el acc" x="1028" y="316">SNAPSHOT</text>
+
+  <!-- Legend -->
+  <path class="e" d="M0.5 372.5H26" marker-end="url(#dgmArchW-ah)"/>
+  <text class="el" x="34" y="376">order data</text>
+  <path class="e-acc" d="M112.5 372.5H138" marker-end="url(#dgmArchW-aha)"/>
+  <text class="el" x="146" y="376">design tokens · LIVE on the storefront, SNAPSHOT in admin and print, INLINE in email</text>
+  <text class="el" x="1119" y="376" text-anchor="end">cfc-bakery-orders @ f28ff68</text>
+</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 884" class="dgm dgm--narrow dgm-arch" role="img" aria-labelledby="dgmArchN-t dgmArchN-d">
+  <title id="dgmArchN-t">How a bakery order moves through the system</title>
+  <desc id="dgmArchN-d">The customer and the admin set-up both feed the cake builder, pickup first. The cart and checkout re-check the date and store, and WooCommerce creates the order. Each status change (to make, ready, picked up, or cancelled with a refund) drives the emails, the print list and the staff dashboards. One token map feeds every surface: live CSS variables on the storefront, a snapshot in dashboards and print, inline literal values in email.</desc>
+  <style>
+    .dgm{color:var(--ink-3,#7A807B);font-family:var(--font-text,Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif)}
+    .dgm text{font-family:inherit}
+    .dgm .nd{fill:var(--paper,#F6F5F1);stroke:var(--line-strong,#C6C1B5);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .nd-acc{fill:var(--accent-soft,#DCE9F8);stroke:var(--accent,#2A78D6)}
+    .dgm .nd-ink{fill:var(--ink,#121412);stroke:var(--ink,#121412)}
+    .dgm .grp{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 4}
+    .dgm .pill{fill:var(--paper-2,#EDEBE4);stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .pill-x{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 3}
+    .dgm .rule{fill:none;stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .t{font-size:15px;font-weight:600;letter-spacing:-.01em;fill:var(--ink,#121412)}
+    .dgm .s{font-size:12.5px;fill:var(--ink-2,#4A4F4B)}
+    .dgm .s-ink{font-size:12.5px;font-weight:500;fill:var(--ink,#121412)}
+    .dgm .p{font-size:12px;font-weight:500;fill:var(--ink-2,#4A4F4B)}
+    .dgm .p-x{font-size:12px;fill:var(--ink-meta,#646A66)}
+    .dgm .m,.dgm .el{font-family:var(--font-mono,"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace);font-size:10.5px;fill:var(--ink-meta,#646A66)}
+    .dgm .m{letter-spacing:.08em}
+    .dgm .el{letter-spacing:.02em}
+    .dgm .acc{fill:var(--accent-ink,#1C5CAB)}
+    .dgm .on-ink{fill:var(--paper,#F6F5F1)}
+    .dgm .on-ink-2{fill:var(--paper,#F6F5F1);opacity:.7}
+    .dgm .e{fill:none;stroke:currentColor;stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-acc{fill:none;stroke:var(--accent,#2A78D6);stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-loop{stroke-dasharray:4 4}
+    .dgm .ah{fill:currentColor}
+    .dgm .ah-acc{fill:var(--accent,#2A78D6)}
+    .dgm .live{fill:var(--good,#1a7f37)}
+    .dgm .pulse{fill:var(--accent,#2A78D6)}
+    .dgm.dgm--narrow .s{font-size:13px}
+    .dgm.dgm--narrow .m,.dgm.dgm--narrow .el{font-size:11px}
+    @media (prefers-reduced-motion:reduce){.dgm .pulse{display:none}}
+    .diagram .dgm--wide~.dgm--narrow{display:none}
+    @media (max-width:999.98px){.diagram .dgm--wide:has(~.dgm--narrow){display:none}.diagram .dgm--wide~.dgm--narrow{display:block;width:100%;max-width:480px;margin-inline:auto}}
+  </style>
+  <defs>
+    <marker id="dgmArchN-ah" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmArchN-ahs" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+  </defs>
+
+  <!-- Two inputs feed the builder -->
+  <rect class="nd" x="0.5" y="8.5" width="168" height="92" rx="10"/>
+  <text class="m" x="16" y="30">CUSTOMER</text>
+  <text class="t" x="16" y="52">Orders a cake</text>
+  <text class="s" x="16" y="70">Phone or laptop,</text>
+  <text class="s" x="16" y="86">picks up in store</text>
+
+  <rect class="nd" x="191.5" y="8.5" width="168" height="92" rx="10"/>
+  <text class="m" x="207" y="30">ADMIN</text>
+  <text class="t" x="207" y="52">Set-up</text>
+  <text class="s" x="207" y="70">Settings, catalogs,</text>
+  <text class="s" x="207" y="86">sizes, imports</text>
+
+  <path class="e" d="M84.5 101V135.5" marker-end="url(#dgmArchN-ah)"/>
+  <path class="e" d="M275.5 101V135.5" marker-end="url(#dgmArchN-ah)"/>
+
+  <rect class="nd" x="0.5" y="136.5" width="359" height="92" rx="10"/>
+  <text class="m" x="16" y="158">STOREFRONT</text>
+  <text class="t" x="16" y="180">Cake builder</text>
+  <text class="s" x="16" y="198">Pickup first, then size, flavour,</text>
+  <text class="s" x="16" y="214">frosting and extras</text>
+
+  <path class="e" d="M180.5 229V263.5" marker-end="url(#dgmArchN-ah)"/>
+
+  <rect class="nd" x="0.5" y="264.5" width="359" height="92" rx="10"/>
+  <text class="m" x="16" y="286">STOREFRONT</text>
+  <text class="t" x="16" y="308">Cart and checkout</text>
+  <text class="s" x="16" y="326">Date and store are re-checked</text>
+  <text class="s" x="16" y="342">at the click</text>
+
+  <path class="e" d="M180.5 357V391.5" marker-end="url(#dgmArchN-ah)"/>
+
+  <rect class="nd" x="0.5" y="392.5" width="359" height="130" rx="10"/>
+  <text class="m" x="16" y="414">WOOCOMMERCE</text>
+  <text class="t" x="16" y="436">Order and status</text>
+  <rect class="pill" x="16.5" y="450.5" width="70" height="24" rx="12"/>
+  <text class="p" x="51.5" y="466.5" text-anchor="middle">To make</text>
+  <path class="e" d="M87 462.5H107" marker-end="url(#dgmArchN-ahs)"/>
+  <rect class="pill" x="108.5" y="450.5" width="58" height="24" rx="12"/>
+  <text class="p" x="137.5" y="466.5" text-anchor="middle">Ready</text>
+  <path class="e" d="M167 462.5H187" marker-end="url(#dgmArchN-ahs)"/>
+  <rect class="pill" x="188.5" y="450.5" width="82" height="24" rx="12"/>
+  <text class="p" x="229.5" y="466.5" text-anchor="middle">Picked up</text>
+  <rect class="pill-x" x="16.5" y="484.5" width="132" height="24" rx="12"/>
+  <text class="p-x" x="82.5" y="500.5" text-anchor="middle">Cancelled · refund</text>
+
+  <!-- Each status change fans out -->
+  <path class="e" d="M180.5 523V546.5M56.5 546.5H304.5"/>
+  <path class="e" d="M56.5 546.5V569.5" marker-end="url(#dgmArchN-ah)"/>
+  <path class="e" d="M180.5 546.5V569.5" marker-end="url(#dgmArchN-ah)"/>
+  <path class="e" d="M304.5 546.5V569.5" marker-end="url(#dgmArchN-ah)"/>
+  <text class="el" x="188" y="539">each status change</text>
+
+  <rect class="nd" x="0.5" y="570.5" width="112" height="92" rx="10"/>
+  <text class="m" x="12" y="590">EMAIL</text>
+  <text class="t" x="12" y="612">Emails</text>
+  <text class="s" x="12" y="630">Sent once</text>
+  <text class="s" x="12" y="646">per status</text>
+
+  <rect class="nd" x="124.5" y="570.5" width="112" height="92" rx="10"/>
+  <text class="m" x="136" y="590">PRINT</text>
+  <text class="t" x="136" y="612">Print list</text>
+  <text class="s" x="136" y="630">On a click,</text>
+  <text class="s" x="136" y="646">via a runner</text>
+
+  <rect class="nd" x="247.5" y="570.5" width="112" height="92" rx="10"/>
+  <text class="m" x="259" y="590">STAFF</text>
+  <text class="t" x="259" y="612">Dashboards</text>
+  <text class="s" x="259" y="630">Bakery, deli,</text>
+  <text class="s" x="259" y="646">60 s refresh</text>
+
+  <!-- One token map feeds every surface -->
+  <rect class="nd nd-acc" x="0.5" y="694.5" width="359" height="182" rx="10"/>
+  <text class="m acc" x="16" y="716">DESIGN TOKENS</text>
+  <text class="t" x="16" y="738">One token map, every surface</text>
+  <text class="s" x="16" y="756">tokens.php · 200 names</text>
+  <path class="rule" d="M16 772.5H344"/>
+  <text class="s" x="16" y="789">Storefront</text>
+  <text class="el acc" x="344" y="789" text-anchor="end">LIVE var()</text>
+  <path class="rule" d="M16 797.5H344"/>
+  <text class="s" x="16" y="814">Dashboards, settings</text>
+  <text class="el acc" x="344" y="814" text-anchor="end">SNAPSHOT</text>
+  <path class="rule" d="M16 822.5H344"/>
+  <text class="s" x="16" y="839">Print ticket</text>
+  <text class="el acc" x="344" y="839" text-anchor="end">SNAPSHOT</text>
+  <path class="rule" d="M16 847.5H344"/>
+  <text class="s" x="16" y="864">Email</text>
+  <text class="el acc" x="344" y="864" text-anchor="end">INLINE · zero var()</text>
+</svg>
+    <figcaption>Customer → storefront → cart and checkout → WooCommerce order → statuses, which drive emails, the print list and the dashboards. One token map feeds every surface.</figcaption>
+  </figure>
+
+  <p>There are 64 PHP modules and 50,116 lines, in ten groups:</p>
+  <ul class="bk-modules bk-wide" aria-label="Modules by group">
+    <li style="--n:11">Catalog and modifier engine <span class="bk-modules__n">11</span></li>
+    <li style="--n:7">Storefront, cart and checkout <span class="bk-modules__n">7</span></li>
+    <li style="--n:3">Capacity and calendar <span class="bk-modules__n">3</span></li>
+    <li style="--n:6">Order lifecycle <span class="bk-modules__n">6</span></li>
+    <li style="--n:2">Notifications <span class="bk-modules__n">2</span></li>
+    <li style="--n:1">Printing <span class="bk-modules__n">1</span></li>
+    <li style="--n:4">Staff dashboards <span class="bk-modules__n">4</span></li>
+    <li style="--n:9">Holiday deli layer <span class="bk-modules__n">9</span></li>
+    <li style="--n:7">Importers <span class="bk-modules__n">7</span></li>
+    <li style="--n:14">Settings and Health <span class="bk-modules__n">14</span></li>
+  </ul>
+  <!-- src: research/bakery-case-study.md Part 2 §2.1–2.10 (file tables; 54 in includes/ + 10 in includes/health/) and §11 -->
+
+  <p>Theme tokens only exist on front-end pages, so each surface resolves them its own way:</p>
+
+  <!-- {{diagram:token-contexts}} drawn by B1 as HTML. It carries the copy's three-row table word for word
+       (surface · how a token resolves · mode), so the table isn't repeated; the code lines are the real examples
+       from includes/tokens.php:158 and docs/design-tokens.md:82. -->
+  <figure class="diagram bleed bk-tokens reveal" aria-labelledby="tokens-cap">
+    <p class="bk-tokens__src"><code class="bk-tokens__name">--cfc-bakery-color-ink</code><span class="bk-tokens__note">one of 200 names · includes/tokens.php</span></p>
+    <ol class="bk-tokens__list">
+      <li class="bk-ctx">
+        <p class="bk-ctx__mode">Live</p>
+        <p class="bk-ctx__surface">Storefront pages</p>
+        <p class="bk-ctx__how"><code>var(--wp--preset--*, fallback)</code>: the theme’s live value</p>
+        <p class="bk-ctx__code"><span class="bk-swatch" aria-hidden="true"></span><span>var(--wp--preset--color--primary, #284734)</span></p>
+      </li>
+      <li class="bk-ctx">
+        <p class="bk-ctx__mode">Snapshot</p>
+        <p class="bk-ctx__surface">Staff dashboard and print ticket</p>
+        <p class="bk-ctx__how">a <code>:root</code> snapshot written into every render</p>
+        <p class="bk-ctx__code"><span class="bk-swatch" aria-hidden="true"></span><span>:root { --cfc-bakery-color-ink: #284734 }</span></p>
+      </li>
+      <li class="bk-ctx">
+        <p class="bk-ctx__mode">Inline</p>
+        <p class="bk-ctx__surface">Email</p>
+        <p class="bk-ctx__how">literal values inlined on each element, zero <code>var()</code></p>
+        <p class="bk-ctx__code"><span class="bk-swatch" aria-hidden="true"></span><span>style="color:<wbr>#284734"</span></p>
+      </li>
+    </ol>
+    <figcaption id="tokens-cap">One token name, three ways to resolve it. Source: docs/design-tokens.md:73-85 · includes/tokens.php:131, :158, :365-392 · assets/css/print.css:4-5</figcaption>
+  </figure>
+  <!-- src: docs/design-tokens.md:73-85; includes/tokens.php:131, :365-392; assets/css/print.css:4-5 -->
+
+  <p>The fallbacks are WordPress’s own computed <code>clamp()</code> strings. theme.json’s <code>size</code> field is the clamp’s maximum, and a fallback built from it would have rendered every email and ticket “too big”.</p>
+  <!-- src: docs/design-tokens.md:24-29; includes/tokens.php:145-151 -->
+
+  <figure class="figure reveal" data-chart="loc" data-src="/data/bakery-metrics.json" id="fig-loc">
+    <header>
+      <p class="eyebrow">Figure 2 · Lines by area</p>
+      <h3 class="figure-title">The tests outweigh the product code</h3>
+      <p class="figure-sub">Lines in the plugin repo by area, 7 November 2026.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Horizontal bars. Tests 62,396 lines, docs 51,114, PHP modules 50,116, CSS 11,015, JavaScript 8,201."></div>
+    <figcaption>62,396 lines of tests guard 50,116 lines of PHP. The docs almost match the code, which the retro counts as a cost.</figcaption>
+    <footer class="figure-foot"><span>Source: git ls-files + wc -l, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+</section>
+
+<!-- ======================================================================= 06 -->
+<section class="prose bk-sec" id="workflow" aria-labelledby="workflow-title">
+  <p class="eyebrow eyebrow--rule bk-num">06 · The AI workflow</p>
+  <h2 id="workflow-title">Agents built it; a fresh reviewer and my phone decided when it was done</h2>
+
+  <p>Every commit is authored under my GitHub login, and 1,482 of 1,503 carry a Claude co-author trailer. My part is on either side of the code: the decisions and rules before it, and the verdict after.</p>
+  <!-- src: bakery-metrics.json timeline.contributor_note, ai_coauthorship -->
+
+  <figure class="diagram bleed bk-over-toc bk-edge reveal">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 26 1120 198" class="dgm dgm--wide dgm-orch" role="img" aria-labelledby="dgmOrchW-t dgmOrchW-d">
+  <title id="dgmOrchW-t">How José ships a ticket with AI agents</title>
+  <desc id="dgmOrchW-d">José writes the brief and makes the decisions. An orchestrator agent plans, merges and holds the database lock, and hands each ticket to a builder lane working in its own git worktree. A fresh reviewer scores every change from 1 to 10; 9 or above passes, below 9 goes back for a fix and a new reviewer, at most five rounds. Passing work goes to staging, José checks it on his phone and says "passed", and only José pushes main, the live store.</desc>
+  <style>
+    .dgm{color:var(--ink-3,#7A807B);font-family:var(--font-text,Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif)}
+    .dgm text{font-family:inherit}
+    .dgm .nd{fill:var(--paper,#F6F5F1);stroke:var(--line-strong,#C6C1B5);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .nd-acc{fill:var(--accent-soft,#DCE9F8);stroke:var(--accent,#2A78D6)}
+    .dgm .nd-ink{fill:var(--ink,#121412);stroke:var(--ink,#121412)}
+    .dgm .grp{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 4}
+    .dgm .pill{fill:var(--paper-2,#EDEBE4);stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .pill-x{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 3}
+    .dgm .rule{fill:none;stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .t{font-size:15px;font-weight:600;letter-spacing:-.01em;fill:var(--ink,#121412)}
+    .dgm .s{font-size:12.5px;fill:var(--ink-2,#4A4F4B)}
+    .dgm .s-ink{font-size:12.5px;font-weight:500;fill:var(--ink,#121412)}
+    .dgm .p{font-size:12px;font-weight:500;fill:var(--ink-2,#4A4F4B)}
+    .dgm .p-x{font-size:12px;fill:var(--ink-meta,#646A66)}
+    .dgm .m,.dgm .el{font-family:var(--font-mono,"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace);font-size:10.5px;fill:var(--ink-meta,#646A66)}
+    .dgm .m{letter-spacing:.08em}
+    .dgm .el{letter-spacing:.02em}
+    .dgm .acc{fill:var(--accent-ink,#1C5CAB)}
+    .dgm .on-ink{fill:var(--paper,#F6F5F1)}
+    .dgm .on-ink-2{fill:var(--paper,#F6F5F1);opacity:.7}
+    .dgm .e{fill:none;stroke:currentColor;stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-acc{fill:none;stroke:var(--accent,#2A78D6);stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-loop{stroke-dasharray:4 4}
+    .dgm .ah{fill:currentColor}
+    .dgm .ah-acc{fill:var(--accent,#2A78D6)}
+    .dgm .live{fill:var(--good,#1a7f37)}
+    .dgm .pulse{fill:var(--accent,#2A78D6)}
+    @media (prefers-reduced-motion:reduce){.dgm .pulse{display:none}}
+    .diagram .dgm--wide~.dgm--narrow{display:none}
+    @media (max-width:999.98px){.diagram .dgm--wide:has(~.dgm--narrow){display:none}.diagram .dgm--wide~.dgm--narrow{display:block;width:100%;max-width:480px;margin-inline:auto}}
+  </style>
+  <defs>
+    <marker id="dgmOrchW-ah" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmOrchW-aha" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah-acc" d="M0 .6 8 4 0 7.4z"/></marker>
+  </defs>
+
+  <!-- A work item travels the pipeline (hidden under reduced motion; nodes are drawn on top) -->
+  <circle class="pulse" r="3.5" cx="0" cy="0">
+    <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" path="M104 100.5H296.5V108.5H496.5V100.5H1008"/>
+  </circle>
+
+  <!-- Edges -->
+  <path class="e" d="M105 100.5H137" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M279 100.5H296.5V78.5H323" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M296.5 100.5V108.5H323" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M296.5 100.5V138.5H323" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M473 78.5H496.5V138.5H473M496.5 100.5H517" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M473 108.5H496.5"/>
+  <path class="e-acc" d="M659 100.5H691" marker-end="url(#dgmOrchW-aha)"/>
+  <text class="el acc" x="675" y="89" text-anchor="middle">9/10</text>
+  <path class="e" d="M809 100.5H841" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e" d="M975 100.5H1007" marker-end="url(#dgmOrchW-ah)"/>
+  <path class="e e-loop" d="M588.5 149V190.5H398.5V167.5" marker-end="url(#dgmOrchW-ah)"/>
+  <text class="s" x="493" y="212" text-anchor="middle">Below 9: fix, then a new reviewer · at most 5 rounds</text>
+
+  <!-- Nodes -->
+  <rect class="nd nd-ink" x="0.5" y="52.5" width="104" height="96" rx="10"/>
+  <text class="m on-ink-2" x="16" y="74">HUMAN</text>
+  <text class="t on-ink" x="16" y="96">José</text>
+  <text class="s on-ink" x="16" y="116">Brief and</text>
+  <text class="s on-ink" x="16" y="132">decisions</text>
+
+  <rect class="nd" x="138.5" y="52.5" width="140" height="96" rx="10"/>
+  <text class="m" x="154" y="74">AGENT</text>
+  <text class="t" x="154" y="96">Orchestrator</text>
+  <text class="s" x="154" y="116">Plans, merges,</text>
+  <text class="s" x="154" y="132">holds the lock</text>
+
+  <rect class="grp" x="312.5" y="34.5" width="172" height="132" rx="12"/>
+  <text class="m" x="324" y="54">BUILDER LANES</text>
+  <rect class="nd" x="324.5" y="66.5" width="148" height="24" rx="6"/>
+  <text class="s-ink" x="336" y="83">#49</text>
+  <text class="el" x="460" y="83" text-anchor="end">own worktree</text>
+  <rect class="nd" x="324.5" y="96.5" width="148" height="24" rx="6"/>
+  <text class="s-ink" x="336" y="113">#50</text>
+  <text class="el" x="460" y="113" text-anchor="end">own worktree</text>
+  <rect class="nd" x="324.5" y="126.5" width="148" height="24" rx="6"/>
+  <text class="s-ink" x="336" y="143">#51</text>
+  <text class="el" x="460" y="143" text-anchor="end">own worktree</text>
+
+  <rect class="nd nd-acc" x="518.5" y="52.5" width="140" height="96" rx="10"/>
+  <text class="m acc" x="534" y="74">AGENT · FRESH</text>
+  <text class="t" x="534" y="96">Reviewer</text>
+  <text class="s" x="534" y="116">Scores 1–10;</text>
+  <text class="s" x="534" y="132">9 or above passes</text>
+
+  <rect class="nd" x="692.5" y="52.5" width="116" height="96" rx="10"/>
+  <text class="m" x="708" y="74">ENVIRONMENT</text>
+  <text class="t" x="708" y="96">Staging</text>
+  <text class="s" x="708" y="116">Orchestrator</text>
+  <text class="s" x="708" y="132">pushes here</text>
+
+  <rect class="nd nd-ink" x="842.5" y="52.5" width="132" height="96" rx="10"/>
+  <text class="m on-ink-2" x="858" y="74">HUMAN</text>
+  <text class="t on-ink" x="858" y="96">Phone check</text>
+  <text class="s on-ink" x="858" y="116">José walks it,</text>
+  <text class="s on-ink" x="858" y="132">says “passed”</text>
+
+  <rect class="nd" x="1008.5" y="52.5" width="110" height="96" rx="10"/>
+  <text class="m" x="1024" y="74">PRODUCTION</text>
+  <circle class="live" cx="1028" cy="91" r="4"/>
+  <text class="t" x="1038" y="96">main</text>
+  <text class="s" x="1024" y="116">Live store;</text>
+  <text class="s" x="1024" y="132">José pushes</text>
+</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" class="dgm dgm--narrow dgm-orch" role="img" aria-labelledby="dgmOrchN-t dgmOrchN-d">
+  <title id="dgmOrchN-t">How José ships a ticket with AI agents</title>
+  <desc id="dgmOrchN-d">José writes the brief and makes the decisions. An orchestrator agent plans, merges and holds the database lock, and hands each ticket to a builder lane in its own git worktree. A fresh reviewer scores every change from 1 to 10; 9 or above passes, below 9 goes back for a fix and a new reviewer. Passing work goes to staging, José checks it on his phone and says "passed", and only José pushes main, the live store.</desc>
+  <style>
+    .dgm{color:var(--ink-3,#7A807B);font-family:var(--font-text,Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif)}
+    .dgm text{font-family:inherit}
+    .dgm .nd{fill:var(--paper,#F6F5F1);stroke:var(--line-strong,#C6C1B5);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .nd-acc{fill:var(--accent-soft,#DCE9F8);stroke:var(--accent,#2A78D6)}
+    .dgm .nd-ink{fill:var(--ink,#121412);stroke:var(--ink,#121412)}
+    .dgm .grp{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 4}
+    .dgm .pill{fill:var(--paper-2,#EDEBE4);stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .pill-x{fill:none;stroke:var(--line-strong,#C6C1B5);stroke-width:1;stroke-dasharray:3 3}
+    .dgm .rule{fill:none;stroke:var(--line,#DAD6CC);stroke-width:1;vector-effect:non-scaling-stroke}
+    .dgm .t{font-size:15px;font-weight:600;letter-spacing:-.01em;fill:var(--ink,#121412)}
+    .dgm .s{font-size:12.5px;fill:var(--ink-2,#4A4F4B)}
+    .dgm .s-ink{font-size:12.5px;font-weight:500;fill:var(--ink,#121412)}
+    .dgm .p{font-size:12px;font-weight:500;fill:var(--ink-2,#4A4F4B)}
+    .dgm .p-x{font-size:12px;fill:var(--ink-meta,#646A66)}
+    .dgm .m,.dgm .el{font-family:var(--font-mono,"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace);font-size:10.5px;fill:var(--ink-meta,#646A66)}
+    .dgm .m{letter-spacing:.08em}
+    .dgm .el{letter-spacing:.02em}
+    .dgm .acc{fill:var(--accent-ink,#1C5CAB)}
+    .dgm .on-ink{fill:var(--paper,#F6F5F1)}
+    .dgm .on-ink-2{fill:var(--paper,#F6F5F1);opacity:.7}
+    .dgm .e{fill:none;stroke:currentColor;stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-acc{fill:none;stroke:var(--accent,#2A78D6);stroke-width:1.25;vector-effect:non-scaling-stroke}
+    .dgm .e-loop{stroke-dasharray:4 4}
+    .dgm .ah{fill:currentColor}
+    .dgm .ah-acc{fill:var(--accent,#2A78D6)}
+    .dgm .live{fill:var(--good,#1a7f37)}
+    .dgm .pulse{fill:var(--accent,#2A78D6)}
+    .dgm.dgm--narrow .s{font-size:13px}
+    .dgm.dgm--narrow .m,.dgm.dgm--narrow .el{font-size:11px}
+    @media (prefers-reduced-motion:reduce){.dgm .pulse{display:none}}
+    .diagram .dgm--wide~.dgm--narrow{display:none}
+    @media (max-width:999.98px){.diagram .dgm--wide:has(~.dgm--narrow){display:none}.diagram .dgm--wide~.dgm--narrow{display:block;width:100%;max-width:480px;margin-inline:auto}}
+  </style>
+  <defs>
+    <marker id="dgmOrchN-ah" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah" d="M0 .6 8 4 0 7.4z"/></marker>
+    <marker id="dgmOrchN-aha" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path class="ah-acc" d="M0 .6 8 4 0 7.4z"/></marker>
+  </defs>
+
+  <circle class="pulse" r="3.5" cx="0" cy="0">
+    <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" path="M156.5 84V672"/>
+  </circle>
+
+  <!-- Edges -->
+  <path class="e" d="M156.5 85V111.5" marker-end="url(#dgmOrchN-ah)"/>
+  <path class="e" d="M156.5 189V211.5" marker-end="url(#dgmOrchN-ah)"/>
+  <path class="e" d="M156.5 317V341.5" marker-end="url(#dgmOrchN-ah)"/>
+  <path class="e e-loop" d="M313 388.5H338.5V264.5H313.5" marker-end="url(#dgmOrchN-ah)"/>
+  <path class="e-acc" d="M156.5 435V463.5" marker-end="url(#dgmOrchN-aha)"/>
+  <text class="el acc" x="166" y="453">9/10 passes</text>
+  <path class="e" d="M156.5 541V567.5" marker-end="url(#dgmOrchN-ah)"/>
+  <path class="e" d="M156.5 645V671.5" marker-end="url(#dgmOrchN-ah)"/>
+  <text class="el" x="166" y="662">José pushes</text>
+
+  <!-- Nodes -->
+  <rect class="nd nd-ink" x="0.5" y="8.5" width="312" height="76" rx="10"/>
+  <text class="m on-ink-2" x="16" y="28">HUMAN</text>
+  <text class="t on-ink" x="16" y="50">José</text>
+  <text class="s on-ink" x="16" y="70">Writes the brief, makes the decisions</text>
+
+  <rect class="nd" x="0.5" y="112.5" width="312" height="76" rx="10"/>
+  <text class="m" x="16" y="132">AGENT</text>
+  <text class="t" x="16" y="154">Orchestrator</text>
+  <text class="s" x="16" y="174">Plans, merges lanes, holds the lock</text>
+
+  <rect class="grp" x="0.5" y="212.5" width="312" height="104" rx="12"/>
+  <text class="m" x="16" y="234">BUILDER LANES · OWN WORKTREE EACH</text>
+  <rect class="nd" x="12.5" y="246.5" width="88" height="56" rx="6"/>
+  <text class="t" x="24" y="270">#49</text>
+  <text class="el" x="24" y="290">worktree</text>
+  <rect class="nd" x="112.5" y="246.5" width="88" height="56" rx="6"/>
+  <text class="t" x="124" y="270">#50</text>
+  <text class="el" x="124" y="290">worktree</text>
+  <rect class="nd" x="212.5" y="246.5" width="88" height="56" rx="6"/>
+  <text class="t" x="224" y="270">#51</text>
+  <text class="el" x="224" y="290">worktree</text>
+
+  <rect class="nd nd-acc" x="0.5" y="342.5" width="312" height="92" rx="10"/>
+  <text class="m acc" x="16" y="362">AGENT · FRESH</text>
+  <text class="t" x="16" y="384">Reviewer</text>
+  <text class="s" x="16" y="404">Scores 1–10; 9 or above passes</text>
+  <text class="s" x="16" y="420">Below 9: fix, then a new reviewer</text>
+
+  <rect class="nd" x="0.5" y="464.5" width="312" height="76" rx="10"/>
+  <text class="m" x="16" y="484">ENVIRONMENT</text>
+  <text class="t" x="16" y="506">Staging</text>
+  <text class="s" x="16" y="526">The orchestrator pushes here</text>
+
+  <rect class="nd nd-ink" x="0.5" y="568.5" width="312" height="76" rx="10"/>
+  <text class="m on-ink-2" x="16" y="588">HUMAN</text>
+  <text class="t on-ink" x="16" y="610">Phone check</text>
+  <text class="s on-ink" x="16" y="630">José walks it and says “passed”</text>
+
+  <rect class="nd" x="0.5" y="672.5" width="312" height="76" rx="10"/>
+  <text class="m" x="16" y="692">PRODUCTION</text>
+  <circle class="live" cx="20" cy="709" r="4"/>
+  <text class="t" x="30" y="714">main</text>
+  <text class="s" x="16" y="734">The live store; only José pushes it</text>
+</svg>
+    <figcaption>José → orchestrator → lanes in worktrees → fresh reviewer at 9/10 → staging → phone check → main.</figcaption>
+  </figure>
+
+  <p>One orchestrator session holds the plan and the shared test database. Builders work in their own git worktrees and may not push staging or main, merge, or edit the status file. On 25 October I handed the deli build to an orchestrator:</p>
+  <!-- src: docs/agents/handoffs/holiday-orchestrator.md:3-8; holiday-ticket-12-mixed-cart.md:221-226 -->
+
+  <figure class="quote reveal">
+    <blockquote>
+      <p>“you are the orchestrator … starting as many sessions as you need”</p>
+      <p>“I will leave this plugged in until you are done”</p>
+    </blockquote>
+    <figcaption>— José, 2026-10-25 · <cite>docs/agents/handoffs/holiday-orchestrator.md:11-14</cite></figcaption>
+  </figure>
+
+  <p>By the next morning all 18 deli tickets were merged and on staging.</p>
+  <!-- src: STATUS.md:64-68 ("all 18 merged and on staging at 5b4efb4 by the morning of 10-26") -->
+
+  <!-- The heat figure sits here (after "by the next morning") rather than after the issues figure; C1 QA renumbered Figures 3–5 to reading order: the overnight pattern is this paragraph's point, and it keeps two charts from running back to back. -->
+  <figure class="figure reveal" data-chart="heat" data-src="/data/bakery-metrics.json" id="fig-heat">
+    <header>
+      <p class="eyebrow">Figure 3 · When commits happened</p>
+      <h3 class="figure-title">Nights and Mondays</h3>
+      <p class="figure-sub">Commits by hour of day (Pacific) and by weekday, all branches.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two bar charts. By hour, the peak is the midnight hour with 203 commits, and 45% of commits fall between 10 pm and 3 am. By weekday, Monday leads with 390."></div>
+    <figcaption>45% of commits landed between 10&nbsp;pm and 3&nbsp;am: overnight agent runs, reviewed in the morning.</figcaption>
+    <footer class="figure-foot"><span>Source: git log --all, local time, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+  <!-- src: commits_by_hour 22–02 = 671 of 1,503 (44.6%); commits_by_weekday Mon 390 -->
+
+  <p>Each deli ticket got its prompt from a separate session. The one for #49, the mixed cart, runs 243 lines under these headings:</p>
+
+  <figure class="artefact reveal">
+    <figcaption class="artefact__head"><span class="artefact__path">docs/agents/session-prompts/holiday-ticket-12-mixed-cart.md</span><span>243 lines</span></figcaption>
+    <pre class="bk-lines"><span class="bk-h1"># #49 (draft ticket 12) — Mixed cart: holiday is the third kind, and the department is decided at checkout</span><span>## 0. The goal, in José’s words</span><span>## 1. Blocked by, and what you may assume has landed on `holiday`</span><span>## 2. What you build (the ticket body on #49 is the contract; this is the order — seams first, screen last)</span><span>## 3. The `--only` list</span><span>## 4. Check 47’s `47.12.*` sections (engine seam — library / stored data in → verdict out)</span><span>## 5. The browser pass on Local (own orders, every tick by own order id)</span><span>## 6. The review lane — PILLAR</span><span>## 7. The Local lock, the stop rules, the 40% rule, the hand-back</span></pre>
+  </figure>
+  <!-- src: docs/agents/session-prompts/holiday-ticket-12-mixed-cart.md:1-221 (heading 3 trimmed after "list") -->
+
+  <p>When a builder passes about 40% of its context window, it stops at a clean commit and writes a hand-off for a fresh session. Hand-backs read like lab notes:</p>
+
+  <figure class="artefact reveal">
+    <figcaption class="artefact__head"><span class="artefact__path">docs/agents/handoffs/ticket-68-hand-back.md:63-73</span><span>excerpt</span></figcaption>
+    <pre class="bk-lines"><span>Review R1: <mark>8/10, FIX</mark>. Two must-fixes <span class="bk-dim">[…]</span> Fix round 1 (12577ab).</span><span>Review R2: <mark>9/10, PASS</mark>. Browser pass on 12577ab: PASS <span class="bk-dim">[…]</span> Fix round 2 (ce2e87d).</span><span>Review R3: <mark>9/10, PASS</mark>. <span class="bk-dim">[…]</span></span><span>Full suite on the final tree: 6088 passed / 1 failed theme on, 6083 / 1 theme off (f38fd9e).</span></pre>
+  </figure>
+  <!-- src: docs/agents/handoffs/ticket-68-hand-back.md:63-73; 40% rule holiday-preamble.md:131-134 -->
+
+  <p>The review gate for risky changes is one rule. A new reviewer each round scores the change out of 10; 9 passes and anything lower goes back. The reviewer reruns the tests itself:</p>
+
+  <figure class="quote reveal">
+    <blockquote><p>“It does not trust the builder’s word.”</p></blockquote>
+    <figcaption><cite>docs/agents/review-loop.md:28</cite></figcaption>
+  </figure>
+
+  <p>I raised the cap from three rounds to five after one ticket needed five (7, 8, 8, 7, 9) and every failed round had found a real bug.</p>
+  <!-- src: docs/agents/review-loop.md:5-6; commit f1f14a8 -->
+
+  <figure class="figure reveal" data-chart="rounds" data-src="/data/bakery-metrics.json" id="fig-rounds">
+    <header>
+      <p class="eyebrow">Figure 4 · Review rounds to a pass</p>
+      <h3 class="figure-title">Most changes passed review in one or two rounds</h3>
+      <p class="figure-sub">Mentions of “9/10 in N rounds” across the status file and the agent records. A ticket can be mentioned more than once, so read the shape, not a count of tickets.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Horizontal bars. One round 90 mentions, two rounds 69, three rounds 18, four rounds 2, five rounds 9. Scores of 10/10 appear 4 times."></div>
+    <figcaption>159 of 188 mentions are one or two rounds. Perfect scores are rare: four in the whole record.</figcaption>
+    <footer class="figure-foot"><span>Source: grep across STATUS.md, docs/agents and docs/parity, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <!-- The next two paragraphs are swapped against the copy file (harness first, then record-and-ask) so a paragraph sits between Figure 5 and the Figure 6/7 pair. -->
+  <p>The test harness asserts at one seam, data in and verdict out, never through a browser, with the theme on and off. After two overlapping runs lost 16 settings on 20 October, every run takes a lock. The one standing red is a data problem of mine, and every report names it.</p>
+  <!-- src: tests/cli/README.md:3-6, :12-13, :36-40; faster-rounds.md:40 ("never 'green' while check 18 fails") -->
+
+  <figure class="figure reveal" data-chart="issues" data-src="/data/bakery-metrics.json" id="fig-issues">
+    <header>
+      <p class="eyebrow">Figure 5 · GitHub issues, cumulative</p>
+      <h3 class="figure-title">69 tickets opened, 61 closed, median nine days to close</h3>
+      <p class="figure-sub">Issues opened and closed on the plugin repo, 6 August to 7 November 2026. The shaded gap is open work.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two cumulative lines. Opened jumps by 14 on 6 August and by 19 on 26 October; closed follows behind and ends at 61 of 69."></div>
+    <figcaption>The two jumps are planning days: 14 tickets cut from the spec on 6 August, and 19 opened on 26 October, most of them the deli layer.</figcaption>
+    <footer class="figure-foot"><span>Source: gh issue list --state all, <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <p>A bug found outside a ticket gets a row and a question, never a quiet fix: “No fix without José’s word — not even a one-liner.” The status file uses the phrase “record-and-ask” 99 times.</p>
+  <!-- src: docs/agents/session-prompts/holiday-preamble.md:181-185; STATUS.md grep count (research Part 4 §4) -->
+
+  <div class="figure-pair">
+    <figure class="figure reveal" data-chart="models" data-src="/data/bakery-metrics.json" id="fig-models">
+      <header>
+        <p class="eyebrow">Figure 6 · Co-author trailers by model</p>
+        <h3 class="figure-title">1,482 of 1,503 commits carry a Claude co-author trailer</h3>
+        <p class="figure-sub">Co-Authored-By trailers by model, all branches.</p>
+      </header>
+      <div class="chart" role="img" aria-label="Horizontal bars. Claude Fable 5.1 1,051; Claude Opus 5.5 238; Opus 5.5 with 1M context 117; Fable 5 58; Opus 5 with 1M context 14; Opus 4.8 with 1M context 4."></div>
+      <figcaption>Fable 5.1 is on 1,051 commits. Opus 5.5 became the builder model in mid-October.</figcaption>
+      <footer class="figure-foot"><span>Source: git log --all --format='%(trailers:key=Co-Authored-By,valueonly)', <span class="nowrap">2026-11-07</span></span>
+        <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+    </figure>
+    <!-- src: .claude/agents/bakery-round-worker.md:3 ("Runs on Opus 5.5 … José, 2026-10-14"); holiday builders on Opus 5.5 (holiday-orchestrator.md:3-8) -->
+
+    <figure class="figure reveal" data-chart="types" data-src="/data/bakery-metrics.json" id="fig-types">
+      <header>
+        <p class="eyebrow">Figure 7 · Commits by type</p>
+        <h3 class="figure-title">Almost half the commits were documentation</h3>
+        <p class="figure-sub">Conventional-commit prefixes across 1,503 commits.</p>
+      </header>
+      <div class="chart" role="img" aria-label="One stacked bar split by type. Docs 734, feat 294, fix 211, test 166, merge 45, other 37, chore 16."></div>
+      <figcaption>The 734 docs commits are the records that let a fresh session start cold. The retro lists them as waste, and it’s right.</figcaption>
+      <footer class="figure-foot"><span>Source: git log --all subject prefixes, computed <span class="nowrap">2026-11-07</span></span>
+        <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+    </figure>
+    <!-- src: research/ai-playbook-summary.md (LESSONS.md:15-27, "49% docs-only commits" as a waste marker) -->
+  </div>
+</section>
+
+<!-- ======================================================================= 07 -->
+<section class="prose bk-sec" id="outcome" aria-labelledby="outcome-title">
+  <p class="eyebrow eyebrow--rule bk-num">07 · Outcome</p>
+  <h2 id="outcome-title">Live on 1 November; Thanksgiving orders opened three days later</h2>
+
+  <p>The roadmap’s target was 15 August. The store went live on 1 November, 78 days later, after the deli layer joined the scope in October.</p>
+  <!-- src: docs/build-roadmap.md:12; bakery-metrics.json timeline.days_late_vs_target 78 -->
+
+  <figure class="figure reveal" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline" data-labels="6" data-labels-mobile="3">
+    <header>
+      <p class="eyebrow">Figure 8 · Commits per day, all branches</p>
+      <h3 class="figure-title">142 days from first commit to a live store</h3>
+      <p class="figure-sub">Daily commits from 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Bar chart of daily commits from June to November 2026. Summer is sparse, October is dense, the tallest bar is 307 commits on 26 October, and launch is marked on 1 November."></div>
+    <figcaption>The tallest bar is the deli build: 18 tickets in one orchestrated night, 307 commits dated 26 October.</figcaption>
+    <footer class="figure-foot"><span>Source: git log --all, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <!-- The quote moves above the launch-week table so the chart and the table don't sit back to back. -->
+  <figure class="quote reveal">
+    <blockquote><p>“all passed. push to main”</p></blockquote>
+    <figcaption>— José, 2026-11-04 · <cite>STATUS.md:179</cite></figcaption>
+  </figure>
+
+  <div class="table-wrap reveal">
+    <table class="table bk-launch">
+      <caption>Source: STATUS.md:161-183</caption>
+      <thead><tr><th scope="col">Date</th><th scope="col">Launch week</th></tr></thead>
+      <tbody>
+        <tr><td>1 Nov, evening</td><td>Live on production. A round of launch fixes is built overnight in two lanes, both reviewed 9/10</td></tr>
+        <tr><td>2 Nov</td><td>Site-wide checkout built, reviewed and browser-tested; my five staging notes fixed; on production that evening</td></tr>
+        <tr><td>3 Nov</td><td>Size price push fails my staging walk, is rebuilt, and reaches production the same day. The holiday walk passes and the 18 deli tickets close</td></tr>
+        <tr><td>4 Nov</td><td>Thanksgiving ordering opens. Nine deli features that skipped scored review get read-only reviews from nine fresh sessions: all 9/10</td></tr>
+        <tr><td>5 Nov</td><td>A Health tab for staff reaches staging; the suite stands at 6,089 assertions</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- src: STATUS.md:161-183 (research/bakery-case-study.md Part 5 §g, launch-week table) -->
+
+  <!-- The copy's two media rows render as one gallery: 2 × 2 on wide screens, a swipe strip on phones.
+       Screenshots are from Local/staging browser passes with demo orders, not real customers (research/bakery-assets.md §5). -->
+  <p class="bk-swipe" aria-hidden="true">4 screens · swipe →</p>
+  <div class="bk-gallery reveal" role="group" aria-label="Staff and customer screens after launch" tabindex="0">
+    <figure class="media media--browser">
+      <img src="/assets/img/bakery/admin-bakery-dashboard-day-view-1280.jpg" width="1265" height="1622" loading="lazy" decoding="async" alt="Staff dashboard with a rail of pickup days and a month calendar on the left and a list of the next day’s orders on the right.">
+      <figcaption>The bakery dashboard’s day view: pickup days with counts on the left, the day’s orders on the right.</figcaption>
+    </figure>
+    <figure class="media media--browser">
+      <img src="/assets/img/bakery/admin-deli-dashboard-1280.jpg" width="1196" height="1600" loading="lazy" decoding="async" alt="The deli’s order dashboard for a single pickup day, listing slot numbers, orders and print actions.">
+      <figcaption>The deli dashboard for one pickup day, with slots and a print button per audience.</figcaption>
+    </figure>
+    <figure class="media">
+      <div class="bk-crop" style="--z:208%;--x:-54%;--y:-6%">
+        <img src="/assets/img/bakery/print-ticket-three-copies-1280.jpg" width="1280" height="1416" loading="lazy" decoding="async" alt="A receipt-printer ticket page showing three copies of one order, each with a dark header band, boxed pickup date and store.">
+      </div>
+      <figcaption>One ticket, three copies: production, pickup routing and office record.</figcaption>
+    </figure>
+    <figure class="media">
+      <img src="/assets/img/bakery/email-bakery-order-confirmed-1200.jpg" width="1200" height="3636" loading="lazy" decoding="async" alt="An order confirmation email with the co-op logo, the order summary and the pickup details.">
+      <figcaption>The order-confirmed email, built from inline literal values because email clients can’t read CSS variables.</figcaption>
+    </figure>
+  </div>
+
+  <p>I’m not showing order volume. The repo doesn’t record it, and the store’s sales are the co-op’s numbers.</p>
+  <!-- src: research/bakery-case-study.md Part 5 §g "Volume" -->
+</section>
+
+<!-- ======================================================================= 08 -->
+<section class="prose bk-sec" id="retro" aria-labelledby="retro-title">
+  <p class="eyebrow eyebrow--rule bk-num">08 · What I’d change</p>
+  <h2 id="retro-title">It worked, and it cost more process than it needed</h2>
+
+  <p>I wrote a retro on 4 November and turned it into a playbook. Three things stay, three change, two go.</p>
+  <!-- src: research/ai-playbook-summary.md (LESSONS.md, bakery retro 2026-11-04; ~/ai-playbook commit 2026-11-04) -->
+
+  <div class="kcd reveal">
+    <div class="kcd__col kcd__col--keep">
+      <h3 class="kcd__label">Keep</h3>
+      <ul>
+        <li><strong>A fresh reviewer, a 9/10 pass mark and a cap on rounds.</strong>“Every failed round found a real bug.”</li>
+        <li><strong>Staging first, then my phone.</strong>My phone check caught a pricing bug the review had passed.</li>
+        <li><strong>One decision at a time, with a recommendation,</strong>and record-and-ask for anything outside the ticket.</li>
+      </ul>
+    </div>
+    <div class="kcd__col kcd__col--change">
+      <h3 class="kcd__label">Change</h3>
+      <ul>
+        <li><strong>Ticket prompts of 3,000 to 7,000 words.</strong>The playbook now caps a brief at one page.</li>
+        <li><strong>Tests that pin markup and wording:</strong>161 commits did nothing but re-pin them.</li>
+        <li><strong>One shared test database for parallel sessions:</strong>it needed a lock and a recovery, and test orders still leaked into Mailchimp.</li>
+      </ul>
+    </div>
+    <div class="kcd__col kcd__col--drop">
+      <h3 class="kcd__label">Drop</h3>
+      <ul>
+        <li><strong>Essay commits and history in code comments.</strong>The average commit subject ran to 243 characters.</li>
+        <li><strong>“Known reds”.</strong>Check 18 failed on every run for weeks, for a data reason; next time it gets fixed, not reported.</li>
+      </ul>
+    </div>
+  </div>
+  <!-- src: research/ai-playbook-summary.md "What he learned" (keep / change / drop, waste markers); STATUS.md:169 (#66 failed José's staging walk) -->
+
+  <figure class="quote quote--small reveal">
+    <blockquote><p>“the bakery project wrote 1.09 million words of docs (about 12 novels). STATUS reached 99,000 words and contradicted itself, and 45% of the decision rows were never signed off.”</p></blockquote>
+    <figcaption><cite>~/ai-playbook/PLAYBOOK.md:216-218</cite></figcaption>
+  </figure>
+
+  <nav class="case-nav" aria-label="More case studies">
+    <a class="case-nav__link case-nav__link--prev" href="/work/epoch-explorer/"><span class="case-nav__dir">Previous</span><span class="case-nav__title">Notable AI models, redrawn for a phone</span></a>
+    <a class="case-nav__link case-nav__link--next" href="/work/design-system/"><span class="case-nav__dir">Next</span><span class="case-nav__title">One system in both directions</span></a>
+  </nav>
+</section>
+
+  </div><!-- /.bk-body -->
+</div><!-- /.case-layout -->
+
+<!-- /PAGE CONTENT -->
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__lead">
+      <p class="site-footer__name">José Ochoa</p>
+      <p class="site-footer__role">Product &amp; web design · Data visualization<br>Bellingham, WA · Pacific time</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Contact">
+      <p class="site-footer__heading">Contact</p>
+      <ul>
+        <li><a href="mailto:joseo@communityfood.coop">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/jose-antonio-ochoa">LinkedIn</a></li>
+        <li><a href="https://github.com/joseocfc">GitHub</a></li>
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="Site">
+      <p class="site-footer__heading">Work</p>
+      <ul>
+        <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
+        <li><a href="/work/design-system/">Design system</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch explorer study</a></li>
+        <li><a href="/process/">Process</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-footer__base">
+      <p class="site-footer__colophon">Built 2026-11 with Claude Code; every chart’s data is downloadable.</p>
+      <button class="theme-toggle theme-toggle--labelled" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="theme-toggle__text" aria-hidden="true">Theme</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<!-- PAGE SCRIPTS: pages with figures add these two lines (D3 first, then the chart core): -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script type="module" src="/assets/js/charts/index.js"></script>
+<script type="module" src="/assets/js/site.js"></script>
+<!-- Page script (B1): at ≥1024px the two system diagrams run full width over the TOC rail; fade the rail while one passes it. -->
+<script type="module">
+const toc = document.querySelector('.toc');
+const wide = [...document.querySelectorAll('.bk-over-toc')];
+if (toc && wide.length) {
+  const mq = matchMedia('(min-width: 1024px)');
+  let raf = 0;
+  const check = () => {
+    raf = 0;
+    if (!mq.matches) { toc.classList.remove('bk-toc-off'); return; }
+    const t = toc.getBoundingClientRect();
+    toc.classList.toggle('bk-toc-off', wide.some((el) => {
+      const r = el.getBoundingClientRect();
+      return r.bottom > t.top - 24 && r.top < t.bottom + 24;
+    }));
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(check); };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  mq.addEventListener('change', queue);
+  check();
+}
+</script>
+</body>
+</html>

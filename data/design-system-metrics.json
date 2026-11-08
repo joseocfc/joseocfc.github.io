@@ -1,0 +1,833 @@
+{
+ "generated": "2026-11-07",
+ "repo": {
+  "name": "cfc-theme",
+  "github": "joseocfc/cfc-theme",
+  "private": true,
+  "local_path": "/Users/joseantonioochoa/Local Sites/communityfood-coop/app/public/wp-content/themes/cfc-theme",
+  "live_url": "https://www.communityfood.coop/",
+  "figma_file": "https://www.figma.com/design/EMQTwlYkvcjG7cVJVi980v",
+  "first_commit": "2026-03-04",
+  "first_commit_hash": "a7113a4",
+  "last_commit": "2026-09-10",
+  "github_created": "2026-03-05",
+  "github_pushed": "2026-09-10"
+ },
+ "commits": {
+  "all_branches": 537,
+  "main": 491,
+  "authors": 1,
+  "active_days": 65,
+  "span_days": 190,
+  "busiest_day": {
+   "date": "2026-07-17",
+   "commits": 94
+  },
+  "by_month": {
+   "2026-03": 59,
+   "2026-04": 77,
+   "2026-06": 49,
+   "2026-07": 298,
+   "2026-08": 40,
+   "2026-09": 14
+  },
+  "design_system_window": {
+   "from": "2026-06-25",
+   "to": "2026-08-21",
+   "commits": 346
+  },
+  "touching_guides_design_system": 128,
+  "touching_theme_json": 26,
+  "design_system_related_total": 250,
+  "main_insertions": 84687,
+  "main_deletions": 12782
+ },
+ "milestones": [
+  {
+   "date": "2026-03-04",
+   "event": "Initial commit of cfc-theme"
+  },
+  {
+   "date": "2026-06-25",
+   "event": "Token-cleanup project starts (Phase 0 pre-flight, research-validated type scale)",
+   "source": "git log; token-system.md §1"
+  },
+  {
+   "date": "2026-06-29",
+   "event": "Role map validated (8-agent workflow); defaultFontSizes:false fix found",
+   "source": "token-system.md §1a"
+  },
+  {
+   "date": "2026-07-01",
+   "event": "8px spacing ladder applied; 64-agent visual diff, 0 regressions",
+   "source": "token-system.md §4"
+  },
+  {
+   "date": "2026-07-03",
+   "event": "Button system built (6 variants × 3 sizes)",
+   "source": "button-system.md"
+  },
+  {
+   "date": "2026-07-13",
+   "event": "Phase 5: 59 font-size repoints, 0 regressions",
+   "source": "phase5-fontsize-audit.md"
+  },
+  {
+   "date": "2026-07-16",
+   "event": "Header V2 + Footer B decided; deployed to staging",
+   "source": "00-SOURCE-OF-TRUTH.md"
+  },
+  {
+   "date": "2026-07-17",
+   "event": "Contract FROZEN v1.0 (theme.json @ 1a43808); Figma library rebuilt; parity checker + skill + hook shipped (overnight run)",
+   "source": "token-system.md §7; productization-review.md"
+  },
+  {
+   "date": "2026-07-18",
+   "event": "Ratified by José (P1–P14, P2 reversed); hook smoke test passes",
+   "source": "productization-review.md"
+  },
+  {
+   "date": "2026-07-24",
+   "event": "v1.1 additive: surface-mint, line-moss, text-muted, shadow.stickyUp; parity PASS 94/60",
+   "source": "figma-parity.md"
+  },
+  {
+   "date": "2026-08-07",
+   "event": "Figma Token Board page (THEME / BAKERY-ONLY / PROPOSED)",
+   "source": "Figma node 701:9"
+  },
+  {
+   "date": "2026-08-21",
+   "event": "7th button variant (Outline Inverse); parity PASS 94/60; checker scoped to 3 collections",
+   "source": "figma-parity.md; commit 5d2cbbf"
+  },
+  {
+   "date": "2026-11-07",
+   "event": "Design system confirmed live on production DOM",
+   "source": "this lane"
+  }
+ ],
+ "tokens": {
+  "contract_total": 94,
+  "brand_colors": 10,
+  "senary_gap": true,
+  "spacing_steps": 6,
+  "spacing_px": [
+   8,
+   16,
+   24,
+   32,
+   48,
+   64
+  ],
+  "font_sizes": 6,
+  "font_sizes_px_mobile_desktop": {
+   "small": [
+    14,
+    15
+   ],
+   "medium": [
+    16,
+    17
+   ],
+   "large": [
+    20,
+    24
+   ],
+   "x-large": [
+    24,
+    32
+   ],
+   "xx-large": [
+    30,
+    44
+   ],
+   "xxx-large": [
+    36,
+    75
+   ]
+  },
+  "font_families": 2,
+  "custom_keys": 70,
+  "radius": 7,
+  "alpha": 5,
+  "shadows": 5,
+  "transitions": 4,
+  "z_ladder": 6,
+  "button_contract_tokens": 24,
+  "semantic_status_colors": 6,
+  "neutrals": 7,
+  "contract_version": "v1.1",
+  "frozen_date": "2026-07-17",
+  "ratified_date": "2026-07-18",
+  "v1_1_date": "2026-07-24",
+  "layout": {
+   "contentSize": "55em",
+   "wideSize": "80rem",
+   "page": "80rem"
+  }
+ },
+ "figma": {
+  "file_key": "EMQTwlYkvcjG7cVJVi980v",
+  "variables": 60,
+  "effect_styles": 5,
+  "collections": [
+   "1 Primitives",
+   "2 Semantic",
+   "3 Type"
+  ],
+  "type_modes": [
+   "Mobile",
+   "Desktop"
+  ],
+  "documented_not_mirrored": 34,
+  "not_mirrored_entries_in_checker": 36,
+  "sections": [
+   "01 Colors",
+   "02 Typography",
+   "03 Spacing & Radius",
+   "04 Elevation & Effects",
+   "05 Buttons",
+   "06 Header & Footer",
+   "07 Icons",
+   "08 Cards & Forms (placeholders)",
+   "09 Usage & Rules"
+  ],
+  "button_variants": 7,
+  "button_sizes": 3,
+  "button_states": 5,
+  "button_matrix": 105,
+  "icons_traced": 8,
+  "pages_total": 14,
+  "archive_pages": 5,
+  "parity_runs": [
+   {
+    "date": "2026-07-17",
+    "tokens": 92,
+    "mirrored": 59,
+    "result": "PASS"
+   },
+   {
+    "date": "2026-07-18",
+    "tokens": 90,
+    "mirrored": 57,
+    "result": "PASS"
+   },
+   {
+    "date": "2026-07-24",
+    "tokens": 94,
+    "mirrored": 60,
+    "result": "PASS"
+   },
+   {
+    "date": "2026-08-21",
+    "tokens": 94,
+    "mirrored": 60,
+    "result": "PASS"
+   }
+  ]
+ },
+ "parity_checker": {
+  "path": "guides/design-system/figma-parity-check.py",
+  "lines": 221,
+  "language": "python3 stdlib",
+  "checks": [
+   "theme->figma coverage or NOT_MIRRORED reason",
+   "figma->theme no inventions",
+   "value match (rem→px, alpha %, pill 99↔999, clamp min/max per mode, color-mix→hex, alias targets)",
+   "5 shadow effect styles exist"
+  ],
+  "pass_signal": "exit 0 + 'PARITY PASS — zero unexplained deltas (both directions).'"
+ },
+ "enforcement": {
+  "skill_path": ".claude/skills/cfc-design-system/SKILL.md",
+  "skill_lines": 88,
+  "lint_path": ".claude/skills/cfc-design-system/scripts/token-lint.sh",
+  "lint_lines": 103,
+  "lint_rule_families": 6,
+  "hook": "PostToolUse on Edit|Write (.claude/settings.json)",
+  "smoke_test_models": [
+   "Fable 5",
+   "Haiku 4.5",
+   "Opus 4.8",
+   "Sonnet 5"
+  ],
+  "adversarial_temptations": 4,
+  "token_exception_tags_in_css": 25,
+  "full_lint_violations_front_end": 1
+ },
+ "theme_inventory": {
+  "templates": 20,
+  "template_parts": 5,
+  "patterns": 4,
+  "acf_blocks": 14,
+  "custom_post_types": 8,
+  "acf_field_groups": 29,
+  "inc_modules": 26,
+  "php_files": 73,
+  "php_lines": 21018,
+  "css_files": 43,
+  "css_lines_total": 12571,
+  "css_lines_front_end": 10713,
+  "js_files": 32,
+  "js_lines": 8292,
+  "guides_md_files": 69,
+  "guides_md_lines": 16815,
+  "design_system_docs_files": 34,
+  "design_system_docs_lines": 7154,
+  "claude_md_lines": 423,
+  "project_bible_lines": 1532
+ },
+ "adoption_before_after": {
+  "baseline_commit": "a3d56db^ (2026-06-24)",
+  "current": "main 2026-09-10",
+  "front_end_css_lines": [
+   7036,
+   10713
+  ],
+  "preset_var_refs": [
+   446,
+   1270
+  ],
+  "custom_var_refs": [
+   0,
+   518
+  ],
+  "distinct_preset_vars_used": [
+   null,
+   22
+  ],
+  "distinct_custom_vars_used": [
+   0,
+   64
+  ],
+  "raw_font_size_declarations": [
+   66,
+   3
+  ],
+  "raw_hex_lines": [
+   26,
+   14
+  ],
+  "raw_z_index_3plus_digits": [
+   12,
+   6
+  ]
+ },
+ "audits": {
+  "phase5_font_sizes_found": 141,
+  "phase5_actionable": 58,
+  "phase5_repoints_applied": 59,
+  "phase5_regressions": 0,
+  "colors_already_tokenised": 388,
+  "colors_literals_remaining": 88,
+  "spacing_visual_diff": {
+   "surfaces": 32,
+   "viewports": 2,
+   "agents": 64,
+   "clean_or_intended": 62,
+   "regressions": 0,
+   "uncertain_explained": 2
+  },
+  "adversarial_gate_agents": 18,
+  "visual_diff_66_surfaces_regressions": 0,
+  "role_map_agents": 8,
+  "type_scale_verdicts": 12,
+  "type_scale_refuted": 0,
+  "plugin_contract_quiz": "10/10"
+ },
+ "live_site": {
+  "fetched": "2026-11-07",
+  "theme_in_body_class": "wp-theme-cfc-theme",
+  "theme_asset_refs_home": 58,
+  "custom_props_emitted": 68,
+  "header_variant_live": "cfc-header--a (Header V2)",
+  "medium_font_size_live": "clamp(1rem, 1rem + ((1vw - 0.2rem) * 0.105), 1.0625rem)",
+  "spacing_90_live": "4rem",
+  "button_styles_in_home_markup": {
+   "is-style-outline": 6,
+   "is-style-tertiary": 1
+  },
+  "pages_linked_from_home": [
+   "/",
+   "/current-sales/",
+   "/cooking-classes/",
+   "/bakery-orders/",
+   "/departments/",
+   "/membership/",
+   "/membership/update-membership/",
+   "/letters-from-lisa/",
+   "/our-mission/",
+   "/history/",
+   "/board-of-directors/",
+   "/community-giving/",
+   "/frequently-asked-questions/",
+   "/store-policies/",
+   "/contact/",
+   "/careers/",
+   "/become-a-vendor/",
+   "/emailed-receipts-form/",
+   "/email-newsletter/",
+   "/donations-sponsorships-request/"
+  ],
+  "homepage_h2s": [
+   "Gather Around Local Flavors",
+   "Members Save 10%*",
+   "Reserve Your Turkey",
+   "Let Us Complete Your Meal",
+   "Custom Baked Treats",
+   "Cooking Classes",
+   "55 Years of Doing Things Differently",
+   "Fresh Deals",
+   "Upcoming Events",
+   "Join the Co-op",
+   "See What We're Up To"
+  ],
+  "screenshots": [
+   "assets/theme/live-home-1440.png",
+   "assets/theme/live-home-390.png",
+   "assets/theme/live-current-sales-1440.png",
+   "assets/theme/live-current-sales-390.png",
+   "assets/theme/live-cooking-classes-1440.png",
+   "assets/theme/live-cooking-classes-390.png"
+  ],
+  "pagespeed_note": "lab mobile 77/56/39 across three PDFs; field data CWV passed, LCP 1.2s (guides/performance/fable5-performance-review-findings.md)"
+ },
+ "sibling_bakery_plugin": {
+  "path": "wp-content/plugins/cfc-bakery-orders",
+  "commits": 1489,
+  "first_commit": "2026-06-12",
+  "last_commit": "2026-11-05",
+  "contract_doc": "docs/theme-token-contract-v1.md",
+  "bakery_only_tokens": 12
+ },
+ "commits_by_day": [
+  {
+   "date": "2026-03-04",
+   "commits": 4
+  },
+  {
+   "date": "2026-03-05",
+   "commits": 7
+  },
+  {
+   "date": "2026-03-06",
+   "commits": 8
+  },
+  {
+   "date": "2026-03-13",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-16",
+   "commits": 2
+  },
+  {
+   "date": "2026-03-17",
+   "commits": 3
+  },
+  {
+   "date": "2026-03-18",
+   "commits": 11
+  },
+  {
+   "date": "2026-03-19",
+   "commits": 2
+  },
+  {
+   "date": "2026-03-20",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-23",
+   "commits": 9
+  },
+  {
+   "date": "2026-03-25",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-30",
+   "commits": 10
+  },
+  {
+   "date": "2026-04-01",
+   "commits": 6
+  },
+  {
+   "date": "2026-04-07",
+   "commits": 13
+  },
+  {
+   "date": "2026-04-08",
+   "commits": 8
+  },
+  {
+   "date": "2026-04-10",
+   "commits": 3
+  },
+  {
+   "date": "2026-04-13",
+   "commits": 2
+  },
+  {
+   "date": "2026-04-17",
+   "commits": 2
+  },
+  {
+   "date": "2026-04-20",
+   "commits": 10
+  },
+  {
+   "date": "2026-04-22",
+   "commits": 7
+  },
+  {
+   "date": "2026-04-27",
+   "commits": 4
+  },
+  {
+   "date": "2026-04-28",
+   "commits": 3
+  },
+  {
+   "date": "2026-04-29",
+   "commits": 7
+  },
+  {
+   "date": "2026-04-30",
+   "commits": 12
+  },
+  {
+   "date": "2026-06-01",
+   "commits": 4
+  },
+  {
+   "date": "2026-06-10",
+   "commits": 1
+  },
+  {
+   "date": "2026-06-11",
+   "commits": 9
+  },
+  {
+   "date": "2026-06-12",
+   "commits": 3
+  },
+  {
+   "date": "2026-06-17",
+   "commits": 2
+  },
+  {
+   "date": "2026-06-22",
+   "commits": 7
+  },
+  {
+   "date": "2026-06-25",
+   "commits": 13
+  },
+  {
+   "date": "2026-06-29",
+   "commits": 8
+  },
+  {
+   "date": "2026-06-30",
+   "commits": 2
+  },
+  {
+   "date": "2026-07-01",
+   "commits": 11
+  },
+  {
+   "date": "2026-07-02",
+   "commits": 9
+  },
+  {
+   "date": "2026-07-03",
+   "commits": 18
+  },
+  {
+   "date": "2026-07-06",
+   "commits": 13
+  },
+  {
+   "date": "2026-07-07",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-09",
+   "commits": 11
+  },
+  {
+   "date": "2026-07-13",
+   "commits": 7
+  },
+  {
+   "date": "2026-07-14",
+   "commits": 4
+  },
+  {
+   "date": "2026-07-15",
+   "commits": 7
+  },
+  {
+   "date": "2026-07-16",
+   "commits": 17
+  },
+  {
+   "date": "2026-07-17",
+   "commits": 94
+  },
+  {
+   "date": "2026-07-18",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-20",
+   "commits": 13
+  },
+  {
+   "date": "2026-07-21",
+   "commits": 1
+  },
+  {
+   "date": "2026-07-22",
+   "commits": 11
+  },
+  {
+   "date": "2026-07-23",
+   "commits": 12
+  },
+  {
+   "date": "2026-07-24",
+   "commits": 25
+  },
+  {
+   "date": "2026-07-27",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-28",
+   "commits": 4
+  },
+  {
+   "date": "2026-07-29",
+   "commits": 2
+  },
+  {
+   "date": "2026-07-30",
+   "commits": 7
+  },
+  {
+   "date": "2026-07-31",
+   "commits": 14
+  },
+  {
+   "date": "2026-08-03",
+   "commits": 3
+  },
+  {
+   "date": "2026-08-04",
+   "commits": 7
+  },
+  {
+   "date": "2026-08-05",
+   "commits": 7
+  },
+  {
+   "date": "2026-08-20",
+   "commits": 1
+  },
+  {
+   "date": "2026-08-21",
+   "commits": 20
+  },
+  {
+   "date": "2026-08-25",
+   "commits": 1
+  },
+  {
+   "date": "2026-08-26",
+   "commits": 1
+  },
+  {
+   "date": "2026-09-01",
+   "commits": 2
+  },
+  {
+   "date": "2026-09-03",
+   "commits": 2
+  },
+  {
+   "date": "2026-09-10",
+   "commits": 10
+  }
+ ],
+ "design_system_commits_by_day": [
+  {
+   "date": "2026-03-04",
+   "commits": 3
+  },
+  {
+   "date": "2026-03-05",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-06",
+   "commits": 6
+  },
+  {
+   "date": "2026-03-17",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-18",
+   "commits": 5
+  },
+  {
+   "date": "2026-03-19",
+   "commits": 1
+  },
+  {
+   "date": "2026-03-20",
+   "commits": 1
+  },
+  {
+   "date": "2026-04-01",
+   "commits": 1
+  },
+  {
+   "date": "2026-04-07",
+   "commits": 2
+  },
+  {
+   "date": "2026-04-08",
+   "commits": 1
+  },
+  {
+   "date": "2026-04-10",
+   "commits": 1
+  },
+  {
+   "date": "2026-04-29",
+   "commits": 1
+  },
+  {
+   "date": "2026-04-30",
+   "commits": 2
+  },
+  {
+   "date": "2026-06-11",
+   "commits": 3
+  },
+  {
+   "date": "2026-06-22",
+   "commits": 2
+  },
+  {
+   "date": "2026-06-25",
+   "commits": 10
+  },
+  {
+   "date": "2026-06-29",
+   "commits": 2
+  },
+  {
+   "date": "2026-06-30",
+   "commits": 2
+  },
+  {
+   "date": "2026-07-01",
+   "commits": 8
+  },
+  {
+   "date": "2026-07-02",
+   "commits": 9
+  },
+  {
+   "date": "2026-07-03",
+   "commits": 13
+  },
+  {
+   "date": "2026-07-06",
+   "commits": 12
+  },
+  {
+   "date": "2026-07-07",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-09",
+   "commits": 10
+  },
+  {
+   "date": "2026-07-13",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-14",
+   "commits": 4
+  },
+  {
+   "date": "2026-07-15",
+   "commits": 6
+  },
+  {
+   "date": "2026-07-16",
+   "commits": 15
+  },
+  {
+   "date": "2026-07-17",
+   "commits": 73
+  },
+  {
+   "date": "2026-07-18",
+   "commits": 2
+  },
+  {
+   "date": "2026-07-20",
+   "commits": 3
+  },
+  {
+   "date": "2026-07-22",
+   "commits": 8
+  },
+  {
+   "date": "2026-07-23",
+   "commits": 8
+  },
+  {
+   "date": "2026-07-24",
+   "commits": 7
+  },
+  {
+   "date": "2026-07-27",
+   "commits": 1
+  },
+  {
+   "date": "2026-07-28",
+   "commits": 2
+  },
+  {
+   "date": "2026-07-31",
+   "commits": 1
+  },
+  {
+   "date": "2026-08-04",
+   "commits": 3
+  },
+  {
+   "date": "2026-08-05",
+   "commits": 3
+  },
+  {
+   "date": "2026-08-21",
+   "commits": 3
+  },
+  {
+   "date": "2026-09-01",
+   "commits": 2
+  }
+ ]
+}

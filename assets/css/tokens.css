@@ -1,0 +1,286 @@
+/* ==========================================================================
+   tokens.css — José Ochoa portfolio · design tokens (lane A1 "shell")
+   The single source for colour, type, space, layout, radius and motion.
+   Every other stylesheet and every chart reads these; nothing hardcodes a value.
+
+   Theme model
+   - :root carries the light values.
+   - Dark is declared under BOTH scopes (SPEC §3):
+       1. @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }  → OS preference
+       2. :root[data-theme="dark"]                                                → explicit toggle
+   - The inline boot script in <head> sets data-theme before first paint, so (2) wins
+     both ways; (1) is the no-JS fallback.
+   - .theme-light / .theme-dark pin a subtree to one theme (styleguide specimens, an always-dark
+     band). Set `color: var(--ink); background: var(--paper)` on that element too.
+   ========================================================================== */
+
+:root,
+.theme-light {
+  color-scheme: light;
+
+  /* ---- Surfaces & ink (SPEC §3) ---------------------------------------- */
+  --paper:        #F6F5F1;
+  --paper-2:      #EDEBE4;   /* cards, alternate sections */
+  --paper-3:      #E4E1D8;   /* hover, inset */
+  --ink:          #121412;
+  --ink-2:        #4A4F4B;
+  --ink-3:        #7A807B;   /* muted: axis ticks, rules, icons, placeholders */
+  --ink-meta:     #646A66;   /* AA-safe muted text for small meta (≥4.5:1 on paper and paper-2) */
+  --line:         #DAD6CC;
+  --line-strong:  #C6C1B5;   /* baselines, emphasised dividers */
+
+  --accent:       #2A78D6;
+  --accent-ink:   #1C5CAB;   /* accent text on paper */
+  --accent-soft:  #DCE9F8;
+  --accent-strong:#256ABF;   /* filled controls; white text clears 5.4:1 */
+  --accent-strong-hover: #1C5CAB;
+  --on-accent:    #FFFFFF;
+
+  /* ---- Status --------------------------------------------------------- */
+  --good:         #1a7f37;
+  --warn:         #b7791f;
+  --bad:          #c62828;
+  --good-soft:    #E3EFE3;
+  --warn-soft:    #F4EBD9;
+  --bad-soft:     #F6E1DE;
+  --callout-good: var(--good);
+  --callout-warn: var(--warn);
+  --callout-bad:  var(--bad);
+
+  /* ---- Categorical series (validated palette, fixed slot order) ------- */
+  --series-1: #2a78d6;  /* blue    */
+  --series-2: #eb6834;  /* orange  */
+  --series-3: #1baf7a;  /* aqua    */
+  --series-4: #eda100;  /* yellow  */
+  --series-5: #e87ba4;  /* magenta */
+  --series-6: #008300;  /* green   */
+  --series-7: #6250d6;  /* violet  */
+  --series-8: #e34948;  /* red     */
+
+  /* ---- Sequential blue ramp ------------------------------------------- */
+  --seq-100: #cde2fb;
+  --seq-150: #b7d3f6;
+  --seq-200: #9ec5f4;
+  --seq-250: #86b6ef;
+  --seq-300: #6da7ec;
+  --seq-350: #5598e7;
+  --seq-400: #3987e5;
+  --seq-450: #2a78d6;
+  --seq-500: #256abf;
+  --seq-550: #1c5cab;
+  --seq-600: #184f95;
+  --seq-650: #104281;
+  --seq-700: #0d366b;
+
+  /* ---- Chart chrome (recessive; charts lane reads these) -------------- */
+  --grid:         #E3E0D7;   /* hairline gridlines */
+  --axis:         #C6C1B5;   /* baseline / axis rule */
+  --tip-bg:       #121412;
+  --tip-ink:      #F6F5F1;
+  --tip-shadow:   0 1px 2px rgba(18, 20, 18, .10), 0 8px 24px -6px rgba(18, 20, 18, .22);
+  --selection:    #CFE0F6;
+  --overlay:      rgba(18, 20, 18, .28);
+
+  /* ---- Typography ------------------------------------------------------ */
+  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-text:    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
+  --fs-h1:      clamp(2.25rem, 1.4rem + 3vw, 3.75rem);
+  --fs-h2:      clamp(1.625rem, 1.2rem + 1.6vw, 2.375rem);
+  --fs-h3:      1.25rem;
+  --fs-h4:      1.0625rem;
+  --fs-lead:    clamp(1.125rem, 1.02rem + .45vw, 1.3125rem);  /* dek / standfirst */
+  --fs-body:    1.0625rem;
+  --fs-small:   .9rem;
+  --fs-meta:    .78rem;
+  --fs-micro:   .72rem;                                       /* axis + legend text */
+  --fs-stat:    clamp(3rem, 2.3rem + 2.4vw, 4.5rem);
+  --fs-quote:   clamp(1.5rem, 1.15rem + 1.3vw, 2.125rem);
+
+  --lh-display: .98;
+  --lh-h1:      1.04;
+  --lh-h2:      1.1;
+  --lh-h3:      1.3;
+  --lh-body:    1.6;
+  --lh-tight:   1.35;
+  --lh-meta:    1.4;
+
+  --track-display: -.015em;
+  --track-h:       -.01em;
+  --track-meta:    .08em;
+  --track-text:    -.003em;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+
+  /* ---- Spacing (4px base) --------------------------------------------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+  --section-pad: clamp(4rem, 8vw, 8rem);
+  --flow:        1.1em;     /* default vertical rhythm inside prose */
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --w-content: 1120px;
+  --w-prose:   680px;
+  --w-wide:    1280px;
+  --gutter:    clamp(16px, 4vw, 40px);
+  --header-h:  64px;
+  --toc-w:     200px;
+
+  /* ---- Radius & borders ------------------------------------------------ */
+  --r-control: 6px;
+  --r-card:    12px;
+  --r-pill:    999px;
+  --r-media:   10px;
+  --border:    1px solid var(--line);
+  --focus-ring: 2px solid var(--accent);
+  --focus-offset: 2px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease-out:    cubic-bezier(.22, .61, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-fast:    140ms;
+  --dur-base:    220ms;
+  --dur-reveal:  500ms;
+  --dur-draw:    800ms;
+  --dur-count:   900ms;
+  --stagger:     60ms;
+  --reveal-shift: 8px;
+
+  /* ---- Layers ---------------------------------------------------------- */
+  --z-raised:  10;
+  --z-sticky:  50;
+  --z-header:  100;
+  --z-menu:    110;
+  --z-tip:     1000;
+}
+
+/* ---- Dark, scope 1: OS preference, unless the reader picked light ------ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper:        #121412;
+    --paper-2:      #1B1E1B;
+    --paper-3:      #242824;
+    --ink:          #F1EFE9;
+    --ink-2:        #BDBAB1;
+    --ink-3:        #8A8C86;
+    --ink-meta:     #969892;
+    --line:         #2C302C;
+    --line-strong:  #3C413C;
+
+    --accent:       #3987E5;
+    --accent-ink:   #6DA7EC;
+    --accent-soft:  #17304F;
+    --accent-strong:#256ABF;
+    --on-accent:    #FFFFFF;
+
+    --good:         #3fb950;
+    --warn:         #d4a72c;
+    --bad:          #ff6b6b;
+    --good-soft:    #15291A;
+    --warn-soft:    #2A2414;
+    --bad-soft:     #321A1A;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+
+    --grid:         #232723;
+    --axis:         #3C413C;
+    --tip-bg:       #F1EFE9;
+    --tip-ink:      #121412;
+    --tip-shadow:   0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -6px rgba(0, 0, 0, .6);
+    --selection:    #1E3F66;
+    --overlay:      rgba(0, 0, 0, .55);
+  }
+}
+
+/* ---- Dark, scope 2: explicit toggle ----------------------------------- */
+:root[data-theme="dark"],
+.theme-dark {
+  color-scheme: dark;
+
+  --paper:        #121412;
+  --paper-2:      #1B1E1B;
+  --paper-3:      #242824;
+  --ink:          #F1EFE9;
+  --ink-2:        #BDBAB1;
+  --ink-3:        #8A8C86;
+  --ink-meta:     #969892;
+  --line:         #2C302C;
+  --line-strong:  #3C413C;
+
+  --accent:       #3987E5;
+  --accent-ink:   #6DA7EC;
+  --accent-soft:  #17304F;
+  --accent-strong:#256ABF;
+  --on-accent:    #FFFFFF;
+
+  --good:         #3fb950;
+  --warn:         #d4a72c;
+  --bad:          #ff6b6b;
+  --good-soft:    #15291A;
+  --warn-soft:    #2A2414;
+  --bad-soft:     #321A1A;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+
+  --grid:         #232723;
+  --axis:         #3C413C;
+  --tip-bg:       #F1EFE9;
+  --tip-ink:      #121412;
+  --tip-shadow:   0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -6px rgba(0, 0, 0, .6);
+  --selection:    #1E3F66;
+  --overlay:      rgba(0, 0, 0, .55);
+}
+
+/* C1 QA: alias tokens resolve on the element that declares them, so a .theme-dark subtree on a light page
+   inherited the light --good/--warn/--bad etc. Re-declare the aliases inside the dark scope. */
+.theme-dark {
+  --callout-good: var(--good);
+  --callout-warn: var(--warn);
+  --callout-bad:  var(--bad);
+  --border:       1px solid var(--line);
+  --focus-ring:   2px solid var(--accent);
+}
+
+/* The sequential ramp keeps the same steps in dark (SPEC §3); dark charts should
+   start from the lighter end (--seq-100…--seq-400) against --paper. */
+
+/* ---- Reduced motion: collapse every duration to zero ------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast:   0ms;
+    --dur-base:   0ms;
+    --dur-reveal: 0ms;
+    --dur-draw:   0ms;
+    --dur-count:  0ms;
+    --stagger:    0ms;
+    --reveal-shift: 0px;
+  }
+}

@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
+<title>Systems that stay coherent at AI speed — José Ochoa</title>
+<meta name="description" content="Product and web designer. A bakery system shipped by directing AI agents, a design system held in parity with Figma, and charts built on real data.">
+<meta name="author" content="José Ochoa">
+<link rel="canonical" href="https://joseocfc.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="José Ochoa">
+<meta property="og:title" content="José Ochoa: I design systems that stay coherent at AI speed">
+<meta property="og:description" content="One designer, zero developers, one live store. Case studies where every chart is computed from real data, with the source attached.">
+<meta property="og:url" content="https://joseocfc.github.io/">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
+     preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/charts.css">
+<!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
+<style>
+/* Home · lane B4 · page-scoped. Nothing here overrides shared component rules outside this page. */
+
+/* Stat cards read number → label → claim (content/home.md: "value | label | claim | meta"),
+   so "1" is followed by "Designer, 0 developers" and the label sits under the number. */
+.home-stats .stat-value { margin-top: 0; }
+.home-stats .stat-value + .stat-label { margin-top: var(--space-3); color: var(--ink-2); }
+
+/* Epoch card: a window onto A4's matplotlib render (assets/img/epoch/notable-models-mpl[-dark].png, 2400×1440),
+   x 980–2340 and y 290 down, so no frontier label is cut at the edge. Light and dark renders swap with the theme,
+   like the live charts do; the hidden one is lazy and display:none, so it is never downloaded. */
+.epoch-thumb__frame {
+  display: block;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  background: var(--paper);
+}
+.epoch-thumb__frame--dark { display: none; }
+[data-theme="dark"] .epoch-thumb__frame--light { display: none; }
+[data-theme="dark"] .epoch-thumb__frame--dark { display: block; }
+.work-card__media .epoch-thumb__frame img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 176.5%;          /* 2400 / 1360 */
+  max-width: none;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  object-fit: fill;
+  translate: -40.83% -20.14%;   /* 980 / 2400, 290 / 1440 */
+}
+@media (max-width: 899.98px) {
+  /* 16:10 frame: start lower so the dense 2016–2026 cloud and its labels fill it. */
+  .work-card__media .epoch-thumb__frame img { translate: -40.83% -27.78%; }
+}
+
+/* Project Net has no screenshots (research/other-projects.md §1). Its plate gets a quiet map texture instead
+   of an empty box: a dot grid and soft "fuzzed" location circles, the privacy idea the card describes. */
+.pn-plate {
+  background:
+    radial-gradient(circle at 22% 32%, var(--pn-zone) 0 30px, transparent 31px),
+    radial-gradient(circle at 78% 64%, var(--pn-zone) 0 40px, transparent 41px),
+    radial-gradient(circle at 66% 20%, var(--pn-zone) 0 22px, transparent 23px),
+    radial-gradient(circle at 30% 76%, var(--pn-zone) 0 26px, transparent 27px),
+    radial-gradient(circle, var(--line-strong) 1px, transparent 1.6px) 0 0 / 18px 18px,
+    var(--paper-2);
+  --pn-zone: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.work-card__media--logo.pn-plate img { width: 88px; height: 88px; border-radius: 20px; }
+
+/* Contact block on Home: keep the label column narrow enough for the location line. */
+.home-about .contact-list__value { color: var(--ink); }
+.home-about .btn-row { margin-top: var(--space-5); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/" aria-label="José Ochoa, home">
+      <svg class="wordmark__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 5.5v14a6.5 6.5 0 0 1-6.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21.5" cy="19.5" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      <span class="wordmark__name">José Ochoa</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        <li class="site-nav__item site-nav__item--menu">
+          <button class="site-nav__link site-nav__trigger" type="button" aria-expanded="false" aria-controls="work-menu">
+            Work
+            <svg class="site-nav__chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="site-nav__group" aria-hidden="true">Work</p>
+          <ul class="site-nav__menu" id="work-menu" aria-label="Work">
+            <li><a class="site-nav__menu-link" href="/work/bakery-orders/">
+              <span class="site-nav__menu-title">Bakery Orders</span>
+              <span class="site-nav__menu-desc">An ordering system shipped by one designer directing AI agents</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/design-system/">
+              <span class="site-nav__menu-title">Design system</span>
+              <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
+              <span class="site-nav__menu-title">Epoch explorer study</span>
+              <span class="site-nav__menu-desc">Notable AI models, redrawn for a phone</span>
+            </a></li>
+          </ul>
+        </li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/process/">Process</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/about/">About</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme">
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+<!-- PAGE CONTENT -->
+<!-- Home · lane B4 (Phase B) · copy: content/home.md (A5), verbatim. Structure: SPEC §7 Home. -->
+
+<section class="hero container" aria-labelledby="hero-title">
+  <p class="eyebrow hero__eyebrow">José Ochoa · Product &amp; web design · Data visualization</p>
+  <h1 class="hero__title" id="hero-title">I design systems that stay coherent at <em>AI&nbsp;speed.</em></h1>
+  <p class="lead hero__dek">On 1 November 2026, a bakery ordering system I designed went live at Community Food <span class="nowrap">Co-op</span>, built by AI agents I directed and checked by 6,089 automated assertions. It sits on the co-op’s design system, which I keep in parity across theme.json, CSS and Figma so an agent can’t hardcode a value without it surfacing.</p>
+  <!-- src: launch STATUS.md:161 and 6,089 tests/cli/README.md Count line, via research/bakery-case-study.md Part 5 §g; hook research/design-system-case.md §0, §7 -->
+  <div class="btn-row hero__actions">
+    <a class="btn btn--primary" href="/work/bakery-orders/">Read the bakery case study <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn btn--ghost" href="/process/">How I work</a>
+  </div>
+
+  <figure class="figure hero__figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
+    <header>
+      <p class="eyebrow">Figure 1 · Commits per day, all branches</p>
+      <h2 class="figure-title">142 days from first commit to a live store</h2>
+      <p class="figure-sub">Daily commits on the bakery plugin, 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Bar chart of daily commits from June to November 2026. Summer is sparse, October is dense, the tallest bar is 307 commits on 26 October, and the store goes live on 1 November."></div>
+    <figcaption>The tallest bar is one night: 18 deli tickets built by an orchestrator and parallel builders, 307 commits dated 26 October.</figcaption>
+    <footer class="figure-foot">
+      <span>Source: git log --all on joseocfc/cfc-bakery-orders, computed 2026-11-07</span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span>
+    </footer>
+  </figure>
+  <!-- src: data/bakery-metrics.json timeline.days_to_launch 142, timeline.total_commits 1503, commits_by_month 2026-10 = 1174, busiest_days[0] 2026-10-26 = 307 -->
+</section>
+
+<section class="section section--tight home-stats" id="numbers" aria-labelledby="numbers-title">
+  <div class="container">
+    <h2 class="visually-hidden" id="numbers-title">The work in four numbers</h2>
+    <div class="stat-grid">
+      <article class="stat-card reveal">
+        <p class="stat-value"><span data-count="1">1</span></p>
+        <p class="stat-label">Designer, 0 developers</p>
+        <p class="stat-claim">One live store since 1 November 2026, for bakery and Thanksgiving deli orders.</p>
+        <footer class="stat-meta">git log --all: 1 author · STATUS.md:161</footer>
+      </article>
+      <article class="stat-card reveal">
+        <p class="stat-value"><span data-count="6089">6,089</span></p>
+        <p class="stat-label">Automated assertions</p>
+        <p class="stat-claim">In a full test run, with 1 known red that every report names.</p>
+        <footer class="stat-meta">tests/cli/README.md · <span class="nowrap">2026-11-05</span></footer>
+      </article>
+      <article class="stat-card reveal">
+        <p class="stat-value"><span data-count="1594">1,594</span></p>
+        <p class="stat-label">Assumptions written down</p>
+        <p class="stat-claim">Numbered A1 to A2121, each with a status: signed off, superseded or waiting on me.</p>
+        <footer class="stat-meta">docs/assumptions-register.md · <span class="nowrap">2026-11-05</span></footer>
+      </article>
+      <article class="stat-card reveal">
+        <p class="stat-value"><span data-count="94">94</span></p>
+        <p class="stat-label">Design tokens</p>
+        <p class="stat-claim">1 source of truth, mirrored to Figma, with 0 unexplained deltas either way.</p>
+        <footer class="stat-meta">figma-parity-check.py · last run <span class="nowrap">2026-08-21</span></footer>
+      </article>
+    </div>
+    <!-- src: card 1 data/bakery-metrics.json timeline.contributors = 1; card 2 harness.latest_count_line (6089);
+         card 3 assumptions_register.rows_in_file 1594, highest_a_number 2121; card 4 data/design-system-metrics.json tokens.contract_total 94 -->
+  </div>
+</section>
+
+<section class="section section--rule" id="work" aria-labelledby="work-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-title">Two systems in production and one study for Epoch</h2>
+    </header>
+
+    <div class="work-list">
+      <article class="work-card work-card--feature reveal">
+        <div class="work-card__media work-card__media--duo">
+          <img class="work-card__shot" src="/assets/img/home/bakery-landing-1440.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="The bakery ordering landing page at desktop width, with seasonal specials and category cards.">
+          <img class="work-card__phone" src="/assets/img/home/bakery-landing-375.jpg" width="560" height="1165" loading="lazy" decoding="async" alt="">
+        </div>
+        <div class="work-card__body">
+          <p class="eyebrow">Case study · Community Food <span class="nowrap">Co-op</span> · 2026</p>
+          <h3 class="work-card__title"><a href="/work/bakery-orders/">A bakery ordering system, shipped by one designer directing AI agents</a></h3>
+          <p class="work-card__text">A pickup-first cake builder, staff dashboards, printed tickets and a Thanksgiving deli layer.</p>
+          <ul class="tags" aria-label="Disciplines"><li class="tag">Product design</li><li class="tag">Figma</li><li class="tag">AI orchestration</li><li class="tag">WooCommerce</li></ul>
+          <span class="work-card__cta" aria-hidden="true">Read the case study</span>
+        </div>
+      </article>
+
+      <article class="work-card work-card--feature reveal">
+        <div class="work-card__media work-card__media--plate">
+          <img src="/assets/img/home/ds-buttons-component-set.jpg" width="760" height="570" loading="lazy" decoding="async" alt="The Figma button component set: six variants, three sizes and five states in a grid, plus a loading state, with placement rules above.">
+        </div>
+        <div class="work-card__body">
+          <p class="eyebrow">Case study · Design system · 2026</p>
+          <h3 class="work-card__title"><a href="/work/design-system/">One system in both directions</a></h3>
+          <p class="work-card__text">theme.json, CSS and Figma held in parity by a drift checker and a hook that stops agents hardcoding values.</p>
+          <ul class="tags" aria-label="Disciplines"><li class="tag">Design systems</li><li class="tag">Tokens</li><li class="tag">Figma variables</li></ul>
+          <span class="work-card__cta" aria-hidden="true">Read the case study</span>
+        </div>
+      </article>
+
+      <article class="work-card work-card--feature reveal">
+        <div class="work-card__media work-card__media--plate epoch-thumb">
+          <span class="epoch-thumb__frame epoch-thumb__frame--light"><img src="/assets/img/epoch/notable-models-mpl.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Scatter chart of training compute for notable AI models by publication date, on a log scale."></span>
+          <span class="epoch-thumb__frame epoch-thumb__frame--dark"><img src="/assets/img/epoch/notable-models-mpl-dark.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Scatter chart of training compute for notable AI models by publication date, on a log scale."></span>
+        </div>
+        <div class="work-card__body">
+          <p class="eyebrow">Study · Epoch AI data · 2026</p>
+          <h3 class="work-card__title"><a href="/work/epoch-explorer/">Notable AI models, redrawn for a phone</a></h3>
+          <p class="work-card__text">Epoch’s CC-BY data rebuilt as a chart that reflows at 390&nbsp;px instead of cropping.</p>
+          <ul class="tags" aria-label="Disciplines"><li class="tag">Data visualization</li><li class="tag">D3</li><li class="tag">matplotlib</li></ul>
+          <span class="work-card__cta" aria-hidden="true">Read the study</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="more-work">
+      <h3 class="more-work__title eyebrow eyebrow--rule" id="more">Two smaller builds, same method</h3>
+      <div class="work-grid">
+        <article class="work-card work-card--compact reveal">
+          <div class="work-card__media work-card__media--logo pn-plate">
+            <img src="/assets/img/home/project-net-logo.svg" width="64" height="64" loading="lazy" alt="Project Net’s knot logo.">
+          </div>
+          <div class="work-card__body">
+            <h4 class="work-card__title">Project Net</h4>
+            <p class="work-card__text">A community map of tension nets in Bellingham, with location privacy built into the data model.</p>
+            <ul class="tags" aria-label="Disciplines"><li class="tag">Product design</li><li class="tag">Maps</li><li class="tag">Next.js</li></ul>
+          </div>
+        </article>
+        <!-- Project Net: no public URL in the repo and no screenshots exist (research/other-projects.md §1); no link until José supplies one. -->
+        <article class="work-card work-card--compact reveal">
+          <div class="work-card__media">
+            <img src="/assets/img/home/nanny-site-desktop-1440.jpg" width="1440" height="740" loading="lazy" decoding="async" alt="Desktop landing page for a local nanny service, with a hero and a trust band of three certifications.">
+          </div>
+          <div class="work-card__body">
+            <h4 class="work-card__title"><a href="https://nannymckenzie.github.io/">A lead funnel for a local nanny service</a></h4>
+            <p class="work-card__text">Figma system, site, form backend, QR flyers and a share card, live the day it was built.</p>
+            <ul class="tags" aria-label="Disciplines"><li class="tag">Web design</li><li class="tag">Figma</li><li class="tag">Print</li></ul>
+            <span class="work-card__cta work-card__cta--ext" aria-hidden="true">Visit the live site</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="eyebrow">How I work</p>
+      <h2 id="how-title">I specify, agents build, and nothing ships without proof</h2>
+      <p class="lead">I don’t write the code. I specify it, direct the agents that do, and prove it works.</p>
+    </header>
+    <ol class="steps">
+      <li class="step reveal">
+        <h3 class="step__title">Specify</h3>
+        <p class="step__text">Every open question gets decided one at a time, with a recommended answer. Anything an agent has to assume becomes a numbered row before it commits.</p>
+      </li>
+      <li class="step reveal">
+        <h3 class="step__title">Direct</h3>
+        <p class="step__text">An orchestrator splits the work into lanes, each builder works on its own branch, and a fresh reviewer scores every risky change. Below 9/10, it goes back.</p>
+      </li>
+      <li class="step reveal">
+        <h3 class="step__title">Prove</h3>
+        <p class="step__text">Test output and screenshots, never summaries. Then I walk staging on my phone, and production moves only on my word.</p>
+      </li>
+    </ol>
+    <p class="section-foot"><a class="btn btn--ghost" href="/process/">The method, with the evidence <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  </div>
+</section>
+
+<section class="section home-about" id="about" aria-labelledby="about-title">
+  <div class="container split split--even">
+    <div class="stack reveal">
+      <p class="eyebrow">About</p>
+      <h2 id="about-title">I work from Bellingham, Washington, on Pacific time</h2>
+      <p class="about-teaser__text">I trained as an industrial designer at Tec de Monterrey, then led brand and web design for startups in Mexico and the Bay Area. Since March 2025 I’ve been the web designer at Community Food <span class="nowrap">Co-op</span>.</p>
+      <div class="btn-row"><a class="btn btn--ghost" href="/about/">More about me <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </div>
+    <ul class="contact-list reveal" aria-label="Contact">
+      <li><span class="contact-list__label">Email</span><a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a></li>
+      <li><span class="contact-list__label">LinkedIn</span><a href="https://www.linkedin.com/in/jose-antonio-ochoa">in/jose-antonio-ochoa</a></li>
+      <li><span class="contact-list__label">GitHub</span><a href="https://github.com/joseocfc">github.com/joseocfc</a></li>
+      <li><span class="contact-list__label">Location</span><span class="contact-list__value">Bellingham, WA · Pacific · <span class="nowrap">9–2 PT</span> overlaps <span class="nowrap">12–5 ET</span></span></li>
+    </ul>
+    <!-- Email: the co-op work address is the fallback content/home.md allows until José picks an address for applications.
+         LinkedIn: kept to match the shared footer; public visibility is off (research/jose-profile.md flag 4) — see lanes/notes/B4.md. -->
+  </div>
+</section>
+<!-- /PAGE CONTENT -->
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__lead">
+      <p class="site-footer__name">José Ochoa</p>
+      <p class="site-footer__role">Product &amp; web design · Data visualization<br>Bellingham, WA · Pacific time</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Contact">
+      <p class="site-footer__heading">Contact</p>
+      <ul>
+        <li><a href="mailto:joseo@communityfood.coop">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/jose-antonio-ochoa">LinkedIn</a></li>
+        <li><a href="https://github.com/joseocfc">GitHub</a></li>
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="Site">
+      <p class="site-footer__heading">Work</p>
+      <ul>
+        <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
+        <li><a href="/work/design-system/">Design system</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch explorer study</a></li>
+        <li><a href="/process/">Process</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-footer__base">
+      <p class="site-footer__colophon">Built 2026-11 with Claude Code; every chart’s data is downloadable.</p>
+      <button class="theme-toggle theme-toggle--labelled" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="theme-toggle__text" aria-hidden="true">Theme</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<!-- PAGE SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script type="module" src="/assets/js/charts/index.js"></script>
+<script type="module" src="/assets/js/site.js"></script>
+</body>
+</html>
