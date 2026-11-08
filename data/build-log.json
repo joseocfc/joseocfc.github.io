@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-08T00:56:35-08:00",
+ "generated": "2026-11-08T00:56:57-08:00",
  "note": "Start/end from the first and last line of each lane's log. Research lanes ran on Fable 5.1 before Jos\u00e9 asked for Opus 5.5 workers; every later worker is Opus 5.5. The orchestrator row spans the session.",
  "phases": [
   "research",
