@@ -1,4 +1,4 @@
-/* Page styles: /about/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+/* Page styles: /about/ — moved from inline <style> blocks (F4). Round 2 (F34): About no longer loads charts.css. */
 
 /* About · page-scoped. The page's sections sit inside .prose (the shared case layout), so these rules
    undo .prose's list indents for the timeline, findings and contact components and set section rhythm. */
@@ -15,9 +15,7 @@
 .about-layout .timeline__text { font-size: var(--fs-body); line-height: 1.55; }
 .about-layout .timeline__text strong { font-weight: var(--fw-semi); }
 .about-layout .timeline__item:last-child { padding-bottom: 0; }
-.about-bring .finding:last-child { border-bottom: 1px solid var(--line); }
-.about-bring .finding__title { color: var(--ink); }   /* .prose p would grey it */
-.about-bring .finding__text { color: var(--ink-2); }
+.about-layout .about-role { color: var(--ink); font-weight: var(--fw-semi); }   /* the role wanted (F38); .prose p would grey it */
 
 /* The chip strip under 1024px is sticky below the header: keep jumped-to headings clear of it. */
 @media (max-width: 1023.98px) {

@@ -37,3 +37,4 @@ html:not(.js) .ex-unit { display: none; }
 .ex-next > li:last-child { border-bottom: 1px solid var(--line); }
 .ex-next > li::before { content: counter(nx, decimal-leading-zero); position: absolute; left: 0; top: calc(var(--space-4) + .2em); font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--accent-ink); }
 .ex-next strong { display: block; margin-bottom: 2px; color: var(--ink); font-weight: var(--fw-semi); }
+.ex-cvd code { font-size: .78rem; white-space: nowrap; }

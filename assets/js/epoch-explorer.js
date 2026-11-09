@@ -62,6 +62,25 @@ const LABEL_MODES = [
   { key: 'more', budget: [30, 12] },
   { key: 'frontier', budget: [Infinity, Infinity] },
 ];
+// Anchors: models a general reader already knows, labelled first (in this order) when visible,
+// so the placer never spends the budget on obscure neighbours. Exact names from
+// data/epoch/notable_models.json; the value is the short label used on small screens.
+const ANCHORS = new Map([
+  ['GPT-4 (Mar 2023)', 'GPT-4'],
+  ['GPT-3 175B (davinci)', 'GPT-3'],
+  ['AlphaGo Lee', 'AlphaGo'],
+  ['AlexNet', 'AlexNet'],
+  ['Transformer', 'Transformer'],
+  ['BERT-Large', 'BERT'],
+  ['Gemini 1.0 Ultra', 'Gemini 1.0'],
+  ['Claude 3.7 Sonnet', 'Claude 3.7'],
+  ['Llama 3.1-405B', 'Llama 3.1'],
+]);
+// Density rule: dots stay fully opaque up to 600 visible points (the 543-model file and every
+// range of it), then opacity falls with the square root of N, floored at 0.35. Past about
+// 2,000 points the rule is to switch to hexbins; that part is stated on the page, not built.
+const DENSITY_N = 600;
+const densityOpacity = (n) => (n <= DENSITY_N ? 1 : Math.max(0.35, Math.sqrt(DENSITY_N / n)));
 const labelModeText = (key, compact) => {
   const m = LABEL_MODES.find((d) => d.key === key);
   if (key === 'frontier') return 'Frontier only';
@@ -133,7 +152,8 @@ function el(tag, attrs = {}, ...kids) {
     if (v == null || v === false) continue;
     if (k === 'class') n.className = v;
     else if (k === 'text') n.textContent = v;
-    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if (k === 'signal') continue;
+    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v, { signal: attrs.signal });
     else n.setAttribute(k, v === true ? '' : v);
   }
   for (const k of kids) if (k != null) n.append(k);
@@ -275,7 +295,8 @@ function topCategories(models, field) {
 
 /* --------------------------------------------------------------------------
    Label placement
-   Candidates: the largest model inside its rolling 6-month window (rank 0), then
+   Candidates: first the visible anchors (ANCHORS, in order, at most budget - 2 so
+   two rolling-window labels remain), then the largest model inside its rolling 6-month window (rank 0), then
    rank 1 and 2. To spread labels along the frontier instead of piling them at the
    top right, candidates are taken in turns from equal time slots across the view
    (one slot per label in the budget). Each label is placed greedily at the first
@@ -306,6 +327,10 @@ function recordSetters(vis) {
 }
 function labelCandidates(vis, mode, budget, x0, x1) {
   if (mode === 'frontier') return recordSetters(vis).sort((a, b) => b.compute - a.compute);
+  const anchorRank = [...ANCHORS.keys()];
+  const anchors = vis.filter((p) => ANCHORS.has(p.model))
+    .sort((a, b) => anchorRank.indexOf(a.model) - anchorRank.indexOf(b.model))
+    .slice(0, Math.max(0, budget - 2));
   const rank = windowRanks(vis);
   const pool = vis.filter((p) => rank.get(p.id) <= 2);
   const k = Math.max(1, Math.min(budget, 40));
@@ -320,7 +345,8 @@ function labelCandidates(vis, mode, budget, x0, x1) {
     batch.sort((a, b) => rank.get(a.id) - rank.get(b.id) || b.compute - a.compute);
     order.push(...batch);
   }
-  return order;
+  const taken = new Set(anchors.map((p) => p.id));
+  return [...anchors, ...order.filter((p) => !taken.has(p.id))];
 }
 
 function rectsOverlap(a, b, pad = 2) {
@@ -390,14 +416,14 @@ function placeLabels(cands, { budget, bounds, reserved, points, measure, rad, h 
 const ICON_SLIDERS = '<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 6h8M15 6h2M3 14h2M9 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="14" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 const ICON_X = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 
-function segmented(name, legendText, options, value, onChange) {
+function segmented(name, legendText, options, value, onChange, signal) {
   const fs = el('fieldset', { class: 'ex-group', 'data-group': name });
   fs.append(el('legend', { class: 'ex-group__label', text: legendText }));
   const seg = el('div', { class: 'ex-seg' });
   for (const o of options) {
     const input = el('input', { type: 'radio', name: `${name}-${uid}`, value: o.key });
     input.checked = o.key === value;
-    input.addEventListener('change', () => input.checked && onChange(o.key));
+    input.addEventListener('change', () => input.checked && onChange(o.key), { signal });
     const span = el('span');
     if (o.short && o.short !== o.label) span.append(el('span', { class: 'ex-long', text: o.label }), el('span', { class: 'ex-short', text: o.short }));
     else span.textContent = o.label;
@@ -412,6 +438,8 @@ function segmented(name, legendText, options, value, onChange) {
    -------------------------------------------------------------------------- */
 class Explorer {
   constructor(root, data, d3) {
+    this.ac = new AbortController(); // F13: one controller per instance; destroy() removes every listener
+    this.sig = { signal: this.ac.signal };
     uid += 1;
     this.uid = uid;
     this.root = root;
@@ -449,15 +477,15 @@ class Explorer {
 
     this.toolbar = el('div', { class: 'ex-toolbar', role: 'group', 'aria-label': 'Chart settings' });
     this.groups = {
-      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v })),
-      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null })),
-      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v })),
+      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v }), this.ac.signal),
+      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null }), this.ac.signal),
+      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v }), this.ac.signal),
       trend: this.buildSwitch(),
     };
     this.customize = el('button', { type: 'button', class: 'ex-customize', 'aria-haspopup': 'dialog' });
     this.customize.innerHTML = ICON_SLIDERS;
     this.customize.append(el('span', { text: 'Customize' }));
-    this.customize.addEventListener('click', () => this.openSheet());
+    this.customize.addEventListener('click', () => this.openSheet(), this.sig);
     this.toolbar.append(this.groups.range, this.groups.color, this.groups.labels, this.groups.trend, this.customize);
 
     this.legend = el('ul', { class: 'ex-legend', 'aria-label': 'Legend' });
@@ -491,7 +519,7 @@ class Explorer {
     wrap.append(el('span', { class: 'ex-group__label', 'aria-hidden': 'true', text: 'Trend' }));
     const input = el('input', { type: 'checkbox', role: 'switch' });
     input.checked = this.state.trend;
-    input.addEventListener('change', () => this.set({ trend: input.checked }));
+    input.addEventListener('change', () => this.set({ trend: input.checked }), this.sig);
     wrap.append(el('label', { class: 'ex-switch' }, input, el('span', { class: 'ex-switch__track', 'aria-hidden': 'true' }), el('span', { text: 'Regression, 90% CI' })));
     return wrap;
   }
@@ -501,18 +529,18 @@ class Explorer {
     this.sheet = el('dialog', { class: 'ex-sheet', 'aria-labelledby': titleId });
     const close = el('button', { type: 'button', class: 'ex-sheet__x', 'aria-label': 'Close settings' });
     close.innerHTML = ICON_X;
-    close.addEventListener('click', () => this.sheet.close());
+    close.addEventListener('click', () => this.sheet.close(), this.sig);
     this.sheetBody = el('div', { class: 'ex-sheet__body' });
     const done = el('button', { type: 'button', class: 'ex-sheet__done', text: 'Show chart' });
-    done.addEventListener('click', () => this.sheet.close());
+    done.addEventListener('click', () => this.sheet.close(), this.sig);
     this.sheet.append(
       el('span', { class: 'ex-sheet__grip', 'aria-hidden': 'true' }),
       el('div', { class: 'ex-sheet__head' }, el('p', { class: 'ex-sheet__title', id: titleId, text: 'Customize chart' }), close),
       this.sheetBody,
       el('div', { class: 'ex-sheet__foot' }, done),
     );
-    this.sheet.addEventListener('click', (e) => { if (e.target === this.sheet) this.sheet.close(); });
-    this.sheet.addEventListener('close', () => this.customize.focus({ preventScroll: true }));
+    this.sheet.addEventListener('click', (e) => { if (e.target === this.sheet) this.sheet.close(); }, this.sig);
+    this.sheet.addEventListener('close', () => this.customize.focus({ preventScroll: true }), this.sig);
     this.root.append(this.sheet);
   }
 
@@ -553,9 +581,9 @@ class Explorer {
           btn.setAttribute('aria-expanded', String(this.tableOpen));
           btn.textContent = this.tableOpen ? 'Hide table' : 'Table';
           if (this.tableOpen) this.renderTable();
-        });
+        }, this.sig);
       } else if (action === 'download') {
-        btn.addEventListener('click', () => this.download());
+        btn.addEventListener('click', () => this.download(), this.sig);
       }
     });
   }
@@ -563,7 +591,7 @@ class Explorer {
   observe() {
     const mq = sheetMQ();
     const onMQ = () => { this.placeControls(); this.render({ animate: false }); };
-    if (mq.addEventListener) mq.addEventListener('change', onMQ); else mq.addListener(onMQ);
+    if (mq.addEventListener) mq.addEventListener('change', onMQ, this.sig); else mq.addListener(onMQ);
     let raf = 0, lastW = 0;
     this.ro = new ResizeObserver((entries) => {
       const w = Math.round(entries[0].contentRect.width);
@@ -574,11 +602,11 @@ class Explorer {
       this.roT = setTimeout(() => { raf = requestAnimationFrame(() => this.render({ animate: false })); }, 90);
     });
     this.ro.observe(this.stage);
-    document.addEventListener('themechange', () => this.render({ animate: false }));
-    new MutationObserver(() => this.render({ animate: false }))
-      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    document.addEventListener('themechange', () => this.render({ animate: false }), this.sig);
+    this.mo = new MutationObserver(() => this.render({ animate: false }));
+    this.mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     const dark = matchMedia('(prefers-color-scheme: dark)');
-    if (dark.addEventListener) dark.addEventListener('change', () => this.render({ animate: false }));
+    if (dark.addEventListener) dark.addEventListener('change', () => this.render({ animate: false }), this.sig);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.render({ animate: false }));
     const animateIn = !reducedMotion() && 'IntersectionObserver' in window;
     this.drawn = !animateIn;
@@ -589,7 +617,19 @@ class Explorer {
         if (es.some((e) => e.isIntersecting)) { io.disconnect(); this.drawIn(); }
       }, { threshold: 0.15 });
       io.observe(this.stage);
+      this.io = io;
     }
+  }
+
+  // F13: tear down one instance. Aborting the controller removes every listener it was
+  // passed to (controls, legend, stage, table, sheet, media queries, document).
+  destroy() {
+    this.ac.abort();
+    this.ro?.disconnect();
+    this.mo?.disconnect();
+    this.io?.disconnect();
+    clearTimeout(this.roT);
+    if (this.sheet?.open) this.sheet.close();
   }
 
   set(patch) {
@@ -615,11 +655,12 @@ class Explorer {
   }
   categories() {
     const names = this.cats[this.state.colorBy];
-    const list = names.map((n, i) => ({ key: n, label: shortName(n), slot: i }));
-    if (this.state.colorBy !== 'domain') list.push({ key: 'Other', label: 'Other', slot: -1 });
+    const list = names.filter((n) => n !== 'Other').map((n, i) => ({ key: n, label: shortName(n), slot: i }));
+    list.push({ key: 'Other', label: 'Other', slot: -1 }); // gray, in every Color-by mode
     return list;
   }
   colorFor(cat, T) {
+    if (cat === 'Other') return T.ink3;
     if (this.state.colorBy === 'domain') return T.series[DOMAIN_ORDER.indexOf(cat)] || T.ink3;
     const i = this.cats[this.state.colorBy].indexOf(cat);
     return i >= 0 ? T.series[i] : T.ink3;
@@ -738,7 +779,9 @@ class Explorer {
 
     // Points
     const focus = this.state.focus;
-    const isOther = (m) => this.state.colorBy !== 'domain' && m.cat === 'Other';
+    const isOther = (m) => m.cat === 'Other'; // gray context, drawn underneath
+    const full = densityOpacity(vis.length);
+    this.fullOpacity = full;
     for (const m of vis) { m.cat = this.catOf(m); m.color = this.colorFor(m.cat, T); }
     const sorted = [...vis].sort((a, b) => isOther(b) - isOther(a) || a.x - b.x);
     const dots = this.g.dots.selectAll('circle').data(sorted, (d) => d.id).join(
@@ -752,7 +795,7 @@ class Explorer {
       .attr('r', (d) => (d.speculative ? L.rad - 0.6 : L.rad))
       .attr('fill', (d) => (d.speculative ? T.paper : d.color))
       .attr('stroke', (d) => (d.speculative ? d.color : T.paper))
-      .attr('opacity', (d) => (!this.drawn ? 0 : focus && d.cat !== focus ? 0.12 : 1));
+      .attr('opacity', (d) => (!this.drawn ? 0 : focus && d.cat !== focus ? 0.12 : full));
 
     // Trend lines with the 90% confidence band of the fitted mean
     const fits = this.state.trend ? this.fits(vis) : [];
@@ -811,7 +854,7 @@ class Explorer {
     const maxChars = L.compact ? 18 : 26;
     const cands = labelCandidates(vis, mode, budget, r.start, DATA_END)
       .filter((m) => !focus || m.cat === focus)
-      .map((m) => ({ id: m.id, m, px: m.px, py: m.py, text: truncate(m.model, maxChars) }));
+      .map((m) => ({ id: m.id, m, px: m.px, py: m.py, text: L.compact && ANCHORS.has(m.model) ? ANCHORS.get(m.model) : truncate(m.model, maxChars) }));
     const placed = placeLabels(cands, {
       budget,
       bounds: { x0: 2, x1: L.iw + L.M.r - 2, y0: 2, y1: L.ih - 2 },
@@ -848,6 +891,12 @@ class Explorer {
     this.prev = { x, y };
     this.layoutNow = L;
     this.vis = vis;
+    // Arrow-key order: re-sorted only when the filtered set changes (range), not per render or keypress.
+    const visKey = `${this.range().from}|${vis.length}`;
+    if (visKey !== this.byDateKey) {
+      this.byDate = [...vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
+      this.byDateKey = visKey;
+    }
     this.delaunay = d3.Delaunay.from(vis, (d) => d.px, (d) => d.py);
     if (this.selected && !vis.includes(this.selected)) this.clearSelection();
     else if (this.selected) this.showTip(this.selected, { pinned: this.pinned, silent: true });
@@ -888,7 +937,7 @@ class Explorer {
     this.g.dots.selectAll('circle')
       .attr('opacity', 0)
       .transition().delay((d) => (d.px / L.iw) * 650).duration(320).ease(d3.easeCubicOut)
-      .attr('opacity', (d) => (focus && d.cat !== focus ? 0.12 : 1));
+      .attr('opacity', (d) => (focus && d.cat !== focus ? 0.12 : this.fullOpacity ?? 1));
     this.g.trend.selectAll('path').attr('opacity', 1).each(function () {
       const len = this.getTotalLength ? this.getTotalLength() : 0;
       d3.select(this).attr('stroke-dasharray', `${len} ${len}`).attr('stroke-dashoffset', len)
@@ -912,9 +961,9 @@ class Explorer {
       dot.style.background = this.colorFor(c.key, T);
       btn.append(dot, el('span', { text: c.label }), el('span', { class: 'ex-legend__n', text: int(n) }));
       btn.setAttribute('aria-describedby', this.legendHint.id);
-      btn.addEventListener('click', () => this.set({ focus: this.state.focus === c.key ? null : c.key }));
-      btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(c.key); });
-      btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(null); });
+      btn.addEventListener('click', () => this.set({ focus: this.state.focus === c.key ? null : c.key }), this.sig);
+      btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(c.key); }, this.sig);
+      btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(null); }, this.sig);
       this.legend.append(el('li', { class: `ex-legend__item${n ? '' : ' is-empty'}` }, btn));
     }
     const meta = el('li', { class: 'ex-legend__meta' });
@@ -923,7 +972,7 @@ class Explorer {
   }
 
   peek(cat) {
-    this.g.dots.selectAll('circle').interrupt().attr('opacity', (d) => (cat && d.cat !== cat ? 0.12 : 1));
+    this.g.dots.selectAll('circle').interrupt().attr('opacity', (d) => (cat && d.cat !== cat ? 0.12 : this.fullOpacity ?? 1));
   }
 
   renderReadout(fits, vis) {
@@ -961,10 +1010,10 @@ class Explorer {
       if (e.pointerType !== 'mouse' || this.pinned) return;
       const d = nearest(e, 24);
       if (d) this.showTip(d); else this.hideTip();
-    });
-    st.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.pinned) this.hideTip(); });
+    }, this.sig);
+    st.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.pinned) this.hideTip(); }, this.sig);
     let down = null;
-    st.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: e.timeStamp }; });
+    st.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: e.timeStamp }; }, this.sig);
     st.addEventListener('pointerup', (e) => {
       if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 8) { down = null; return; }
       down = null;
@@ -972,10 +1021,10 @@ class Explorer {
       const d = nearest(e, 34);
       if (d && !(this.pinned && this.selected === d)) this.showTip(d, { pinned: true });
       else this.clearSelection();
-    });
+    }, this.sig);
     st.addEventListener('keydown', (e) => {
       if (!this.vis || !this.vis.length) return;
-      const byDate = [...this.vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
+      const byDate = this.byDate; // sorted once per render, not per keypress
       let i = this.selected ? byDate.indexOf(this.selected) : -1;
       if (e.key === 'ArrowRight' || e.key === 'ArrowUp') i = Math.min(byDate.length - 1, i + 1);
       else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') i = i < 0 ? byDate.length - 1 : Math.max(0, i - 1);
@@ -985,9 +1034,9 @@ class Explorer {
       else return;
       e.preventDefault();
       this.showTip(byDate[i], { pinned: true });
-    });
-    st.addEventListener('blur', () => { if (this.pinned && !this.stage.matches(':hover')) this.clearSelection(); });
-    document.addEventListener('pointerdown', (e) => { if (this.pinned && !st.contains(e.target) && !this.tableWrap.contains(e.target)) this.clearSelection(); });
+    }, this.sig);
+    st.addEventListener('blur', () => { if (this.pinned && !this.stage.matches(':hover')) this.clearSelection(); }, this.sig);
+    document.addEventListener('pointerdown', (e) => { if (this.pinned && !st.contains(e.target) && !this.tableWrap.contains(e.target)) this.clearSelection(); }, this.sig);
   }
 
   showTip(d, { pinned = false, silent = false } = {}) {
@@ -1077,7 +1126,7 @@ class Explorer {
         this.sort = { key: c.key, dir: this.sort.key === c.key && this.sort.dir === 'descending' ? 'ascending' : 'descending' };
         this.renderTable();
         this.tableWrap.querySelector(`th[aria-sort] button`)?.focus();
-      });
+      }, this.sig);
       th.append(b);
       tr.append(th);
     }
@@ -1094,8 +1143,8 @@ class Explorer {
         el('td', { class: 'num' }, sciNode(m.compute)),
         el('td', { class: 'num', text: compact(m.parameters) }),
         el('td', { text: m.confidence }));
-      row.addEventListener('pointerenter', () => { if (this.vis.includes(m)) this.showTip(m); });
-      row.addEventListener('pointerleave', () => { if (!this.pinned) this.hideTip(); });
+      row.addEventListener('pointerenter', () => { if (this.vis.includes(m)) this.showTip(m); }, this.sig);
+      row.addEventListener('pointerleave', () => { if (!this.pinned) this.hideTip(); }, this.sig);
       tb.append(row);
     }
     table.append(tb);
@@ -1121,6 +1170,8 @@ const d3max = (arr) => arr.reduce((a, b) => (b > a ? b : a), -Infinity);
    -------------------------------------------------------------------------- */
 class TrendCards {
   constructor(root, data) {
+    this.ac = new AbortController(); // F13
+    this.sig = { signal: this.ac.signal };
     this.root = root;
     this.models = data.models;
     this.cards = [...root.querySelectorAll('[data-from]')].map((card) => {
@@ -1131,10 +1182,12 @@ class TrendCards {
     this.live = root.querySelector('[data-ex-live]') || el('p', { class: 'ex-sr', 'aria-live': 'polite' });
     if (!this.live.isConnected) root.append(this.live);
     const radios = root.querySelectorAll('[data-ex-unit] input[type="radio"]');
-    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true)));
+    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true), this.sig));
     const checked = root.querySelector('[data-ex-unit] input:checked');
     this.setUnit(checked ? checked.value : 'x', false);
   }
+  destroy() { this.ac.abort(); }
+
   setUnit(unit, animate) {
     const u = UNITS[unit];
     if (!u) return;
@@ -1177,7 +1230,7 @@ async function boot() {
   if (!figs.length && !cards.length) return;
   for (const root of cards) {
     loadData(root.dataset.src || '/data/epoch/notable_models.json')
-      .then((data) => new TrendCards(root, data))
+      .then((data) => { root.trendCards = new TrendCards(root, data); })
       .catch((err) => console.error('[epoch-explorer] trend cards:', err));
   }
   if (!figs.length) return;

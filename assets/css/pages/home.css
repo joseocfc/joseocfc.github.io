@@ -1,9 +1,8 @@
-/* Page styles: / — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+/* Page styles: / — moved from inline <style> blocks (F4).  */
 
 /* Home · page-scoped. Nothing here overrides shared component rules outside this page. */
 
-/* Stat cards read number → label → claim (content/home.md: "value | label | claim | meta"),
-   so "1" is followed by "Designer, 0 developers" and the label sits under the number. */
+/* Stat cards read number → label → claim (content/home.md: "value | label | claim | meta"); the label sits under the number. */
 .home-stats .stat-value { margin-top: 0; }
 .home-stats .stat-value + .stat-label { margin-top: var(--space-3); color: var(--ink-2); }
 
@@ -40,23 +39,24 @@
   .work-card__media .epoch-thumb__frame img { translate: -41% -27.78%; }
 }
 
-/* Project Net has no screenshots (research/other-projects.md §1). Its plate gets a quiet map texture instead
-   of an empty box: a dot grid and soft "fuzzed" location circles, the privacy idea the card describes. */
-.pn-plate {
-  background:
-    radial-gradient(circle at 22% 32%, var(--pn-zone) 0 30px, transparent 31px),
-    radial-gradient(circle at 78% 64%, var(--pn-zone) 0 40px, transparent 41px),
-    radial-gradient(circle at 66% 20%, var(--pn-zone) 0 22px, transparent 23px),
-    radial-gradient(circle at 30% 76%, var(--pn-zone) 0 26px, transparent 27px),
-    radial-gradient(circle, var(--line-strong) 1px, transparent 1.6px) 0 0 / 18px 18px,
-    var(--paper-2);
-  --pn-zone: color-mix(in srgb, var(--accent) 12%, transparent);
-}
-.work-card__media--logo.pn-plate img { width: 88px; height: 88px; border-radius: 20px; }
-
 /* Contact block on Home: keep the label column narrow enough for the location line. */
 .home-about .contact-list__value { color: var(--ink); }
 .home-about .btn-row { margin-top: var(--space-5); }
 
 /* Review round 1 (F2): second link in the bakery card, lifted above the card's stretched title link */
 .work-card__live { position: relative; z-index: 2; white-space: nowrap; }
+
+/* Round 2 hero (F28, F40): text left, product right at real size from 1100px; CTAs under the lede; stacked buttons on phones. */
+.hero__role { margin-top: var(--space-5); max-width: 36em; color: var(--ink-2); }
+@media (max-width: 599.98px) {
+  .home-hero .hero__actions { flex-direction: column; align-items: stretch; }
+  .home-hero .hero__actions .btn { justify-content: center; }
+}
+@media (min-width: 1100px) {
+  .home-hero.hero--wide { grid-template-columns: minmax(0, 1fr) minmax(560px, 1.1fr); align-items: center; }
+  .home-hero > .hero__text { grid-column: 1; grid-row: 1; }
+  .home-hero > .hero__figure { grid-column: 2; grid-row: 1; margin-top: 0; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: end; }
+  .home-hero { padding-top: var(--space-7); }
+  .home-hero .hero__title { font-size: calc(var(--fs-h1) * .8); line-height: var(--lh-h1); }
+  .home-hero .hero__figure > .media--phone { max-width: none; }
+}
