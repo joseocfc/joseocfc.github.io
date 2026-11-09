@@ -1,6 +1,6 @@
 /* ==========================================================================
    epoch-explorer.js — José Ochoa portfolio · the Epoch chart study
-   Notable AI models (Epoch AI, CC BY 4.0), redrawn for a phone.
+   Notable AI models (Epoch AI, CC BY 4.0): a dense scatter plot redrawn for a phone.
 
    ES module. D3 and JSON come from the shared loaders in charts/index.js (loadD3,
    fetchJSON); styles (.ex-*) live in assets/css/charts.css. Every colour is read
