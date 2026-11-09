@@ -133,7 +133,8 @@ function el(tag, attrs = {}, ...kids) {
     if (v == null || v === false) continue;
     if (k === 'class') n.className = v;
     else if (k === 'text') n.textContent = v;
-    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if (k === 'signal') continue;
+    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v, { signal: attrs.signal });
     else n.setAttribute(k, v === true ? '' : v);
   }
   for (const k of kids) if (k != null) n.append(k);
@@ -390,14 +391,14 @@ function placeLabels(cands, { budget, bounds, reserved, points, measure, rad, h 
 const ICON_SLIDERS = '<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 6h8M15 6h2M3 14h2M9 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="14" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 const ICON_X = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 
-function segmented(name, legendText, options, value, onChange) {
+function segmented(name, legendText, options, value, onChange, signal) {
   const fs = el('fieldset', { class: 'ex-group', 'data-group': name });
   fs.append(el('legend', { class: 'ex-group__label', text: legendText }));
   const seg = el('div', { class: 'ex-seg' });
   for (const o of options) {
     const input = el('input', { type: 'radio', name: `${name}-${uid}`, value: o.key });
     input.checked = o.key === value;
-    input.addEventListener('change', () => input.checked && onChange(o.key));
+    input.addEventListener('change', () => input.checked && onChange(o.key), { signal });
     const span = el('span');
     if (o.short && o.short !== o.label) span.append(el('span', { class: 'ex-long', text: o.label }), el('span', { class: 'ex-short', text: o.short }));
     else span.textContent = o.label;
@@ -412,6 +413,8 @@ function segmented(name, legendText, options, value, onChange) {
    -------------------------------------------------------------------------- */
 class Explorer {
   constructor(root, data, d3) {
+    this.ac = new AbortController(); // F13: one controller per instance; destroy() removes every listener
+    this.sig = { signal: this.ac.signal };
     uid += 1;
     this.uid = uid;
     this.root = root;
@@ -449,15 +452,15 @@ class Explorer {
 
     this.toolbar = el('div', { class: 'ex-toolbar', role: 'group', 'aria-label': 'Chart settings' });
     this.groups = {
-      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v })),
-      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null })),
-      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v })),
+      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v }), this.sig),
+      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null }), this.sig),
+      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v }), this.sig),
       trend: this.buildSwitch(),
     };
     this.customize = el('button', { type: 'button', class: 'ex-customize', 'aria-haspopup': 'dialog' });
     this.customize.innerHTML = ICON_SLIDERS;
     this.customize.append(el('span', { text: 'Customize' }));
-    this.customize.addEventListener('click', () => this.openSheet());
+    this.customize.addEventListener('click', () => this.openSheet(), this.sig);
     this.toolbar.append(this.groups.range, this.groups.color, this.groups.labels, this.groups.trend, this.customize);
 
     this.legend = el('ul', { class: 'ex-legend', 'aria-label': 'Legend' });
@@ -491,7 +494,7 @@ class Explorer {
     wrap.append(el('span', { class: 'ex-group__label', 'aria-hidden': 'true', text: 'Trend' }));
     const input = el('input', { type: 'checkbox', role: 'switch' });
     input.checked = this.state.trend;
-    input.addEventListener('change', () => this.set({ trend: input.checked }));
+    input.addEventListener('change', () => this.set({ trend: input.checked }), this.sig);
     wrap.append(el('label', { class: 'ex-switch' }, input, el('span', { class: 'ex-switch__track', 'aria-hidden': 'true' }), el('span', { text: 'Regression, 90% CI' })));
     return wrap;
   }
@@ -501,18 +504,18 @@ class Explorer {
     this.sheet = el('dialog', { class: 'ex-sheet', 'aria-labelledby': titleId });
     const close = el('button', { type: 'button', class: 'ex-sheet__x', 'aria-label': 'Close settings' });
     close.innerHTML = ICON_X;
-    close.addEventListener('click', () => this.sheet.close());
+    close.addEventListener('click', () => this.sheet.close(), this.sig);
     this.sheetBody = el('div', { class: 'ex-sheet__body' });
     const done = el('button', { type: 'button', class: 'ex-sheet__done', text: 'Show chart' });
-    done.addEventListener('click', () => this.sheet.close());
+    done.addEventListener('click', () => this.sheet.close(), this.sig);
     this.sheet.append(
       el('span', { class: 'ex-sheet__grip', 'aria-hidden': 'true' }),
       el('div', { class: 'ex-sheet__head' }, el('p', { class: 'ex-sheet__title', id: titleId, text: 'Customize chart' }), close),
       this.sheetBody,
       el('div', { class: 'ex-sheet__foot' }, done),
     );
-    this.sheet.addEventListener('click', (e) => { if (e.target === this.sheet) this.sheet.close(); });
-    this.sheet.addEventListener('close', () => this.customize.focus({ preventScroll: true }));
+    this.sheet.addEventListener('click', (e) => { if (e.target === this.sheet) this.sheet.close(); }, this.sig);
+    this.sheet.addEventListener('close', () => this.customize.focus({ preventScroll: true }), this.sig);
     this.root.append(this.sheet);
   }
 
@@ -553,9 +556,9 @@ class Explorer {
           btn.setAttribute('aria-expanded', String(this.tableOpen));
           btn.textContent = this.tableOpen ? 'Hide table' : 'Table';
           if (this.tableOpen) this.renderTable();
-        });
+        }, this.sig);
       } else if (action === 'download') {
-        btn.addEventListener('click', () => this.download());
+        btn.addEventListener('click', () => this.download(), this.sig);
       }
     });
   }
@@ -563,7 +566,7 @@ class Explorer {
   observe() {
     const mq = sheetMQ();
     const onMQ = () => { this.placeControls(); this.render({ animate: false }); };
-    if (mq.addEventListener) mq.addEventListener('change', onMQ); else mq.addListener(onMQ);
+    if (mq.addEventListener) mq.addEventListener('change', onMQ, this.sig); else mq.addListener(onMQ);
     let raf = 0, lastW = 0;
     this.ro = new ResizeObserver((entries) => {
       const w = Math.round(entries[0].contentRect.width);
@@ -574,11 +577,11 @@ class Explorer {
       this.roT = setTimeout(() => { raf = requestAnimationFrame(() => this.render({ animate: false })); }, 90);
     });
     this.ro.observe(this.stage);
-    document.addEventListener('themechange', () => this.render({ animate: false }));
+    document.addEventListener('themechange', () => this.render({ animate: false }), this.sig);
     new MutationObserver(() => this.render({ animate: false }))
       .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     const dark = matchMedia('(prefers-color-scheme: dark)');
-    if (dark.addEventListener) dark.addEventListener('change', () => this.render({ animate: false }));
+    if (dark.addEventListener) dark.addEventListener('change', () => this.render({ animate: false }), this.sig);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.render({ animate: false }));
     const animateIn = !reducedMotion() && 'IntersectionObserver' in window;
     this.drawn = !animateIn;
@@ -912,9 +915,9 @@ class Explorer {
       dot.style.background = this.colorFor(c.key, T);
       btn.append(dot, el('span', { text: c.label }), el('span', { class: 'ex-legend__n', text: int(n) }));
       btn.setAttribute('aria-describedby', this.legendHint.id);
-      btn.addEventListener('click', () => this.set({ focus: this.state.focus === c.key ? null : c.key }));
-      btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(c.key); });
-      btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(null); });
+      btn.addEventListener('click', () => this.set({ focus: this.state.focus === c.key ? null : c.key }), this.sig);
+      btn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(c.key); }, this.sig);
+      btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.state.focus) this.peek(null); }, this.sig);
       this.legend.append(el('li', { class: `ex-legend__item${n ? '' : ' is-empty'}` }, btn));
     }
     const meta = el('li', { class: 'ex-legend__meta' });
@@ -961,10 +964,10 @@ class Explorer {
       if (e.pointerType !== 'mouse' || this.pinned) return;
       const d = nearest(e, 24);
       if (d) this.showTip(d); else this.hideTip();
-    });
-    st.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.pinned) this.hideTip(); });
+    }, this.sig);
+    st.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !this.pinned) this.hideTip(); }, this.sig);
     let down = null;
-    st.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: e.timeStamp }; });
+    st.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: e.timeStamp }; }, this.sig);
     st.addEventListener('pointerup', (e) => {
       if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 8) { down = null; return; }
       down = null;
@@ -972,7 +975,7 @@ class Explorer {
       const d = nearest(e, 34);
       if (d && !(this.pinned && this.selected === d)) this.showTip(d, { pinned: true });
       else this.clearSelection();
-    });
+    }, this.sig);
     st.addEventListener('keydown', (e) => {
       if (!this.vis || !this.vis.length) return;
       const byDate = [...this.vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
@@ -985,9 +988,9 @@ class Explorer {
       else return;
       e.preventDefault();
       this.showTip(byDate[i], { pinned: true });
-    });
-    st.addEventListener('blur', () => { if (this.pinned && !this.stage.matches(':hover')) this.clearSelection(); });
-    document.addEventListener('pointerdown', (e) => { if (this.pinned && !st.contains(e.target) && !this.tableWrap.contains(e.target)) this.clearSelection(); });
+    }, this.sig);
+    st.addEventListener('blur', () => { if (this.pinned && !this.stage.matches(':hover')) this.clearSelection(); }, this.sig);
+    document.addEventListener('pointerdown', (e) => { if (this.pinned && !st.contains(e.target) && !this.tableWrap.contains(e.target)) this.clearSelection(); }, this.sig);
   }
 
   showTip(d, { pinned = false, silent = false } = {}) {
@@ -1077,7 +1080,7 @@ class Explorer {
         this.sort = { key: c.key, dir: this.sort.key === c.key && this.sort.dir === 'descending' ? 'ascending' : 'descending' };
         this.renderTable();
         this.tableWrap.querySelector(`th[aria-sort] button`)?.focus();
-      });
+      }, this.sig);
       th.append(b);
       tr.append(th);
     }
@@ -1094,8 +1097,8 @@ class Explorer {
         el('td', { class: 'num' }, sciNode(m.compute)),
         el('td', { class: 'num', text: compact(m.parameters) }),
         el('td', { text: m.confidence }));
-      row.addEventListener('pointerenter', () => { if (this.vis.includes(m)) this.showTip(m); });
-      row.addEventListener('pointerleave', () => { if (!this.pinned) this.hideTip(); });
+      row.addEventListener('pointerenter', () => { if (this.vis.includes(m)) this.showTip(m); }, this.sig);
+      row.addEventListener('pointerleave', () => { if (!this.pinned) this.hideTip(); }, this.sig);
       tb.append(row);
     }
     table.append(tb);
@@ -1121,6 +1124,8 @@ const d3max = (arr) => arr.reduce((a, b) => (b > a ? b : a), -Infinity);
    -------------------------------------------------------------------------- */
 class TrendCards {
   constructor(root, data) {
+    this.ac = new AbortController(); // F13
+    this.sig = { signal: this.ac.signal };
     this.root = root;
     this.models = data.models;
     this.cards = [...root.querySelectorAll('[data-from]')].map((card) => {
@@ -1131,7 +1136,7 @@ class TrendCards {
     this.live = root.querySelector('[data-ex-live]') || el('p', { class: 'ex-sr', 'aria-live': 'polite' });
     if (!this.live.isConnected) root.append(this.live);
     const radios = root.querySelectorAll('[data-ex-unit] input[type="radio"]');
-    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true)));
+    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true)), this.sig);
     const checked = root.querySelector('[data-ex-unit] input:checked');
     this.setUnit(checked ? checked.value : 'x', false);
   }

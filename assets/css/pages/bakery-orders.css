@@ -13,6 +13,15 @@
 .bk-hero .stat-claim { font-size: var(--fs-small); }
 .bk-hero .stat-grid--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (min-width: 900px) { .bk-hero .stat-grid--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* The 90-second version (F25): four labeled lines above the outcome tiles */
+.bk-summary { margin-top: clamp(var(--space-6), 4vw, var(--space-7)); max-width: 46rem; }
+.bk-summary__title { margin-bottom: var(--space-3); }
+.bk-summary__list { margin: 0; }
+.bk-summary__list > div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-3); border-top: 1px solid var(--line); }
+.bk-summary__list > div:last-child { border-bottom: 1px solid var(--line); }
+.bk-summary__list dt { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: var(--track-meta); text-transform: uppercase; color: var(--ink-meta); padding-top: .2em; }
+.bk-summary__list dd { margin: 0; color: var(--ink-2); line-height: 1.5; }
+@media (max-width: 599.98px) { .bk-summary__list > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); } }
 
 /* Desktop + phone captures side by side; overlapped on phones. */
 .bk-duo { margin-top: clamp(var(--space-7), 6vw, var(--space-8)); }

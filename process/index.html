@@ -205,6 +205,107 @@
 </ul>
 </section>
 
+<!-- Build telemetry: moved from /work/bakery-orders/ in review round 2 (F25). Figures unchanged; charts load through /assets/js/charts/index.js. -->
+<section class="prose" id="telemetry" aria-labelledby="telemetry-title">
+<h2 id="telemetry-title">Build telemetry (moved from the Bakery study)</h2>
+<p>These eight charts measure how the bakery ordering plugin was built, from commits per day to review rounds, and moved here so the Bakery case study can lead with its outcome.</p>
+  <figure class="figure reveal" data-chart="growth" data-src="/data/bakery-metrics.json" id="fig-build-growth">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 1</span> · Test suite and register over time</p>
+      <h3 class="figure-title">The rulebook and the test suite grew together</h3>
+      <p class="figure-sub">Left, assertion lines in a full test run. Right, the highest row number in the assumptions register. Same dates, separate scales.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two step charts on a shared date axis. Assertions climb from 860 in late September to 6,089 on 5 November. The register’s highest row climbs from A18 in July to A2121 on 5 November. Both rise steepest in October."></div>
+    <figcaption>Both took off in October: the register went from A218 to A2121, the suite from 1,156 to 6,089 assertions.</figcaption>
+    <footer class="figure-foot"><span>Source: git log -p on tests/cli/README.md and docs/assumptions-register.md, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <figure class="figure reveal" data-chart="loc" data-src="/data/bakery-metrics.json" id="fig-build-loc">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 2</span> · <span class="eyebrow__seg">Lines by area</span></p>
+      <h3 class="figure-title">The tests outweigh the product code</h3>
+      <p class="figure-sub">Lines in the plugin repo by area, 7 November 2026.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Horizontal bars. Tests 62,396 lines, docs 51,114, PHP modules 50,116, CSS 11,015, JavaScript 8,201."></div>
+    <figcaption>62,396 lines of tests guard 50,116 lines of PHP. The docs almost match the code, which the retro counts as a cost.</figcaption>
+    <footer class="figure-foot"><span>Source: git ls-files + wc -l, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <figure class="figure reveal" data-chart="heat" data-src="/data/bakery-metrics.json" id="fig-build-heat">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 3</span> · <span class="eyebrow__seg">When commits happened</span></p>
+      <h3 class="figure-title">Nights and Mondays</h3>
+      <p class="figure-sub">Commits by hour of day (Pacific) and by weekday, all branches.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two bar charts. By hour, the peak is the midnight hour with 203 commits, and 45% of commits fall between 10 pm and 3 am. By weekday, Monday leads with 390."></div>
+    <figcaption>45% of commits landed between 10&nbsp;pm and 3&nbsp;am: overnight agent runs, reviewed in the morning.</figcaption>
+    <footer class="figure-foot"><span>Source: git log --all, local time, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <figure class="figure reveal" data-chart="rounds" data-src="/data/bakery-metrics.json" id="fig-build-rounds">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 4</span> · <span class="eyebrow__seg">Review rounds to a pass</span></p>
+      <h3 class="figure-title">Most changes passed review in one or two rounds</h3>
+      <p class="figure-sub">Mentions of “9/10 in N rounds” across the status file and the agent records. A ticket can be mentioned more than once, so the bars overstate the number of tickets; their shape is the point.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Horizontal bars. One round 90 mentions, two rounds 69, three rounds 18, four rounds 2, five rounds 9. Scores of 10/10 appear 4 times."></div>
+    <figcaption>159 of 188 mentions are one or two rounds. Perfect scores are rare: four in the whole record.</figcaption>
+    <footer class="figure-foot"><span>Source: grep across the project log, agent records and parity ledgers, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+  <figure class="figure reveal" data-chart="issues" data-src="/data/bakery-metrics.json" id="fig-build-issues">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 5</span> · <span class="eyebrow__seg">GitHub issues, cumulative</span></p>
+      <h3 class="figure-title">69 tickets opened, 61 closed, median nine days to close</h3>
+      <p class="figure-sub">Issues opened and closed on the plugin repo, 6 August to 7 November 2026. The shaded gap is open work.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Two cumulative lines. Opened jumps by 14 on 6 August and by 19 on 26 October; closed follows behind and ends at 61 of 69."></div>
+    <figcaption>The two jumps are planning days: 14 tickets cut from the spec on 6 August, and 19 opened on 26 October, most of them the deli layer.</figcaption>
+    <footer class="figure-foot"><span>Source: gh issue list --state all, <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+
+    <figure class="figure reveal" data-chart="models" data-src="/data/bakery-metrics.json" id="fig-build-models">
+      <header>
+        <p class="eyebrow"><span class="eyebrow__seg">Build figure 6</span> · <span class="eyebrow__seg">Co-author trailers by model</span></p>
+        <h3 class="figure-title">1,482 of 1,503 commits carry a Claude co-author trailer</h3>
+        <p class="figure-sub">Co-Authored-By trailers by model, all branches.</p>
+      </header>
+      <div class="chart" role="img" aria-label="Horizontal bars. Claude Fable 5.1 1,051; Claude Opus 5.5 238; Opus 5.5 with 1M context 117; Fable 5 58; Opus 5 with 1M context 14; Opus 4.8 with 1M context 4."></div>
+      <figcaption>Fable 5.1 is on 1,051 commits. Opus 5.5 became the builder model in mid-October.</figcaption>
+      <footer class="figure-foot"><span>Source: git log --all --format='%(trailers:key=Co-Authored-By,valueonly)', <span class="nowrap">2026-11-07</span></span>
+        <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+    </figure>
+
+    <figure class="figure reveal" data-chart="types" data-src="/data/bakery-metrics.json" id="fig-build-types">
+      <header>
+        <p class="eyebrow"><span class="eyebrow__seg">Build figure 7</span> · <span class="eyebrow__seg">Commits by type</span></p>
+        <h3 class="figure-title">Almost half the commits were documentation</h3>
+        <p class="figure-sub">Conventional-commit prefixes across 1,503 commits.</p>
+      </header>
+      <div class="chart" role="img" aria-label="One stacked bar split by type. Docs 734, feat 294, fix 211, test 166, merge 45, other 37, chore 16."></div>
+      <figcaption>The 734 docs commits are the records that let a fresh session start cold. The retro lists them as waste, and it’s right.</figcaption>
+      <footer class="figure-foot"><span>Source: git log --all subject prefixes, computed <span class="nowrap">2026-11-07</span></span>
+        <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+    </figure>
+
+  <figure class="figure reveal" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-build-timeline" data-labels="6" data-labels-mobile="3">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Build figure 8</span> · <span class="eyebrow__seg">Commits per day, all branches</span></p>
+      <h3 class="figure-title">142 days from first commit to a live store</h3>
+      <p class="figure-sub">Daily commits from 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Bar chart of daily commits from June to November 2026. Summer is sparse, October is dense, the tallest bar is 307 commits on 26 October, and launch is marked on 1 November."></div>
+    <figcaption>The tallest bar is the deli build: 18 tickets in one orchestrated night, 307 commits dated 26 October.</figcaption>
+    <footer class="figure-foot"><span>Source: git log --all, computed <span class="nowrap">2026-11-07</span></span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+  </figure>
+</section>
+
 </div>
 </div>
 </div>
