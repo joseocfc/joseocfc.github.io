@@ -1,4 +1,4 @@
-/* types — what the 1,503 commits were, by conventional-commit prefix (SPEC §6.6)
+/* types — what the 1,503 commits were, by conventional-commit prefix
    data-src: /data/bakery-metrics.json → commits_by_type { docs, feat, fix, test, merge, other, chore }
    Form:     one whole split into parts → the tall segmented bar (28px, 4px corners, 2px gaps),
              ≤6 parts (the smallest tail folds into "other"), share printed inside where it fits,
@@ -8,7 +8,7 @@ import { svg, legend, measure, fadeIn, hover, clientPoint } from './kit.js';
 const NAMES = { docs: 'docs', feat: 'feat', fix: 'fix', test: 'test', merge: 'merge', other: 'other', chore: 'chore' };
 const MEANING = {
   docs: 'Specs, hand-offs, status and review records',
-  feat: 'New behaviour',
+  feat: 'New behavior',
   fix: 'Bug fixes',
   test: 'Harness checks and assertions',
   merge: 'Branch merges',

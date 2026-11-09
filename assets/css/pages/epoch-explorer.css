@@ -1,0 +1,39 @@
+/* Page styles: /work/epoch-explorer/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+
+html:not(.js) .ex-unit { display: none; }
+.ex-hero-meta { margin-top: var(--space-7); }
+.ex-rules { display: grid; gap: 0; max-width: 880px; margin-block: var(--space-6) 0; }
+.ex + .prose { margin-top: var(--space-8); }
+.ex-trend-grid + .prose { margin-top: var(--space-7); }
+.findings + .callout { margin-top: var(--space-6); }
+.ex-attrib { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-5) + 2px); border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: var(--r-control); background: var(--paper-2); }
+.ex-attrib p { margin: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
+.ex-attrib ul { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: var(--fs-micro); }
+.ex-attrib a { color: var(--accent-ink); }
+.ex-trend-grid { margin-top: 0; }
+.ex-trend-grid .stat-value { min-height: 1em; }
+.ex-grammar td, .ex-grammar th[scope="row"] { white-space: normal; min-width: 8.5rem; }
+.ex-grammar td:nth-child(3) { min-width: 15rem; }
+.ex-grammar code { font-size: .78rem; white-space: nowrap; }
+.ex-twin img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--r-media); }
+.ex-twin .ex-twin__dark { display: none; }
+:root[data-theme="dark"] .ex-twin .ex-twin__light { display: none; }
+:root[data-theme="dark"] .ex-twin .ex-twin__dark { display: block; }
+.prose > .findings { padding-left: 0; }
+@media (max-width: 639.98px) {
+  .ex-grammar-wrap { overflow: visible; }
+  .ex-grammar, .ex-grammar tbody, .ex-grammar tr, .ex-grammar th, .ex-grammar td { display: block; width: 100%; }
+  .ex-grammar thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .ex-grammar tr { padding: var(--space-4) 0; border-bottom: 1px solid var(--line); }
+  .ex-grammar tbody th[scope="row"] { padding: 0 0 var(--space-2); border: 0; font-weight: var(--fw-semi); }
+  .ex-grammar td, .ex-grammar td:nth-child(3) { min-width: 0; }
+  .ex-grammar td { position: relative; padding: 4px 0 4px 6.25rem; border: 0; }
+  .ex-grammar td::before { content: attr(data-label); position: absolute; left: 0; top: 6px; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
+  .ex-grammar code { white-space: normal; }
+  .ex-grammar caption { display: block; }
+}
+.prose .ex-next, .ex-next { counter-reset: nx; list-style: none; padding: 0; }
+.prose .ex-next > li, .ex-next > li { counter-increment: nx; position: relative; padding: var(--space-4) 0 var(--space-4) 2.75rem; border-top: 1px solid var(--line); margin: 0; }
+.ex-next > li:last-child { border-bottom: 1px solid var(--line); }
+.ex-next > li::before { content: counter(nx, decimal-leading-zero); position: absolute; left: 0; top: calc(var(--space-4) + .2em); font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--accent-ink); }
+.ex-next strong { display: block; margin-bottom: 2px; color: var(--ink); font-weight: var(--fw-semi); }

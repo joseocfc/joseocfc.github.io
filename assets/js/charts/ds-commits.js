@@ -1,4 +1,4 @@
-/* ds-commits — cfc-theme commits per day, design-system work emphasised (SPEC §6.9)
+/* ds-commits — cfc-theme commits per day, design-system work emphasised
    data-src: /data/design-system-metrics.json → commits_by_day[{date,commits}],
              design_system_commits_by_day[{date,commits}], milestones[{date,event}], commits.design_system_window
    Marks:    stacked daily bars (design-system commits in the accent, the rest of the theme in grey),

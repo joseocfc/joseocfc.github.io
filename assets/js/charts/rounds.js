@@ -1,4 +1,4 @@
-/* rounds — how many review rounds a change needed to pass 9/10 (SPEC §6.5)
+/* rounds — how many review rounds a change needed to pass 9/10
    data-src: /data/bakery-metrics.json → review_gate.mentions_in_records {"9/10 in 1 round": 90, …, "10/10": 4}
    Form:     horizontal bars in round order (ordinal, so not re-sorted), one hue; the 10/10
              count is a different measure, so it sits apart below a hairline.

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   base.css — reset, page, typography, layout primitives (lane A1 "shell")
+   base.css — reset, page, typography, layout primitives
    Reads tokens.css only. Components live in components.css.
    ========================================================================== */
 
@@ -104,7 +104,7 @@ small, .small { font-size: var(--fs-small); }
   max-width: 38em;
 }
 
-.meta, .mono-meta {
+.meta {
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   line-height: var(--lh-meta);
@@ -190,8 +190,6 @@ a:not([class]):visited { color: var(--accent-ink); }
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
-.container--wide { max-width: calc(var(--w-wide) + 2 * var(--gutter)); }
-.container--prose { max-width: calc(var(--w-prose) + 2 * var(--gutter)); }
 
 /* .prose is a flow column: its children sit at the prose measure, left-aligned to the
    container edge, while .bleed children (charts, media, tables) take the full width. */
@@ -208,7 +206,6 @@ a:not([class]):visited { color: var(--accent-ink); }
 .prose > :first-child { margin-top: 0; }
 .prose > :last-child { margin-bottom: 0; }
 .prose > .bleed, .prose > .figure, .prose > .stat-grid, .prose > .media-row { max-width: none; }
-.prose--center > * { margin-inline: auto; }
 .prose ul, .prose ol { padding-left: 1.25em; }
 .prose li + li { margin-top: .4em; }
 .prose li::marker { color: var(--ink-3); }
@@ -233,17 +230,7 @@ a:not([class]):visited { color: var(--accent-ink); }
 .section-head > * + * { margin-top: var(--space-4); }
 .section-head > .eyebrow + * { margin-top: var(--space-3); }
 .section-head .lead { margin-top: var(--space-4); }
-.section-head--split {
-  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between;
-  gap: var(--space-4) var(--space-7); max-width: none;
-}
 
-/* Generic grids */
-.grid-2, .grid-3 { display: grid; gap: var(--space-6); }
-@media (min-width: 768px) {
-  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
 .split { display: grid; gap: var(--space-6) var(--space-8); }
 @media (min-width: 900px) {
   .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
@@ -285,7 +272,7 @@ a:not([class]):visited { color: var(--accent-ink); }
 /* ---- Print ------------------------------------------------------------ */
 @media print {
   .site-header, .site-footer, .skip, .toc, .theme-toggle, .figure-actions { display: none !important; }
-  body { background: #fff; color: #000; }
+  body { background: white; color: black; }  /* print: plain keywords, outside the theme */
   .section { padding-block: 1.5rem; }
   a { color: inherit; }
 }

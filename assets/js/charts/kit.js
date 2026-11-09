@@ -1,5 +1,5 @@
 /* =============================================================================
-   charts/kit.js — shared drawing helpers for the renderers (lane A2)
+   charts/kit.js — shared drawing helpers for the renderers
    Mark specs (dataviz references): bars ≤24px with a 4px rounded data end and a square
    baseline · 2px lines · dots r≥4 with a 2px surface ring · 2px surface gap between
    touching marks · hairline, solid, recessive grid · text never wears the data colour.
@@ -133,7 +133,7 @@ export function yGridInline(g, y, ticks, { x0 = 0, x1, fmt, unit = '', halo = tr
     const yy = Math.round(y(t)) + 0.5;
     g.append('line').attr('class', 'c-grid').attr('x1', x0).attr('x2', x1).attr('y1', yy).attr('y2', yy);
     const text = fmt(t) + (t === top && unit ? ` ${unit}` : '');
-    // C1 QA: opt-in surface plate so a milestone pole at the left edge passes behind the label, not through it.
+    // opt-in surface plate so a milestone pole at the left edge passes behind the label, not through it.
     if (plate) labels.append('rect').attr('class', 'c-plate').attr('x', x0 - 2).attr('y', yy - 15).attr('width', measure(text, 'c-axis') + 6).attr('height', 13);
     labels.append('text').attr('class', `c-axis${halo ? ' c-halo' : ''}`)
       .attr('x', x0).attr('y', yy - 4)
@@ -252,15 +252,15 @@ export function hover(ctx, el, { target, count, indexAt, show, clear = () => {},
     if (i < 0) { if (active >= 0) reset(); return; }
     active = i;
     show(i, { x: e.clientX, y: e.clientY });
-  });
+  }, opt);
   node.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'mouse') return;
     const i = indexAt(e);
     if (i < 0) return reset();
     active = i;
     show(i, { x: e.clientX, y: e.clientY });
-  });
-  node.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') reset(); });
+  }, opt);
+  node.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') reset(); }, opt);
   el.addEventListener('chart:reset', reset, opt);
   ctx.keys({ count, start, show: (i) => show(i, null), clear });
 }
@@ -523,5 +523,5 @@ export function hbars(el, ctx, cfg) {
 /* ---- Small utilities ------------------------------------------------- */
 export const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 export const num = (v, dflt) => (v == null || v === '' || Number.isNaN(+v) ? dflt : +v);
-/** Staff names never appear in charts (SPEC §1): "the deli lead". */
+/** Staff names never appear in charts: "the deli lead". */
 export const scrub = (s) => (typeof s === 'string' ? s.replace(/\bKurt's\b/g, "the deli lead's").replace(/\bKurt\b/g, 'the deli lead') : s);

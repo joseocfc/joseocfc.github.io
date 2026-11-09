@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>A note for Epoch AI’s design team — José Ochoa</title>
+<meta name="description" content="Why my work fits the Designer / Senior Designer role at Epoch AI.">
+<meta name="author" content="José Ochoa">
+<link rel="canonical" href="https://joseocfc.github.io/for-epoch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="José Ochoa">
+<meta property="og:title" content="A note for Epoch AI’s design team">
+<meta property="og:description" content="Why my work fits the Designer / Senior Designer role at Epoch AI.">
+<meta property="og:url" content="https://joseocfc.github.io/for-epoch/">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og/for-epoch.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Top of the note for Epoch AI: the headline “A note for Epoch AI’s design team” and a line quoted from Epoch’s Designer / Senior Designer posting.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A note for Epoch AI’s design team">
+<meta name="twitter:description" content="Why my work fits the Designer / Senior Designer role at Epoch AI.">
+<meta name="twitter:image" content="https://joseocfc.github.io/assets/img/og/for-epoch.jpg">
+<meta name="twitter:image:alt" content="Top of the note for Epoch AI: the headline “A note for Epoch AI’s design team” and a line quoted from Epoch’s Designer / Senior Designer posting.">
+<meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
+     preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
+<link rel="preload" href="/assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/charts.css">
+<link rel="stylesheet" href="/assets/css/pages/about.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/" aria-label="José Ochoa, home">
+      <svg class="wordmark__mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 5.5v14a6.5 6.5 0 0 1-6.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="21.5" cy="19.5" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      <span class="wordmark__name">José Ochoa</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__label">Menu</span>
+      <span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        <li class="site-nav__item site-nav__item--menu">
+          <button class="site-nav__link site-nav__trigger" type="button" aria-expanded="false" aria-controls="work-menu">
+            Work
+            <svg class="site-nav__chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="site-nav__group" aria-hidden="true">Work</p>
+          <ul class="site-nav__menu" id="work-menu" aria-label="Work">
+            <li><a class="site-nav__menu-link" href="/work/bakery-orders/">
+              <span class="site-nav__menu-title">Bakery Orders</span>
+              <span class="site-nav__menu-desc">An ordering system shipped by one designer directing AI agents</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/design-system/">
+              <span class="site-nav__menu-title">Design system</span>
+              <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
+            </a></li>
+            <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
+              <span class="site-nav__menu-title">Epoch chart study</span>
+              <span class="site-nav__menu-desc">Redrawing a dense scatter plot for a phone</span>
+            </a></li>
+          </ul>
+        </li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/process/">Process</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/about/">About</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme">
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+<section class="hero container about-hero" aria-labelledby="fe-title">
+  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Unlisted</span> · <span class="eyebrow__seg">For Epoch AI</span></p>
+  <h1 class="hero__title hero__title--h1" id="fe-title">A note for Epoch AI’s design team</h1>
+  <div class="about-bio">
+    <p class="lead">This page isn’t linked from the rest of the site. It’s for the Designer / Senior Designer role on Epoch’s Product &amp; Design team, posted in May 2026.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="prose">
+    <figure class="quote">
+      <blockquote><p>“This work directly shapes how our research is understood.”</p></blockquote>
+      <figcaption>Epoch AI, Designer / Senior Designer posting</figcaption>
+    </figure>
+    
+    <section class="about-section" id="fit" aria-labelledby="fit-title">
+      <h2 id="fit-title">Where my work meets that job</h2>
+      <ul class="findings about-bring">
+        <li class="finding"><p class="finding__title">Coherent at AI speed.</p><p class="finding__text">The posting asks for work that stays true to the design system. My <a href="/work/design-system/">token contract, drift checker and hook</a> keep a site coherent while AI agents change it quickly.</p></li>
+        <li class="finding"><p class="finding__title">Both specializations.</p><p class="finding__text">The role takes product and web design or data visualization. The <a href="/work/bakery-orders/">bakery system</a> is the first: storefront, staff dashboards, printed tickets. The <a href="/work/epoch-explorer/">study of your AI Models explorer</a>, built unsolicited on your CC-BY data in D3 and matplotlib, is the second.</p></li>
+        <li class="finding"><p class="finding__title">A method I can show.</p><p class="finding__text">Specs, review gates and phone checks, and a <a href="/process/#review">public record</a> of what reviewers caught in this site and how it was fixed.</p></li>
+      </ul>
+      
+    </section>
+    <section class="about-section" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Practicalities</h2>
+      <p>I’m in Bellingham, Washington, on Pacific time, with five hours a day of overlap with US Eastern. <a href="/about/">More about me</a>, or email <a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a>.<!-- F17: José to replace with a personal address --></p>
+    </section>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__lead">
+      <p class="site-footer__name">José Ochoa</p>
+      <p class="site-footer__role">Product &amp; web design · Data visualization<br>Bellingham, WA · Pacific time</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Contact">
+      <p class="site-footer__heading">Contact</p>
+      <ul>
+        <li><a href="mailto:joseo@communityfood.coop">Email</a><!-- F17: José to replace with a personal address --></li>
+        <li><a href="https://www.linkedin.com/in/jose-antonio-ochoa">LinkedIn</a></li>
+        <li><a href="https://github.com/joseocfc">GitHub</a></li>
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-label="Site">
+      <p class="site-footer__heading">Work</p>
+      <ul>
+        <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
+        <li><a href="/work/design-system/">Design system</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch chart study</a></li>
+        <li><a href="/process/">Process</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <div class="site-footer__base">
+      <p class="site-footer__colophon">Built 2026-11 with Claude Code; every chart’s data is downloadable.</p>
+      <button class="theme-toggle theme-toggle--labelled" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="theme-toggle__text" aria-hidden="true">Theme</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/assets/js/site.js"></script>
+</body>
+</html>

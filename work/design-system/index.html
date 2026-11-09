@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
 <title>One system in both directions — José Ochoa</title>
-<meta name="description" content="A WordPress token contract mirrored to Figma variables, held in parity by a drift checker and a hook that catches AI sessions hardcoding values.">
+<meta name="description" content="A WordPress token contract mirrored to Figma variables, last confirmed in parity on 21 Aug 2026, and a hook that catches AI sessions hardcoding values.">
 <meta name="author" content="José Ochoa">
 <link rel="canonical" href="https://joseocfc.github.io/work/design-system/">
 <meta property="og:type" content="website">
@@ -13,201 +12,30 @@
 <meta property="og:title" content="One design system, in code and in Figma, checked both ways">
 <meta property="og:description" content="94 tokens, 60 Figma variables, 0 unexplained deltas. How the co-op’s theme.json, CSS and Figma library became the same object.">
 <meta property="og:url" content="https://joseocfc.github.io/work/design-system/">
-<meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og/design-system.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta property="og:image:alt" content="Top of the design-system case study: the headline “One system in both directions” and four figures: 94 contract tokens, 60 Figma variables, 0 unexplained deltas, 3 raw font sizes left.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One design system, in code and in Figma, checked both ways">
+<meta name="twitter:description" content="94 tokens, 60 Figma variables, 0 unexplained deltas. How the co-op’s theme.json, CSS and Figma library became the same object.">
+<meta name="twitter:image" content="https://joseocfc.github.io/assets/img/og/design-system.jpg">
+<meta name="twitter:image:alt" content="Top of the design-system case study: the headline “One system in both directions” and four figures: 94 contract tokens, 60 Figma variables, 0 unexplained deltas, 3 raw font sizes left.">
 <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
      preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
 <script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
-<!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
-<!-- Lane B2: styles scoped to this page (.ds-*, .nr-*, .md-*). Nothing here overrides a shared component. -->
-<style>
-/* ---- Hero ------------------------------------------------------------- */
-.ds-hero .stat-grid { margin-top: clamp(var(--space-7), 6vw, var(--space-8)); }
-.ds-hero .stat-value { font-size: clamp(3rem, 2.4rem + 2.4vw, 4.25rem); }
-.ds-hero__media { margin-top: clamp(var(--space-7), 6vw, var(--space-8)); }
-.ds-hero__media.media--plate { padding: clamp(var(--space-4), 5vw, var(--space-8)); }
-.ds-hero__media img { max-width: 760px; margin-inline: auto; }
-.ds-hero__media figcaption { max-width: 760px; margin-inline: auto; }
-
-/* ---- Inline code: token names stay whole (the longest, 28 chars, fits a 390px line) */
-.ds-code, .case-layout .prose > p code { white-space: nowrap; overflow-wrap: normal; }
-
-/* ---- Diagrams (naming rule + type modes) -------------------------------
-   One container query swaps the wide and narrow SVGs by the figure's own width. */
-.ds-diagram { container-type: inline-size; }
-.ds-diagram .ds-v--narrow { max-width: 420px; margin-inline: auto; }
-@container (min-width: 640px) { .ds-diagram .ds-v--narrow { display: none; } }
-@container (max-width: 639.98px) { .ds-diagram .ds-v--wide { display: none; } }
-.ds-diagram svg { overflow: visible; }
-.ds-diagram .d-node { fill: var(--paper); }
-.ds-diagram .nr-node--fig { stroke: color-mix(in srgb, var(--accent) 45%, var(--line-strong)); }
-.ds-diagram text { font-family: var(--font-text); fill: var(--ink); }
-.ds-diagram .nr-h { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; fill: var(--ink-meta); }
-.ds-diagram .nr-h2 { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; fill: var(--ink); font-weight: 500; }
-.ds-diagram .nr-sub { font-size: 12.5px; fill: var(--ink-2); }
-.ds-diagram .nr-m { font-family: var(--font-mono); font-size: 12px; fill: var(--ink); }
-.ds-diagram .nr-s { font-family: var(--font-mono); font-size: 10.5px; fill: var(--ink-meta); }
-.ds-diagram .nr-a { fill: var(--accent-ink); }
-.ds-diagram .nr-fig { font-weight: 500; }
-.ds-diagram .nr-strong { font-weight: 500; }
-.ds-diagram .nr-hl { fill: var(--accent-ink); font-weight: 500; }
-.ds-diagram .nr-web { font-size: 9.5px; letter-spacing: .08em; fill: var(--ink-meta); }
-.ds-diagram .nr-div { stroke: var(--line); stroke-width: 1; fill: none; }
-.ds-diagram .nr-chip { fill: var(--paper-2); stroke: var(--line-strong); stroke-width: 1; }
-.ds-diagram .nr-chev { fill: none; stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.ds-diagram .nr-join { stroke-dasharray: 4 4; }
-
-/* Modes: plot + table side by side when the figure is wide enough */
-.ds-modes__grid { display: grid; gap: var(--space-6); align-items: center; }
-.ds-modes__svg { width: 100%; max-width: 460px; }
-/* C1 QA: the table column was capped at 250/260px but the table needs ~279px, so it ran over the card border at 768.
-   The column now takes the table's own width; the plot column absorbs the difference. */
-@container (min-width: 600px) {
-  .ds-modes__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); }
-}
-@container (min-width: 760px) {
-  .ds-modes__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-7); }
-}
-.ds-diagram .md-band { fill: var(--paper); }
-.ds-diagram .md-grid { stroke: var(--line); stroke-width: 1; }
-.ds-diagram .md-axis { stroke: var(--ink-3); stroke-width: 1; }
-.ds-diagram .md-tick { font-size: 10px; }
-.ds-diagram .md-bh { font-size: 10px; fill: var(--ink); font-weight: 500; }
-.ds-diagram .md-bs { font-family: var(--font-mono); font-size: 10px; fill: var(--ink-meta); }
-.ds-diagram .md-mid.md-bh { fill: var(--ink-meta); font-weight: 400; }
-.ds-diagram .md-line { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
-.ds-diagram .md-ramp { stroke-dasharray: 3 4; stroke-width: 1.25; }
-.ds-diagram .md-line--acc { stroke: var(--accent); stroke-width: 2; }
-.ds-diagram .md-line--acc.md-ramp { stroke-width: 1.5; }
-.ds-diagram .md-dot { fill: var(--ink-3); stroke: none; }
-.ds-diagram .md-dot--acc { fill: var(--accent); stroke: var(--accent); }
-.ds-diagram .md-val { font-size: 12px; font-weight: 500; fill: var(--accent-ink); }
-.ds-modes__table table { width: 100%; }
-.ds-modes__table th[scope="row"] { font-weight: var(--fw-regular); }
-.ds-modes__table .ds-code { padding: 0; border: 0; background: none; font-size: .8125rem; color: var(--ink); }
-.ds-modes__acc td.num { color: var(--accent-ink); font-weight: var(--fw-medium); }
-.ds-diagram .ds-modes__table :is(th, td) { background: none; }
-
-/* ---- Parity pass line -------------------------------------------------- */
-.ds-pass .artefact__body { font-size: .9rem; color: var(--good); }
-
-/* ---- Change protocol (steps inside prose) ----------------------------- */
-.prose .ds-steps { padding-left: 0; border-bottom: 1px solid var(--line-strong); }
-.prose .ds-steps > li + li { margin-top: 0; }
-.ds-steps .step__title { font-size: 1.0625rem; line-height: 1.4; }
-.ds-steps .step__text { margin-top: var(--space-1); max-width: 36em; }
-
-/* ---- Before / after table --------------------------------------------- */
-.ds-table td.num { white-space: normal; }
-.ds-table .ds-note { display: block; margin-top: 2px; font-family: var(--font-text); font-size: .78rem; color: var(--ink-meta); white-space: normal; }
-.ds-table tbody th code { font-size: .8em; }
-.ds-table th.num, .ds-table td.num { width: 8.5rem; }
-.ds-table tbody th code { white-space: nowrap; }
-@media (max-width: 599.98px) {
-  .ds-table th.num, .ds-table td.num { width: auto; padding-left: var(--space-3); }
-  .ds-table tbody th code { display: inline-block; margin-bottom: 2px; }
-}
-
-/* ---- Cropped captures (tall Figma boards, live pages) ------------------ */
-.ds-crop {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  aspect-ratio: var(--crop, 4 / 3);
-  border: 1px solid var(--line);
-  border-radius: var(--r-media);
-  background: var(--paper-2);
-  color: var(--ink);
-  text-decoration: none;
-}
-.media .ds-crop img {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 600ms var(--ease-out);
-}
-.ds-crop::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 22%;
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--paper) 88%, transparent));
-  pointer-events: none;
-}
-.ds-crop__hint {
-  position: absolute;
-  right: var(--space-3);
-  bottom: var(--space-3);
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: .35em;
-  height: 26px;
-  padding: 0 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-pill);
-  background: var(--paper);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
-  letter-spacing: .04em;
-  color: var(--ink-2);
-}
-:root[data-theme="dark"] .ds-crop::after { display: none; }
-.ds-crop:hover .ds-crop__hint { color: var(--ink); border-color: var(--ink-3); }
-@media (hover: hover) { .ds-crop:hover img { transform: scale(1.01); } }
-.ds-crop:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
-
-/* ---- Figma rows: equal heights, captions aligned ----------------------- */
-.ds-row { align-items: start; }
-.ds-row .media img { aspect-ratio: auto; }
-
-/* ---- Live site: browser + phone side by side --------------------------- */
-.ds-live { display: grid; gap: var(--space-6); align-items: end; }
-.ds-live .media--browser .ds-crop { border-radius: 0 0 var(--r-media) var(--r-media); }
-.ds-live .media--phone { max-width: 240px; }
-.ds-live .media--phone .ds-crop {
-  margin: 6px;
-  border: 1px solid var(--line-strong);
-  border-radius: 26px;
-  box-shadow: 0 0 0 5px var(--paper-2), 0 0 0 6px var(--line);
-}
-.ds-live .media--phone .ds-crop::after { display: none; }
-@media (min-width: 720px) {
-  .ds-live { grid-template-columns: minmax(0, 1fr) clamp(180px, 26%, 236px); gap: var(--space-6); }
-  .ds-live .media--phone { max-width: none; }
-}
-
-/* ---- Honest-state callout ---------------------------------------------- */
-.ds-honest { font-size: .975rem; }
-.ds-honest ul { margin-top: var(--space-3); }
-.ds-honest li { color: var(--ink-2); }
-.ds-honest li + li { margin-top: var(--space-2); }
-
-/* ---- Dark mode: light Figma captures sit a step quieter on dark paper -- */
-:root[data-theme="dark"] .ds-shots img,
-:root[data-theme="dark"] .ds-hero__media img { filter: brightness(.94); }
-
-/* ---- Case nav ---------------------------------------------------------- */
-.ds-casenav { margin-top: var(--space-8); }
-</style>
+<link rel="stylesheet" href="/assets/css/pages/design-system.css">
+<!-- Styles scoped to this page (.ds-*, .nr-*, .md-*) live in pages/design-system.css. Nothing there overrides a shared component. -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -242,8 +70,8 @@
               <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
             </a></li>
             <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
-              <span class="site-nav__menu-title">Epoch explorer study</span>
-              <span class="site-nav__menu-desc">Notable AI models, redrawn for a phone</span>
+              <span class="site-nav__menu-title">Epoch chart study</span>
+              <span class="site-nav__menu-desc">Redrawing a dense scatter plot for a phone</span>
             </a></li>
           </ul>
         </li>
@@ -261,25 +89,24 @@
 
 <main id="main" tabindex="-1">
 <!-- PAGE CONTENT -->
-<!-- /work/design-system/ · lane B2 (design-system page), 2026-11-07.
-     Copy: content/design-system.md (lane A5), poured verbatim; the few changes are listed in lanes/notes/B2.md.
+<!-- /work/design-system/ · copy from content/design-system.md.
      Numbers: /data/design-system-metrics.json. The two diagrams are inline SVG drawn for this page. -->
 
-<header class="hero container ds-hero" aria-labelledby="page-title">
-  <p class="eyebrow hero__eyebrow">Case study · Community Food Co-op · Jun–Aug 2026</p>
+<header class="hero hero--split container ds-hero" aria-labelledby="page-title">
+  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Case study</span> · <span class="eyebrow__seg">Community Food Co-op</span> · <span class="eyebrow__seg">Jun–Aug 2026</span></p>
   <h1 class="hero__title hero__title--h1" id="page-title">One system in both directions</h1>
   <p class="lead hero__dek">The co-op’s website runs on a WordPress theme I designed. In summer 2026 I replaced its drifted CSS with one token contract: written once in theme.json, emitted as CSS variables, mirrored as Figma variables, and checked for drift in both directions before any design work starts.</p>
 
   <div class="stat-grid">
     <article class="stat-card">
       <p class="stat-label">Contract tokens</p>
-      <p class="stat-value"><span data-count="94">94</span></p>
+      <p class="stat-value">94</p>
       <p class="stat-claim">One source of truth: theme.json.</p>
       <footer class="stat-meta">theme.json v1.1</footer>
     </article>
     <article class="stat-card">
       <p class="stat-label">Figma variables</p>
-      <p class="stat-value"><span data-count="60">60</span></p>
+      <p class="stat-value">60</p>
       <p class="stat-claim">The other 34 are documented as deliberately not mirrored.</p>
       <footer class="stat-meta">figma-parity.md · 2026-08-21</footer>
     </article>
@@ -287,18 +114,18 @@
       <p class="stat-label">Unexplained deltas</p>
       <p class="stat-value"><span>0</span></p>
       <p class="stat-claim">Both directions. All four recorded parity runs ended in PASS.</p>
-      <footer class="stat-meta">figma-parity-check.py · 2026-08-21</footer>
+      <footer class="stat-meta">figma-parity-check.py · last run 2026-08-21</footer>
     </article>
     <article class="stat-card">
       <p class="stat-label">Raw font sizes left</p>
-      <p class="stat-value"><span data-count="3">3</span></p>
+      <p class="stat-value">3</p>
       <p class="stat-claim">In the front-end CSS, down from 66 before the cleanup.</p>
       <footer class="stat-meta">2026-06-24 → 2026-09-10</footer>
     </article>
   </div>
 
   <figure class="media media--plate ds-hero__media reveal">
-    <img src="/assets/img/figma/ds-cover-frozen-v1.0.jpg" width="1172" height="1038" decoding="async" alt="Figma cover page titled CFC Design System, with a green stamp reading Frozen v1.0, 2026-07-17, and five rule cards.">
+    <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/ds-cover-frozen-v1.0-320w.avif 320w, /assets/img/figma/ds-cover-frozen-v1.0-640w.avif 640w, /assets/img/figma/ds-cover-frozen-v1.0-800w.avif 800w, /assets/img/figma/ds-cover-frozen-v1.0-1172w.avif 1172w" sizes="(max-width: 599px) 82vw, (max-width: 1023px) 83vw, 760px"><source type="image/webp" srcset="/assets/img/figma/ds-cover-frozen-v1.0-320w.webp 320w, /assets/img/figma/ds-cover-frozen-v1.0-640w.webp 640w, /assets/img/figma/ds-cover-frozen-v1.0-800w.webp 800w, /assets/img/figma/ds-cover-frozen-v1.0-1172w.webp 1172w" sizes="(max-width: 599px) 82vw, (max-width: 1023px) 83vw, 760px"><img src="/assets/img/figma/ds-cover-frozen-v1.0.jpg" width="1172" height="1038" decoding="async" alt="Figma cover page titled CFC Design System, with a green stamp reading Frozen v1.0, 2026-07-17, and five rule cards."></picture>
     <figcaption>The Figma library’s cover: the freeze stamp, the naming rule, and what is deliberately not a variable.</figcaption>
   </figure>
 </header>
@@ -314,6 +141,7 @@
       <li><a class="toc__link" href="#parity">Parity check</a></li>
       <li><a class="toc__link" href="#hook">The hook</a></li>
       <li><a class="toc__link" href="#protocol">Change protocol</a></li>
+      <li><a class="toc__link" href="#mixes">Color mixes</a></li>
       <li><a class="toc__link" href="#freeze">The freeze</a></li>
       <li><a class="toc__link" href="#figma">In Figma</a></li>
       <li><a class="toc__link" href="#live">Live</a></li>
@@ -326,12 +154,12 @@
     <!-- The problem ------------------------------------------------------ -->
     <h2 id="problem">A decade of CSS had drifted out of any system</h2>
     <p>The theme carried what its own audit called “a decade of drifted, hardcoded, duplicated CSS”. The front end had 66 raw font-size declarations, z-index values as high as 9999999, and nine competing page widths with no shared token.</p>
-    <p>One bug sat underneath it all. WordPress core silently overrides four font-size slugs unless a theme opts out, so body text had been rendering at 20&nbsp;px instead of 16–17, and a retune did nothing for four of the six sizes.</p>
+    <p>One bug sat underneath it all. WordPress core silently overrides four font-size slugs unless a theme opts out, so body text had been rendering at 20&nbsp;px when it should have been 16–17, and a retune did nothing for four of the six sizes.</p>
 
     <!-- The decision ----------------------------------------------------- -->
     <h2 id="decision">WordPress’s own variable names became the contract</h2>
     <p>I decided against the usual second vocabulary, a <code>--brand-green</code> layer on top of WordPress. WordPress already turns theme.json into variables like <code>--wp--preset--color--primary</code>, so those emitted names are the contract, with “no parallel <code>--cfc-*</code> layer”.</p>
-    <p>The editor’s colour picker, the front-end CSS, the Figma file and the bakery plugin now speak the same strings. The cost is written down too: camelCase keys come out kebab-case, and one slug keeps its capital letter because renaming it would mean migrating saved content.</p>
+    <p>The editor’s color picker, the front-end CSS, the Figma file and the bakery plugin now speak the same strings. The cost is written down too: camelCase keys come out kebab-case, and one slug keeps its capital letter because renaming it would mean migrating saved content.</p>
 
     <figure class="diagram ds-diagram bleed reveal" id="naming-rule">
 <svg class="ds-v ds-v--wide" viewBox="0 0 800 376" role="img" aria-labelledby="nr-w-t nr-w-d" focusable="false">
@@ -341,7 +169,7 @@
 <text class="nr-h" x="0" y="12">01 · THEME.JSON</text>
 <text class="nr-sub" x="0" y="32">The source, written once</text>
 <text class="nr-h" x="222" y="12">02 · CSS VARIABLE</text>
-<text class="nr-sub" x="222" y="32">Emitted by WordPress, never typed</text>
+<text class="nr-sub" x="222" y="32">Generated by WordPress</text>
 <text class="nr-h" x="498" y="12">03 · FIGMA VARIABLE</text>
 <text class="nr-sub" x="498" y="32">Its WEB code syntax is the CSS var</text>
 <rect class="d-node" x="0.5" y="54.5" width="191" height="79" rx="8"/>
@@ -440,16 +268,16 @@
     </figure>
 
     <!-- Tokens ----------------------------------------------------------- -->
-    <h2 id="tokens">94 tokens in six families, and a quarter of them describe one button</h2>
-    <p>The contract holds 94 tokens: 10 brand colours, 6 spacing steps, 6 font sizes, 2 families and 70 custom keys. Spacing is a fixed 8&nbsp;px ladder with a deliberate gap at 12. The palette skips its sixth ordinal on purpose, because filling it would shift the mapping.</p>
+    <h2 id="tokens">94 tokens in seven families, and a quarter of them describe one button</h2>
+    <p>The contract holds 94 tokens: 10 brand colors, 6 spacing steps, 6 font sizes, 2 font families and 70 custom keys. Figure&nbsp;1 sorts them into seven families by what they set. Spacing is a fixed 8&nbsp;px ladder with a deliberate gap at 12. The palette skips its sixth ordinal on purpose, because filling it would shift the mapping.</p>
 
     <figure class="figure reveal" data-chart="tokens" data-src="/data/design-system-metrics.json" id="fig-tokens">
       <header>
-        <p class="eyebrow">Figure 1 · Contract tokens by family</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Contract tokens by family</span></p>
         <h3 class="figure-title">The button contract is a quarter of the system</h3>
-        <p class="figure-sub">The 94 tokens in theme.json v1.1, by family. Colour is drawn as two rows: brand, and semantic + neutral.</p>
+        <p class="figure-sub">The 94 tokens in theme.json v1.1, by family. Color is drawn as two rows: brand, and semantic + neutral.</p>
       </header>
-      <div class="chart" role="img" aria-label="Unit chart of the 94 contract tokens, one square per token, by family: button contract 24; radius, alpha, shadow and motion 21; semantic and neutral colour 13; structure 12; brand colour 10; type 8; spacing 6."></div>
+      <div class="chart" role="img" aria-label="Unit chart of the 94 contract tokens, one square per token, by family: button contract 24; radius, alpha, shadow and motion 21; semantic and neutral color 13; structure 12; brand color 10; type 8; spacing 6."></div>
       <figcaption>24 of 94 tokens are the button’s recipe: radius, border, padding and three minimum heights (44, 48 and 56&nbsp;px), each pointing at a system token.</figcaption>
       <footer class="figure-foot"><span>Source: theme.json at v1.1, via design-system-metrics.json, computed 2026-11-07</span>
         <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
@@ -457,7 +285,7 @@
 
     <!-- Modes ------------------------------------------------------------ -->
     <h2 id="modes">Figma modes hold the two ends of every fluid size</h2>
-    <p>Fluid type has no Figma equivalent, so the system mirrors “the endpoints, not the curve”. The Type collection has two modes: Mobile is each <code>clamp()</code> minimum and Desktop its maximum, so body text reads 16&nbsp;px in one and 17 in the other, and the largest size 36 and 75.</p>
+    <p>Fluid type has no Figma equivalent, so Figma stores only the two ends of each size. The Type collection has two modes: Mobile is each <code>clamp()</code> minimum and Desktop its maximum, so body text reads 16&nbsp;px in one and 17 in the other, and the largest size 36 and 75.</p>
 
     <figure class="diagram ds-diagram ds-modes bleed reveal" id="type-modes">
       <div class="ds-modes__grid">
@@ -481,7 +309,7 @@
 <text class="nr-h md-bh" x="322.0" y="14" text-anchor="middle">DESKTOP</text>
 <text class="md-bs" x="322.0" y="30" text-anchor="middle">clamp() max</text>
 <text class="nr-h md-bh md-mid" x="196.0" y="14" text-anchor="middle">IN BETWEEN</text>
-<text class="md-bs md-mid" x="196.0" y="30" text-anchor="middle">CSS only, not in Figma</text>
+<text class="md-bs md-mid" x="196.0" y="30" text-anchor="middle">Only in CSS</text>
 <path class="md-line" d="M36 215.0H104M288 212.5H356"/>
 <path class="md-line md-ramp" d="M104 215.0L288 212.5"/>
 <circle class="md-dot" cx="70.0" cy="215.0" r="2.25"/>
@@ -531,7 +359,7 @@
     </figure>
 
     <!-- Parity check ----------------------------------------------------- -->
-    <h2 id="parity">A checker fails when Figma and code disagree</h2>
+    <h2 id="parity">When Figma and code disagree, a checker fails</h2>
     <p>Before any design session, a 221-line Python script compares a dump of the Figma variables with theme.json. Every token must exist in Figma or be listed as not mirrored, with a reason. Every Figma variable must map back to a real token, values and alias targets must match, and the five shadow styles must exist.</p>
     <p>Any other result prints the delta and exits 1. The only passing line is this one:</p>
 
@@ -540,17 +368,16 @@
       <pre class="artefact__body"><code>PARITY PASS — zero unexplained deltas (both directions).</code></pre>
     </figure>
 
-    <p>The allowlist doubles as documentation: 34 tokens are deliberately not variables, such as the z-index ladder (“Figma has no z axis”) and transitions (“no time axis”). All four recorded runs ended in PASS; the last, on 21 August, first caught <code>radius/pill</code> drifting from 999 to 99.</p>
+    <p>The allowlist doubles as documentation: 34 tokens are deliberately not variables, such as the z-index ladder (“Figma has no z axis”) and transitions (“no time axis”). All four recorded runs ended in PASS. The last, on 21 August 2026, caught <code>radius/pill</code> drifting from 999 to 99, and the drift was fixed.</p>
+    <p>The script needs a fresh export of the Figma variables, and no run after that one is recorded. Code and Figma were in parity when last checked on 21 August 2026.</p>
 
     <!-- The hook --------------------------------------------------------- -->
     <h2 id="hook">An agent can’t hardcode a value without it surfacing</h2>
     <p>A project skill tells every Claude session to name each token by slug before writing CSS, and to end with a proof table for every raw value in its diff. A lint script with six rule families runs as a PostToolUse hook after each CSS edit, and exits 2 to put the violation, with file and line, back in the conversation.</p>
-    <p>I tested it cold on four models, with bare asks like “try a new orange, something vivid like a tangerine” and “hardcode 13px”. The skill triggered unprompted, contrast math ruled out white on orange, and a planted <code>#ff6600</code> made the hook fire.</p>
+    <p>I tested it cold on four models, with bare asks like “try a new orange, something vivid like a tangerine” and “hardcode 13px”. The skill triggered unprompted, contrast math ruled out white on orange, and a planted <code>#ff6600</code> made the hook fire. The skill does the main work, and the hook is a backstop for anything it misses.</p>
 
-    <figure class="quote reveal">
-      <blockquote><p>The hook is the backstop, not the process.</p></blockquote>
-      <figcaption><cite>.claude/skills/cfc-design-system/SKILL.md, Enforcement</cite></figcaption>
-    </figure>
+    <h3 id="this-site">This portfolio is held to the same rule</h3>
+    <p>The hook is the lint script that runs after every CSS edit and reports any hardcoded value. In this site’s first review round the agent working on CSS held the portfolio’s own stylesheets to its rule, and hex color literals outside tokens.css went from 108 to 0. The 968 lines of inline <code>&lt;style&gt;</code> CSS on 10 pages went to 0 as well; they now sit in 10 page stylesheets of 869 lines, because a sheet that had been pasted four times is kept once.</p>
 
     <!-- Change protocol -------------------------------------------------- -->
     <h2 id="protocol">Every change goes through the front door, with a version number</h2>
@@ -558,21 +385,29 @@
       <li class="step"><h3 class="step__title">A missing token stops the work.</h3><p class="step__text">Nobody hardcodes “for now”; the session proposes a name, a value and a reason.</p></li>
       <li class="step"><h3 class="step__title">theme.json changes first.</h3><p class="step__text">Then the token is mirrored to Figma in the same session and gets a dated changelog entry.</p></li>
       <li class="step"><h3 class="step__title">Adding is a minor version; renaming is major.</h3><p class="step__text">A rename also needs a migration note, and the bakery plugin’s copy of the contract updated in the same change.</p></li>
-      <li class="step"><h3 class="step__title">A reusable colour mix becomes a named token.</h3><p class="step__text">A mix hidden inside one component is a consistency leak.</p></li>
+      <li class="step"><h3 class="step__title">A reusable color mix becomes a named token.</h3><p class="step__text">I added this rule on 22 July. The next section explains why.</p></li>
     </ol>
 
+    <!-- A decision ----------------------------------------------------- -->
+    <h2 id="mixes">I made shared color mixes into tokens; left inside a component, no other page could find them</h2>
+    <p>On 22 July I set a rule for <code>color-mix()</code>: a mix that stands for a reusable design decision gets promoted to a named token in theme.json.</p>
+    <p><strong>The alternative I rejected:</strong> leaving those mixes where they were. A mix built from tokens inside one component already passed the lint.</p>
+    <p><strong>Why:</strong> a mix kept inside one component is invisible to every later page. The lint passes it, and the system leaks anyway.</p>
+    <p><strong>The result:</strong> on 24 July the events library’s local neutrals became <code>surface-mint</code>, <code>line-moss</code> and <code>text-muted</code> in contract v1.1, an additive change with no renames. theme.json changed first.</p>
+
     <figure class="quote reveal">
-      <blockquote><p>Grow the system through the front door, never silently.</p></blockquote>
+      <blockquote><p>Grow the system through the front door …</p></blockquote>
       <figcaption>José, 2026-07-22 · <cite>guides/design-system/token-system.md §7.2</cite></figcaption>
     </figure>
+    <!-- F8: José to confirm and add the decision the agents cannot know -->
 
     <!-- The freeze ------------------------------------------------------- -->
-    <h2 id="freeze">The contract froze on 17 July, and the bakery plugin was waiting for it</h2>
+    <h2 id="freeze">The bakery plugin waited for the 17 July freeze</h2>
     <p>The cleanup ran from 25 June to 21 August; 359 commits landed in that window. On 17 July an overnight run froze v1.0 at commit <code>1a43808</code>, rebuilt the Figma library to match, and shipped the checker, the skill and the hook. The next morning I ratified 13 of its 14 provisional calls and reversed one.</p>
 
     <figure class="figure reveal" data-chart="ds-commits" data-src="/data/design-system-metrics.json" id="fig-ds-commits">
       <header>
-        <p class="eyebrow">Figure 2 · Theme commits per day</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 2</span> · <span class="eyebrow__seg">Theme commits per day</span></p>
         <h3 class="figure-title">94 commits on the day the contract froze</h3>
         <p class="figure-sub">Commits per day on the theme repo, March to September 2026. The design-system window, 25 June to 21 August, is shaded; v1.0 is marked on 17 July.</p>
       </header>
@@ -596,43 +431,43 @@
       </table>
     </div>
 
-    <p>Changes were verified by diff, not by eye: 59 font-size repoints with 0 regressions, and a 64-agent visual diff of 32 surfaces at two widths that also found 0.</p>
+    <p>Every change was checked by diff: 59 font-size repoints with 0 regressions, and a 64-agent visual diff of 32 surfaces at two widths that also found 0.</p>
 
     <!-- In Figma --------------------------------------------------------- -->
     <h2 id="figma">The Figma library is the same system, drawn</h2>
     <p>The library has three collections and 60 variables, each with its code syntax set to the exact CSS variable. The Button is one component set of 7 variants, 3 sizes and 5 states, 105 in all plus a Loading switch, with its placement rules written on the canvas.</p>
-    <p>Contrast is computed, not eyeballed. White on the brand green measured 4.48:1, which “fails AA by 0.02”, so the Tertiary fill was darkened from <code>#228848</code> to <code>#1E7A40</code>.</p>
+    <p>Contrast is computed. White on the brand green measured 4.48:1, which “fails AA by 0.02”, so the Tertiary fill was darkened from <code>#228848</code> to <code>#1E7A40</code>.</p>
 
     <div class="media-row ds-row ds-shots reveal">
       <figure class="media">
-        <img src="/assets/img/figma/ds-colors.jpg" width="1688" height="1556" loading="lazy" decoding="async" alt="Figma colour section: ten brand swatches with names and hex values, a dashed empty swatch, neutrals, and status colours with contrast ratios.">
-        <figcaption>Ten brand colours with their slugs and usage, and a dashed swatch where the skipped ordinal would be.</figcaption>
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/ds-colors-480w.avif 480w, /assets/img/figma/ds-colors-800w.avif 800w, /assets/img/figma/ds-colors-960w.avif 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><source type="image/webp" srcset="/assets/img/figma/ds-colors-480w.webp 480w, /assets/img/figma/ds-colors-800w.webp 800w, /assets/img/figma/ds-colors-960w.webp 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><img src="/assets/img/figma/ds-colors.jpg" width="1688" height="1556" loading="lazy" decoding="async" alt="Figma color section: ten brand swatches with names and hex values, a dashed empty swatch, neutrals, and status colors with contrast ratios."></picture>
+        <figcaption>Ten brand colors with their slugs and usage, and a dashed swatch where the skipped ordinal would be.</figcaption>
       </figure>
       <figure class="media">
-        <img src="/assets/img/figma/ds-typography.jpg" width="1672" height="1519" loading="lazy" decoding="async" alt="Figma typography section with paired mobile and desktop type specimens and a heading role map.">
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/ds-typography-480w.avif 480w, /assets/img/figma/ds-typography-800w.avif 800w, /assets/img/figma/ds-typography-960w.avif 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><source type="image/webp" srcset="/assets/img/figma/ds-typography-480w.webp 480w, /assets/img/figma/ds-typography-800w.webp 800w, /assets/img/figma/ds-typography-960w.webp 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><img src="/assets/img/figma/ds-typography.jpg" width="1672" height="1519" loading="lazy" decoding="async" alt="Figma typography section with paired mobile and desktop type specimens and a heading role map."></picture>
         <figcaption>Type specimens in both modes, with the role map from hero to h6.</figcaption>
       </figure>
     </div>
 
     <figure class="media bleed ds-shots reveal">
       <a class="ds-crop" href="/assets/img/figma/ds-buttons-105-variants.jpg" style="--crop: 1697 / 1060">
-        <img src="/assets/img/figma/ds-buttons-105-variants.jpg" width="1697" height="3200" loading="lazy" decoding="async" alt="A large grid of button components in seven styles, three sizes and five states, with placement rules beside it.">
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/ds-buttons-105-variants-480w.avif 480w, /assets/img/figma/ds-buttons-105-variants-800w.avif 800w, /assets/img/figma/ds-buttons-105-variants-960w.avif 960w, /assets/img/figma/ds-buttons-105-variants-1440w.avif 1440w, /assets/img/figma/ds-buttons-105-variants-1697w.avif 1697w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 92vw, 854px"><source type="image/webp" srcset="/assets/img/figma/ds-buttons-105-variants-480w.webp 480w, /assets/img/figma/ds-buttons-105-variants-800w.webp 800w, /assets/img/figma/ds-buttons-105-variants-960w.webp 960w, /assets/img/figma/ds-buttons-105-variants-1440w.webp 1440w, /assets/img/figma/ds-buttons-105-variants-1697w.webp 1697w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 92vw, 854px"><img src="/assets/img/figma/ds-buttons-105-variants.jpg" width="1697" height="3200" loading="lazy" decoding="async" alt="A large grid of button components in seven styles, three sizes and five states, with placement rules beside it."></picture>
         <span class="ds-crop__hint">Full set <span aria-hidden="true">↗</span></span>
       </a>
-      <figcaption>The Button set: 7 variants × 3 sizes × 5 states, every fill, radius and padding bound to a variable.</figcaption>
+      <figcaption>The Button set: 7 variants × 3 sizes × 5 states, 105 in all, every fill, radius and padding bound to a variable. The set had six variants at the freeze; the seventh, Outline Inverse, was added on 21 August.</figcaption>
     </figure>
 
     <div class="media-row ds-row ds-shots reveal">
       <figure class="media">
         <a class="ds-crop" href="/assets/img/figma/token-board.jpg" style="--crop: 1276 / 1037">
-          <img src="/assets/img/figma/token-board.jpg" width="1497" height="3000" loading="lazy" decoding="async" alt="A tall three-column Figma board titled Token Board, with token chips under Theme, Bakery-only and Proposed.">
+          <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/token-board-480w.avif 480w, /assets/img/figma/token-board-800w.avif 800w, /assets/img/figma/token-board-960w.avif 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 414px"><source type="image/webp" srcset="/assets/img/figma/token-board-480w.webp 480w, /assets/img/figma/token-board-800w.webp 800w, /assets/img/figma/token-board-960w.webp 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 414px"><img src="/assets/img/figma/token-board.jpg" width="1497" height="3000" loading="lazy" decoding="async" alt="A tall three-column Figma board titled Token Board, with token chips under Theme, Bakery-only and Proposed."></picture>
           <span class="ds-crop__hint">Full board <span aria-hidden="true">↗</span></span>
         </a>
         <figcaption>The Token Board: every token in exactly one column, owned by the theme, the bakery plugin, or still proposed.</figcaption>
       </figure>
       <figure class="media">
-        <img src="/assets/img/figma/changelog.jpg" width="1276" height="1037" loading="lazy" decoding="async" alt="A Figma changelog frame with five dated entries for versions 1.0 and 1.1.">
-        <figcaption>The changelog: date, version, what, why and who, newest first.</figcaption>
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/figma/changelog-480w.avif 480w, /assets/img/figma/changelog-800w.avif 800w, /assets/img/figma/changelog-960w.avif 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><source type="image/webp" srcset="/assets/img/figma/changelog-480w.webp 480w, /assets/img/figma/changelog-800w.webp 800w, /assets/img/figma/changelog-960w.webp 960w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 416px"><img src="/assets/img/figma/changelog.jpg" width="1276" height="1037" loading="lazy" decoding="async" alt="A Figma changelog frame with five dated entries for versions 1.0 and 1.1."></picture>
+        <figcaption>The changelog, newest first: date, version, what, why and who. Its last entry is from 21 August 2026.</figcaption>
       </figure>
     </div>
 
@@ -643,30 +478,32 @@
     <div class="ds-live bleed reveal">
       <figure class="media media--browser">
         <a class="ds-crop" href="/assets/img/theme/live-home-1440-top.jpg" style="--crop: 1440 / 1060">
-          <img src="/assets/img/theme/live-home-1440-top.jpg" width="1440" height="1580" loading="lazy" decoding="async" alt="Community Food Co-op home page at desktop width: centred logo header, a photo hero and rounded content cards on an almond background.">
+          <picture style="display:contents"><source type="image/avif" srcset="/assets/img/theme/live-home-1440-top-480w.avif 480w, /assets/img/theme/live-home-1440-top-640w.avif 640w, /assets/img/theme/live-home-1440-top-800w.avif 800w, /assets/img/theme/live-home-1440-top-960w.avif 960w, /assets/img/theme/live-home-1440-top-1200w.avif 1200w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 64vw, 599px"><source type="image/webp" srcset="/assets/img/theme/live-home-1440-top-480w.webp 480w, /assets/img/theme/live-home-1440-top-640w.webp 640w, /assets/img/theme/live-home-1440-top-800w.webp 800w, /assets/img/theme/live-home-1440-top-960w.webp 960w, /assets/img/theme/live-home-1440-top-1200w.webp 1200w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 64vw, 599px"><img src="/assets/img/theme/live-home-1440-top.jpg" width="1440" height="1580" loading="lazy" decoding="async" alt="Community Food Co-op home page at desktop width: centered logo header, a photo hero and rounded content cards on an almond background."></picture>
           <span class="ds-crop__hint">Full capture <span aria-hidden="true">↗</span></span>
         </a>
         <figcaption>The co-op’s home page at 1440&nbsp;px, 7 November 2026.</figcaption>
       </figure>
       <figure class="media media--phone">
         <a class="ds-crop" href="/assets/img/theme/live-home-390-top.jpg" style="--crop: 390 / 844">
-          <img src="/assets/img/theme/live-home-390-top.jpg" width="390" height="2440" loading="lazy" decoding="async" alt="The co-op home page on a phone, with the header, hero and stacked cards.">
+          <picture style="display:contents"><source type="image/avif" srcset="/assets/img/theme/live-home-390-top-320w.avif 320w, /assets/img/theme/live-home-390-top-390w.avif 390w" sizes="(max-width: 599px) 58vw, (max-width: 1023px) 23vw, 209px"><source type="image/webp" srcset="/assets/img/theme/live-home-390-top-320w.webp 320w, /assets/img/theme/live-home-390-top-390w.webp 390w" sizes="(max-width: 599px) 58vw, (max-width: 1023px) 23vw, 209px"><img src="/assets/img/theme/live-home-390-top.jpg" width="390" height="2440" loading="lazy" decoding="async" alt="The co-op home page on a phone, with the header, hero and stacked cards."></picture>
         </a>
         <figcaption>The same page at 390&nbsp;px.</figcaption>
       </figure>
     </div>
 
     <!-- What's weak ------------------------------------------------------ -->
-    <h2 id="weak">The file still has loose ends, and they’re worth showing</h2>
+    <h2 id="weak">Loose ends, left visible on purpose</h2>
     <aside class="callout callout--warn ds-honest" aria-labelledby="honest-title">
       <p class="callout__title" id="honest-title">Honest state · 7 November 2026</p>
       <ul>
-        <li>The Figma cover still marks the contract “PROVISIONAL” until I ratify it, though I did on 18 July, and its stamp reads v1.0 while the contract is at v1.1.</li>
-        <li>The changelog stops on 21 August. Later work, including two bakery collections, only shows on the Token Board.</li>
-        <li>Cards and forms are a placeholder section. The library is button-complete, not component-complete.</li>
+        <li>The Figma cover still carries its freeze stamp: v1.0 and “PROVISIONAL until Jose ratifies”. I ratified the contract on 18 July, and it has been at v1.1 since 24 July.</li>
+        <li>The changelog was last updated on 21 August 2026. It leaves out the two bakery collections created on 7 August, which only show on the Token Board.</li>
+        <li>Cards and forms are still a placeholder section; of the components, only the buttons are complete.</li>
         <li>14 raw hex lines remain in the front-end CSS, and the full lint still reports one violation.</li>
       </ul>
     </aside>
+
+    <p class="lead">Want to talk about this work? <a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a><!-- F17: José to replace with a personal address --></p>
 
   </div>
 </div>
@@ -679,7 +516,7 @@
     </a>
     <a class="case-nav__link case-nav__link--next" href="/work/epoch-explorer/">
       <span class="case-nav__dir">Next</span>
-      <span class="case-nav__title">Notable AI models, redrawn for a phone</span>
+      <span class="case-nav__title">Redrawing a dense scatter plot for a phone</span>
     </a>
   </div>
 </nav>
@@ -706,7 +543,7 @@
       <ul>
         <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
         <li><a href="/work/design-system/">Design system</a></li>
-        <li><a href="/work/epoch-explorer/">Epoch explorer study</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch chart study</a></li>
         <li><a href="/process/">Process</a></li>
         <li><a href="/about/">About</a></li>
       </ul>
@@ -723,7 +560,7 @@
 </footer>
 
 <!-- PAGE SCRIPTS: this page has figures (D3 first, then the chart core). -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script type="module" src="/assets/js/charts/index.js"></script>
 <script type="module" src="/assets/js/site.js"></script>
 </body>

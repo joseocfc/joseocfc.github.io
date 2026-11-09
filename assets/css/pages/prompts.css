@@ -1,0 +1,37 @@
+/* Page styles: /process/prompts/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+
+/* /process/prompts/ — page-scoped styles. Shared tokens only. */
+.pp-hero { padding-bottom: clamp(var(--space-6), 4vw, var(--space-8)); }
+.pp-hero .meta-grid { margin-top: var(--space-7); max-width: 52rem; }
+.pp-actions { margin-top: var(--space-6); }
+.pp-body { padding-bottom: var(--section-pad); }
+.pp-index { margin-bottom: var(--space-9); }
+.pp-index td a { font-family: var(--font-mono); font-size: .8125rem; }
+.pp-index td.pp-ran { font-family: var(--font-mono); font-size: .75rem; color: var(--ink-meta); white-space: nowrap; }
+.pp-phase + .pp-phase { margin-top: var(--space-9); }
+.pp-phase > header { margin-bottom: var(--space-5); max-width: 44rem; }
+.pp-phase > header p { margin-top: var(--space-3); color: var(--ink-2); }
+.pp-list { display: grid; gap: var(--space-3); }
+.prompt { scroll-margin-top: calc(var(--header-h) + var(--space-5)); }
+.prompt > summary { flex-wrap: wrap; justify-content: flex-start; row-gap: var(--space-2); padding-block: var(--space-4); }
+.prompt > summary::after { margin-left: auto; }
+.prompt__id { min-width: 4.25rem; font-family: var(--font-mono); font-size: .8125rem; color: var(--accent-ink); }
+.prompt__label { font-weight: var(--fw-semi); margin-right: var(--space-3); }
+.prompt__tags { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.prompt > .prompt__meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: var(--fs-micro); line-height: 1.5; color: var(--ink-meta); }
+.prompt__meta b { font-weight: var(--fw-medium); color: var(--ink-2); margin-right: .35em; text-transform: uppercase; letter-spacing: .06em; }
+.prompt__text { max-height: 70vh; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; line-height: 1.6; background: var(--paper-2);
+  padding-inline: var(--space-5) max(var(--space-5), calc(100% - 112ch)); }
+.prompt--spec .prompt__text { max-height: 80vh; }
+.prompt[open] { border-color: var(--line-strong); }
+.prompt:target, .prompt.is-target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.pp-note { margin-top: var(--space-4); font-size: var(--fs-small); color: var(--ink-meta); max-width: 44rem; }
+@media (max-width: 599.98px) {
+  .prompt__id { min-width: 0; margin-right: var(--space-2); }
+  .prompt__label { flex: 1 1 60%; margin-right: 0; }
+  .prompt__tags { order: 3; flex-basis: 100%; }
+  .prompt__text { font-size: .75rem; padding-inline: var(--space-4); }
+  .pp-index .pp-sm-hide { display: none; }
+  .pp-index td.pp-ran { white-space: normal; min-width: 7.5rem; }
+}

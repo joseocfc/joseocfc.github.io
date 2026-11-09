@@ -1,0 +1,5 @@
+/* Page styles: /404.html — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+
+/* 404 · page-scoped: keep the footer below the fold on tall screens so the page doesn't look truncated. */
+.nf { min-height: calc(100svh - var(--header-h) - 12rem); display: flex; flex-direction: column; justify-content: center; }
+.nf__title { max-width: 12em; }

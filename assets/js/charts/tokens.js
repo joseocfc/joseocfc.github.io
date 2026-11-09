@@ -1,4 +1,4 @@
-/* tokens — the 94 contract tokens of the CFC design system, by family (SPEC §6.10)
+/* tokens — the 94 contract tokens of the CFC design system, by family
    data-src: /data/design-system-metrics.json → tokens { brand_colors, neutrals, semantic_status_colors,
              font_sizes, font_families, spacing_steps, radius, alpha, shadows, transitions,
              z_ladder, button_contract_tokens, custom_keys, contract_total }
@@ -14,9 +14,9 @@ function families(t) {
   const list = [
     { key: 'button', label: 'Button contract', sub: 'radius, padding, min-heights, focus', value: button },
     { key: 'shape', label: 'Radius · alpha · shadow · motion', sub: `${t.radius} · ${t.alpha} · ${t.shadows} · ${t.transitions}`, value: shape },
-    { key: 'semantic', label: 'Semantic + neutral colour', sub: `${t.semantic_status_colors} status · ${t.neutrals} neutral`, value: semantic },
+    { key: 'semantic', label: 'Semantic + neutral color', sub: `${t.semantic_status_colors} status · ${t.neutrals} neutral`, value: semantic },
     { key: 'structure', label: 'Structure', sub: `z ladder ${t.z_ladder} · layout + scalars ${structure - (t.z_ladder || 0)}`, value: structure, derived: true },
-    { key: 'brand', label: 'Brand colour', sub: 'primary … undenary (no senary)', value: t.brand_colors || 0 },
+    { key: 'brand', label: 'Brand color', sub: 'primary … undenary (no senary)', value: t.brand_colors || 0 },
     { key: 'type', label: 'Type', sub: `${t.font_sizes} fluid sizes · ${t.font_families} families`, value: (t.font_sizes || 0) + (t.font_families || 0) },
     { key: 'spacing', label: 'Spacing', sub: (t.spacing_px || []).join(' · ') + ' px', value: t.spacing_steps || 0 },
   ];

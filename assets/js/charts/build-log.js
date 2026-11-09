@@ -1,4 +1,4 @@
-/* build-log — this site's own build: one row per worker terminal (SPEC §6.11)
+/* build-log — this site's own build: one row per worker terminal
    data-src: /data/build-log.json → { generated, phases:[{id,label}], lanes:[{id,label,model,start,end|null,phase}] }
    Form:     a Gantt on a clock-time axis (Pacific). Bars float (no baseline), so both ends are
              rounded; colour = phase (series slots in order, legend). A lane with "end": null is
@@ -80,7 +80,7 @@ export default {
     rows.each(function (l, i) {
       const g = d3.select(this);
       if (mobile) {
-        // C1 QA: halo so the grid and snapshot lines pass behind the label instead of striking through it.
+        // halo so the grid and snapshot lines pass behind the label instead of striking through it.
         const t = g.append('text').attr('class', 'c-halo').attr('x', 0).attr('y', l.inline ? l.pitch / 2 + 4 : 14);
         t.append('tspan').attr('class', 'c-sub').text(l.id);
         t.append('tspan').attr('class', 'c-label').attr('dx', 8).text(l.label);
@@ -88,7 +88,7 @@ export default {
       } else {
         g.append('text').attr('class', 'c-sub').attr('x', 0).attr('y', pitch / 2 + 4).text(l.id);
         const t = g.append('text').attr('x', idW).attr('y', pitch / 2 + 4);
-        // C1 QA: the label column is capped at 38% of the width; long labels ran under the bars and grid.
+        // the label column is capped at 38% of the width; long labels ran under the bars and grid.
         // Trim the job label to fit (model always shown); the tooltip and table keep the full text.
         const room = labelW - 24 - idW - 8 - measure(l.model, 'c-sub');
         let job = l.label;
@@ -153,7 +153,7 @@ export default {
   },
 };
 
-// C1 QA: build-log.json now ships `phases` as plain strings and lists only some of the lanes' phases. Accept
+// build-log.json now ships `phases` as plain strings and lists only some of the lanes' phases. Accept
 // strings or {id,label}, keep the listed order, then append any lane phase it misses (in lane start order).
 function phaseList(data) {
   const listed = (data.phases || []).map((p) => (typeof p === 'string' ? { id: p, label: p } : p)).filter((p) => p && p.id != null);

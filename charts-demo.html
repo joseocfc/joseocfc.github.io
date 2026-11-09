@@ -3,43 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
 <title>Chart system — José Ochoa</title>
-<meta name="description" content="Every chart on the site, rendered from the real data: the figure anatomy, the palette, the table view and the download.">
+<meta name="description" content="The site’s chart system, rendered from the real data: the figure anatomy, the palette, the table view and the download.">
 <meta name="author" content="José Ochoa">
 <link rel="canonical" href="https://joseocfc.github.io/charts-demo.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="José Ochoa">
 <meta property="og:title" content="Chart system — José Ochoa">
-<meta property="og:description" content="Every chart on the site, rendered from the real data: the figure anatomy, the palette, the table view and the download.">
+<meta property="og:description" content="The site’s chart system, rendered from the real data: the figure anatomy, the palette, the table view and the download.">
 <meta property="og:url" content="https://joseocfc.github.io/charts-demo.html">
-<meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og/charts-demo.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta property="og:image:alt" content="Top of the chart-system page: the headline “Ten charts, one grammar” and a paragraph on how every figure is drawn from the real data.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chart system — José Ochoa">
+<meta name="twitter:description" content="The site’s chart system, rendered from the real data: the figure anatomy, the palette, the table view and the download.">
+<meta name="twitter:image" content="https://joseocfc.github.io/assets/img/og/charts-demo.jpg">
+<meta name="twitter:image:alt" content="Top of the chart-system page: the headline “Ten charts, one grammar” and a paragraph on how every figure is drawn from the real data.">
 <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
      preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
 <script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
+<link rel="stylesheet" href="/assets/css/pages/charts-demo.css">
 <!-- PAGE HEAD -->
 <meta name="robots" content="noindex">
 <!-- Demo only: ?theme=dark|light forces a theme (used for screenshots). -->
 <script>(function(){var m=location.search.match(/[?&]theme=(dark|light)/);if(m)document.documentElement.setAttribute('data-theme',m[1]);})();</script>
-<style>
-  .demo-h2 { margin: var(--space-3) 0 var(--space-8); }
-  .demo-stack { display: grid; gap: var(--space-9); }
-  @media (max-width: 640px) { .demo-stack { gap: var(--space-8); } }
-</style>
 
 </head>
 <body>
@@ -75,8 +74,8 @@
               <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
             </a></li>
             <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
-              <span class="site-nav__menu-title">Epoch explorer study</span>
-              <span class="site-nav__menu-desc">Notable AI models, redrawn for a phone</span>
+              <span class="site-nav__menu-title">Epoch chart study</span>
+              <span class="site-nav__menu-desc">Redrawing a dense scatter plot for a phone</span>
             </a></li>
           </ul>
         </li>
@@ -98,21 +97,21 @@
 <section class="section section--tight">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">Chart system · build lane A2</p>
-      <h1>Eleven charts, one grammar</h1>
-      <p class="lead">Every figure on this site is drawn by one small D3 library from the real data files: a validated eight-slot palette read from the design tokens, hairline grids, direct labels, a tooltip, a table and a download on every chart. This page renders all of them.</p>
+      <p class="eyebrow"><span class="eyebrow__seg">Chart system</span></p>
+      <h1>Ten charts, one grammar</h1>
+      <p class="lead">Every figure on this site is drawn by one small D3 library from the real data files: a validated eight-slot palette read from the design tokens, hairline grids, direct labels, a tooltip, a table and a download on every chart. This page renders ten of them; the eleventh, co-authorship by model, is on the <a href="/process/">process page</a>.</p>
     </header>
   </div>
 </section>
 
 <section class="section section--flush-top" aria-labelledby="h-bakery">
   <div class="container">
-    <p class="eyebrow">Case study · CFC Bakery Orders</p>
-    <h2 id="h-bakery" class="demo-h2">The build, in eight figures</h2>
+    <p class="eyebrow"><span class="eyebrow__seg">Case study</span> · <span class="eyebrow__seg">CFC Bakery Orders</span></p>
+    <h2 id="h-bakery" class="demo-h2">The build, in seven figures</h2>
     <div class="demo-stack">
 <figure class="figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
   <header>
-    <p class="eyebrow">Figure 1 · Commits per day</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Commits per day</span></p>
     <h3 class="figure-title">142 days from first commit to a live store</h3>
     <p class="figure-sub">Daily commits across all branches, with milestones. October alone holds 1,174 of 1,503.</p>
   </header>
@@ -123,18 +122,18 @@
 </figure>
 <figure class="figure" data-chart="growth" data-src="/data/bakery-metrics.json" id="fig-growth">
   <header>
-    <p class="eyebrow">Figure 2 · Harness and register</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 2</span> · <span class="eyebrow__seg">Harness and register</span></p>
     <h3 class="figure-title">The test harness and the assumptions register grew together</h3>
     <p class="figure-sub">Assertions in a full harness run, and the highest numbered assumption, on every date either was recorded.</p>
   </header>
   <div class="chart" role="img" aria-label="Two step charts on a shared time axis: harness assertions rising from 860 on September 22 to 6,089 on November 5, and the assumptions register rising from A18 on July 7 to A2121 on November 5."></div>
-  <figcaption>Every new behaviour arrived with checks and a written assumption: 860 assertions became 6,089, and the register went from A18 to A2121.</figcaption>
+  <figcaption>Every new behavior arrived with checks and a written assumption: 860 assertions became 6,089, and the register’s highest row number went from A18 to A2121. It holds 1,594 rows: the numbers skip because each ticket reserved a block and some ranges were later merged or superseded.</figcaption>
   <footer class="figure-foot"><span>Source: git log -p on tests/cli/README.md and docs/assumptions-register.md · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
 <figure class="figure" data-chart="issues" data-src="/data/bakery-metrics.json" id="fig-issues">
   <header>
-    <p class="eyebrow">Figure 3 · GitHub issues</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 3</span> · <span class="eyebrow__seg">GitHub issues</span></p>
     <h3 class="figure-title">61 of 69 tickets closed, with a median of 9 days to close</h3>
     <p class="figure-sub">Cumulative issues opened and closed, Aug 6 – Nov 7. The shaded gap between the lines is the open backlog.</p>
   </header>
@@ -145,7 +144,7 @@
 </figure>
 <figure class="figure" data-chart="heat" data-src="/data/bakery-metrics.json" id="fig-heat">
   <header>
-    <p class="eyebrow">Figure 4 · When the work happened</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 4</span> · <span class="eyebrow__seg">When the work happened</span></p>
     <h3 class="figure-title">Nights and Mondays</h3>
     <p class="figure-sub">Commits by hour of day (Pacific time) and by weekday, all 1,503 commits.</p>
   </header>
@@ -154,10 +153,9 @@
   <footer class="figure-foot"><span>Source: git log --all, author time in America/Los_Angeles · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
-<div class="figure-pair">
 <figure class="figure" data-chart="rounds" data-src="/data/bakery-metrics.json" id="fig-rounds">
   <header>
-    <p class="eyebrow">Figure 5 · The review gate</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 5</span> · <span class="eyebrow__seg">The review gate</span></p>
     <h3 class="figure-title">Most changes passed a fresh 9/10 review in one or two rounds</h3>
     <p class="figure-sub">Mentions of each outcome in the records. Below 9/10 loops back: fix, then a new reviewer, five rounds at most.</p>
   </header>
@@ -166,21 +164,9 @@
   <footer class="figure-foot"><span>Source: grep of STATUS.md, docs/agents, docs/parity; the rule from CLAUDE.md · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
-<figure class="figure" data-chart="models" data-src="/data/bakery-metrics.json" id="fig-models">
-  <header>
-    <p class="eyebrow">Figure 6 · Co-authorship</p>
-    <h3 class="figure-title">98.6% of commits name a Claude co-author</h3>
-    <p class="figure-sub">Commits by the model named in each Co-Authored-By trailer.</p>
-  </header>
-  <div class="chart" role="img" aria-label="Horizontal bars of commits by Claude model: Fable 5.1 1,051, Opus 5.5 238, Opus 5.5 with 1M context 117, Fable 5 58, Opus 5 with 1M context 14, Opus 4.8 with 1M context 4."></div>
-  <figcaption>Six model versions across five months; Fable 5.1 alone is on 1,051 commits.</figcaption>
-  <footer class="figure-foot"><span>Source: git log --all --format='%(trailers:key=Co-Authored-By,valueonly)' · computed 2026-11-07</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
-</div>
 <figure class="figure" data-chart="types" data-src="/data/bakery-metrics.json" id="fig-types">
   <header>
-    <p class="eyebrow">Figure 7 · Commit mix</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 6</span> · <span class="eyebrow__seg">Commit mix</span></p>
     <h3 class="figure-title">Nearly half of all commits are documentation</h3>
     <p class="figure-sub">1,503 commits by conventional-commit prefix.</p>
   </header>
@@ -191,7 +177,7 @@
 </figure>
 <figure class="figure" data-chart="loc" data-src="/data/bakery-metrics.json" id="fig-loc">
   <header>
-    <p class="eyebrow">Figure 8 · Lines by area</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 7</span> · <span class="eyebrow__seg">Lines by area</span></p>
     <h3 class="figure-title">More lines of tests than of plugin code</h3>
     <p class="figure-sub">Lines in tracked files, by area of the repository.</p>
   </header>
@@ -206,12 +192,12 @@
 
 <section class="section section--rule" aria-labelledby="h-ds">
   <div class="container">
-    <p class="eyebrow">Case study · CFC design system</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Case study</span> · <span class="eyebrow__seg">CFC design system</span></p>
     <h2 id="h-ds" class="demo-h2">One system in both directions</h2>
     <div class="demo-stack">
 <figure class="figure" data-chart="ds-commits" data-src="/data/design-system-metrics.json" id="fig-ds-commits">
   <header>
-    <p class="eyebrow">Figure 9 · Design-system commits</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 8</span> · <span class="eyebrow__seg">Design-system commits</span></p>
     <h3 class="figure-title">94 commits on the day the contract froze</h3>
     <p class="figure-sub">cfc-theme commits per day, Mar 4 – Sep 10, 2026. Design-system work in blue; the shaded band is the design-system window.</p>
   </header>
@@ -222,11 +208,11 @@
 </figure>
 <figure class="figure figure--prose" data-chart="tokens" data-src="/data/design-system-metrics.json" id="fig-tokens">
   <header>
-    <p class="eyebrow">Figure 10 · Token families</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 9</span> · <span class="eyebrow__seg">Token families</span></p>
     <h3 class="figure-title">94 contract tokens in seven families</h3>
     <p class="figure-sub">Every token in theme.json, one square each, a family per row.</p>
   </header>
-  <div class="chart" role="img" aria-label="Unit chart of 94 design tokens by family: button contract 24, radius alpha shadow and motion 21, semantic and neutral colour 13, structure 12, brand colour 10, type 8, spacing 6."></div>
+  <div class="chart" role="img" aria-label="Unit chart of 94 design tokens by family: button contract 24, radius alpha shadow and motion 21, semantic and neutral color 13, structure 12, brand color 10, type 8, spacing 6."></div>
   <figcaption>The button contract is the largest family: a whole component recipe written as tokens that alias other tokens.</figcaption>
   <footer class="figure-foot"><span>Source: theme.json @ v1.1; figma-parity.md, 94 tokens · 60 mirrored · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
@@ -237,12 +223,12 @@
 
 <section class="section section--rule" aria-labelledby="h-site">
   <div class="container">
-    <p class="eyebrow">Process · this site</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Process</span> · <span class="eyebrow__seg">this site</span></p>
     <h2 id="h-site" class="demo-h2">The portfolio, measured like the work</h2>
     <div class="demo-stack">
 <figure class="figure" data-chart="build-log" data-src="/data/build-log.json" id="fig-build-log">
   <header>
-    <p class="eyebrow">Figure 11 · This site</p>
+    <p class="eyebrow"><span class="eyebrow__seg">Figure 10</span> · <span class="eyebrow__seg">This site</span></p>
     <h3 class="figure-title">One night from the first research lane to a deployable site</h3>
     <p class="figure-sub">Each bar is one terminal running one lane prompt. Pacific time, Nov 7, 2026.</p>
   </header>
@@ -277,7 +263,7 @@
       <ul>
         <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
         <li><a href="/work/design-system/">Design system</a></li>
-        <li><a href="/work/epoch-explorer/">Epoch explorer study</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch chart study</a></li>
         <li><a href="/process/">Process</a></li>
         <li><a href="/about/">About</a></li>
       </ul>
@@ -293,7 +279,7 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script type="module" src="/assets/js/charts/index.js"></script>
 <script type="module" src="/assets/js/site.js"></script>
 </body>

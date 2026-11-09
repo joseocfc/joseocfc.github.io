@@ -1,4 +1,4 @@
-/* models — which Claude model is named in each commit's co-author trailer (SPEC §6.7)
+/* models — which Claude model is named in each commit's co-author trailer
    data-src: /data/bakery-metrics.json → ai_coauthorship { by_model{…}, commits_with_claude_coauthor_trailer, total_commits }
    Form:     ranked horizontal bars, one hue, value at the tip; a thin meter above for the
              share of commits that carry a trailer at all. */

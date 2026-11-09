@@ -290,6 +290,9 @@ def main():
                     ex, ey = inv.transform((cx, cy))
                     ax.plot([sx, ex], [sy, ey], color=T["ink-3"], lw=0.75, zorder=5)
                 done = True
+                axb = ax.bbox
+                print(f"label {name!r}: {'leader' if k >= len(offsets) else 'offset'}, "
+                      f"x {bb.x0 - axb.x0:.0f}..{bb.x1 - axb.x0:.0f} of axes width {axb.width:.0f} px")
                 break
             t.remove()
         count += done
@@ -317,7 +320,7 @@ def main():
                                                  facecolor=T["paper"], edgecolor=T["ink-3"], linewidth=1.0, figure=fig))
     fig.text(lx + 0.011, 0.808, "speculative estimate", fontsize=8, family=[f_mono], color=T["ink-meta"], va="center")
 
-    fig.text(L, 0.036, "Data: Epoch AI, ‘Notable AI Models’ (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/notable-ai-models.",
+    fig.text(L, 0.036, "Data: Epoch AI, ‘Notable AI Models’ (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/ai-models.",
              fontsize=7.6, family=[f_mono], color=T["ink-meta"], va="bottom")
     fig.text(L, 0.016, "Redrawn by José Ochoa with tools/epoch_chart.py (matplotlib, colours read from the site’s tokens.css). Not affiliated with Epoch AI.",
              fontsize=7.6, family=[f_mono], color=T["ink-meta"], va="bottom")

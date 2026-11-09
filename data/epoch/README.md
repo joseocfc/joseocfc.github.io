@@ -5,7 +5,7 @@
 (`tools/epoch_chart.py`).
 
 **Licence.** Data: Epoch AI, "Notable AI Models" (CC BY 4.0), downloaded 2026-11-07 from
-epoch.ai/data/notable-ai-models (file https://epoch.ai/data/notable_ai_models.csv; the source page
+epoch.ai/data/ai-models (file https://epoch.ai/data/notable_ai_models.csv; the source page
 lists it as updated 2026-11-03). Redrawn by José Ochoa; not affiliated with Epoch AI.
 Epoch's terms: "Epoch AI's data is free to use, distribute, and reproduce provided the source and
 authors are credited."

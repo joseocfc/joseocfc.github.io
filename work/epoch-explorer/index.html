@@ -3,103 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Notable AI models, redrawn for a phone — José Ochoa</title>
-<meta name="description" content="A study for Epoch AI: their Notable AI Models data rebuilt as a D3 chart that reflows at 390px, with live trend cards and a matplotlib twin.">
+<title>Redrawing a dense scatter plot for a phone — José Ochoa</title>
+<meta name="description" content="An unsolicited study of Epoch AI’s Notable AI models chart, rebuilt from their CC BY data as a D3 chart that gives the years since 2010 the full width at 390px, with live trend cards and a matplotlib twin.">
 <meta name="author" content="José Ochoa">
 <link rel="canonical" href="https://joseocfc.github.io/work/epoch-explorer/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="José Ochoa">
-<meta property="og:title" content="Notable AI models, redrawn for a phone — José Ochoa">
-<meta property="og:description" content="A study for Epoch AI: their Notable AI Models data rebuilt as a D3 chart that reflows at 390px, with live trend cards and a matplotlib twin.">
+<meta property="og:title" content="Redrawing a dense scatter plot for a phone — José Ochoa">
+<meta property="og:description" content="An unsolicited study of Epoch AI’s Notable AI models chart, rebuilt from their CC BY data as a D3 chart that gives the years since 2010 the full width at 390px, with live trend cards and a matplotlib twin.">
 <meta property="og:url" content="https://joseocfc.github.io/work/epoch-explorer/">
-<meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
+<meta property="og:image" content="https://joseocfc.github.io/assets/img/og/epoch-explorer.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta property="og:image:alt" content="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labeled 4.3 times per year, 90% CI 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Redrawing a dense scatter plot for a phone — José Ochoa">
+<meta name="twitter:description" content="An unsolicited study of Epoch AI’s Notable AI models chart, rebuilt from their CC BY data as a D3 chart that gives the years since 2010 the full width at 390px, with live trend cards and a matplotlib twin.">
+<meta name="twitter:image" content="https://joseocfc.github.io/assets/img/og/epoch-explorer.jpg">
+<meta name="twitter:image:alt" content="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labeled 4.3 times per year, 90% CI 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
 <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <!-- Theme boot: runs before first paint. Reads localStorage 'theme' ('light' | 'dark'); falls back to the OS
      preference; stamps data-theme on <html> so CSS and charts read a single source. Do not edit per page. -->
 <script>(function(){var d=document.documentElement;d.classList.add('js');try{var s=localStorage.getItem('theme');d.setAttribute('data-theme',s==='light'||s==='dark'?s:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
-<!-- Page styles for the Epoch study (lane A4). The explorer module injects its own scoped .ex-* styles. -->
-<style>
-  html:not(.js) .ex-unit { display: none; }
-  .ex-hero-meta { margin-top: var(--space-7); }
-  .ex-crop { display: grid; gap: var(--space-5); margin-block: var(--space-7); }
-  @media (min-width: 640px) { .ex-crop { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .ex-crop figure { margin: 0; padding: var(--space-5) var(--space-5) var(--space-4); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper-2); }
-  .ex-crop svg { display: block; width: 100%; max-width: 340px; height: auto; margin-inline: auto; overflow: visible; }
-  .ex-crop figcaption { margin-top: var(--space-3); font-size: var(--fs-small); line-height: 1.5; color: var(--ink-2); }
-  .ex-crop figcaption .eyebrow { margin-bottom: 4px; }
-  .ex-crop .ex-phone { fill: var(--paper); stroke: var(--line-strong); stroke-width: 1.25; }
-  .ex-crop .ex-notch { fill: var(--line-strong); }
-  .ex-crop .ex-screen { fill: var(--paper); }
-  .ex-crop .ex-ghost { opacity: .32; }
-  .ex-crop .ex-ghost-frame { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
-  .ex-crop .ex-d { stroke: var(--paper); stroke-width: .8; }
-  .ex-crop .ex-d1 { fill: var(--series-1); } .ex-crop .ex-d2 { fill: var(--series-2); } .ex-crop .ex-d3 { fill: var(--series-3); }
-  .ex-crop .ex-pill { fill: var(--paper-2); stroke: var(--line-strong); stroke-width: .75; }
-  .ex-crop .ex-pill--on { fill: var(--ink); stroke: var(--ink); }
-  .ex-crop .ex-pill--on + text { fill: var(--paper); }
-  .ex-crop .ex-edge { stroke: var(--accent); stroke-width: 1.5; }
-  .ex-crop .ex-gridl { stroke: var(--grid); stroke-width: .75; }
-  .ex-crop .ex-fitl { stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
-  .ex-crop .ex-tiny { font-size: 8.5px; font-weight: 600; }
-  .ex-crop .ex-tiny2 { font-size: 6.5px; letter-spacing: 0; }
-  .ex-crop .ex-halo { paint-order: stroke; stroke: var(--paper); stroke-width: 3px; font-weight: 500; font-size: 7.5px; }
-  .ex-crop .d-meta { font-size: 10px; }
-  /* C1 QA: these schematics use the shell's .d-* classes outside .diagram, so they had no fill/stroke
-     (text defaulted to black: invisible in dark; the axis line had no stroke). Same paint as .diagram. */
-  .ex-crop .d-label { fill: var(--ink); }
-  .ex-crop .d-meta { fill: var(--ink-meta); }
-  .ex-crop .d-edge { fill: none; stroke: var(--ink-3); stroke-width: 1; }
-  .ex-crop .d-meta.ex-tiny2 { font-size: 6.5px; } /* C1 QA: the .d-meta rule above overrode .ex-tiny2, so pill labels overflowed their pills */
-  .ex-rules { display: grid; gap: 0; max-width: 880px; margin-block: var(--space-6) 0; }
-  .ex + .prose { margin-top: var(--space-8); }
-  .ex-trend-grid + .prose { margin-top: var(--space-7); }
-  .ex-twin + .prose { margin-top: var(--space-5); }
-  .findings + .callout { margin-top: var(--space-6); }
-  .ex-attrib { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-5) + 2px); border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: var(--r-control); background: var(--paper-2); }
-  .ex-attrib p { margin: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
-  .ex-attrib ul { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: var(--fs-micro); }
-  .ex-attrib a { color: var(--accent-ink); }
-  .ex-trend-grid { margin-top: 0; }
-  .ex-trend-grid .stat-value { min-height: 1em; }
-  .ex-grammar td, .ex-grammar th[scope="row"] { white-space: normal; min-width: 8.5rem; }
-  .ex-grammar td:nth-child(3) { min-width: 15rem; }
-  .ex-grammar code { font-size: .78rem; white-space: nowrap; }
-  .ex-code pre { max-height: 34rem; overflow: auto; margin: 0; padding: var(--space-4) var(--space-5); font-size: .78rem; line-height: 1.6; tab-size: 4; }
-  .ex-twin img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--r-media); }
-  .ex-twin .ex-twin__dark { display: none; }
-  :root[data-theme="dark"] .ex-twin .ex-twin__light { display: none; }
-  :root[data-theme="dark"] .ex-twin .ex-twin__dark { display: block; }
-  .prose > .findings { padding-left: 0; }
-  @media (max-width: 639.98px) {
-    .ex-grammar-wrap { overflow: visible; }
-    .ex-grammar, .ex-grammar tbody, .ex-grammar tr, .ex-grammar th, .ex-grammar td { display: block; width: 100%; }
-    .ex-grammar thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-    .ex-grammar tr { padding: var(--space-4) 0; border-bottom: 1px solid var(--line); }
-    .ex-grammar tbody th[scope="row"] { padding: 0 0 var(--space-2); border: 0; font-weight: var(--fw-semi); }
-    .ex-grammar td { position: relative; min-width: 0 !important; padding: 4px 0 4px 6.25rem; border: 0; }
-    .ex-grammar td::before { content: attr(data-label); position: absolute; left: 0; top: 6px; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
-    .ex-grammar code { white-space: normal; }
-    .ex-grammar caption { display: block; }
-  }
-  .ex-next { counter-reset: nx; list-style: none; padding: 0 !important; }
-  .ex-next > li { counter-increment: nx; position: relative; padding: var(--space-4) 0 var(--space-4) 2.75rem; border-top: 1px solid var(--line); margin: 0 !important; }
-  .ex-next > li:last-child { border-bottom: 1px solid var(--line); }
-  .ex-next > li::before { content: counter(nx, decimal-leading-zero); position: absolute; left: 0; top: calc(var(--space-4) + .2em); font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--accent-ink); }
-  .ex-next strong { display: block; margin-bottom: 2px; color: var(--ink); font-weight: var(--fw-semi); }
-</style>
+<link rel="stylesheet" href="/assets/css/pages/epoch-explorer.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -134,8 +69,8 @@
               <span class="site-nav__menu-desc">One system in both directions: code and Figma in parity</span>
             </a></li>
             <li><a class="site-nav__menu-link" href="/work/epoch-explorer/">
-              <span class="site-nav__menu-title">Epoch explorer study</span>
-              <span class="site-nav__menu-desc">Notable AI models, redrawn for a phone</span>
+              <span class="site-nav__menu-title">Epoch chart study</span>
+              <span class="site-nav__menu-desc">Redrawing a dense scatter plot for a phone</span>
             </a></li>
           </ul>
         </li>
@@ -153,19 +88,19 @@
 
 <main id="main" tabindex="-1">
 <!-- PAGE CONTENT -->
-<!-- /work/epoch-explorer/ · lane A4 (epoch). Numbers on this page are computed from /data/epoch/notable_models.json;
-     the trend cards and chart recompute them live. Notes and computed values: lanes/notes/A4.md. -->
+<!-- /work/epoch-explorer/ · Numbers on this page are computed from /data/epoch/notable_models.json;
+     the trend cards and chart recompute them live. -->
 
-<header class="hero container" aria-labelledby="page-title">
-  <p class="eyebrow hero__eyebrow">Study · Epoch AI data · November 2026</p>
-  <h1 class="hero__title hero__title--h1" id="page-title">Notable AI models, redrawn for a phone.</h1>
-  <p class="lead hero__dek">Epoch’s AI Models explorer is excellent on a laptop and crops on a phone. I rebuilt the core chart from their CC-BY dataset to show how I’d approach it.</p>
+<header class="hero hero--split container" aria-labelledby="page-title">
+  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Unsolicited study</span> · <span class="eyebrow__seg">Epoch AI data</span> · <span class="eyebrow__seg">November 2026</span></p>
+  <h1 class="hero__title hero__title--h1" id="page-title">Redrawing a dense scatter plot for a phone</h1>
+  <p class="lead hero__dek">Epoch’s Notable AI models chart fits on a phone screen. The years since 2010 hold about 90% of its dots and get about a quarter of its width. This is an unsolicited study: Epoch did not commission it. I rebuilt the core chart from their CC BY dataset to show how I would give those years room.</p>
   <dl class="meta-grid ex-hero-meta">
     <div><dt>Data</dt><dd>Epoch AI, Notable AI Models (CC BY 4.0)</dd></div>
     <div><dt>Rows used</dt><dd>543 of 1,092: every model with a training-compute estimate</dd></div>
     <div><dt>Built with</dt><dd>D3 v7, matplotlib, this site’s tokens</dd></div>
     <div><dt>Scope</dt><dd>1 chart, 3 trend cards, 1 static twin</dd></div>
-    <div><dt>Observed</dt><dd>7 November 2026</dd></div>
+    <div><dt>Observed</dt><dd>7 and 8 November 2026</dd></div>
   </dl>
 </header>
 
@@ -173,84 +108,55 @@
 <section class="section section--rule" id="looked" aria-labelledby="looked-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">01 · What I looked at</p>
-      <h2 id="looked-title">Five observations from 7 November 2026</h2>
-      <p class="lead">I spent an evening with Epoch’s AI Models explorer, Trends dashboard and Data hub at 1440 and 390 pixels wide, in headless Chrome. The chart gets the hard things right: dense data, uncertainty on the page, provenance on the figure. These notes are about what happens around it.</p>
+      <p class="eyebrow"><span class="eyebrow__seg">01</span> · <span class="eyebrow__seg">What I looked at</span></p>
+      <h2 id="looked-title">On a phone, 90% of the dots share a quarter of the plot</h2>
+      <p class="lead">On 7 November 2026 I spent an evening with Epoch’s AI Models explorer, Trends dashboard and Data hub at 1440 and 390 pixels wide. On 8 November I tested the chart again with Chrome DevTools Protocol device emulation at 390×844 (3× pixel ratio, iPhone user agent) and at 1440×900, and measured what it draws. The chart gets the hard things right: dense data, uncertainty on the page, provenance on the figure. These notes are about density and the pages around it.</p>
     </header>
 
-    <div class="ex-crop">
-      <figure>
-        <svg viewBox="0 0 300 300" role="img" aria-labelledby="crop-a-t" focusable="false">
-<title id="crop-a-t">Schematic: the desktop chart drawn at full width inside a 390-pixel phone; the plot continues past the right edge of the screen, so its axis ends near 2010.</title>
-<defs><clipPath id="crop-a-clip"><rect x="26" y="14" width="138" height="272" rx="16"/></clipPath></defs>
-<rect class="d-node ex-phone" x="20" y="8" width="150" height="284" rx="22"/><rect class="ex-notch" x="77.0" y="16" width="36" height="6" rx="3"/>
-<g class="ex-ghost">
-<rect class="ex-ghost-frame" x="30" y="70" width="214" height="194" rx="4"/>
-<g><circle class="ex-d ex-d1" cx="86.3" cy="205.1" r="2.6"/><circle class="ex-d ex-d1" cx="163.5" cy="173.7" r="2.6"/><circle class="ex-d ex-d1" cx="92.8" cy="201.0" r="2.6"/><circle class="ex-d ex-d2" cx="49.3" cy="221.7" r="2.6"/><circle class="ex-d ex-d3" cx="46.8" cy="219.8" r="2.6"/><circle class="ex-d ex-d1" cx="55.2" cy="218.6" r="2.6"/><circle class="ex-d ex-d3" cx="133.9" cy="194.0" r="2.6"/><circle class="ex-d ex-d1" cx="97.6" cy="207.0" r="2.6"/><circle class="ex-d ex-d1" cx="43.2" cy="223.4" r="2.6"/><circle class="ex-d ex-d3" cx="119.9" cy="201.4" r="2.6"/><circle class="ex-d ex-d3" cx="83.9" cy="209.6" r="2.6"/><circle class="ex-d ex-d1" cx="124.7" cy="199.2" r="2.6"/><circle class="ex-d ex-d1" cx="93.8" cy="209.5" r="2.6"/><circle class="ex-d ex-d2" cx="132.1" cy="193.5" r="2.6"/><circle class="ex-d ex-d3" cx="141.6" cy="194.0" r="2.6"/><circle class="ex-d ex-d2" cx="179.4" cy="172.5" r="2.6"/><circle class="ex-d ex-d1" cx="212.7" cy="128.6" r="2.6"/><circle class="ex-d ex-d1" cx="201.5" cy="159.4" r="2.6"/><circle class="ex-d ex-d1" cx="221.7" cy="110.6" r="2.6"/><circle class="ex-d ex-d1" cx="224.8" cy="125.6" r="2.6"/><circle class="ex-d ex-d1" cx="203.7" cy="156.3" r="2.6"/><circle class="ex-d ex-d2" cx="235.5" cy="94.9" r="2.6"/><circle class="ex-d ex-d3" cx="198.4" cy="158.1" r="2.6"/><circle class="ex-d ex-d1" cx="230.9" cy="120.2" r="2.6"/><circle class="ex-d ex-d2" cx="214.4" cy="135.5" r="2.6"/><circle class="ex-d ex-d1" cx="200.6" cy="140.3" r="2.6"/><circle class="ex-d ex-d1" cx="235.9" cy="113.4" r="2.6"/><circle class="ex-d ex-d1" cx="229.0" cy="108.5" r="2.6"/><circle class="ex-d ex-d1" cx="226.1" cy="98.8" r="2.6"/><circle class="ex-d ex-d3" cx="228.5" cy="111.8" r="2.6"/><circle class="ex-d ex-d3" cx="214.7" cy="122.1" r="2.6"/><circle class="ex-d ex-d1" cx="203.6" cy="147.0" r="2.6"/><circle class="ex-d ex-d2" cx="208.9" cy="140.3" r="2.6"/><circle class="ex-d ex-d2" cx="216.5" cy="113.7" r="2.6"/><circle class="ex-d ex-d1" cx="201.4" cy="157.1" r="2.6"/><circle class="ex-d ex-d3" cx="231.9" cy="103.3" r="2.6"/><circle class="ex-d ex-d2" cx="211.7" cy="140.1" r="2.6"/><circle class="ex-d ex-d1" cx="236.3" cy="96.8" r="2.6"/><circle class="ex-d ex-d1" cx="201.5" cy="139.8" r="2.6"/><circle class="ex-d ex-d3" cx="220.2" cy="112.2" r="2.6"/><circle class="ex-d ex-d3" cx="207.2" cy="140.4" r="2.6"/><circle class="ex-d ex-d3" cx="215.6" cy="123.6" r="2.6"/><circle class="ex-d ex-d3" cx="213.5" cy="119.4" r="2.6"/><circle class="ex-d ex-d3" cx="226.4" cy="102.2" r="2.6"/><circle class="ex-d ex-d3" cx="199.6" cy="137.9" r="2.6"/><circle class="ex-d ex-d2" cx="231.2" cy="116.1" r="2.6"/><circle class="ex-d ex-d2" cx="216.8" cy="134.1" r="2.6"/><circle class="ex-d ex-d1" cx="200.1" cy="142.9" r="2.6"/><circle class="ex-d ex-d3" cx="237.1" cy="103.4" r="2.6"/><circle class="ex-d ex-d1" cx="199.5" cy="148.3" r="2.6"/><circle class="ex-d ex-d3" cx="223.3" cy="137.9" r="2.6"/><circle class="ex-d ex-d1" cx="197.2" cy="157.3" r="2.6"/><circle class="ex-d ex-d1" cx="224.9" cy="112.0" r="2.6"/><circle class="ex-d ex-d2" cx="224.5" cy="111.3" r="2.6"/><circle class="ex-d ex-d2" cx="204.0" cy="128.4" r="2.6"/><circle class="ex-d ex-d1" cx="220.0" cy="143.7" r="2.6"/><circle class="ex-d ex-d1" cx="201.7" cy="140.6" r="2.6"/><circle class="ex-d ex-d3" cx="220.0" cy="117.9" r="2.6"/><circle class="ex-d ex-d3" cx="206.1" cy="120.7" r="2.6"/><circle class="ex-d ex-d3" cx="215.3" cy="125.6" r="2.6"/><circle class="ex-d ex-d3" cx="222.4" cy="109.1" r="2.6"/><circle class="ex-d ex-d3" cx="233.3" cy="103.0" r="2.6"/><circle class="ex-d ex-d1" cx="232.7" cy="123.5" r="2.6"/><circle class="ex-d ex-d3" cx="230.3" cy="110.7" r="2.6"/><circle class="ex-d ex-d3" cx="222.3" cy="131.1" r="2.6"/><circle class="ex-d ex-d1" cx="231.6" cy="107.1" r="2.6"/><circle class="ex-d ex-d1" cx="231.5" cy="101.5" r="2.6"/><circle class="ex-d ex-d2" cx="208.1" cy="150.7" r="2.6"/><circle class="ex-d ex-d1" cx="215.1" cy="127.0" r="2.6"/><circle class="ex-d ex-d1" cx="219.7" cy="122.4" r="2.6"/><circle class="ex-d ex-d3" cx="227.7" cy="103.4" r="2.6"/><circle class="ex-d ex-d1" cx="237.2" cy="101.9" r="2.6"/><circle class="ex-d ex-d1" cx="201.4" cy="139.6" r="2.6"/><circle class="ex-d ex-d3" cx="208.3" cy="132.4" r="2.6"/><circle class="ex-d ex-d3" cx="237.1" cy="100.0" r="2.6"/><circle class="ex-d ex-d3" cx="214.6" cy="129.9" r="2.6"/></g><line class="d-edge" x1="36" x2="236" y1="238" y2="238"/><text class="d-meta" x="236.0" y="252" text-anchor="middle">2026</text>
-</g>
-<g clip-path="url(#crop-a-clip)">
-<rect x="26" y="14" width="138" height="272" class="ex-screen"/>
-<text class="d-label ex-tiny" x="36" y="44">AI Models</text>
-<rect class="ex-pill" x="36" y="52" width="74" height="14" rx="7"/><text class="d-meta ex-tiny2" x="73" y="62" text-anchor="middle">Customize graph</text>
-<g><circle class="ex-d ex-d1" cx="86.3" cy="205.1" r="2.6"/><circle class="ex-d ex-d1" cx="163.5" cy="173.7" r="2.6"/><circle class="ex-d ex-d1" cx="92.8" cy="201.0" r="2.6"/><circle class="ex-d ex-d2" cx="49.3" cy="221.7" r="2.6"/><circle class="ex-d ex-d3" cx="46.8" cy="219.8" r="2.6"/><circle class="ex-d ex-d1" cx="55.2" cy="218.6" r="2.6"/><circle class="ex-d ex-d3" cx="133.9" cy="194.0" r="2.6"/><circle class="ex-d ex-d1" cx="97.6" cy="207.0" r="2.6"/><circle class="ex-d ex-d1" cx="43.2" cy="223.4" r="2.6"/><circle class="ex-d ex-d3" cx="119.9" cy="201.4" r="2.6"/><circle class="ex-d ex-d3" cx="83.9" cy="209.6" r="2.6"/><circle class="ex-d ex-d1" cx="124.7" cy="199.2" r="2.6"/><circle class="ex-d ex-d1" cx="93.8" cy="209.5" r="2.6"/><circle class="ex-d ex-d2" cx="132.1" cy="193.5" r="2.6"/><circle class="ex-d ex-d3" cx="141.6" cy="194.0" r="2.6"/><circle class="ex-d ex-d2" cx="179.4" cy="172.5" r="2.6"/><circle class="ex-d ex-d1" cx="212.7" cy="128.6" r="2.6"/><circle class="ex-d ex-d1" cx="201.5" cy="159.4" r="2.6"/><circle class="ex-d ex-d1" cx="221.7" cy="110.6" r="2.6"/><circle class="ex-d ex-d1" cx="224.8" cy="125.6" r="2.6"/><circle class="ex-d ex-d1" cx="203.7" cy="156.3" r="2.6"/><circle class="ex-d ex-d2" cx="235.5" cy="94.9" r="2.6"/><circle class="ex-d ex-d3" cx="198.4" cy="158.1" r="2.6"/><circle class="ex-d ex-d1" cx="230.9" cy="120.2" r="2.6"/><circle class="ex-d ex-d2" cx="214.4" cy="135.5" r="2.6"/><circle class="ex-d ex-d1" cx="200.6" cy="140.3" r="2.6"/><circle class="ex-d ex-d1" cx="235.9" cy="113.4" r="2.6"/><circle class="ex-d ex-d1" cx="229.0" cy="108.5" r="2.6"/><circle class="ex-d ex-d1" cx="226.1" cy="98.8" r="2.6"/><circle class="ex-d ex-d3" cx="228.5" cy="111.8" r="2.6"/><circle class="ex-d ex-d3" cx="214.7" cy="122.1" r="2.6"/><circle class="ex-d ex-d1" cx="203.6" cy="147.0" r="2.6"/><circle class="ex-d ex-d2" cx="208.9" cy="140.3" r="2.6"/><circle class="ex-d ex-d2" cx="216.5" cy="113.7" r="2.6"/><circle class="ex-d ex-d1" cx="201.4" cy="157.1" r="2.6"/><circle class="ex-d ex-d3" cx="231.9" cy="103.3" r="2.6"/><circle class="ex-d ex-d2" cx="211.7" cy="140.1" r="2.6"/><circle class="ex-d ex-d1" cx="236.3" cy="96.8" r="2.6"/><circle class="ex-d ex-d1" cx="201.5" cy="139.8" r="2.6"/><circle class="ex-d ex-d3" cx="220.2" cy="112.2" r="2.6"/><circle class="ex-d ex-d3" cx="207.2" cy="140.4" r="2.6"/><circle class="ex-d ex-d3" cx="215.6" cy="123.6" r="2.6"/><circle class="ex-d ex-d3" cx="213.5" cy="119.4" r="2.6"/><circle class="ex-d ex-d3" cx="226.4" cy="102.2" r="2.6"/><circle class="ex-d ex-d3" cx="199.6" cy="137.9" r="2.6"/><circle class="ex-d ex-d2" cx="231.2" cy="116.1" r="2.6"/><circle class="ex-d ex-d2" cx="216.8" cy="134.1" r="2.6"/><circle class="ex-d ex-d1" cx="200.1" cy="142.9" r="2.6"/><circle class="ex-d ex-d3" cx="237.1" cy="103.4" r="2.6"/><circle class="ex-d ex-d1" cx="199.5" cy="148.3" r="2.6"/><circle class="ex-d ex-d3" cx="223.3" cy="137.9" r="2.6"/><circle class="ex-d ex-d1" cx="197.2" cy="157.3" r="2.6"/><circle class="ex-d ex-d1" cx="224.9" cy="112.0" r="2.6"/><circle class="ex-d ex-d2" cx="224.5" cy="111.3" r="2.6"/><circle class="ex-d ex-d2" cx="204.0" cy="128.4" r="2.6"/><circle class="ex-d ex-d1" cx="220.0" cy="143.7" r="2.6"/><circle class="ex-d ex-d1" cx="201.7" cy="140.6" r="2.6"/><circle class="ex-d ex-d3" cx="220.0" cy="117.9" r="2.6"/><circle class="ex-d ex-d3" cx="206.1" cy="120.7" r="2.6"/><circle class="ex-d ex-d3" cx="215.3" cy="125.6" r="2.6"/><circle class="ex-d ex-d3" cx="222.4" cy="109.1" r="2.6"/><circle class="ex-d ex-d3" cx="233.3" cy="103.0" r="2.6"/><circle class="ex-d ex-d1" cx="232.7" cy="123.5" r="2.6"/><circle class="ex-d ex-d3" cx="230.3" cy="110.7" r="2.6"/><circle class="ex-d ex-d3" cx="222.3" cy="131.1" r="2.6"/><circle class="ex-d ex-d1" cx="231.6" cy="107.1" r="2.6"/><circle class="ex-d ex-d1" cx="231.5" cy="101.5" r="2.6"/><circle class="ex-d ex-d2" cx="208.1" cy="150.7" r="2.6"/><circle class="ex-d ex-d1" cx="215.1" cy="127.0" r="2.6"/><circle class="ex-d ex-d1" cx="219.7" cy="122.4" r="2.6"/><circle class="ex-d ex-d3" cx="227.7" cy="103.4" r="2.6"/><circle class="ex-d ex-d1" cx="237.2" cy="101.9" r="2.6"/><circle class="ex-d ex-d1" cx="201.4" cy="139.6" r="2.6"/><circle class="ex-d ex-d3" cx="208.3" cy="132.4" r="2.6"/><circle class="ex-d ex-d3" cx="237.1" cy="100.0" r="2.6"/><circle class="ex-d ex-d3" cx="214.6" cy="129.9" r="2.6"/></g>
-<line class="d-edge" x1="36" x2="236" y1="238" y2="238"/><text class="d-meta" x="62.3" y="252" text-anchor="middle">1960</text><text class="d-meta" x="128.1" y="252" text-anchor="middle">1985</text><text class="d-meta" x="193.9" y="252" text-anchor="middle">2010</text>
-</g>
-<line class="ex-edge" x1="164" x2="164" y1="62" y2="270"/>
-<text class="d-meta" x="176" y="44">2010–2026</text><text class="d-meta" x="176" y="58">off-screen →</text>
-</svg>
-        <figcaption><p class="eyebrow">Observed · epoch.ai/data/ai-models at 390px</p>The plot keeps its desktop width, so the visible axis ends near 2010.</figcaption>
+    <div class="prose">
+    <div class="media-row">
+      <figure class="media media--phone">
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.avif 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.avif 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><source type="image/webp" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.webp 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.webp 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><img src="/assets/img/epoch/observed-epoch-explorer-390.jpg" width="1170" height="2532" loading="lazy" decoding="async" alt="Screenshot of Epoch AI’s Notable AI models chart on a 390-pixel phone screen. The whole 1950 to 2025 axis fits and every label is whole: ADALINE, Zip CNN, JPMAX, Neural LM, RankNet, MSRA (C, PReLU), Meena and Grok 4. Most dots pile into the shaded band from 2010 on at the right edge, where the dashed 4.2 x/year trend label lies across the cluster. Below the chart are a Customize graph button and a Jump to row: All time, Deep Learning Era, 2020+."></picture>
+        <figcaption><strong>Epoch at 390px.</strong> epoch.ai/data/ai-models, captured 2026-11-08 by device emulation (390×844 at 3×, iPhone user agent), scrolled to the chart. Chart and data: Epoch AI, CC BY 4.0.</figcaption>
       </figure>
-      <figure>
-        <svg viewBox="0 0 300 300" role="img" aria-labelledby="crop-b-t" focusable="false">
-<title id="crop-b-t">Schematic: the rebuilt chart inside the same phone; the plot turns portrait and fits 2010 to 2026, with thinned ticks, a few labels, and a Customize button that opens a bottom sheet.</title>
-<rect class="d-node ex-phone" x="20" y="8" width="150" height="284" rx="22"/><rect class="ex-notch" x="77.0" y="16" width="36" height="6" rx="3"/>
-<text class="d-label ex-tiny" x="36" y="44">Notable AI models</text>
-<rect class="ex-pill ex-pill--on" x="34" y="52" width="34" height="14" rx="7"/><text class="d-meta ex-tiny2" x="51" y="62" text-anchor="middle">2010+</text>
-<rect class="ex-pill" x="112" y="52" width="46" height="14" rx="7"/><text class="d-meta ex-tiny2" x="135" y="62" text-anchor="middle">Customize</text>
-<g><line class="ex-gridl" x1="44" x2="154" y1="214.8" y2="214.8"/><line class="ex-gridl" x1="44" x2="154" y1="173.2" y2="173.2"/><line class="ex-gridl" x1="44" x2="154" y1="131.6" y2="131.6"/><line class="ex-gridl" x1="44" x2="154" y1="90.0" y2="90.0"/></g>
-<line class="d-edge" x1="44" x2="154" y1="250" y2="250"/><text class="d-meta" x="44.0" y="262" text-anchor="middle">2010</text><text class="d-meta" x="96.4" y="262" text-anchor="middle">2018</text><text class="d-meta" x="148.8" y="262" text-anchor="middle">2026</text>
-<g><circle class="ex-d ex-d1" cx="90.8" cy="169.7" r="2.4"/><circle class="ex-d ex-d1" cx="62.9" cy="227.5" r="2.4"/><circle class="ex-d ex-d1" cx="113.2" cy="136.0" r="2.4"/><circle class="ex-d ex-d1" cx="120.8" cy="164.1" r="2.4"/><circle class="ex-d ex-d1" cx="68.4" cy="221.6" r="2.4"/><circle class="ex-d ex-d2" cx="147.6" cy="106.6" r="2.4"/><circle class="ex-d ex-d3" cx="55.3" cy="224.9" r="2.4"/><circle class="ex-d ex-d1" cx="136.1" cy="154.1" r="2.4"/><circle class="ex-d ex-d2" cx="95.1" cy="182.8" r="2.4"/><circle class="ex-d ex-d1" cx="60.7" cy="191.6" r="2.4"/><circle class="ex-d ex-d1" cx="148.4" cy="141.3" r="2.4"/><circle class="ex-d ex-d1" cx="131.3" cy="132.0" r="2.4"/><circle class="ex-d ex-d1" cx="124.1" cy="114.0" r="2.4"/><circle class="ex-d ex-d3" cx="130.1" cy="138.2" r="2.4"/><circle class="ex-d ex-d3" cx="95.8" cy="157.7" r="2.4"/><circle class="ex-d ex-d1" cx="68.2" cy="204.2" r="2.4"/><circle class="ex-d ex-d2" cx="81.4" cy="191.6" r="2.4"/><circle class="ex-d ex-d2" cx="100.3" cy="141.9" r="2.4"/><circle class="ex-d ex-d1" cx="62.6" cy="223.2" r="2.4"/><circle class="ex-d ex-d3" cx="138.5" cy="122.3" r="2.4"/><circle class="ex-d ex-d2" cx="88.4" cy="191.4" r="2.4"/><circle class="ex-d ex-d1" cx="149.5" cy="110.1" r="2.4"/><circle class="ex-d ex-d1" cx="63.0" cy="190.8" r="2.4"/><circle class="ex-d ex-d3" cx="109.5" cy="139.0" r="2.4"/><circle class="ex-d ex-d3" cx="77.0" cy="191.8" r="2.4"/><circle class="ex-d ex-d3" cx="98.1" cy="160.4" r="2.4"/><circle class="ex-d ex-d3" cx="92.8" cy="152.5" r="2.4"/><circle class="ex-d ex-d3" cx="124.8" cy="120.3" r="2.4"/><circle class="ex-d ex-d3" cx="58.1" cy="187.1" r="2.4"/><circle class="ex-d ex-d2" cx="136.8" cy="146.3" r="2.4"/><circle class="ex-d ex-d2" cx="101.0" cy="180.1" r="2.4"/><circle class="ex-d ex-d1" cx="59.6" cy="196.5" r="2.4"/><circle class="ex-d ex-d3" cx="151.5" cy="122.5" r="2.4"/><circle class="ex-d ex-d1" cx="57.8" cy="206.5" r="2.4"/><circle class="ex-d ex-d3" cx="117.0" cy="187.1" r="2.4"/><circle class="ex-d ex-d1" cx="52.3" cy="223.5" r="2.4"/><circle class="ex-d ex-d1" cx="121.3" cy="138.7" r="2.4"/><circle class="ex-d ex-d2" cx="120.2" cy="137.3" r="2.4"/><circle class="ex-d ex-d2" cx="69.0" cy="169.4" r="2.4"/><circle class="ex-d ex-d1" cx="109.1" cy="198.0" r="2.4"/><circle class="ex-d ex-d1" cx="63.5" cy="192.2" r="2.4"/><circle class="ex-d ex-d3" cx="108.9" cy="149.6" r="2.4"/><circle class="ex-d ex-d3" cx="74.3" cy="154.9" r="2.4"/><circle class="ex-d ex-d3" cx="97.3" cy="164.2" r="2.4"/><circle class="ex-d ex-d3" cx="114.9" cy="133.3" r="2.4"/><circle class="ex-d ex-d3" cx="142.1" cy="121.8" r="2.4"/><circle class="ex-d ex-d1" cx="140.6" cy="160.3" r="2.4"/><circle class="ex-d ex-d3" cx="134.7" cy="136.3" r="2.4"/><circle class="ex-d ex-d3" cx="114.8" cy="174.5" r="2.4"/><circle class="ex-d ex-d1" cx="137.9" cy="129.5" r="2.4"/><circle class="ex-d ex-d1" cx="137.5" cy="118.9" r="2.4"/><circle class="ex-d ex-d2" cx="79.2" cy="211.2" r="2.4"/><circle class="ex-d ex-d1" cx="96.7" cy="166.7" r="2.4"/><circle class="ex-d ex-d1" cx="108.3" cy="158.1" r="2.4"/><circle class="ex-d ex-d3" cx="128.0" cy="122.7" r="2.4"/><circle class="ex-d ex-d1" cx="151.8" cy="119.9" r="2.4"/><circle class="ex-d ex-d1" cx="62.6" cy="190.4" r="2.4"/><circle class="ex-d ex-d3" cx="79.8" cy="176.8" r="2.4"/><circle class="ex-d ex-d3" cx="151.6" cy="116.2" r="2.4"/><circle class="ex-d ex-d3" cx="95.5" cy="172.2" r="2.4"/></g><line class="ex-fitl" x1="46.0" y1="222.1" x2="152.7" y2="115.3"/>
-<text class="d-label ex-tiny ex-halo" x="152" y="94.2" text-anchor="end">GPT-6 Astra</text>
-<text class="d-label ex-tiny ex-halo" x="112.1" y="125.4" text-anchor="end">GPT-3</text>
-<text class="d-label ex-tiny ex-halo" x="85.9" y="153.4" text-anchor="end">GNMT</text>
-<text class="d-meta" x="186" y="118">fits 2010–2026</text><text class="d-meta" x="186" y="132">at 358px wide</text>
-</svg>
-        <figcaption><p class="eyebrow">This study at 390px</p>The plot turns portrait and the whole deep-learning era fits on screen.</figcaption>
+      <figure class="media ex-twin">
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-480w.avif 480w, /assets/img/epoch/notable-models-mpl-640w.avif 640w, /assets/img/epoch/notable-models-mpl-800w.avif 800w, /assets/img/epoch/notable-models-mpl-960w.avif 960w, /assets/img/epoch/notable-models-mpl-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-480w.webp 480w, /assets/img/epoch/notable-models-mpl-640w.webp 640w, /assets/img/epoch/notable-models-mpl-800w.webp 800w, /assets/img/epoch/notable-models-mpl-960w.webp 960w, /assets/img/epoch/notable-models-mpl-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__light" src="/assets/img/epoch/notable-models-mpl.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labeled 4.3 times per year, 90% CI 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
+        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.avif 480w, /assets/img/epoch/notable-models-mpl-dark-640w.avif 640w, /assets/img/epoch/notable-models-mpl-dark-800w.avif 800w, /assets/img/epoch/notable-models-mpl-dark-960w.avif 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.webp 480w, /assets/img/epoch/notable-models-mpl-dark-640w.webp 640w, /assets/img/epoch/notable-models-mpl-dark-800w.webp 800w, /assets/img/epoch/notable-models-mpl-dark-960w.webp 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__dark" src="/assets/img/epoch/notable-models-mpl-dark.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labeled 4.3 times per year, 90% CI 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
+        <figcaption><strong>The same data, redrawn.</strong> The 481 models from 2010 on get the full width, on a log scale of training compute in floating-point operations (FLOP). An ordinary least squares (OLS) fit gives 4.3× a year, with a 90% confidence interval (CI) of 4.0× to 4.7×, and its label sits in the empty upper left. Drawn by <code>tools/epoch_chart.py</code> from Epoch AI’s Notable AI Models data (CC BY 4.0).</figcaption>
       </figure>
     </div>
 
-    <div class="prose">
     <ol class="findings">
       <li class="finding">
-        <p class="finding__title">At 390px the chart keeps its desktop width.</p>
-        <p class="finding__text">The plot is cropped on the right: the x-axis ends around 2010, so the models from 2020 on are off-screen until you pan. Labels at the edge are cut mid-word (“MSRA (C, PReL”).</p>
-        <p class="finding__source">epoch.ai/data/ai-models · default view · 390px</p>
+        <p class="finding__title">At 390px the whole chart fits, and the deep-learning era gets a quarter of it.</p>
+        <p class="finding__text">The full 1950–2025 axis renders, every label is whole, and nothing scrolls sideways. The problem is density. The years from 2010 on get about 72 of the plot’s ~300 px, roughly the right quarter (2010–2026 alone is about a fifth), yet they hold about 90% of the dots: 564 of 630 drawn circles. The “4.2 x/year” trend label is drawn over about 51 of them.</p>
+        <p class="finding__source">epoch.ai/data/ai-models · default view · 390×844 device emulation · 8 November 2026</p>
       </li>
       <li class="finding">
-        <p class="finding__title">The settings become a button; the plot does not reflow.</p>
-        <p class="finding__text">On mobile the settings sidebar collapses into “Customize graph”, which is the right call. The chart behind it stays at desktop proportions.</p>
-        <p class="finding__source">epoch.ai/data/ai-models · 390px</p>
+        <p class="finding__title">The squeeze comes from the axis.</p>
+        <p class="finding__text">At 1440px the same era gets 202 of about 898 px, the same share as on the phone. The linear 1950–2026 axis sets that proportion at every width. Epoch already has a one-tap answer: on mobile the settings collapse into a “Customize graph” button, and a “Jump to: All time / Deep Learning Era / 2020+” row just below the chart zooms to the dense years. At 390px that row sits about 130 px under the chart, below the fold at first paint.</p>
+        <p class="finding__source">epoch.ai/data/ai-models · 390×844 and 1440×900 · 8 November 2026</p>
       </li>
       <li class="finding">
-        <p class="finding__title">Labels collide where the frontier is densest.</p>
-        <p class="finding__text">At 1440px, labels such as GPT-4.5, FLAN 137B, GNMT and RoFormer overlap in the upper right of the default view, where a reader looks first.</p>
-        <p class="finding__source">epoch.ai/data/ai-models · default view · 1440px</p>
+        <p class="finding__title">Where the frontier is densest, labels land on dots.</p>
+        <p class="finding__text">At 1440px all 17 model labels are whole. The “4.2 x/year” trend label covers 17 dots in the frontier cloud, the corner a reader looks at first.</p>
+        <p class="finding__source">epoch.ai/data/ai-models · default view · 1440×900 · 8 November 2026</p>
       </li>
       <li class="finding">
         <p class="finding__title">Two counts for the same database.</p>
         <p class="finding__text">The AI Models page says “over 3700 models”; a tile on the Data hub says “3,200+ ML models tracked”. Both were probably true at different moments, which is the kind of drift a number rendered from the data prevents.</p>
-        <p class="finding__source">epoch.ai/data/ai-models · epoch.ai/data</p>
+        <p class="finding__source">epoch.ai/data/ai-models · epoch.ai/data · 7 November 2026</p>
       </li>
       <li class="finding">
         <p class="finding__title">The Trends date undersells its data.</p>
         <p class="finding__text">The page header reads “Updated Feb. 5, 2026” while several cards cite data through Q3 2026. A date on each card, or the newest card’s date in the header, would say how fresh it is.</p>
-        <p class="finding__source">epoch.ai/trends</p>
+        <p class="finding__source">epoch.ai/trends · 7 November 2026</p>
       </li>
     </ol>
 
       <aside class="callout callout--good">
         <p class="callout__title">What I kept</p>
-        <p>The claim-first title, the 90% interval stated in words, the All time / Deep learning era / 2020+ presets, a distinct mark for speculative estimates, and provenance on the figure itself. I did not reuse Epoch’s palette or typefaces: this chart runs on my site’s tokens.</p>
+        <p>The claim-first title, the 90% interval stated in words, the All time / Deep learning era / 2020+ presets, a distinct mark for speculative estimates, and provenance on the figure itself. The palette and typefaces come from my site’s own tokens.</p>
       </aside>
     </div>
   </div>
@@ -260,14 +166,14 @@
 <section class="section section--rule" id="chart" aria-labelledby="chart-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">02 · The rebuilt chart</p>
-      <h2 id="chart-title">A chart that reflows instead of cropping</h2>
+      <p class="eyebrow"><span class="eyebrow__seg">02</span> · <span class="eyebrow__seg">The rebuilt chart</span></p>
+      <h2 id="chart-title">Every width opens on the years since 2010</h2>
       <p class="lead">Same data, log scale and presets as Epoch’s default view. Below 768px the controls move into a bottom sheet, the plot turns portrait, ticks thin out, labels drop to the top six and a tap opens the tooltip.</p>
     </header>
 
     <figure class="figure bleed ex" id="fig-epoch" data-epoch-explorer data-src="/data/epoch/notable_models.json">
       <header>
-        <p class="eyebrow">Figure 1 · Training compute of notable AI models</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · Training compute of notable AI models</p>
         <h3 class="figure-title">Since 2010, training compute has grown about 4.3× a year</h3>
         <p class="figure-sub">Each dot is one model in Epoch’s Notable AI Models dataset with a training-compute estimate (543 of 1,092), by publication date. Log scale. Hollow dots are estimates Epoch marks as speculative.</p>
       </header>
@@ -281,25 +187,41 @@
 
     <div class="prose">
       <h3>The rules behind it</h3>
-      <p>Each behaviour is a rule rather than a per-chart fix, so it would carry to the next explorer.</p>
+      <p>Each behavior is a rule, so it would carry to the next explorer.</p>
     </div>
     <dl class="facts ex-rules">
       <div><dt>Labels</dt><dd>Candidates are the largest model in their rolling six-month window. They are taken in turn from equal time slots so labels spread along the frontier, and each is placed greedily at the first free spot around its dot, or skipped. A leader line appears only when a label sits more than 8px from its dot.</dd></div>
-      <div><dt>Colour</dt><dd>Domain uses eight fixed slots, Language first and Other last. Organization and Country show the eight largest across the whole dataset plus a grey Other, so changing the range never repaints a survivor.</dd></div>
-      <div><dt>Trend</dt><dd>Least squares on log₁₀ FLOP against publication year, fitted to the visible range from 2010 on, and separately before 2010 in the All time view. The 90% interval is the slope ± t·SE; the band is the 90% confidence band of the fitted line.</dd></div>
-      <div><dt>Phone</dt><dd>Portrait plot, ticks spaced by pixels rather than by count, six labels, a 34px tap radius to the nearest dot, the tooltip above the finger, and controls in a sheet with 44px targets. Every width opens on the deep-learning era, where 481 of the 543 points are; All time is one tap away.</dd></div>
-      <div><dt>Access</dt><dd>Focus the plot and use ← → to step through models by date. Table lists every model in the current view and sorts by any column; Data downloads that view as CSV with the licence line in its header.</dd></div>
+      <div><dt>Color</dt><dd>Domain uses eight fixed slots, Language first and Other last. Organization and Country show the eight largest across the whole dataset plus a gray Other, so changing the range never repaints a survivor.</dd></div>
+      <div><dt>Trend</dt><dd>An OLS fit of log₁₀ FLOP against publication year, fitted to the visible range from 2010 on, and separately before 2010 in the All time view. The 90% interval is the slope ± t·SE; the band is the 90% confidence band of the fitted line.</dd></div>
+      <div><dt>Phone</dt><dd>Portrait plot, ticks spaced by pixel distance, six labels, a 34px tap radius to the nearest dot, the tooltip above the finger, and controls in a sheet with 44px targets. Every width opens on the deep-learning era, where 481 of the 543 points are; All time is one tap away.</dd></div>
+      <div><dt>Access</dt><dd>Focus the plot and use ← → to step through models by date. Table lists every model in the current view and sorts by any column; Data downloads that view as CSV with the license line in its header.</dd></div>
     </dl>
   </div>
 </section>
 
 <!-- 03 ------------------------------------------------------------------ -->
+<section class="section section--rule" id="decision" aria-labelledby="decision-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow"><span class="eyebrow__seg">03</span> · <span class="eyebrow__seg">A decision</span></p>
+      <h2 id="decision-title">Open on 2010–2026, keep All time one tap away</h2>
+    </header>
+    <div class="prose">
+      <p><strong>The alternative I rejected:</strong> keeping Epoch’s default, the full 1950–2026 axis, and fitting the phone layout around it.</p>
+      <p><strong>Why:</strong> with a linear 1950–2026 axis, the years since 2010 get about a quarter of the width at 390px and at 1440px alike (observations 1 and 2), and no layout change gives them more. In this study’s data, 481 of the 543 models with a compute estimate are from 2010 on, and the chart’s title makes its claim about that period. So every width opens on the deep-learning era. All time sits in the same control, and when it is on, the chart fits the years before and after 2010 separately.</p>
+      <p><strong>The cost:</strong> the 62 models from before 2010 are off-screen at first paint, and a reader who wants the long history has to ask for it.</p>
+      <!-- F8: José to confirm and add the decision the agents cannot know -->
+    </div>
+  </div>
+</section>
+
+<!-- 04 ------------------------------------------------------------------ -->
 <section class="section section--rule" id="cards" aria-labelledby="cards-title" data-epoch-trends data-src="/data/epoch/notable_models.json">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">03 · The stat-card grammar</p>
+      <p class="eyebrow"><span class="eyebrow__seg">04</span> · <span class="eyebrow__seg">The stat-card grammar</span></p>
       <h2 id="cards-title">One dataset, three framings</h2>
-      <p class="lead">Epoch’s best interaction is the unit switch on its trend cards. Here it drives three cards computed live from the same JSON as the chart: the number, the sentence and the interval change together.</p>
+      <p class="lead">Epoch’s best interaction is the unit switch on its trend cards, which shows growth as an increase per year, a doubling time, or orders of magnitude (OOM) per year. Here it drives three cards computed live from the same JSON as the chart: the number, the sentence and the interval change together.</p>
     </header>
 
     <div class="ex-unit" data-ex-unit role="radiogroup" aria-labelledby="ex-unit-label">
@@ -334,7 +256,7 @@
     </div>
 
     <div class="prose">
-      <p>The 2020+ interval is more than twice as wide as the 2010+ one (0.16 against 0.07 orders of magnitude a year): fewer years, more scatter. The card says that through its interval instead of a caveat paragraph.</p>
+      <p>The 2020+ interval is more than twice as wide as the 2010+ one (0.16 against 0.07 orders of magnitude a year): fewer years, more scatter. The interval on the card carries that caveat by itself.</p>
 
       <h3>The copy template</h3>
       <p>Each card is one sentence built from four parts: a lead that names the period, a subject, a verb phrase owned by the unit, and the number. Written down as a template, a researcher can add a card without a designer and every card says the same thing the same way.</p>
@@ -350,7 +272,7 @@
         </table>
       </div>
       <ol>
-        <li>The lead names the period, never the unit: “Since 2010”, “From 1950 to 2009”.</li>
+        <li>The lead names the period: “Since 2010”, “From 1950 to 2009”.</li>
         <li>Tense follows the period: “has grown” while it runs to the latest data, “grew” once it is closed.</li>
         <li>An arrow marks a rate of increase. A doubling time gets none, because a smaller number means faster growth.</li>
         <li>The interval travels with the unit, and its bounds swap for doubling time.</li>
@@ -360,285 +282,19 @@
   </div>
 </section>
 
-<!-- 04 ------------------------------------------------------------------ -->
+<!-- 05 ------------------------------------------------------------------ -->
 <section class="section section--rule" id="python" aria-labelledby="python-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">04 · Same data, in Python</p>
+      <p class="eyebrow"><span class="eyebrow__seg">05</span> · <span class="eyebrow__seg">Same data, in Python</span></p>
       <h2 id="python-title">The same encoding, rendered with matplotlib</h2>
-      <p class="lead">Researchers often need a static figure for a paper, a post or a slide. <code>tools/epoch_chart.py</code> reads the same JSON and this site’s <code>tokens.css</code>, so the PNG has the same colours, fit and label rule as the live chart and cannot drift from it.</p>
+      <p class="lead">Researchers often need a static figure for a paper, a post or a slide. <code>tools/epoch_chart.py</code> reads the same JSON and this site’s <code>tokens.css</code>, so the PNG has the same colors, fit and label rule as the live chart and cannot drift from it.</p>
     </header>
 
-    <figure class="media ex-twin bleed">
-      <img class="ex-twin__light" src="/assets/img/epoch/notable-models-mpl.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 coloured by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labelled 4.3 times per year, 90% CI 4.0 to 4.7 times, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
-      <img class="ex-twin__dark" src="/assets/img/epoch/notable-models-mpl-dark.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 coloured by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 FLOP, with a trend line labelled 4.3 times per year, 90% CI 4.0 to 4.7 times, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
-      <figcaption>Rendered at 2400 × 1440 (2x) with Geist and Geist Mono, once from the light token block and once from the dark one. The fit matches the live chart: 4.30× per year, 90% CI 3.97× to 4.65×, n = 481.</figcaption>
-    </figure>
-
     <div class="prose">
-      <details class="disclosure ex-code">
-        <summary>Show tools/epoch_chart.py (334 lines)</summary>
-        <pre><code class="language-python">"""Matplotlib twin of the Epoch explorer chart.
-
-Renders the same encoding as assets/js/epoch-explorer.js — training compute (log10 FLOP)
-against publication date, coloured by domain, OLS trend with a 90% CI band, and the
-same label rule — to a static PNG at 2x.
-
-Colours are read from the site's own tokens.css (the light :root block), so the PNG and
-the live chart cannot drift apart. Nothing in this file names a hex value.
-
-Usage:
-    python tools/epoch_chart.py                       # defaults below, run from site/
-    python tools/epoch_chart.py --range all --fonts /path/to/geist-ttf-dir
-
-Requires matplotlib and pandas (pandas only for the CSV-friendly frame).
-"""
-import argparse
-import json
-import math
-import re
-from pathlib import Path
-
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-import pandas as pd  # noqa: E402
-from matplotlib import font_manager  # noqa: E402
-from matplotlib import patheffects as pe  # noqa: E402
-
-SITE = Path(__file__).resolve().parent.parent
-DOMAIN_ORDER = ["Language", "Vision", "Multimodal", "Games", "Speech", "Biology", "Robotics", "Other"]
-# key: (axis start with a little padding, first year of data shown, label)
-RANGES = {"all": (1948.0, -math.inf, "All time"), "dl": (2009.6, 2010, "Deep learning era"), "recent": (2019.8, 2020, "2020+")}
-FIT_FROM = {"all": [(-math.inf, 2010), (2010, math.inf)], "dl": [(2010, math.inf)], "recent": [(2020, math.inf)]}
-DATA_END = 2027.0
-SUP = str.maketrans("0123456789-", "⁰¹²³⁴⁵⁶⁷⁸⁹⁻")
-
-
-# ---------------------------------------------------------------- tokens
-def read_tokens(css_path, theme="light"):
-    css = re.sub(r"/\*.*?\*/", "", Path(css_path).read_text(encoding="utf-8"), flags=re.S)
-    toks = {}
-    # Light values live in the first top-level rule whose selector list includes a bare `:root`;
-    # dark values in the rule for `:root[data-theme="dark"]` (the explicit-toggle scope).
-    want = ":root" if theme == "light" else ':root[data-theme="dark"]'
-    for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
-        if want in [s.strip() for s in sel.split(",")] and "--paper:" in body:
-            toks = dict(re.findall(r"--([a-z0-9-]+):\s*([^;]+);", body))
-            break
-    need = ["paper", "paper-2", "ink", "ink-2", "ink-3", "ink-meta", "grid", "axis"] + [f"series-{i}" for i in range(1, 9)]
-    missing = [k for k in need if k not in toks]
-    if missing:
-        raise SystemExit(f"tokens.css is missing {missing}")
-    return {k: v.strip() for k, v in toks.items()}
-
-
-def register_fonts(font_dir):
-    if font_dir:
-        for f in Path(font_dir).glob("*.ttf"):
-            font_manager.fontManager.addfont(str(f))
-    names = {f.name for f in font_manager.fontManager.ttflist}
-    text = next((n for n in ["Geist", "Inter", "Helvetica Neue", "Arial"] if n in names), "DejaVu Sans")
-    mono = next((n for n in ["Geist Mono", "SF Mono", "Menlo", "DejaVu Sans Mono"] if n in names), "DejaVu Sans Mono")
-    return text, mono
-
-
-# ---------------------------------------------------------------- data + stats
-def fractional_year(iso):
-    ts = pd.Timestamp(iso, tz="UTC")
-    return 1970 + ts.value / 1e9 / 86400 / 365.25
-
-
-def load(path):
-    meta_models = json.loads(Path(path).read_text(encoding="utf-8"))
-    df = pd.DataFrame(meta_models["models"])
-    df["x"] = df["date"].map(fractional_year)
-    df["y"] = df["compute"].map(math.log10)
-    df["speculative"] = df["confidence"].eq("Speculative")
-    return df
-
-
-def t95(df):
-    z = 1.6448536269514722
-    return (z + (z**3 + z) / (4 * df) + (5 * z**5 + 16 * z**3 + 3 * z) / (96 * df**2)
-            + (3 * z**7 + 19 * z**5 + 17 * z**3 - 15 * z) / (384 * df**3))
-
-
-def ols(sub):
-    n = len(sub)
-    mx, my = sub.x.mean(), sub.y.mean()
-    sxx = ((sub.x - mx) ** 2).sum()
-    b = ((sub.x - mx) * (sub.y - my)).sum() / sxx
-    a = my - b * mx
-    resid = sub.y - (a + b * sub.x)
-    s = math.sqrt((resid**2).sum() / (n - 2))
-    se = s / math.sqrt(sxx)
-    t = t95(n - 2)
-    r2 = 1 - (resid**2).sum() / ((sub.y - my) ** 2).sum()
-    return dict(n=n, a=a, b=b, se=se, t=t, lo=b - t * se, hi=b + t * se, r2=r2, mx=mx, sxx=sxx, s=s,
-                x0=sub.x.min(), x1=sub.x.max())
-
-
-def yr_from(key):
-    return {"all": 2010, "dl": 2010, "recent": 2020}[key]
-
-
-def fmt_x(v):
-    return f"{v:.0f}" if v &gt;= 10 else f"{v:.1f}"
-
-
-# ---------------------------------------------------------------- label rule (same as the JS)
-def window_ranks(vis):
-    xs, cs = vis.x.to_numpy(), vis.compute.to_numpy()
-    return {i: int(((abs(xs - xs[k]) &lt;= 0.25) &amp; (cs &gt; cs[k])).sum()) for k, i in enumerate(vis.index)}
-
-
-def label_order(vis, budget, x0, x1):
-    rank = window_ranks(vis)
-    pool = vis[[rank[i] &lt;= 2 for i in vis.index]]
-    k = max(1, min(budget, 40))
-    w = (x1 - x0) / k
-    slots = [[] for _ in range(k)]
-    for i, row in pool.iterrows():
-        slots[min(k - 1, max(0, int((row.x - x0) // w)))].append(i)
-    for s in slots:
-        s.sort(key=lambda i: (rank[i], -vis.at[i, "compute"]))
-    order, rnd = [], 0
-    while True:
-        batch = [s[rnd] for s in slots if len(s) &gt; rnd]
-        if not batch:
-            break
-        batch.sort(key=lambda i: (rank[i], -vis.at[i, "compute"]))
-        order += batch
-        rnd += 1
-    return order
-
-
-def truncate(s, n=26):
-    if len(s) &lt;= n:
-        return s
-    cut = s[: n - 1]
-    sp = cut.rfind(" ")
-    return (cut[:sp] if sp &gt; n * 0.55 else cut).rstrip(" ,(") + "…"
-
-
-# ---------------------------------------------------------------- draw
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--data", default=str(SITE / "data/epoch/notable_models.json"))
-    ap.add_argument("--tokens", default=str(SITE / "assets/css/tokens.css"))
-    ap.add_argument("--out", default=str(SITE / "assets/img/epoch/notable-models-mpl.png"))
-    ap.add_argument("--range", default="dl", choices=sorted(RANGES))
-    ap.add_argument("--labels", type=int, default=12)
-    ap.add_argument("--fonts", default=None, help="directory of .ttf files to register (e.g. Geist)")
-    ap.add_argument("--theme", default="light", choices=["light", "dark"], help="which token block to read")
-    args = ap.parse_args()
-
-    T = read_tokens(args.tokens, args.theme)
-    SERIES = {d: T[f"series-{i + 1}"] for i, d in enumerate(DOMAIN_ORDER)}
-    f_text, f_mono = register_fonts(args.fonts)
-    plt.rcParams.update({
-        "font.family": [f_text, "DejaVu Sans"], "font.size": 10, "axes.unicode_minus": False,
-        "savefig.facecolor": T["paper"], "figure.facecolor": T["paper"],
-    })
-
-    df = load(args.data)
-    start, data_from, range_label = RANGES[args.range]
-    vis = df[df.x &gt;= data_from].copy()
-    fits = [dict(ols(vis[(vis.x &gt;= a) &amp; (vis.x &lt; b)]), era="pre" if a == -math.inf else "main")
-            for a, b in FIT_FROM[args.range]]
-
-    # Canvas: 1200 x 720 CSS px, saved at dpi 200 -&gt; 2400 x 1440 (2x).
-    W, H = 12.0, 7.2
-    fig = plt.figure(figsize=(W, H), dpi=100)
-    L, R, B, TOP = 0.062, 0.975, 0.105, 0.735
-    ax = fig.add_axes([L, B, R - L, TOP - B])
-    ax.set_facecolor(T["paper"])
-    for sp in ax.spines.values():
-        sp.set_visible(False)
-
-    y_lo = math.floor(vis.y.min() - 0.35)
-    y_hi = math.ceil(vis.y.max() + 0.25)
-    ax.set_xlim(start, DATA_END)
-    ax.set_ylim(y_lo, y_hi)
-
-    # grid + axes (powers of ten, one solid hairline per labelled decade)
-    plot_h_px = (TOP - B) * H * 100
-    step = next((k for k in [1, 2, 3, 4, 5, 6] if plot_h_px / (y_hi - y_lo) * k &gt;= 42), 6)
-    yt = list(range(math.ceil(y_lo / step) * step, y_hi + 1, step))
-    ax.set_yticks(yt)
-    ax.set_yticklabels([f"10{str(e).translate(SUP)}" for e in yt])
-    for e in yt:
-        ax.axhline(e, color=T["grid"], lw=0.75, zorder=0)
-    span = DATA_END - start
-    plot_w_px = (R - L) * W * 100
-    xs = next((k for k in [1, 2, 5, 10, 20] if plot_w_px / span * k &gt;= 58), 20)
-    xt = list(range(int(math.ceil(start / xs) * xs), 2027, xs))
-    ax.set_xticks(xt)
-    ax.set_xticklabels([str(v) for v in xt])
-    ax.axhline(y_lo, color=T["axis"], lw=0.9, zorder=1)
-    ax.tick_params(axis="both", length=0, pad=7, labelsize=8.6, labelcolor=T["ink-meta"])
-    ax.tick_params(axis="x", length=3, color=T["axis"], width=0.75)
-    for lab in ax.get_xticklabels():
-        lab.set_fontfamily([f_mono, "DejaVu Sans Mono"])
-    for lab in ax.get_yticklabels():
-        lab.set_fontsize(9.2)
-    ax.text(0, 1.035, "Training compute (FLOP, log scale)", transform=ax.transAxes, ha="left", va="bottom",
-            fontsize=9, fontweight=500, color=T["ink-2"])
-
-    if args.range == "all":
-        ax.axvspan(2010, DATA_END, color=T["paper-2"], zorder=0, lw=0)
-        ax.text(2010.4, y_hi - 0.25, "DEEP LEARNING ERA", fontsize=7.6, family=[f_mono], color=T["ink-meta"], va="top")
-
-    # trend bands under the dots
-    for f in fits:
-        xx = [f["x0"] + (f["x1"] - f["x0"]) * i / 40 for i in range(41)]
-        yy = [f["a"] + f["b"] * v for v in xx]
-        hb = [f["t"] * f["s"] * math.sqrt(1 / f["n"] + (v - f["mx"]) ** 2 / f["sxx"]) for v in xx]
-        ax.fill_between(xx, [a - h for a, h in zip(yy, hb)], [a + h for a, h in zip(yy, hb)],
-                        color=T["ink"] if f["era"] == "main" else T["ink-3"], alpha=0.1, lw=0, zorder=2)
-
-    # dots: solid with a paper ring; speculative estimates hollow
-    r_pt = 4.2 * 0.72
-    for dom in DOMAIN_ORDER:
-        sub = vis[vis.domain_group == dom]
-        solid, hollow = sub[~sub.speculative], sub[sub.speculative]
-        ax.scatter(solid.x, solid.y, s=(2 * r_pt) ** 2, c=SERIES[dom], edgecolors=T["paper"], linewidths=1.1, zorder=3)
-        ax.scatter(hollow.x, hollow.y, s=(2 * r_pt - 0.9) ** 2, facecolors=T["paper"], edgecolors=SERIES[dom], linewidths=1.0, zorder=3)
-
-    # trend lines over the dots, with a paper halo
-    halo = [pe.Stroke(linewidth=4.2, foreground=T["paper"], alpha=0.9), pe.Normal()]
-    for f in fits:
-        ax.plot([f["x0"], f["x1"]], [f["a"] + f["b"] * f["x0"], f["a"] + f["b"] * f["x1"]],
-                color=T["ink"] if f["era"] == "main" else T["ink-2"], lw=1.6, solid_capstyle="round", zorder=4, path_effects=halo)
-
-    fig.canvas.draw()
-    rend = fig.canvas.get_renderer()
-    placed = []  # display-space bboxes
-
-    def free(bb, pad=2):
-        if bb.x0 &lt; ax.bbox.x0 + 2 or bb.x1 &gt; ax.bbox.x1 + 18 or bb.y0 &lt; ax.bbox.y0 + 2 or bb.y1 &gt; ax.bbox.y1 - 2:
-            return False
-        return not any(bb.x0 &lt; p.x1 + pad and bb.x1 + pad &gt; p.x0 and bb.y0 &lt; p.y1 + pad and bb.y1 + pad &gt; p.y0 for p in placed)
-
-    txt_halo = [pe.Stroke(linewidth=3, foreground=T["paper"]), pe.Normal()]
-
-    # trend callout: the upper-left of a rising scatter is empty, so the rate in words and
-    # its 90% CI sit there as a keyed legend for the line(s), never on top of the points.
-    cy = 0.975
-    for f in sorted(fits, key=lambda f: f["era"] != "main"):
-        prefix = ("Since 2010: " if f["era"] == "main" else "Before 2010: ") if len(fits) &gt; 1 else f"Trend since {yr_from(args.range)}: "
-        rate = f"{prefix}{fmt_x(10 ** f['b'])}× per year"
-        ci = f"90% CI {fmt_x(10 ** f['lo'])}× to {fmt_x(10 ** f['hi'])}× · doubling every {12 * math.log10(2) / f['b']:.1f} months"
-        ax.plot([0.012, 0.036], [cy - 0.012, cy - 0.012], transform=ax.transAxes, color=T["ink"] if f["era"] == "main" else T["ink-2"],
-                lw=1.6, solid_capstyle="round", zorder=6, path_effects=halo)
-        t1 = ax.text(0.044, cy, rate, transform=ax.transAxes, fontsize=9.8, fontweight=600, color=T["ink"], va="top", zorder=6, path_effects=txt_halo)
-        t2 = ax.text(0.044, cy - 0.04, ci, transform=ax.transAxes, fontsize=7.8, family=[f_mono], color=T["ink-meta"], va="top", zorder=6, path_effects=txt_halo)
-        placed.append(matplotlib.transforms.Bbox.union([t1.get_window_extent(rend), t2.get_window_extent(rend)]).expanded(1.04, 1.25))
-        cy -= 0.105
-
-    # model labels: same candidate rule as the live chart; greedy, skip on collision
+      <p>The redrawn chart at the top of this page is its output, rendered at 2400 × 1440 (2x) with Geist and Geist Mono, once from the light token block and once from the dark one. The fit matches the live chart: 4.30× per year, 90% CI 3.97× to 4.65×, n = 481.</p>
+      <p>The excerpt below is the label rule. Each label tries eight spots around its dot and takes the first one that is free and covers at most one other dot. When none qualifies, it moves further out on a leader line; when that fails too, the label is skipped.</p>
+      <pre><code class="language-python">    # model labels: same candidate rule as the live chart; greedy, skip on collision
     to_px = ax.transData.transform
     offsets = [(6, -3.5, "left"), (-6, -3.5, "right"), (4, 5, "left"), (-4, 5, "right"), (4, -12, "left"),
                (-4, -12, "right"), (0, 9, "center"), (0, -17, "center")]
@@ -660,76 +316,24 @@ def main():
             covered = sum(1 for qx, qy in to_px(vis[["x", "y"]].to_numpy())
                           if bb.x0 - 4 &lt; qx &lt; bb.x1 + 4 and bb.y0 - 4 &lt; qy &lt; bb.y1 + 4 and (qx, qy) != (px, py))
             if free(bb) and (covered &lt;= 1 or k &gt;= len(offsets)):
-                placed.append(bb)
-                if k &gt;= len(offsets):
-                    cx = min(max(px, bb.x0), bb.x1)
-                    cy = min(max(py, bb.y0), bb.y1)
-                    inv = ax.transData.inverted()
-                    a = math.atan2(cy - py, cx - px)
-                    sx, sy = inv.transform((px + math.cos(a) * 6.5, py + math.sin(a) * 6.5))
-                    ex, ey = inv.transform((cx, cy))
-                    ax.plot([sx, ex], [sy, ey], color=T["ink-3"], lw=0.75, zorder=5)
-                done = True
-                break
-            t.remove()
-        count += done
-
-    # header: eyebrow, title, subtitle, legend
-    main_fit = next(f for f in fits if f["era"] == "main")
-    yr0 = yr_from(args.range)
-    fig.text(L, 0.955, f"NOTABLE AI MODELS · {range_label.upper()}", fontsize=8.2, family=[f_mono], color=T["ink-meta"], va="top")
-    fig.text(L, 0.925, f"Since {yr0}, training compute has grown {fmt_x(10 ** main_fit['b'])}× a year",
-             fontsize=17, fontweight=600, color=T["ink"], va="top")
-    fig.text(L, 0.868, f"{len(vis)} models with a training-compute estimate, by publication date. Line: least-squares fit on log₁₀ FLOP "
-             f"with its 90% confidence band; doubling every {12 * math.log10(2) / main_fit['b']:.1f} months.",
-             fontsize=9.8, color=T["ink-2"], va="top")
-    lx = L
-    counts = vis.domain_group.value_counts()
-    for dom in DOMAIN_ORDER:
-        n = int(counts.get(dom, 0))
-        fig.patches.append(matplotlib.patches.Circle((lx + 0.004, 0.808), 0.0036, transform=fig.transFigure,
-                                                     facecolor=SERIES[dom], edgecolor="none", figure=fig))
-        t = fig.text(lx + 0.011, 0.808, dom, fontsize=9, fontweight=500, color=T["ink-2"], va="center")
-        tn = fig.text(t.get_window_extent(rend).x1 / fig.bbox.width + 0.004, 0.808, str(n), fontsize=8,
-                      family=[f_mono], color=T["ink-meta"], va="center")
-        lx = tn.get_window_extent(rend).x1 / fig.bbox.width + 0.018
-    fig.patches.append(matplotlib.patches.Circle((lx + 0.004, 0.808), 0.0032, transform=fig.transFigure,
-                                                 facecolor=T["paper"], edgecolor=T["ink-3"], linewidth=1.0, figure=fig))
-    fig.text(lx + 0.011, 0.808, "speculative estimate", fontsize=8, family=[f_mono], color=T["ink-meta"], va="center")
-
-    fig.text(L, 0.036, "Data: Epoch AI, ‘Notable AI Models’ (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/notable-ai-models.",
-             fontsize=7.6, family=[f_mono], color=T["ink-meta"], va="bottom")
-    fig.text(L, 0.016, "Redrawn by José Ochoa with tools/epoch_chart.py (matplotlib, colours read from the site’s tokens.css). Not affiliated with Epoch AI.",
-             fontsize=7.6, family=[f_mono], color=T["ink-meta"], va="bottom")
-
-    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.out, dpi=200)
-    for f in fits:
-        print(f"{f['era']}: n={f['n']} {10 ** f['b']:.3f}x/yr (90% CI {10 ** f['lo']:.3f}-{10 ** f['hi']:.3f}), "
-              f"doubling {12 * math.log10(2) / f['b']:.2f} mo, R2={f['r2']:.3f}")
-    print("wrote", args.out, "fonts:", f_text, "/", f_mono, "labels:", count)
-
-
-if __name__ == "__main__":
-    main()</code></pre>
-      </details>
-      <p>To run it: <code>python tools/epoch_chart.py --fonts &lt;geist-dir&gt;</code>. Add <code>--range all</code> for the All time view with both trends.</p>
+                placed.append(bb)</code></pre>
+      <p><code>tools/epoch_chart.py</code>, lines 261–283. The full script is in this site’s repository: <a href="https://github.com/joseocfc/joseocfc.github.io/blob/main/tools/epoch_chart.py">tools/epoch_chart.py on GitHub</a>. To run it: <code>python tools/epoch_chart.py --fonts &lt;geist-dir&gt;</code>. Add <code>--range all</code> for the All time view with both trends.</p>
     </div>
   </div>
 </section>
 
-<!-- 05 ------------------------------------------------------------------ -->
+<!-- 06 ------------------------------------------------------------------ -->
 <section class="section section--rule" id="next" aria-labelledby="next-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">05 · What I would do next</p>
-      <h2 id="next-title">Five proposals, each one a rule rather than a fix</h2>
+      <p class="eyebrow"><span class="eyebrow__seg">06</span> · <span class="eyebrow__seg">What I would do next</span></p>
+      <h2 id="next-title">Five rules the next explorer could inherit</h2>
     </header>
     <div class="prose">
       <ol class="ex-next">
-        <li><strong>A 390px chart contract.</strong> Every figure declares its phone behaviour (aspect, tick spacing, label budget, where the controls go), and a 390px screenshot runs before deploy. This study is one worked contract.</li>
+        <li><strong>A 390px chart contract.</strong> Every figure declares its phone behavior (aspect, tick spacing, label budget, where the controls go), and a 390px device-emulation screenshot runs before deploy. This study is one worked contract.</li>
         <li><strong>The label rule as a design-system token.</strong> A label budget per width, the 8px leader-line threshold and greedy placement, set once in the chart library so collisions stop being fixed page by page.</li>
-        <li><strong>One card type for the Data hub.</strong> Seventeen datasets as one card (name, update date, rows, licence, formats), faceted by Drivers, Progress and Impacts, with search. It replaces four tiles, thirteen rows and a download list that repeats the same names a third time.</li>
+        <li><strong>One card type for the Data hub.</strong> Seventeen datasets as one card (name, update date, rows, license, formats), faceted by Drivers, Progress and Impacts, with search. It replaces four tiles, thirteen rows and a download list that repeats the same names a third time.</li>
         <li><strong>Numbers rendered from the data.</strong> “Over 3,700 models” comes from the dataset’s row count at build time, so the AI Models page and the Data hub cannot disagree.</li>
         <li><strong>Freshness on every card.</strong> Each trend card carries the date of its newest data point, and the page header shows the newest of those.</li>
       </ol>
@@ -741,7 +345,7 @@ if __name__ == "__main__":
 <section class="section section--tight" aria-label="Attribution">
   <div class="container">
     <aside class="ex-attrib">
-      <p>Data: Epoch AI, ‘Notable AI Models’ (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/notable-ai-models. Redrawn by José Ochoa; not affiliated with Epoch AI.</p>
+      <p>Data: Epoch AI, ‘Notable AI Models’ (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/ai-models. Redrawn by José Ochoa; not affiliated with Epoch AI.</p>
       <ul>
         <li><a href="https://epoch.ai/data/ai-models">Source page</a></li>
         <li><a href="/data/epoch/notable_models.json">Trimmed JSON (543 rows)</a></li>
@@ -751,6 +355,12 @@ if __name__ == "__main__":
         <li><a href="/tools/epoch_chart.py">Python twin</a></li>
       </ul>
     </aside>
+  </div>
+</section>
+
+<section class="section section--tight" aria-label="Contact">
+  <div class="container">
+    <p class="lead">Want to talk about this work? <a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a><!-- F17: José to replace with a personal address --></p>
   </div>
 </section>
 
@@ -790,7 +400,7 @@ if __name__ == "__main__":
       <ul>
         <li><a href="/work/bakery-orders/">Bakery Orders</a></li>
         <li><a href="/work/design-system/">Design system</a></li>
-        <li><a href="/work/epoch-explorer/">Epoch explorer study</a></li>
+        <li><a href="/work/epoch-explorer/">Epoch chart study</a></li>
         <li><a href="/process/">Process</a></li>
         <li><a href="/about/">About</a></li>
       </ul>
@@ -806,7 +416,7 @@ if __name__ == "__main__":
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script type="module" src="/assets/js/epoch-explorer.js"></script>
 <script type="module" src="/assets/js/site.js"></script>
 </body>

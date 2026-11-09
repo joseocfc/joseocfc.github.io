@@ -1,0 +1,5 @@
+/* Page styles: /charts-demo.html — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
+
+.demo-h2 { margin: var(--space-3) 0 var(--space-8); }
+.demo-stack { display: grid; gap: var(--space-9); }
+@media (max-width: 640px) { .demo-stack { gap: var(--space-8); } }

@@ -1,4 +1,4 @@
-/* growth — the harness and the assumptions register grew together (SPEC §6.2)
+/* growth — the harness and the assumptions register grew together
    data-src: /data/bakery-metrics.json → assertion_count_over_time[{date,assertions}],
              assumptions_register_rows_over_time[{date,highest_a_number}]
    Form:     two small multiples on one shared time axis (never a dual axis), step lines with a

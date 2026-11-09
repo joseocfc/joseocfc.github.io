@@ -2,5 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /styleguide/
 Disallow: /charts-demo.html
-Disallow: /templates/
 Sitemap: https://joseocfc.github.io/sitemap.xml

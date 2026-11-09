@@ -1,4 +1,4 @@
-/* loc — lines of code by area of the repo (SPEC §6.8)
+/* loc — lines of code by area of the repo
    data-src: /data/bakery-metrics.json → loc_by_area { tests_php, docs_md, includes_php, … }
    Form:     ranked horizontal bars with the repo path under each label. Emphasis: the
              highlighted area in the accent, the rest in grey (default "tests_php").
