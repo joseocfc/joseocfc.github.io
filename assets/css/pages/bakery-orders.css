@@ -35,14 +35,12 @@
   .bk-tag { display: inline; margin: 0 .6em 0 0; }
 }
 @media (max-width: 599.98px) {
-  .bk-duo__frames { position: relative; display: block; aspect-ratio: 1 / .9; }
-  .bk-duo__desk { width: 84%; }
-  .bk-duo__desk::before { height: 18px; }
-  .bk-duo__desk img { aspect-ratio: 1440 / 1120; }
-  .bk-duo__phone { position: absolute; right: 0; bottom: 0; width: 37%; }
+  /* F15: phone only below 600px; the desktop capture was illegible behind the phone frame */
+  .bk-duo__desk, .bk-duo__caps p:first-child { display: none; }
+  .bk-duo__frames { display: block; }
+  .bk-duo__phone { width: 62%; margin-inline: auto; }
   .bk-duo__phone img { border-radius: 16px; box-shadow: 0 0 0 4px var(--paper-2), 0 0 0 5px var(--line); margin: 5px; width: calc(100% - 10px); }
-  .bk-duo__caps { grid-template-columns: 1fr; gap: var(--space-2); }
-  .bk-duo__caps p:last-child { text-align: left; }
+  .bk-duo__caps { grid-template-columns: 1fr; }
   .bk-tag { display: inline; margin: 0 .6em 0 0; }
 }
 

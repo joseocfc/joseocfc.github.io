@@ -91,8 +91,8 @@
      Copy: content/design-system.md (lane A5), poured verbatim; the few changes are listed in lanes/notes/B2.md.
      Numbers: /data/design-system-metrics.json. The two diagrams are inline SVG drawn for this page. -->
 
-<header class="hero container ds-hero" aria-labelledby="page-title">
-  <p class="eyebrow hero__eyebrow">Case study · Community Food Co-op · Jun–Aug 2026</p>
+<header class="hero hero--split container ds-hero" aria-labelledby="page-title">
+  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Case study</span> · <span class="eyebrow__seg">Community Food Co-op</span> · <span class="eyebrow__seg">Jun–Aug 2026</span></p>
   <h1 class="hero__title hero__title--h1" id="page-title">One system in both directions</h1>
   <p class="lead hero__dek">The co-op’s website runs on a WordPress theme I designed. In summer 2026 I replaced its drifted CSS with one token contract: written once in theme.json, emitted as CSS variables, mirrored as Figma variables, and checked for drift in both directions before any design work starts.</p>
 
@@ -271,7 +271,7 @@
 
     <figure class="figure reveal" data-chart="tokens" data-src="/data/design-system-metrics.json" id="fig-tokens">
       <header>
-        <p class="eyebrow">Figure 1 · Contract tokens by family</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Contract tokens by family</span></p>
         <h3 class="figure-title">The button contract is a quarter of the system</h3>
         <p class="figure-sub">The 94 tokens in theme.json v1.1, by family. Colour is drawn as two rows: brand, and semantic + neutral.</p>
       </header>
@@ -398,7 +398,7 @@
 
     <figure class="figure reveal" data-chart="ds-commits" data-src="/data/design-system-metrics.json" id="fig-ds-commits">
       <header>
-        <p class="eyebrow">Figure 2 · Theme commits per day</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 2</span> · <span class="eyebrow__seg">Theme commits per day</span></p>
         <h3 class="figure-title">94 commits on the day the contract froze</h3>
         <p class="figure-sub">Commits per day on the theme repo, March to September 2026. The design-system window, 25 June to 21 August, is shaded; v1.0 is marked on 17 July.</p>
       </header>

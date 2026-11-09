@@ -88,8 +88,8 @@
 <!-- /work/epoch-explorer/ · lane A4 (epoch). Numbers on this page are computed from /data/epoch/notable_models.json;
      the trend cards and chart recompute them live. Notes and computed values: lanes/notes/A4.md. -->
 
-<header class="hero container" aria-labelledby="page-title">
-  <p class="eyebrow hero__eyebrow">Study · Epoch AI data · November 2026</p>
+<header class="hero hero--split container" aria-labelledby="page-title">
+  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Study</span> · <span class="eyebrow__seg">Epoch AI data</span> · <span class="eyebrow__seg">November 2026</span></p>
   <h1 class="hero__title hero__title--h1" id="page-title">Notable AI models, redrawn for a phone.</h1>
   <p class="lead hero__dek">Epoch’s AI Models explorer is excellent on a laptop and crops on a phone. I rebuilt the core chart from their CC-BY dataset to show how I’d approach it.</p>
   <dl class="meta-grid ex-hero-meta">
@@ -105,7 +105,7 @@
 <section class="section section--rule" id="looked" aria-labelledby="looked-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">01 · What I looked at</p>
+      <p class="eyebrow"><span class="eyebrow__seg">01</span> · <span class="eyebrow__seg">What I looked at</span></p>
       <h2 id="looked-title">Five observations from 7 November 2026</h2>
       <p class="lead">I spent an evening with Epoch’s AI Models explorer, Trends dashboard and Data hub at 1440 and 390 pixels wide, in headless Chrome. The chart gets the hard things right: dense data, uncertainty on the page, provenance on the figure. These notes are about what happens around it.</p>
     </header>
@@ -130,7 +130,7 @@
 <line class="ex-edge" x1="164" x2="164" y1="62" y2="270"/>
 <text class="d-meta" x="176" y="44">2010–2026</text><text class="d-meta" x="176" y="58">off-screen →</text>
 </svg>
-        <figcaption><p class="eyebrow">Observed · epoch.ai/data/ai-models at 390px</p>The plot keeps its desktop width, so the visible axis ends near 2010.</figcaption>
+        <figcaption><p class="eyebrow"><span class="eyebrow__seg">Observed</span> · <span class="eyebrow__seg">epoch.ai/data/ai-models at 390px</span></p>The plot keeps its desktop width, so the visible axis ends near 2010.</figcaption>
       </figure>
       <figure>
         <svg viewBox="0 0 300 300" role="img" aria-labelledby="crop-b-t" focusable="false">
@@ -192,14 +192,14 @@
 <section class="section section--rule" id="chart" aria-labelledby="chart-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">02 · The rebuilt chart</p>
+      <p class="eyebrow"><span class="eyebrow__seg">02</span> · <span class="eyebrow__seg">The rebuilt chart</span></p>
       <h2 id="chart-title">A chart that reflows instead of cropping</h2>
       <p class="lead">Same data, log scale and presets as Epoch’s default view. Below 768px the controls move into a bottom sheet, the plot turns portrait, ticks thin out, labels drop to the top six and a tap opens the tooltip.</p>
     </header>
 
     <figure class="figure bleed ex" id="fig-epoch" data-epoch-explorer data-src="/data/epoch/notable_models.json">
       <header>
-        <p class="eyebrow">Figure 1 · Training compute of notable AI models</p>
+        <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · Training compute of notable AI models</p>
         <h3 class="figure-title">Since 2010, training compute has grown about 4.3× a year</h3>
         <p class="figure-sub">Each dot is one model in Epoch’s Notable AI Models dataset with a training-compute estimate (543 of 1,092), by publication date. Log scale. Hollow dots are estimates Epoch marks as speculative.</p>
       </header>
@@ -229,7 +229,7 @@
 <section class="section section--rule" id="cards" aria-labelledby="cards-title" data-epoch-trends data-src="/data/epoch/notable_models.json">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">03 · The stat-card grammar</p>
+      <p class="eyebrow"><span class="eyebrow__seg">03</span> · <span class="eyebrow__seg">The stat-card grammar</span></p>
       <h2 id="cards-title">One dataset, three framings</h2>
       <p class="lead">Epoch’s best interaction is the unit switch on its trend cards. Here it drives three cards computed live from the same JSON as the chart: the number, the sentence and the interval change together.</p>
     </header>
@@ -296,7 +296,7 @@
 <section class="section section--rule" id="python" aria-labelledby="python-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">04 · Same data, in Python</p>
+      <p class="eyebrow"><span class="eyebrow__seg">04</span> · <span class="eyebrow__seg">Same data, in Python</span></p>
       <h2 id="python-title">The same encoding, rendered with matplotlib</h2>
       <p class="lead">Researchers often need a static figure for a paper, a post or a slide. <code>tools/epoch_chart.py</code> reads the same JSON and this site’s <code>tokens.css</code>, so the PNG has the same colours, fit and label rule as the live chart and cannot drift from it.</p>
     </header>
@@ -654,7 +654,7 @@ if __name__ == "__main__":
 <section class="section section--rule" id="next" aria-labelledby="next-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow">05 · What I would do next</p>
+      <p class="eyebrow"><span class="eyebrow__seg">05</span> · <span class="eyebrow__seg">What I would do next</span></p>
       <h2 id="next-title">Five proposals, each one a rule rather than a fix</h2>
     </header>
     <div class="prose">

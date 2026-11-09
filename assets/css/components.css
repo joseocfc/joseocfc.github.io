@@ -366,6 +366,7 @@
   text-wrap: balance;
 }
 .eyebrow--accent { color: var(--accent-ink); }
+.eyebrow__seg { white-space: nowrap; }
 .eyebrow--dot::before {
   content: "";
   display: inline-block;
@@ -441,6 +442,18 @@
 .hero__dek { margin-top: var(--space-5); max-width: 36em; }
 .hero__actions { margin-top: var(--space-6); }
 .hero .hero__figure { margin-top: clamp(var(--space-7), 7vw, var(--space-9)); }
+/* F15: at desktop widths the hero fills the content width instead of a ~800px column.
+   --split: h1 left, dek right (case studies). --wide: display title across, dek left, actions right (home). */
+@media (min-width: 1100px) {
+  .hero--split, .hero--wide { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-8); align-items: end; }
+  .hero--split > *, .hero--wide > * { grid-column: 1 / -1; }
+  .hero--split { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .hero--split > .hero__title { grid-column: 1; }
+  .hero--split > .hero__dek { grid-column: 2; margin-top: 0; max-width: none; }
+  .hero--wide > .hero__title { max-width: none; }
+  .hero--wide > .hero__dek { grid-column: 1; }
+  .hero--wide > .hero__actions { grid-column: 2; justify-self: end; }
+}
 .hero__media {
   display: grid;
   gap: var(--space-5);
@@ -469,11 +482,10 @@
   border-top: 1px solid var(--ink);
 }
 .stat-label {
-  font-family: var(--font-mono);
-  font-size: var(--fs-meta);
+  font-family: var(--font-text);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
   line-height: var(--lh-meta);
-  letter-spacing: var(--track-meta);
-  text-transform: uppercase;
   color: var(--ink-meta);
 }
 .stat-value {
@@ -512,10 +524,9 @@
 .stat-meta {
   margin-top: auto;
   padding-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
+  font-family: var(--font-text);
+  font-size: var(--fs-meta);
   line-height: 1.5;
-  letter-spacing: .02em;
   color: var(--ink-meta);
   overflow-wrap: anywhere;
 }
@@ -531,6 +542,10 @@
 .stat-card--accent .stat-value { color: var(--accent-ink); }
 .stat-grid--compact .stat-value { font-size: clamp(2.25rem, 1.9rem + 1.4vw, 3rem); }
 .stat-grid--compact { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-6) var(--space-5); }
+@media (max-width: 600px) {
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-5); }
+  .stat-grid .stat-value { font-size: clamp(2.25rem, 1.9rem + 1.4vw, 3rem); }
+}
 
 /* ==========================================================================
    Media frames
@@ -619,11 +634,10 @@
 .quote cite, .quote figcaption {
   display: block;
   margin-top: var(--space-4);
-  font-family: var(--font-mono);
-  font-size: var(--fs-micro);
+  font-family: var(--font-text);
+  font-size: var(--fs-small);
   font-style: normal;
   line-height: 1.5;
-  letter-spacing: .02em;
   color: var(--ink-meta);
   overflow-wrap: anywhere;
 }
@@ -902,6 +916,10 @@
   .work-card:hover .work-card__phone { transform: translateY(-6px); }
 }
 .work-card__media--duo .work-card__phone { transition: transform 600ms var(--ease-out); }
+@media (max-width: 599.98px) {
+  .work-card__media--duo .work-card__shot { opacity: 0; }
+  .work-card__media--duo .work-card__phone { right: 37%; top: 8%; width: 26%; }
+}
 
 /* Logo plate: for projects without screenshots */
 .work-card__media--logo { display: grid; place-items: center; }
