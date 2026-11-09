@@ -5,7 +5,9 @@
    ADD A FIGURE
    -------------------------
    1. Load D3, then this module, at the end of <body> (D3 first; both are deferred):
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"
+                integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i"
+                crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
         <script type="module" src="/assets/js/charts/index.js"></script>
       If D3 is missing, this module injects that same script tag and waits for it.
 
@@ -84,6 +86,7 @@
    ========================================================================== */
 
 const D3_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js';
+const D3_SRI = 'sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i'; // same hash as the <script> tags
 const D3_TIMEOUT = 15000;
 const MOBILE_BELOW = 520;            // chart width (px) under which renderers use their narrow layout
 const registry = new Map();          // name -> renderer module (default export)
@@ -103,6 +106,8 @@ export function loadD3() {
     s.src = D3_SRC;
     s.async = true;
     s.crossOrigin = 'anonymous';
+    s.integrity = D3_SRI;
+    s.referrerPolicy = 'no-referrer';
     s.addEventListener('load', () => (window.d3 ? done(resolve, window.d3) : done(reject, new Error('D3 loaded without a global'))));
     s.addEventListener('error', () => done(reject, new Error('D3 failed to load from ' + D3_SRC)));
     poll = setInterval(() => { if (window.d3) done(resolve, window.d3); }, 50);
