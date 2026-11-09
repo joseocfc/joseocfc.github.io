@@ -41,6 +41,7 @@
      types       /data/bakery-metrics.json          commits_by_type
      models      /data/bakery-metrics.json          ai_coauthorship
      loc         /data/bakery-metrics.json          loc_by_area
+     orders      /data/bakery-orders-week1.json     days[] {date,bakery,holiday}, totals
      ds-commits  /data/design-system-metrics.json   commits_by_day, design_system_commits_by_day, milestones, commits
      tokens      /data/design-system-metrics.json   tokens
      build-log   /data/build-log.json               generated, phases[], lanes[] {id,label,model,start,end|null,phase}

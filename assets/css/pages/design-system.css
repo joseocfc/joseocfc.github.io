@@ -9,7 +9,7 @@
 .ds-hero__media figcaption { max-width: 760px; margin-inline: auto; }
 
 /* ---- Inline code: token names stay whole (the longest, 28 chars, fits a 390px line) */
-.ds-code, .case-layout .prose > p code { white-space: nowrap; overflow-wrap: normal; }
+.case-layout .prose > p code { white-space: nowrap; overflow-wrap: normal; }
 
 /* ---- Diagrams (naming rule + type modes) -------------------------------
    One container query swaps the wide and narrow SVGs by the figure's own width. */
@@ -36,37 +36,6 @@
 .ds-diagram .nr-chev { fill: none; stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .ds-diagram .nr-join { stroke-dasharray: 4 4; }
 
-/* Modes: plot + table side by side when the figure is wide enough */
-.ds-modes__grid { display: grid; gap: var(--space-6); align-items: center; }
-.ds-modes__svg { width: 100%; max-width: 460px; }
-/* the table column was capped at 250/260px but the table needs ~279px, so it ran over the card border at 768.
-   The column now takes the table's own width; the plot column absorbs the difference. */
-@container (min-width: 600px) {
-  .ds-modes__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); }
-}
-@container (min-width: 760px) {
-  .ds-modes__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-7); }
-}
-.ds-diagram .md-band { fill: var(--paper); }
-.ds-diagram .md-grid { stroke: var(--line); stroke-width: 1; }
-.ds-diagram .md-axis { stroke: var(--ink-3); stroke-width: 1; }
-.ds-diagram .md-tick { font-size: 10px; }
-.ds-diagram .md-bh { font-size: 10px; fill: var(--ink); font-weight: 500; }
-.ds-diagram .md-bs { font-family: var(--font-mono); font-size: 10px; fill: var(--ink-meta); }
-.ds-diagram .md-mid.md-bh { fill: var(--ink-meta); font-weight: 400; }
-.ds-diagram .md-line { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
-.ds-diagram .md-ramp { stroke-dasharray: 3 4; stroke-width: 1.25; }
-.ds-diagram .md-line--acc { stroke: var(--accent); stroke-width: 2; }
-.ds-diagram .md-line--acc.md-ramp { stroke-width: 1.5; }
-.ds-diagram .md-dot { fill: var(--ink-3); stroke: none; }
-.ds-diagram .md-dot--acc { fill: var(--accent); stroke: var(--accent); }
-.ds-diagram .md-val { font-size: 12px; font-weight: 500; fill: var(--accent-ink); }
-.ds-modes__table table { width: 100%; }
-.ds-modes__table th[scope="row"] { font-weight: var(--fw-regular); }
-.ds-modes__table .ds-code { padding: 0; border: 0; background: none; font-size: .8125rem; color: var(--ink); }
-.ds-modes__acc td.num { color: var(--accent-ink); font-weight: var(--fw-medium); }
-.ds-diagram .ds-modes__table :is(th, td) { background: none; }
-
 /* ---- Parity pass line -------------------------------------------------- */
 .ds-pass .artefact__body { font-size: .9rem; color: var(--good); }
 
@@ -88,6 +57,13 @@
 }
 
 /* ---- Cropped captures (tall Figma boards, live pages) ------------------ */
+/* Crop ratios per capture: these were inline style attributes until round 2. */
+.ds-crop--buttons { --crop: 1697 / 1060; }
+.ds-crop--board { --crop: 1276 / 1037; }
+.ds-crop--desktop { --crop: 1440 / 1060; }
+.ds-crop--phone { --crop: 390 / 844; }
+/* <picture> wrappers take no box, so the img inside sizes as before. */
+.ds-pic { display: contents; }
 .ds-crop {
   position: relative;
   display: block;

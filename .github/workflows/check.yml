@@ -1,0 +1,35 @@
+name: check
+
+# Runs on every push and pull request. GitHub Pages deploys main from the branch
+# itself, so a red run here does not stop that deploy: do not merge on red.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Every served file must be referenced by a page, stylesheet, script,
+      # JSON file or the sitemap (tools/check_refs.py; stdlib Python).
+      - name: Reference check
+        run: python3 tools/check_refs.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No package.json on purpose (no build step); pin the linters here.
+      - name: Install linters
+        run: npm install --no-save --no-package-lock --no-audit --no-fund html-validate@9 stylelint@16 stylelint-config-standard@39
+
+      - name: html-validate
+        run: npx html-validate $(git ls-files '*.html')
+
+      - name: stylelint
+        run: npx stylelint "assets/css/**/*.css"

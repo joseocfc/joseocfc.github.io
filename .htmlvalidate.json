@@ -1,0 +1,9 @@
+{
+  "$schema": "https://html-validate.org/schemas/config.json",
+  "extends": ["html-validate:standard"],
+  "rules": {
+    "element-permitted-order": "warn",
+    "element-permitted-content": "warn",
+    "attribute-misuse": "warn"
+  }
+}

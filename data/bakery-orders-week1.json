@@ -1,0 +1,65 @@
+{
+  "source": "WooCommerce Analytics export, Nov 1-9 2026, aggregated 2026-11-09",
+  "unit": "orders through the new bakery system",
+  "days": [
+    {
+      "date": "2026-11-01",
+      "bakery": 0,
+      "holiday": 0
+    },
+    {
+      "date": "2026-11-02",
+      "bakery": 2,
+      "holiday": 0
+    },
+    {
+      "date": "2026-11-03",
+      "bakery": 0,
+      "holiday": 0
+    },
+    {
+      "date": "2026-11-04",
+      "bakery": 5,
+      "holiday": 6
+    },
+    {
+      "date": "2026-11-05",
+      "bakery": 5,
+      "holiday": 4
+    },
+    {
+      "date": "2026-11-06",
+      "bakery": 6,
+      "holiday": 2
+    },
+    {
+      "date": "2026-11-07",
+      "bakery": 2,
+      "holiday": 5
+    },
+    {
+      "date": "2026-11-08",
+      "bakery": 2,
+      "holiday": 6
+    }
+  ],
+  "totals": {
+    "bakery_orders": 22,
+    "holiday_orders": 23,
+    "bakery_net_sales": 966.7,
+    "holiday_net_sales": 3124.63,
+    "items_bakery": 30,
+    "items_holiday": 61,
+    "new_customers": 39,
+    "returning_customers": 6
+  },
+  "holiday_pickup": {
+    "2026-11-16": 1,
+    "2026-11-24": 2,
+    "2026-11-25": 20
+  },
+  "holiday_pickup_by_store": {
+    "Downtown": 16,
+    "Cordata": 7
+  }
+}
