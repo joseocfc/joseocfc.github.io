@@ -1,5 +1,5 @@
 /* ==========================================================================
-   charts.css — figure anatomy, chart chrome, tooltip, table view (lane A2)
+   charts.css — figure anatomy, chart chrome, tooltip, table view
    Reads tokens.css only; no raw colour values. Marks get their colours from the
    renderers (which read the same tokens at render time); text gets them here.
    ========================================================================== */
@@ -169,7 +169,7 @@
   font-variant-numeric: tabular-nums;
   fill: var(--ink-meta);
 }
-.chart-svg .c-plate { fill: var(--chart-surface); stroke: none; } /* C1 QA: label plate, see kit.js yGridInline */
+.chart-svg .c-plate { fill: var(--chart-surface); stroke: none; } /* label plate, see kit.js yGridInline */
 .chart-svg .c-halo {
   paint-order: stroke fill;
   stroke: var(--chart-surface);

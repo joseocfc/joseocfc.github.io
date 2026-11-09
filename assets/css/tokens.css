@@ -1,11 +1,11 @@
 /* ==========================================================================
-   tokens.css — José Ochoa portfolio · design tokens (lane A1 "shell")
+   tokens.css — José Ochoa portfolio · design tokens
    The single source for colour, type, space, layout, radius and motion.
    Every other stylesheet and every chart reads these; nothing hardcodes a value.
 
    Theme model
    - :root carries the light values.
-   - Dark is declared under BOTH scopes (SPEC §3):
+   - Dark is declared under BOTH scopes:
        1. @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }  → OS preference
        2. :root[data-theme="dark"]                                                → explicit toggle
    - The inline boot script in <head> sets data-theme before first paint, so (2) wins
@@ -58,7 +58,7 @@
 .theme-light {
   color-scheme: light;
 
-  /* ---- Surfaces & ink (SPEC §3) ---------------------------------------- */
+  /* ---- Surfaces & ink ------------------------------------------------ */
   --paper:        #F6F5F1;
   --paper-2:      #EDEBE4;   /* cards, alternate sections */
   --paper-3:      #E4E1D8;   /* hover, inset */
@@ -113,7 +113,7 @@
   --seq-650: #104281;
   --seq-700: #0d366b;
 
-  /* ---- Chart chrome (recessive; charts lane reads these) -------------- */
+  /* ---- Chart chrome (recessive; the chart renderers read these) -------------- */
   --grid:         #E3E0D7;   /* hairline gridlines */
   --axis:         #C6C1B5;   /* baseline / axis rule */
   --tip-bg:       #121412;
@@ -287,7 +287,7 @@
   --overlay:      rgba(0, 0, 0, .55);
 }
 
-/* C1 QA: alias tokens resolve on the element that declares them, so a .theme-dark subtree on a light page
+/* alias tokens resolve on the element that declares them, so a .theme-dark subtree on a light page
    inherited the light --good/--warn/--bad etc. Re-declare the aliases inside the dark scope. */
 .theme-dark {
   --callout-good: var(--good);
@@ -296,7 +296,7 @@
   --focus-ring:   2px solid var(--accent);
 }
 
-/* The sequential ramp keeps the same steps in dark (SPEC §3); dark charts should
+/* The sequential ramp keeps the same steps in dark; dark charts should
    start from the lighter end (--seq-100…--seq-400) against --paper. */
 
 /* ---- Reduced motion: collapse every duration to zero ------------------ */

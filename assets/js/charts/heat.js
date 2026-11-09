@@ -1,4 +1,4 @@
-/* heat — when the commits happen: by hour of day and by weekday (SPEC §6.4)
+/* heat — when the commits happen: by hour of day and by weekday
    data-src: /data/bakery-metrics.json → commits_by_hour[{hour,count}], commits_by_weekday{Mon…Sun}
    Form:     two small bar charts side by side (stacked on phones). One measure, so one hue:
              the story bars (the night window, Mondays) in the accent, the rest a lighter step

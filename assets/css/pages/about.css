@@ -1,6 +1,6 @@
 /* Page styles: /about/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
 
-/* About · lane B4 · page-scoped. The page's sections sit inside .prose (A1's case layout), so these rules
+/* About · page-scoped. The page's sections sit inside .prose (the shared case layout), so these rules
    undo .prose's list indents for the timeline, findings and contact components and set section rhythm. */
 .about-bio { max-width: 40rem; margin-top: var(--space-5); }
 .about-bio > * + * { margin-top: var(--space-4); }

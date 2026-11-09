@@ -1,4 +1,4 @@
-/* issues — GitHub issues opened vs closed, cumulative (SPEC §6.3)
+/* issues — GitHub issues opened vs closed, cumulative
    data-src: /data/bakery-metrics.json → issues[{number,title,created,closed,state}], issues_summary
    Form:     two step lines on one axis (series-1 opened, series-2 closed), the open backlog
              between them as a 10% wash, end labels, median-days-to-close as the legend note.

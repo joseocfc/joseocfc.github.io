@@ -1,6 +1,6 @@
 /* Page styles: /process/prompts/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
 
-/* /process/prompts/ — page-scoped styles (lane B3). A1 tokens only. */
+/* /process/prompts/ — page-scoped styles. Shared tokens only. */
 .pp-hero { padding-bottom: clamp(var(--space-6), 4vw, var(--space-8)); }
 .pp-hero .meta-grid { margin-top: var(--space-7); max-width: 52rem; }
 .pp-actions { margin-top: var(--space-6); }

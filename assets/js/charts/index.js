@@ -1,15 +1,15 @@
 /* =============================================================================
-   charts/index.js — chart runtime for José Ochoa's portfolio (build lane A2)
+   charts/index.js — chart runtime for José Ochoa's portfolio
    =============================================================================
 
-   ADD A FIGURE (page lanes)
+   ADD A FIGURE
    -------------------------
    1. Load D3, then this module, at the end of <body> (D3 first; both are deferred):
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
         <script type="module" src="/assets/js/charts/index.js"></script>
       If D3 is missing, this module injects that same script tag and waits for it.
 
-   2. Paste the figure anatomy (SPEC §6). Only data-chart and data-src are required:
+   2. Paste the figure anatomy. Only data-chart and data-src are required:
         <figure class="figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
           <header>
             <p class="eyebrow">Figure 1 · Commits per day</p>
@@ -251,7 +251,7 @@ export function readColors(el = document.documentElement) {
     const vsWhite = 1.05 / (L + 0.05), vsDark = (L + 0.05) / (luminance(darkest) + 0.05);
     return vsWhite >= vsDark ? 'white' : darkest;
   };
-  /** Sequential ramp t∈[0,1] → colour; dark mode starts from the lighter end (SPEC §3). */
+  /** Sequential ramp t∈[0,1] → colour; dark mode starts from the lighter end. */
   c.ramp = (t) => {
     const stops = theme === 'dark'
       ? [c.seq[650], c.seq[500], c.seq[400], c.seq[300], c.seq[200], c.seq[100]]
@@ -562,7 +562,7 @@ class Chart {
     tbtn.setAttribute('aria-expanded', 'false');
     const label = tbtn.textContent.trim() || 'Table';
     tbtn.addEventListener('click', () => {
-      // aria-controls is set once the table exists, so it never points at a missing id (C1 QA).
+      // aria-controls is set once the table exists, so it never points at a missing id.
       if (!this.tableEl) { this.buildTable(tableId); tbtn.setAttribute('aria-controls', tableId); }
       const open = this.tableEl.hidden;
       this.tableEl.hidden = !open;

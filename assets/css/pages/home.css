@@ -1,13 +1,13 @@
 /* Page styles: / — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
 
-/* Home · lane B4 · page-scoped. Nothing here overrides shared component rules outside this page. */
+/* Home · page-scoped. Nothing here overrides shared component rules outside this page. */
 
 /* Stat cards read number → label → claim (content/home.md: "value | label | claim | meta"),
    so "1" is followed by "Designer, 0 developers" and the label sits under the number. */
 .home-stats .stat-value { margin-top: 0; }
 .home-stats .stat-value + .stat-label { margin-top: var(--space-3); color: var(--ink-2); }
 
-/* Epoch card: a window onto A4's matplotlib render (assets/img/epoch/notable-models-mpl[-dark].png, 2400×1440),
+/* Epoch card: a window onto the study's matplotlib render (assets/img/epoch/notable-models-mpl[-dark].png, 2400×1440),
    x 984–2340 and y 290 down, so every label is whole: the "2016" tick label (x 927–980) falls outside, "ResNeXt-101 32x48d" (from x 989) inside. Light and dark renders swap with the theme,
    like the live charts do; the hidden one is lazy and display:none, so it is never downloaded. */
 .epoch-thumb__frame {

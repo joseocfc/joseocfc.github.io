@@ -1,10 +1,10 @@
 /* ==========================================================================
-   components.css — every component in SPEC §5 (lane A1 "shell")
+   components.css — every shared component
    Order: skip · header/nav · theme toggle · footer · eyebrow · buttons · hero ·
    stats · media · quote · callout · timeline · steps · tags · cards · diagram ·
    artefact · findings · keep/change/drop · meta grid · facts · toc + case layout ·
    tables · details · case-nav · reveal.
-   Charts (.figure, .chart, .chart-tip) are styled by charts.css (lane A2).
+   Charts (.figure, .chart, .chart-tip) are styled by charts.css.
    ========================================================================== */
 
 /* ---- Skip link -------------------------------------------------------- */
@@ -126,7 +126,7 @@
   transform: translateY(-4px);
   transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), visibility 0s linear var(--dur-fast);
 }
-/* C1 QA: from 768 to ~1216px the left-anchored 340px menu ran 8–18px past the viewport (horizontal scroll on
+/* from 768 to ~1216px the left-anchored 340px menu ran 8–18px past the viewport (horizontal scroll on
    every page, even while closed). Anchor it to the trigger's right edge until the header is wide enough. */
 @media (min-width: 768px) and (max-width: 1279.98px) {
   .site-nav__menu { left: auto; right: -8px; }
@@ -812,7 +812,7 @@
 .work-card {
   position: relative;
   display: grid;
-  align-content: start; /* C1 QA: when a grid stretches cards to equal height, keep titles aligned instead of padding the gap */
+  align-content: start; /* when a grid stretches cards to equal height, keep titles aligned instead of padding the gap */
   gap: var(--space-5);
   min-width: 0;
   isolation: isolate;
@@ -1133,7 +1133,7 @@
 }
 .toc__link:hover { color: var(--ink); border-color: var(--line-strong); }
 .toc__link[aria-current="true"], .toc__link.is-current { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-/* C1 QA: was `color: inherit; opacity: .6`, which put --ink-meta at 2.4:1 on paper. Muted via the AA-safe token instead. */
+/* was `color: inherit; opacity: .6`, which put --ink-meta at 2.4:1 on paper. Muted via the AA-safe token instead. */
 .toc__num { margin-right: .5em; font-family: var(--font-mono); font-size: .7rem; color: var(--ink-meta); }
 .toc__link:is([aria-current="true"], .is-current) .toc__num { color: inherit; opacity: .75; }
 
@@ -1286,7 +1286,7 @@
 @media (min-width: 768px) { .case-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .case-nav__link {
   display: grid;
-  align-content: start; /* C1 QA: stretched to its neighbour's height, the rows spread and the title floated */
+  align-content: start; /* stretched to its neighbour's height, the rows spread and the title floated */
   gap: var(--space-2);
   padding: var(--space-5);
   border: 1px solid var(--line);

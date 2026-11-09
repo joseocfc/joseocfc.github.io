@@ -1,7 +1,7 @@
 /* Page styles: /work/bakery-orders/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
 
 /* ==========================================================================
-   /work/bakery-orders/ — page-scoped styles (lane B1). Every rule is scoped to
+   /work/bakery-orders/ — page-scoped styles. Every rule is scoped to
    .bk-page or a .bk-* class, reads tokens only, and changes nothing site-wide.
    ========================================================================== */
 

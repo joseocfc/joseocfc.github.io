@@ -1,6 +1,6 @@
 /* Page styles: /process/ — moved from inline <style> blocks (F4). Linked after charts.css so the cascade order matches the old inline position. */
 
-/* /process/ — page-scoped styles (lane B3). A1 tokens only; no new colours. */
+/* /process/ — page-scoped styles. Shared tokens only; no new colors. */
 .pr-hero { padding-bottom: clamp(var(--space-7), 6vw, var(--space-9)); }
 .pr-main { min-width: 0; padding-bottom: var(--section-pad); }
 .pr-main > section + section { margin-top: clamp(var(--space-9), 9vw, var(--space-10)); }
@@ -140,11 +140,11 @@
 .excerpt .ln.is-hl { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .excerpt .ln.is-hl .ln__t { color: var(--ink); }
 .excerpt .ln__t { color: var(--ink-2); }
-.excerpt .md-mark { color: var(--ink-meta); } /* C1 QA: was --ink-3 (3.3–3.9:1); --ink-meta is the site's AA-safe muted text */
+.excerpt .md-mark { color: var(--ink-meta); } /* was --ink-3 (3.3–3.9:1); --ink-meta is the site's AA-safe muted text */
 .excerpt .md-h, .excerpt strong { color: var(--ink); font-weight: var(--fw-medium); }
 .excerpt .md-code { color: var(--accent-ink); }
 .excerpt .md-elide { color: var(--ink-meta); }
-.excerpt .ln.is-hl :is(.ln__n, .md-mark, .md-elide) { color: var(--ink-2); } /* C1 QA: --ink-meta is 4.49:1 on --accent-soft */
+.excerpt .ln.is-hl :is(.ln__n, .md-mark, .md-elide) { color: var(--ink-2); } /* --ink-meta is 4.49:1 on --accent-soft */
 .artefact__note { padding: var(--space-3) var(--space-5); border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: var(--fs-micro); line-height: 1.5; color: var(--ink-meta); overflow-wrap: anywhere; }
 .artefact__note .md-hl { display: inline-block; width: .7em; height: .7em; margin-right: .4em; vertical-align: -.05em; background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 @media (max-width: 599.98px) {
@@ -155,7 +155,7 @@
 }
 .pr-figs { display: grid; gap: var(--space-8); margin-block: var(--space-8) var(--space-7); max-width: none; }
 
-/* Keep / change / drop: the A1 .kcd, with a "→ instead" line on change items. */
+/* Keep / change / drop: the shared .kcd, with a "→ instead" line on change items. */
 .prose > .kcd { max-width: none; margin-block: var(--space-7); }
 .kcd__now { display: block; color: var(--ink-2); }
 .kcd__now::before { content: "\2192\00a0" / ""; color: var(--ink-3); }

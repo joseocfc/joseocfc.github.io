@@ -1,4 +1,4 @@
-/* site.js — shell behaviour for every page (lane A1 "shell"). ES module, no dependencies.
+/* site.js — shell behaviour for every page. ES module, no dependencies.
  *
  *  1. Theme      — the inline <head> script stamps data-theme before paint; this module wires
  *                  every [data-theme-toggle], persists to localStorage('theme'), follows the OS
@@ -77,7 +77,7 @@ function initNav() {
   header.querySelectorAll('.site-nav a[href]').forEach((a) => {
     const target = normalise(new URL(a.href, location.href).pathname);
     if (target === here) a.setAttribute('aria-current', 'page');
-    // C1 QA: a sub-page (/process/prompts/) marks its section link, as /work/* pages mark the Work trigger.
+    // a sub-page (/process/prompts/) marks its section link, as /work/* pages mark the Work trigger.
     else if (target !== '/' && here.startsWith(target) && !a.closest('.site-nav__menu')) a.classList.add('is-current');
   });
   if (trigger && here.startsWith('/work/')) trigger.classList.add('is-current');
@@ -201,7 +201,7 @@ function initToc() {
       current?.a.removeAttribute('aria-current');
       current?.a.classList.remove('is-current');
       current = null;
-      // C1 QA: back above the first section, return the chip strip to its start (it stayed on the last chip).
+      // back above the first section, return the chip strip to its start (it stayed on the last chip).
       if (list.scrollLeft > 0 && list.scrollWidth > list.clientWidth + 1) list.scrollTo({ left: 0, behavior: reduced() ? 'auto' : 'smooth' });
     }
   }, { rootMargin: `-${headerH + 56}px 0px -55% 0px`, threshold: 0 });

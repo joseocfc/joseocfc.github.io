@@ -39,7 +39,7 @@
 /* Modes: plot + table side by side when the figure is wide enough */
 .ds-modes__grid { display: grid; gap: var(--space-6); align-items: center; }
 .ds-modes__svg { width: 100%; max-width: 460px; }
-/* C1 QA: the table column was capped at 250/260px but the table needs ~279px, so it ran over the card border at 768.
+/* the table column was capped at 250/260px but the table needs ~279px, so it ran over the card border at 768.
    The column now takes the table's own width; the plot column absorbs the difference. */
 @container (min-width: 600px) {
   .ds-modes__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); }

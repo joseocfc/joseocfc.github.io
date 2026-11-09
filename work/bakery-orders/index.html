@@ -91,8 +91,8 @@
 
 <main id="main" tabindex="-1">
 <!-- PAGE CONTENT -->
-<!-- /work/bakery-orders/ · lane B1 (Opus 5.5) · assembled 2026-11-07 from content/bakery-orders.md (copy lane A5).
-     Figures: A2 chart runtime. Diagrams: A3's SVGs inlined (architecture, orchestration); token contexts drawn here.
+<!-- /work/bakery-orders/ · copy from content/bakery-orders.md.
+     Figures: the shared chart runtime. Diagrams: SVGs inlined (architecture, orchestration); token contexts drawn here.
      Images: A3's optimised copies (site/assets/img/MANIFEST.md). Page-only styles: the <style> block in <head>. -->
 
 <section class="hero bk-hero container" aria-labelledby="hero-title">
@@ -822,7 +822,7 @@
   <p>By the next morning all 18 deli tickets were merged and on staging.</p>
   <!-- src: STATUS.md:64-68 ("all 18 merged and on staging at 5b4efb4 by the morning of 10-26") -->
 
-  <!-- The heat figure sits here (after "by the next morning") rather than after the issues figure; C1 QA renumbered Figures 3–5 to reading order: the overnight pattern is this paragraph's point, and it keeps two charts from running back to back. -->
+  <!-- The heat figure sits here (after "by the next morning") rather than after the issues figure; renumbered Figures 3–5 to reading order: the overnight pattern is this paragraph's point, and it keeps two charts from running back to back. -->
   <figure class="figure reveal" data-chart="heat" data-src="/data/bakery-metrics.json" id="fig-heat">
     <header>
       <p class="eyebrow"><span class="eyebrow__seg">Figure 3</span> · <span class="eyebrow__seg">When commits happened</span></p>
@@ -1091,7 +1091,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script type="module" src="/assets/js/charts/index.js"></script>
 <script type="module" src="/assets/js/site.js"></script>
-<!-- Page script (B1): at ≥1024px the two system diagrams run full width over the TOC rail; fade the rail while one passes it. -->
+<!-- Page script: at ≥1024px the two system diagrams run full width over the TOC rail; fade the rail while one passes it. -->
 <script type="module">
 const toc = document.querySelector('.toc');
 const wide = [...document.querySelectorAll('.bk-over-toc')];

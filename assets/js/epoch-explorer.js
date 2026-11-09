@@ -1,5 +1,5 @@
 /* ==========================================================================
-   epoch-explorer.js — José Ochoa portfolio · lane A4 "epoch explorer"
+   epoch-explorer.js — José Ochoa portfolio · the Epoch chart study
    Notable AI models (Epoch AI, CC BY 4.0), redrawn for a phone.
 
    ES module. D3 and JSON come from the shared loaders in charts/index.js (loadD3,

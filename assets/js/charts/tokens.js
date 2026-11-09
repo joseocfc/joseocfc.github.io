@@ -1,4 +1,4 @@
-/* tokens — the 94 contract tokens of the CFC design system, by family (SPEC §6.10)
+/* tokens — the 94 contract tokens of the CFC design system, by family
    data-src: /data/design-system-metrics.json → tokens { brand_colors, neutrals, semantic_status_colors,
              font_sizes, font_families, spacing_steps, radius, alpha, shadows, transitions,
              z_ladder, button_contract_tokens, custom_keys, contract_total }

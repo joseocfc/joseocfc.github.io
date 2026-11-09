@@ -1,4 +1,4 @@
-/* types — what the 1,503 commits were, by conventional-commit prefix (SPEC §6.6)
+/* types — what the 1,503 commits were, by conventional-commit prefix
    data-src: /data/bakery-metrics.json → commits_by_type { docs, feat, fix, test, merge, other, chore }
    Form:     one whole split into parts → the tall segmented bar (28px, 4px corners, 2px gaps),
              ≤6 parts (the smallest tail folds into "other"), share printed inside where it fits,

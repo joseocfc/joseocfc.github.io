@@ -1,4 +1,4 @@
-/* timeline — bakery commits per day with milestone flags (SPEC §6.1)
+/* timeline — bakery commits per day with milestone flags
    data-src: /data/bakery-metrics.json → commits_by_day[{date,count}], milestones[{date,label,source}]
    options:  data-labels (6), data-labels-mobile (3), data-from, data-to, data-height */
 import { dailyBars, clamp, num, scrub } from './kit.js';
