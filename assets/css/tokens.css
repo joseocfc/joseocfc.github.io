@@ -190,7 +190,6 @@
   --dur-fast:    140ms;
   --dur-base:    220ms;
   --dur-reveal:  500ms;
-  --stagger:     60ms;
   --reveal-shift: 8px;
 
   /* ---- Layers ---------------------------------------------------------- */
@@ -305,7 +304,6 @@
     --dur-fast:   0ms;
     --dur-base:   0ms;
     --dur-reveal: 0ms;
-    --stagger:    0ms;
     --reveal-shift: 0px;
   }
 }

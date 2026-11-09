@@ -1325,8 +1325,8 @@
   opacity: 0;
   transform: translateY(var(--reveal-shift));
   transition:
-    opacity var(--dur-reveal) var(--ease-out) calc(var(--reveal-i, 0) * var(--stagger)),
-    transform var(--dur-reveal) var(--ease-out) calc(var(--reveal-i, 0) * var(--stagger));
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
 }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
