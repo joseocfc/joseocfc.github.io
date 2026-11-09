@@ -84,6 +84,7 @@
    ========================================================================== */
 
 const D3_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js';
+const D3_TIMEOUT = 15000;
 const MOBILE_BELOW = 520;            // chart width (px) under which renderers use their narrow layout
 const registry = new Map();          // name -> renderer module (default export)
 const dataCache = new Map();         // url  -> Promise<json>
@@ -95,14 +96,21 @@ export function loadD3() {
   if (window.d3) return Promise.resolve(window.d3);
   if (d3Promise) return d3Promise;
   d3Promise = new Promise((resolve, reject) => {
+    // Settle exactly once: on load, on error, or after D3_TIMEOUT so callers can show a fallback.
+    let poll = 0, timer = 0;
+    const done = (fn, v) => { clearInterval(poll); clearTimeout(timer); fn(v); };
     const s = document.createElement('script');
     s.src = D3_SRC;
     s.async = true;
     s.crossOrigin = 'anonymous';
-    s.addEventListener('load', () => (window.d3 ? resolve(window.d3) : reject(new Error('D3 loaded without a global'))));
-    s.addEventListener('error', () => reject(new Error('D3 failed to load from ' + D3_SRC)));
+    s.addEventListener('load', () => (window.d3 ? done(resolve, window.d3) : done(reject, new Error('D3 loaded without a global'))));
+    s.addEventListener('error', () => done(reject, new Error('D3 failed to load from ' + D3_SRC)));
+    poll = setInterval(() => { if (window.d3) done(resolve, window.d3); }, 50);
+    timer = setTimeout(() => done(reject, new Error(`D3 did not load within ${D3_TIMEOUT / 1000} s`)), D3_TIMEOUT);
     document.head.append(s);
   });
+  // A failed attempt is not cached forever: a later call may retry.
+  d3Promise.catch(() => { d3Promise = null; });
   return d3Promise;
 }
 
@@ -265,6 +273,7 @@ function luminance(color) {
 export const tooltip = (() => {
   let el = null;
   let owner = null;
+  let said = '';
   const ensure = () => {
     if (el) return el;
     el = document.createElement('div');
@@ -301,6 +310,8 @@ export const tooltip = (() => {
         t.append(row);
       }
       const notes = content.notes || (content.note ? [content.note] : []);
+      said = [content.title, ...(content.rows || []).map((r) => `${r.value ?? ''} ${r.label ?? ''}`.trim()), ...notes]
+        .filter(Boolean).join('. ');
       notes.forEach((n, i) => t.append(text('p', 'chart-tip__note' + (i ? ' chart-tip__note--more' : ''), n)));
       t.hidden = false;
       // Position: above-right of the point, flipped to stay inside the viewport.
@@ -322,6 +333,7 @@ export const tooltip = (() => {
       owner = null;
     },
     get owner() { return owner; },
+    get text() { return said; },
   };
 })();
 
@@ -378,6 +390,7 @@ class Chart {
       this.json = json;
       this.slice = mod.pick ? mod.pick(json, this.opts) : json;
       this.wireActions();
+      this.wireLive();
       this.wireKeys();
       this.observe();
     } catch (err) {
@@ -412,6 +425,7 @@ class Chart {
   }
 
   watchResize() {
+    if (this.ro) this.ro.disconnect();
     let t = 0;
     const ro = new ResizeObserver(() => {
       clearTimeout(t);
@@ -421,6 +435,7 @@ class Chart {
       }, 120);
     });
     ro.observe(this.el);
+    this.ro = ro;
   }
 
   draw(animate = false) {
@@ -464,6 +479,21 @@ class Chart {
     this.drawn = true;
   }
 
+  /* One polite live region per figure, outside .chart (which is redrawn), so keyboard
+     users hear the point they moved to. Pointer hover is not announced. */
+  wireLive() {
+    const live = document.createElement('p');
+    live.className = 'visually-hidden';
+    live.setAttribute('aria-live', 'polite');
+    this.el.after(live);
+    this.live = live;
+  }
+
+  announce() {
+    if (!this.live) return;
+    this.live.textContent = tooltip.owner === this.el ? tooltip.text : '';
+  }
+
   /* Keyboard: the chart element itself is the single tab stop. */
   wireKeys() {
     this.el.addEventListener('keydown', (e) => {
@@ -482,12 +512,14 @@ class Chart {
       e.preventDefault();
       this.keyIndex = Math.max(0, Math.min(h.count - 1, i));
       h.show(this.keyIndex);
+      this.announce();
     });
     this.el.addEventListener('focus', () => {
       const h = this.keyHandler;
       if (!h || !h.count || !this.el.matches(':focus-visible')) return;
       if (this.keyIndex < 0) this.keyIndex = h.start ?? 0;
       h.show(this.keyIndex);
+      this.announce();
     });
     this.el.addEventListener('blur', () => {
       this.keyIndex = -1;

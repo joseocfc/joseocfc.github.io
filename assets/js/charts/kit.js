@@ -252,15 +252,15 @@ export function hover(ctx, el, { target, count, indexAt, show, clear = () => {},
     if (i < 0) { if (active >= 0) reset(); return; }
     active = i;
     show(i, { x: e.clientX, y: e.clientY });
-  });
+  }, opt);
   node.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'mouse') return;
     const i = indexAt(e);
     if (i < 0) return reset();
     active = i;
     show(i, { x: e.clientX, y: e.clientY });
-  });
-  node.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') reset(); });
+  }, opt);
+  node.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') reset(); }, opt);
   el.addEventListener('chart:reset', reset, opt);
   ctx.keys({ count, start, show: (i) => show(i, null), clear });
 }
