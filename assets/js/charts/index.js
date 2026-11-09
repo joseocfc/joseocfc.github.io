@@ -45,12 +45,15 @@
      ds-commits  /data/design-system-metrics.json   commits_by_day, design_system_commits_by_day, milestones, commits
      tokens      /data/design-system-metrics.json   tokens
      build-log   /data/build-log.json               generated, phases[], lanes[] {id,label,model,start,end|null,phase}
+     pickup      /data/bakery-orders-week1.json     holiday_pickup, days[] {date,holiday}, totals.holiday_orders
+     compute-band     /data/epoch/notable_models.json   models[] {date,compute}, meta
+     domain-multiples /data/epoch/notable_models.json   models[] {date,domain_group}, meta
 
    OPTIONS — data-* attributes on the <figure> (all optional)
    ------------------------------------------------------------
      data-labels="6"          timeline/ds-commits: most milestone labels at ≥520px chart width
      data-labels-mobile="3"   …and below 520px. Labels that would collide drop to the tooltip.
-     data-from / data-to      timeline/ds-commits/issues: YYYY-MM-DD window
+     data-from / data-to      timeline/ds-commits/issues: YYYY-MM-DD window; compute-band/domain-multiples: years
      data-height="280"        plot height in px (the chart adds its own label/axis bands)
      data-highlight="key"     loc: emphasised area key (default "tests_php"; "" = none);
                               heat: night window as "22-2"

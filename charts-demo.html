@@ -99,7 +99,7 @@
     <header class="section-head">
       <p class="eyebrow"><span class="eyebrow__seg">Chart system</span></p>
       <h1>Ten charts, one grammar</h1>
-      <p class="lead">Every figure on this site is drawn by one small D3 library from the real data files: a validated eight-slot palette read from the design tokens, hairline grids, direct labels, a tooltip, a table and a download on every chart. This page renders ten of them; the eleventh, co-authorship by model, is on the <a href="/process/">process page</a>.</p>
+      <p class="lead">Every figure on this site is drawn by one small D3 library from the real data files: a validated eight-slot palette read from the design tokens, hairline grids, direct labels, a tooltip, a table and a download on every chart. This page exists to show that grammar holding across sources and forms, so it mixes the build’s git history with the first week of orders and a public dataset from Epoch AI. Commit hours, commit types, lines by area and co-authorship by model are on the <a href="/process/">process page</a>.</p>
     </header>
   </div>
 </section>
@@ -107,7 +107,7 @@
 <section class="section section--flush-top" aria-labelledby="h-bakery">
   <div class="container">
     <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Case study</span><span class="eyebrow__seg">CFC Bakery Orders</span></p>
-    <h2 id="h-bakery" class="demo-h2">The build, in seven figures</h2>
+    <h2 id="h-bakery" class="demo-h2">The build and its first week, in five figures</h2>
     <div class="demo-stack">
 <figure class="figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
   <header>
@@ -145,21 +145,9 @@
   <footer class="figure-foot"><span>Source: gh issue list --state all, joseocfc/cfc-bakery-orders · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
-<figure class="figure" data-chart="heat" data-src="/data/bakery-metrics.json" id="fig-heat">
-  <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 4</span><span class="eyebrow__seg">When the work happened</span></p>
-    <h3 class="figure-title">Nights and Mondays</h3>
-    <p class="figure-sub">Commits by hour of day (Pacific time) and by weekday, all 1,503 commits.</p>
-  </header>
-  <div class="chart" role="img" aria-label="Two bar charts. By hour: commits peak at midnight, with 45% between 10 pm and 3 am. By weekday: Monday is highest with 390 commits, 26% of the total."></div>
-  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: Nights and Mondays"><table class="table table--compact"><caption>Commits by hour of day (Pacific time)</caption><thead><tr><th scope="col">Hour</th><th scope="col" class="num">Commits</th><th scope="col" class="num">Share</th></tr></thead><tbody><tr><th scope="row">12 am – 1 am</th><td class="num">203</td><td class="num">13.5%</td></tr><tr><th scope="row">1 am – 2 am</th><td class="num">88</td><td class="num">5.9%</td></tr><tr><th scope="row">2 am – 3 am</th><td class="num">112</td><td class="num">7.5%</td></tr><tr><th scope="row">3 am – 4 am</th><td class="num">54</td><td class="num">3.6%</td></tr><tr><th scope="row">4 am – 5 am</th><td class="num">67</td><td class="num">4.5%</td></tr><tr><th scope="row">5 am – 6 am</th><td class="num">35</td><td class="num">2.3%</td></tr><tr><th scope="row">6 am – 7 am</th><td class="num">23</td><td class="num">1.5%</td></tr><tr><th scope="row">7 am – 8 am</th><td class="num">23</td><td class="num">1.5%</td></tr><tr><th scope="row">8 am – 9 am</th><td class="num">27</td><td class="num">1.8%</td></tr><tr><th scope="row">9 am – 10 am</th><td class="num">16</td><td class="num">1.1%</td></tr><tr><th scope="row">10 am – 11 am</th><td class="num">30</td><td class="num">2.0%</td></tr><tr><th scope="row">11 am – noon</th><td class="num">98</td><td class="num">6.5%</td></tr><tr><th scope="row">noon – 1 pm</th><td class="num">58</td><td class="num">3.9%</td></tr><tr><th scope="row">1 pm – 2 pm</th><td class="num">73</td><td class="num">4.9%</td></tr><tr><th scope="row">2 pm – 3 pm</th><td class="num">83</td><td class="num">5.5%</td></tr><tr><th scope="row">3 pm – 4 pm</th><td class="num">56</td><td class="num">3.7%</td></tr><tr><th scope="row">4 pm – 5 pm</th><td class="num">40</td><td class="num">2.7%</td></tr><tr><th scope="row">5 pm – 6 pm</th><td class="num">28</td><td class="num">1.9%</td></tr><tr><th scope="row">6 pm – 7 pm</th><td class="num">11</td><td class="num">0.7%</td></tr><tr><th scope="row">7 pm – 8 pm</th><td class="num">25</td><td class="num">1.7%</td></tr><tr><th scope="row">8 pm – 9 pm</th><td class="num">31</td><td class="num">2.1%</td></tr><tr><th scope="row">9 pm – 10 pm</th><td class="num">54</td><td class="num">3.6%</td></tr><tr><th scope="row">10 pm – 11 pm</th><td class="num">125</td><td class="num">8.3%</td></tr><tr><th scope="row">11 pm – 12 am</th><td class="num">143</td><td class="num">9.5%</td></tr></tbody></table><table class="table table--compact"><caption>Commits by weekday</caption><thead><tr><th scope="col">Weekday</th><th scope="col" class="num">Commits</th><th scope="col" class="num">Share</th></tr></thead><tbody><tr><th scope="row">Mon</th><td class="num">390</td><td class="num">25.9%</td></tr><tr><th scope="row">Tue</th><td class="num">294</td><td class="num">19.6%</td></tr><tr><th scope="row">Wed</th><td class="num">189</td><td class="num">12.6%</td></tr><tr><th scope="row">Thu</th><td class="num">185</td><td class="num">12.3%</td></tr><tr><th scope="row">Fri</th><td class="num">135</td><td class="num">9.0%</td></tr><tr><th scope="row">Sat</th><td class="num">115</td><td class="num">7.7%</td></tr><tr><th scope="row">Sun</th><td class="num">195</td><td class="num">13.0%</td></tr></tbody></table></div></details>
-  <figcaption>45% of commits landed between 10 pm and 3 am; Monday alone holds 26%.</figcaption>
-  <footer class="figure-foot"><span>Source: git log --all, author time in America/Los_Angeles · computed 2026-11-07</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
 <figure class="figure" data-chart="rounds" data-src="/data/bakery-metrics.json" id="fig-rounds">
   <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 5</span><span class="eyebrow__seg">The review gate</span></p>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 4</span><span class="eyebrow__seg">The review gate</span></p>
     <h3 class="figure-title">Most changes passed a fresh 9/10 review in one or two rounds</h3>
     <p class="figure-sub">Mentions of each outcome in the records. Below 9/10 loops back: fix, then a new reviewer, five rounds at most.</p>
   </header>
@@ -169,28 +157,16 @@
   <footer class="figure-foot"><span>Source: grep of STATUS.md, docs/agents, docs/parity; the rule from CLAUDE.md · computed 2026-11-07</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
-<figure class="figure" data-chart="types" data-src="/data/bakery-metrics.json" id="fig-types">
+<figure class="figure" data-chart="pickup" data-src="/data/bakery-orders-week1.json" id="fig-pickup">
   <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 6</span><span class="eyebrow__seg">Commit mix</span></p>
-    <h3 class="figure-title">Nearly half of all commits are documentation</h3>
-    <p class="figure-sub">1,503 commits by conventional-commit prefix.</p>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 5</span><span class="eyebrow__seg">Pickup days</span></p>
+    <h3 class="figure-title">20 of 23 holiday orders chose the same pickup day</h3>
+    <p class="figure-sub">Thanksgiving orders placed 4–8 November 2026, by the pickup date the customer chose. Days nobody chose stay empty.</p>
   </header>
-  <div class="chart" role="img" aria-label="A single segmented bar: docs 49%, feat 20%, fix 14%, test 11%, merge 3%, other and chore 4%."></div>
-  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: Nearly half of all commits are documentation"><table class="table table--compact"><caption>Commits by conventional-commit prefix (all seven types, unfolded)</caption><thead><tr><th scope="col" class="mono">Type</th><th scope="col">What it covers</th><th scope="col" class="num">Commits</th><th scope="col" class="num">Share</th></tr></thead><tbody><tr><th scope="row" class="mono">docs</th><td>Specs, hand-offs, status and review records</td><td class="num">734</td><td class="num">48.8%</td></tr><tr><th scope="row" class="mono">feat</th><td>New behavior</td><td class="num">294</td><td class="num">19.6%</td></tr><tr><th scope="row" class="mono">fix</th><td>Bug fixes</td><td class="num">211</td><td class="num">14.0%</td></tr><tr><th scope="row" class="mono">test</th><td>Harness checks and assertions</td><td class="num">166</td><td class="num">11.0%</td></tr><tr><th scope="row" class="mono">merge</th><td>Branch merges</td><td class="num">45</td><td class="num">3.0%</td></tr><tr><th scope="row" class="mono">other</th><td>Unprefixed commits</td><td class="num">37</td><td class="num">2.5%</td></tr><tr><th scope="row" class="mono">chore</th><td>Housekeeping</td><td class="num">16</td><td class="num">1.1%</td></tr><tr><th scope="row" class="mono">total</th><td>—</td><td class="num">1,503</td><td class="num">100%</td></tr></tbody></table></div></details>
-  <figcaption>Plans, hand-offs and review records were committed alongside the code. That is what makes the build auditable after the fact.</figcaption>
-  <footer class="figure-foot"><span>Source: git log --all, subject-line prefixes · computed 2026-11-07</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
-<figure class="figure" data-chart="loc" data-src="/data/bakery-metrics.json" id="fig-loc">
-  <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 7</span><span class="eyebrow__seg">Lines by area</span></p>
-    <h3 class="figure-title">More lines of tests than of plugin code</h3>
-    <p class="figure-sub">Lines in tracked files, by area of the repository.</p>
-  </header>
-  <div class="chart" role="img" aria-label="Horizontal bars of lines of code: tests 62,396, docs 51,114, plugin code 50,116, styles 11,015, scripts 8,201, assumptions register 1,685, status log 999, agent brief 129."></div>
-  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: More lines of tests than of plugin code"><table class="table table--compact"><caption>Lines of code by area (git ls-files + wc -l)</caption><thead><tr><th scope="col">Area</th><th scope="col" class="mono">Path</th><th scope="col" class="num">Lines</th></tr></thead><tbody><tr><th scope="row">Tests</th><td class="mono">tests/ · PHP</td><td class="num">62,396</td></tr><tr><th scope="row">Docs</th><td class="mono">docs/ · Markdown</td><td class="num">51,114</td></tr><tr><th scope="row">Plugin code</th><td class="mono">includes/ · PHP</td><td class="num">50,116</td></tr><tr><th scope="row">Styles</th><td class="mono">assets/ · CSS</td><td class="num">11,015</td></tr><tr><th scope="row">Scripts</th><td class="mono">assets/ · JS</td><td class="num">8,201</td></tr><tr><th scope="row">Assumptions register</th><td class="mono">docs/assumptions-register.md</td><td class="num">1,685</td></tr><tr><th scope="row">Status log</th><td class="mono">STATUS.md</td><td class="num">999</td></tr><tr><th scope="row">Agent brief</th><td class="mono">CLAUDE.md</td><td class="num">129</td></tr></tbody></table></div></details>
-  <figcaption>62,396 lines of tests stand behind 50,116 lines of plugin PHP, next to 51,114 lines of documentation.</figcaption>
-  <footer class="figure-foot"><span>Source: git ls-files + wc -l, joseocfc/cfc-bakery-orders · computed 2026-11-07</span>
+  <div class="chart" role="img" aria-label="Column chart of holiday orders by pickup date, November 16 to 25, 2026: 1 order on Monday the 16th, 2 on Tuesday the 24th and 20 on Wednesday the 25th, with no orders on the days between."></div>
+  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: 20 of 23 holiday orders chose the same pickup day"><table class="table table--compact"><caption>Holiday orders from the first week, by the pickup date the customer chose (dates with no orders omitted)</caption><thead><tr><th scope="col">Pickup date</th><th scope="col" class="num">Holiday orders</th></tr></thead><tbody><tr><th scope="row">Mon, Nov 16, 2026</th><td class="num">1</td></tr><tr><th scope="row">Tue, Nov 24, 2026</th><td class="num">2</td></tr><tr><th scope="row">Wed, Nov 25, 2026</th><td class="num">20</td></tr><tr><th scope="row">Total</th><td class="num">23</td></tr></tbody></table></div></details>
+  <figcaption>The pile-up on Wednesday 25 November is the one the per-day, per-store pickup sheets were built for.</figcaption>
+  <footer class="figure-foot"><span>Source: the co-op’s WooCommerce Analytics export, 1–9 November 2026 · computed 2026-11-09</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
     </div>
@@ -204,7 +180,7 @@
     <div class="demo-stack">
 <figure class="figure" data-chart="ds-commits" data-src="/data/design-system-metrics.json" id="fig-ds-commits">
   <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 8</span><span class="eyebrow__seg">Design-system commits</span></p>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 6</span><span class="eyebrow__seg">Design-system commits</span></p>
     <h3 class="figure-title">94 commits on the day the contract froze</h3>
     <p class="figure-sub">cfc-theme commits per day, Mar 4 – Sep 10, 2026. Design-system work in blue; the shaded band is the design-system window.</p>
   </header>
@@ -216,7 +192,7 @@
 </figure>
 <figure class="figure figure--prose" data-chart="tokens" data-src="/data/design-system-metrics.json" id="fig-tokens">
   <header>
-    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 9</span><span class="eyebrow__seg">Token families</span></p>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 7</span><span class="eyebrow__seg">Token families</span></p>
     <h3 class="figure-title">94 contract tokens in seven families</h3>
     <p class="figure-sub">Every token in theme.json, one square each, a family per row.</p>
   </header>
@@ -224,6 +200,39 @@
   <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: 94 contract tokens in seven families"><table class="table table--compact"><caption>Design-system contract tokens by family (total 94)</caption><thead><tr><th scope="col">Family</th><th scope="col">Members</th><th scope="col" class="num">Tokens</th></tr></thead><tbody><tr><th scope="row">Button contract</th><td>radius, padding, min-heights, focus</td><td class="num">24</td></tr><tr><th scope="row">Radius · alpha · shadow · motion</th><td>7 · 5 · 5 · 4</td><td class="num">21</td></tr><tr><th scope="row">Semantic + neutral color</th><td>6 status · 7 neutral</td><td class="num">13</td></tr><tr><th scope="row">Structure (derived)</th><td>z ladder 6 · layout + scalars 6</td><td class="num">12</td></tr><tr><th scope="row">Brand color</th><td>primary … undenary (no senary)</td><td class="num">10</td></tr><tr><th scope="row">Type</th><td>6 fluid sizes · 2 families</td><td class="num">8</td></tr><tr><th scope="row">Spacing</th><td>8 · 16 · 24 · 32 · 48 · 64 px</td><td class="num">6</td></tr><tr><th scope="row">Total</th><td>—</td><td class="num">94</td></tr></tbody></table></div></details>
   <figcaption>The button contract is the largest family: a whole component recipe written as tokens that alias other tokens.</figcaption>
   <footer class="figure-foot"><span>Source: theme.json @ v1.1; figma-parity.md, 94 tokens · 60 mirrored · computed 2026-11-07</span>
+    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="section section--rule" aria-labelledby="h-epoch">
+  <div class="container">
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Public data</span><span class="eyebrow__seg">Epoch AI</span></p>
+    <h2 id="h-epoch" class="demo-h2">The same grammar on someone else’s data</h2>
+    <div class="demo-stack">
+<figure class="figure" data-chart="compute-band" data-src="/data/epoch/notable_models.json" id="fig-compute-band">
+  <header>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 8</span><span class="eyebrow__seg">Training compute</span></p>
+    <h3 class="figure-title">Median training compute rose seven orders of magnitude from 2012 to 2025</h3>
+    <p class="figure-sub">Training compute (FLOP, log scale) of Epoch AI’s notable models by publication year. The line is the median; the band holds the middle half of that year’s models.</p>
+  </header>
+  <div class="chart" role="img" aria-label="Line chart on a log scale: the median training compute of notable AI models rises from about 3 × 10^17 FLOP in 2012 to about 4 × 10^24 FLOP in 2025, inside a band from the 25th to the 75th percentile that spans 1.5 to 3.4 orders of magnitude until 2023 and under one in 2024 and 2025."></div>
+  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: Median training compute rose seven orders of magnitude from 2012 to 2025"><table class="table table--compact"><caption>Training compute of notable AI models by publication year: 25th percentile, median and 75th percentile (FLOP)</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Models</th><th scope="col" class="num">25th pct</th><th scope="col" class="num">Median</th><th scope="col" class="num">75th pct</th></tr></thead><tbody><tr><th scope="row">2012</th><td class="num">8</td><td class="num">1.3 × 10¹⁶</td><td class="num">2.9 × 10¹⁷</td><td class="num">4.7 × 10¹⁷</td></tr><tr><th scope="row">2013</th><td class="num">10</td><td class="num">1.0 × 10¹⁶</td><td class="num">7.1 × 10¹⁶</td><td class="num">4.4 × 10¹⁷</td></tr><tr><th scope="row">2014</th><td class="num">14</td><td class="num">4.9 × 10¹⁶</td><td class="num">8.9 × 10¹⁷</td><td class="num">8.1 × 10¹⁸</td></tr><tr><th scope="row">2015</th><td class="num">11</td><td class="num">1.0 × 10¹⁷</td><td class="num">7.1 × 10¹⁸</td><td class="num">1.7 × 10¹⁹</td></tr><tr><th scope="row">2016</th><td class="num">16</td><td class="num">6.6 × 10¹⁶</td><td class="num">5.0 × 10¹⁸</td><td class="num">1.0 × 10²⁰</td></tr><tr><th scope="row">2017</th><td class="num">20</td><td class="num">3.0 × 10¹⁷</td><td class="num">5.0 × 10¹⁸</td><td class="num">1.4 × 10²⁰</td></tr><tr><th scope="row">2018</th><td class="num">24</td><td class="num">1.1 × 10¹⁷</td><td class="num">1.4 × 10¹⁸</td><td class="num">5.0 × 10¹⁹</td></tr><tr><th scope="row">2019</th><td class="num">38</td><td class="num">2.9 × 10¹⁸</td><td class="num">1.2 × 10²⁰</td><td class="num">7.9 × 10²¹</td></tr><tr><th scope="row">2020</th><td class="num">33</td><td class="num">2.6 × 10¹⁹</td><td class="num">6.2 × 10²⁰</td><td class="num">5.1 × 10²¹</td></tr><tr><th scope="row">2021</th><td class="num">62</td><td class="num">5.0 × 10²⁰</td><td class="num">1.2 × 10²²</td><td class="num">4.3 × 10²²</td></tr><tr><th scope="row">2022</th><td class="num">60</td><td class="num">6.6 × 10²⁰</td><td class="num">1.5 × 10²²</td><td class="num">3.0 × 10²³</td></tr><tr><th scope="row">2023</th><td class="num">65</td><td class="num">3.0 × 10²¹</td><td class="num">6.3 × 10²²</td><td class="num">5.5 × 10²³</td></tr><tr><th scope="row">2024</th><td class="num">46</td><td class="num">1.1 × 10²⁴</td><td class="num">3.0 × 10²⁴</td><td class="num">7.6 × 10²⁴</td></tr><tr><th scope="row">2025</th><td class="num">41</td><td class="num">1.4 × 10²⁴</td><td class="num">3.7 × 10²⁴</td><td class="num">5.0 × 10²⁴</td></tr></tbody></table></div></details>
+  <figcaption>The spread inside a year matters as much as the trend: through 2023 the middle half of a year’s models spanned 1.5 to 3.4 orders of magnitude; in 2024 and 2025, under one.</figcaption>
+  <footer class="figure-foot"><span>Source: <a href="https://epoch.ai/data/ai-models">Epoch AI, Notable AI Models</a> (CC BY 4.0), downloaded 2026-11-07; 448 models from 2012–2025 with a compute estimate; redrawn, not affiliated with Epoch AI · computed 2026-11-09</span>
+    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
+</figure>
+<figure class="figure" data-chart="domain-multiples" data-src="/data/epoch/notable_models.json" id="fig-domain-multiples">
+  <header>
+    <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 9</span><span class="eyebrow__seg">Models by domain</span></p>
+    <h3 class="figure-title">Language has been the largest domain every year since 2017</h3>
+    <p class="figure-sub">Notable models with a compute estimate per publication year, 2012–2025, in the four largest domains, on one shared scale.</p>
+  </header>
+  <div class="chart" role="img" aria-label="Four small column charts on one scale. Language, 229 models: 1 in 2012, 10 in 2017, then 17 to 31 a year. Vision, 86: up to 9 a year until 2016 and a peak of 19 in 2021. Multimodal, 49: none before 2021, a peak of 16 in 2023. Biology, 34: from 2016, a peak of 9 in 2022."></div>
+  <details class="disclosure figure-data" data-static-table><summary>Data table</summary><div class="chart-table" role="region" tabindex="0" aria-label="Data table: Language has been the largest domain every year since 2017"><table class="table table--compact"><caption>Notable AI models per publication year, 2012–2025, in the four largest domains</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Language</th><th scope="col" class="num">Vision</th><th scope="col" class="num">Multimodal</th><th scope="col" class="num">Biology</th></tr></thead><tbody><tr><th scope="row">2012</th><td class="num">1</td><td class="num">6</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">2013</th><td class="num">5</td><td class="num">3</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">2014</th><td class="num">4</td><td class="num">9</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">2015</th><td class="num">2</td><td class="num">7</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">2016</th><td class="num">6</td><td class="num">8</td><td class="num">0</td><td class="num">1</td></tr><tr><th scope="row">2017</th><td class="num">10</td><td class="num">3</td><td class="num">0</td><td class="num">1</td></tr><tr><th scope="row">2018</th><td class="num">17</td><td class="num">4</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">2019</th><td class="num">24</td><td class="num">2</td><td class="num">0</td><td class="num">2</td></tr><tr><th scope="row">2020</th><td class="num">22</td><td class="num">3</td><td class="num">0</td><td class="num">4</td></tr><tr><th scope="row">2021</th><td class="num">27</td><td class="num">19</td><td class="num">5</td><td class="num">7</td></tr><tr><th scope="row">2022</th><td class="num">31</td><td class="num">13</td><td class="num">4</td><td class="num">9</td></tr><tr><th scope="row">2023</th><td class="num">27</td><td class="num">7</td><td class="num">16</td><td class="num">7</td></tr><tr><th scope="row">2024</th><td class="num">26</td><td class="num">2</td><td class="num">12</td><td class="num">3</td></tr><tr><th scope="row">2025</th><td class="num">27</td><td class="num">0</td><td class="num">12</td><td class="num">0</td></tr><tr><th scope="row">Total</th><td class="num">229</td><td class="num">86</td><td class="num">49</td><td class="num">34</td></tr></tbody></table></div></details>
+  <figcaption>Vision led four of the first five years. Language has led every year since 2017, and multimodal models appear only from 2021.</figcaption>
+  <footer class="figure-foot"><span>Source: <a href="https://epoch.ai/data/ai-models">Epoch AI, Notable AI Models</a> (CC BY 4.0), downloaded 2026-11-07; 448 models from 2012–2025 with a compute estimate; redrawn, not affiliated with Epoch AI · computed 2026-11-09</span>
     <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
 </figure>
     </div>
