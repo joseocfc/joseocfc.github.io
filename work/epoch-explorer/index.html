@@ -16,12 +16,12 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
+<meta property="og:image:alt" content="Top of the Epoch study: the headline “Redrawing a dense scatter plot for a phone”, its introduction, and the study facts: data, rows used, tools, scope and dates.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Redrawing a dense scatter plot for a phone — José Ochoa">
 <meta name="twitter:description" content="A study of Epoch AI’s Notable AI Models chart, rebuilt from their CC BY data as a D3 chart that gives the years since 2010 the full width at 390px, with live trend cards and a matplotlib twin.">
 <meta name="twitter:image" content="https://joseocfc.github.io/assets/img/og/epoch-explorer.jpg">
-<meta name="twitter:image:alt" content="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026.">
+<meta name="twitter:image:alt" content="Top of the Epoch study: the headline “Redrawing a dense scatter plot for a phone”, its introduction, and the study facts: data, rows used, tools, scope and dates.">
 <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -92,7 +92,7 @@
      the trend cards and chart recompute them live. -->
 
 <header class="hero hero--split container" aria-labelledby="page-title">
-  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Study</span> · <span class="eyebrow__seg">Epoch AI data</span> · <span class="eyebrow__seg">November 2026</span></p>
+  <p class="eyebrow eyebrow--dots hero__eyebrow"><span class="eyebrow__seg">Study</span><span class="eyebrow__seg">Epoch AI data</span><span class="eyebrow__seg">November 2026</span></p>
   <h1 class="hero__title hero__title--h1" id="page-title">Redrawing a dense scatter plot for a phone</h1>
   <p class="lead hero__dek">Epoch’s Notable AI Models chart fits on a phone screen. The years since 2010 hold about 90% of its dots and get about a quarter of its width. I rebuilt the core chart from their openly licensed (CC BY) dataset to show how I would give those years room.</p>
   <dl class="meta-grid ex-hero-meta">
@@ -118,7 +118,7 @@
 <section class="section section--rule" id="looked" aria-labelledby="looked-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">01</span> · <span class="eyebrow__seg">What I looked at</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">01</span><span class="eyebrow__seg">What I looked at</span></p>
       <h2 id="looked-title">On a phone, 90% of the dots share a quarter of the plot</h2>
       <p class="lead">On 7 November 2026 I spent an evening with Epoch’s AI Models explorer, Trends dashboard and Data hub at 1440px and 390px wide. On 8 November I tested the chart again in Chrome set to emulate a phone at 390×844 (3× pixel density, identifying itself as an iPhone) and a 1440×900 desktop, and measured what it draws. On 9 November I captured the phone view again; the layout and labels were unchanged. The chart gets the hard things right: dense data, uncertainty on the page, provenance on the figure. These notes are about density and the pages around it.</p>
     </header>
@@ -126,12 +126,12 @@
     <div class="prose">
     <div class="media-row">
       <figure class="media media--phone">
-        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.avif 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.avif 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><source type="image/webp" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.webp 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.webp 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><img src="/assets/img/epoch/observed-epoch-explorer-390.jpg" width="1170" height="2532" loading="lazy" decoding="async" alt="Screenshot of Epoch AI’s Notable AI Models chart on a 390px phone screen. The whole 1950 to 2025 axis fits and every label is whole: ADALINE, Zip CNN, JPMAX, Neural LM, RankNet, MSRA (C, PReLU), Meena and Grok 4. Most dots pile into the shaded band from 2010 on at the right edge, where the dashed 4.2 x/year trend label lies across the cluster. A counter above the plot reads 568 Results. Below the chart are a Customize graph button, a Jump to row (All time, Deep Learning Era, 2020+) and a 1950 to 2026 range slider."></picture>
+        <picture class="pic"><source type="image/avif" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.avif 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.avif 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><source type="image/webp" srcset="/assets/img/epoch/observed-epoch-explorer-390-320w.webp 320w, /assets/img/epoch/observed-epoch-explorer-390-640w.webp 640w" sizes="(max-width: 599px) 79vw, (max-width: 1023px) 41vw, 308px"><img src="/assets/img/epoch/observed-epoch-explorer-390.jpg" width="1170" height="2532" loading="lazy" decoding="async" alt="Screenshot of Epoch AI’s Notable AI Models chart on a 390px phone screen. The whole 1950 to 2025 axis fits and every label is whole: ADALINE, Zip CNN, JPMAX, Neural LM, RankNet, MSRA (C, PReLU), Meena and Grok 4. Most dots pile into the shaded band from 2010 on at the right edge, where the dashed 4.2 x/year trend label lies across the cluster. A counter above the plot reads 568 Results. Below the chart are a Customize graph button, a Jump to row (All time, Deep Learning Era, 2020+) and a 1950 to 2026 range slider."></picture>
         <figcaption><strong>Epoch at 390px.</strong> epoch.ai/data/ai-models, captured 9 November 2026 in Chrome emulating a phone (390×844 at 3× pixel density, identifying itself as an iPhone), default view, scrolled to the chart. The plot is 350px wide; the shaded 2010-on band starts at the 2010 tick and runs to its right edge. Chart and data: Epoch AI, CC BY 4.0.</figcaption>
       </figure>
       <figure class="media ex-twin">
-        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-480w.avif 480w, /assets/img/epoch/notable-models-mpl-640w.avif 640w, /assets/img/epoch/notable-models-mpl-800w.avif 800w, /assets/img/epoch/notable-models-mpl-960w.avif 960w, /assets/img/epoch/notable-models-mpl-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-480w.webp 480w, /assets/img/epoch/notable-models-mpl-640w.webp 640w, /assets/img/epoch/notable-models-mpl-800w.webp 800w, /assets/img/epoch/notable-models-mpl-960w.webp 960w, /assets/img/epoch/notable-models-mpl-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__light" src="/assets/img/epoch/notable-models-mpl.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
-        <picture style="display:contents"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.avif 480w, /assets/img/epoch/notable-models-mpl-dark-640w.avif 640w, /assets/img/epoch/notable-models-mpl-dark-800w.avif 800w, /assets/img/epoch/notable-models-mpl-dark-960w.avif 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.webp 480w, /assets/img/epoch/notable-models-mpl-dark-640w.webp 640w, /assets/img/epoch/notable-models-mpl-dark-800w.webp 800w, /assets/img/epoch/notable-models-mpl-dark-960w.webp 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__dark" src="/assets/img/epoch/notable-models-mpl-dark.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
+        <picture class="pic"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-480w.avif 480w, /assets/img/epoch/notable-models-mpl-640w.avif 640w, /assets/img/epoch/notable-models-mpl-800w.avif 800w, /assets/img/epoch/notable-models-mpl-960w.avif 960w, /assets/img/epoch/notable-models-mpl-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-480w.webp 480w, /assets/img/epoch/notable-models-mpl-640w.webp 640w, /assets/img/epoch/notable-models-mpl-800w.webp 800w, /assets/img/epoch/notable-models-mpl-960w.webp 960w, /assets/img/epoch/notable-models-mpl-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__light" src="/assets/img/epoch/notable-models-mpl.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
+        <picture class="pic"><source type="image/avif" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.avif 480w, /assets/img/epoch/notable-models-mpl-dark-640w.avif 640w, /assets/img/epoch/notable-models-mpl-dark-800w.avif 800w, /assets/img/epoch/notable-models-mpl-dark-960w.avif 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.avif 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.avif 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.avif 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><source type="image/webp" srcset="/assets/img/epoch/notable-models-mpl-dark-480w.webp 480w, /assets/img/epoch/notable-models-mpl-dark-640w.webp 640w, /assets/img/epoch/notable-models-mpl-dark-800w.webp 800w, /assets/img/epoch/notable-models-mpl-dark-960w.webp 960w, /assets/img/epoch/notable-models-mpl-dark-1200w.webp 1200w, /assets/img/epoch/notable-models-mpl-dark-1680w.webp 1680w, /assets/img/epoch/notable-models-mpl-dark-2400w.webp 2400w" sizes="(max-width: 599px) 92vw, (max-width: 1023px) 45vw, 548px"><img class="ex-twin__dark" src="/assets/img/epoch/notable-models-mpl-dark.png" width="2400" height="1440" loading="lazy" decoding="async" alt="Matplotlib version of the chart: 481 notable AI models since 2010 colored by domain, on a log scale of training compute from 10 to the 13 to 10 to the 28 floating-point operations, with a trend line labeled 4.3 times per year, 90% confidence interval 4.0 to 4.7 times, in the empty upper left, and twelve model labels from RNN LM in 2010 to GPT-6 Astra in 2026."></picture>
         <figcaption><strong>The same data, redrawn.</strong> The 481 models from 2010 on get the full width, on a log scale of training compute in floating-point operations (FLOP), where each gridline is ten times the one below. An ordinary least squares (OLS) fit gives 4.3× a year, with a 90% confidence interval (CI) of 4.0× to 4.7×, and its label sits in the empty upper left. Drawn by <code>tools/epoch_chart.py</code> from Epoch AI’s Notable AI Models data (CC BY 4.0).</figcaption>
       </figure>
     </div>
@@ -176,14 +176,14 @@
 <section class="section section--rule" id="chart" aria-labelledby="chart-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">02</span> · <span class="eyebrow__seg">The rebuilt chart</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">02</span><span class="eyebrow__seg">The rebuilt chart</span></p>
       <h2 id="chart-title">Every width opens on the years since 2010</h2>
       <p class="lead">Same data, log scale and presets as Epoch’s default view. Below 768px the controls move into a bottom sheet (a panel that slides up from the bottom of the screen), the plot turns portrait, ticks thin out, labels drop to the top six and a tap opens the tooltip.</p>
     </header>
 
     <figure class="figure bleed ex" id="fig-epoch" data-epoch-explorer data-src="/data/epoch/notable_models.json">
       <header>
-        <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · Training compute of notable AI models</p>
+        <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 1</span><span class="eyebrow__seg">Training compute of notable AI models</span></p>
         <h3 class="figure-title">Since 2010, training compute has grown about 4.3× a year</h3>
         <p class="figure-sub">Each dot is one model in Epoch’s Notable AI Models dataset with a training-compute estimate (543 of 1,092), by publication date. Log scale. Hollow dots are estimates Epoch marks as speculative.</p>
       </header>
@@ -232,7 +232,7 @@
 <section class="section section--rule" id="decision" aria-labelledby="decision-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">03</span> · <span class="eyebrow__seg">A decision</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">03</span><span class="eyebrow__seg">A decision</span></p>
       <h2 id="decision-title">Open on 2010–2026, keep All time one tap away</h2>
     </header>
     <div class="prose">
@@ -248,7 +248,7 @@
 <section class="section section--rule" id="cards" aria-labelledby="cards-title" data-epoch-trends data-src="/data/epoch/notable_models.json">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">04</span> · <span class="eyebrow__seg">The stat-card grammar</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">04</span><span class="eyebrow__seg">The stat-card grammar</span></p>
       <h2 id="cards-title">One dataset, three framings</h2>
       <p class="lead">Epoch’s best interaction is the unit switch on its trend cards, which shows growth as an increase per year, a doubling time, or orders of magnitude (OOM) per year. Here it drives three cards computed live from the same JSON as the chart: the number, the sentence and the interval change together.</p>
     </header>
@@ -315,7 +315,7 @@
 <section class="section section--rule" id="python" aria-labelledby="python-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">05</span> · <span class="eyebrow__seg">Same data, in Python</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">05</span><span class="eyebrow__seg">Same data, in Python</span></p>
       <h2 id="python-title">The same encoding, rendered with matplotlib</h2>
       <p class="lead">Researchers often need a static figure for a paper, a post or a slide. <code>tools/epoch_chart.py</code> reads the same JSON and this site’s <code>tokens.css</code>, the file that holds its color and type values, so each run takes its colors and fit from the same source as the live chart.</p>
     </header>
@@ -331,7 +331,7 @@
 <section class="section section--rule" id="next" aria-labelledby="next-title">
   <div class="container">
     <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow__seg">06</span> · <span class="eyebrow__seg">What I would do next</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">06</span><span class="eyebrow__seg">What I would do next</span></p>
       <h2 id="next-title">Five rules the next explorer could inherit</h2>
     </header>
     <div class="prose">
@@ -411,7 +411,7 @@
       </ul>
     </nav>
     <div class="site-footer__base">
-      <p class="site-footer__colophon">Built 2026-11 with Claude Code; every chart’s data is downloadable.</p>
+      <p class="site-footer__colophon">Built November 2026 with Claude Code; every chart’s data is downloadable.</p>
       <button class="theme-toggle theme-toggle--labelled" type="button" data-theme-toggle aria-label="Switch to dark theme">
         <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M16.5 12.3A6.75 6.75 0 0 1 7.7 3.5a6.75 6.75 0 1 0 8.8 8.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 1.75v1.5M10 16.75v1.5M1.75 10h1.5M16.75 10h1.5M4.17 4.17l1.06 1.06M14.77 14.77l1.06 1.06M4.17 15.83l1.06-1.06M14.77 5.23l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>

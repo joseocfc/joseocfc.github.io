@@ -382,6 +382,8 @@
 }
 .eyebrow--rule { display: flex; align-items: center; gap: var(--space-4); }
 .eyebrow--rule::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.eyebrow--rule.eyebrow--dots { column-gap: 0; }
+.eyebrow--rule.eyebrow--dots::after { margin-left: var(--space-4); }
 
 /* ==========================================================================
    Buttons
@@ -835,6 +837,10 @@
   transition: transform 600ms var(--ease-out);
 }
 .work-card__media--plate { padding: clamp(var(--space-4), 3vw, var(--space-6)); padding-bottom: 0; }
+/* Media with a visible caption (F33: the caption left the alt text). The image shrinks to make room inside the fixed aspect ratio. */
+.work-card__media--captioned { display: flex; flex-direction: column; margin: 0; }
+.work-card__media--captioned img { flex: 1 1 auto; min-height: 0; height: auto; }
+.work-card__caption { padding: var(--space-2) 0 var(--space-3); font-family: var(--font-mono); font-size: var(--fs-micro); line-height: 1.4; color: var(--ink-meta); }
 .work-card__media--plate img {
   object-position: left top;
   border: 1px solid var(--line);
@@ -1276,6 +1282,9 @@
 .disclosure > :not(summary) { margin: 0; }
 .disclosure > pre { border: 0; border-radius: 0 0 var(--r-media) var(--r-media); }
 .disclosure__body { padding: var(--space-4); }
+/* Static chart data table (F33): ships in the markup for readers without JS; the chart runtime hides it once its Table toggle works. */
+.figure-data { margin-top: var(--space-4); }
+.figure-data > .chart-table { margin: 0; border-top: 0; padding: 0 var(--space-4) var(--space-2); }
 
 /* ==========================================================================
    Case nav (prev / next)
