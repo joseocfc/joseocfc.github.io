@@ -290,6 +290,9 @@ def main():
                     ex, ey = inv.transform((cx, cy))
                     ax.plot([sx, ex], [sy, ey], color=T["ink-3"], lw=0.75, zorder=5)
                 done = True
+                axb = ax.bbox
+                print(f"label {name!r}: {'leader' if k >= len(offsets) else 'offset'}, "
+                      f"x {bb.x0 - axb.x0:.0f}..{bb.x1 - axb.x0:.0f} of axes width {axb.width:.0f} px")
                 break
             t.remove()
         count += done
