@@ -454,15 +454,6 @@
   .hero--wide > .hero__dek { grid-column: 1; }
   .hero--wide > .hero__actions { grid-column: 2; justify-self: end; }
 }
-.hero__media {
-  display: grid;
-  gap: var(--space-5);
-  align-items: end;
-  margin-top: clamp(var(--space-7), 6vw, var(--space-8));
-}
-@media (min-width: 900px) {
-  .hero__media { grid-template-columns: minmax(0, 1fr) clamp(180px, 22%, 260px); }
-}
 
 /* ==========================================================================
    Stat cards
@@ -608,10 +599,6 @@
 .media-row--3 { grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
 .media-row > .media--phone { max-width: 320px; }
 .media-row > figcaption { grid-column: 1 / -1; margin-top: 0; }
-@media (max-width: 599.98px) {
-  .media-row--phones { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
-  .media-row--phones .media--phone img { border-radius: 16px; box-shadow: 0 0 0 3px var(--paper-2), 0 0 0 4px var(--line); margin: 4px; width: calc(100% - 8px); }
-}
 
 /* ==========================================================================
    Quote
@@ -735,7 +722,7 @@
   background: var(--paper);
   border: 1.5px solid var(--ink-3);
 }
-.timeline__item.is-current::after, .timeline__item--accent::after { border-color: var(--accent); background: var(--accent); }
+.timeline__item.is-current::after { border-color: var(--accent); background: var(--accent); }
 .timeline__date {
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
@@ -822,7 +809,7 @@
 /* ==========================================================================
    Cards / work cards (whole card is one link via a stretched title link)
    ========================================================================== */
-.card, .work-card {
+.work-card {
   position: relative;
   display: grid;
   align-content: start; /* C1 QA: when a grid stretches cards to equal height, keep titles aligned instead of padding the gap */
@@ -830,14 +817,14 @@
   min-width: 0;
   isolation: isolate;
 }
-.work-card__media, .card__media {
+.work-card__media {
   position: relative;
   overflow: hidden;
   border-radius: var(--r-card);
   background: var(--paper-2);
   aspect-ratio: 16 / 10;
 }
-.work-card__media img, .card__media img {
+.work-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -852,16 +839,16 @@
   border-radius: 8px 8px 0 0;
   background: var(--paper);
 }
-.work-card__body, .card__body { display: grid; gap: var(--space-3); align-content: start; min-width: 0; }
-.work-card__title, .card__title {
+.work-card__body { display: grid; gap: var(--space-3); align-content: start; min-width: 0; }
+.work-card__title {
   font-family: var(--font-text);
   font-size: var(--fs-h3);
   font-weight: var(--fw-semi);
   line-height: 1.25;
   letter-spacing: -.012em;
 }
-.work-card__title a, .card__title a { color: var(--ink); text-decoration: none; }
-.work-card__title a::after, .card__title a::after {
+.work-card__title a { color: var(--ink); text-decoration: none; }
+.work-card__title a::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -869,12 +856,12 @@
   border-radius: var(--r-card);
 }
 .work-card__title a:focus-visible { outline: none; }
-.work-card:has(.work-card__title a:focus-visible), .card:has(.card__title a:focus-visible) {
+.work-card:has(.work-card__title a:focus-visible) {
   outline: var(--focus-ring);
   outline-offset: 6px;
   border-radius: var(--r-card);
 }
-.work-card__text, .card__text { font-size: .975rem; line-height: 1.55; color: var(--ink-2); max-width: 34em; }
+.work-card__text { font-size: .975rem; line-height: 1.55; color: var(--ink-2); max-width: 34em; }
 .work-card__cta {
   display: inline-flex;
   align-items: center;
@@ -887,7 +874,7 @@
 .work-card__cta::after { content: "\2192" / ""; transition: transform var(--dur-base) var(--ease-out); }
 .work-card .tags { margin-top: var(--space-1); }
 @media (hover: hover) {
-  .work-card:hover .work-card__media img, .card:hover .card__media img { transform: scale(1.015); }
+  .work-card:hover .work-card__media img { transform: scale(1.015); }
   .work-card:hover .work-card__title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: var(--line-strong); }
   .work-card:hover .work-card__cta::after { transform: translateX(4px); }
 }
@@ -964,8 +951,6 @@
 .work-card--compact .work-card__title { font-size: 1.0625rem; }
 
 /* Plain bordered card (generic) */
-.card--boxed { padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); }
-.card--boxed:hover { border-color: var(--line-strong); }
 
 /* ==========================================================================
    Diagram (inline SVG; colour comes from tokens via currentColor + classes)
@@ -980,8 +965,8 @@
 .diagram svg { width: 100%; height: auto; overflow: visible; }
 .diagram figcaption { margin-top: var(--space-4); font-size: var(--fs-small); line-height: 1.5; color: var(--ink-meta); max-width: var(--w-prose); }
 .diagram text, .diagram .d-label { font-family: var(--font-text); font-size: 13px; fill: var(--ink); }
-.diagram .d-label--muted, .diagram .d-meta { fill: var(--ink-meta); }
-.diagram .d-mono, .diagram .d-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; }
+.diagram .d-meta { fill: var(--ink-meta); }
+.diagram .d-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; }
 .diagram .d-node { fill: var(--paper); stroke: var(--line-strong); stroke-width: 1; }
 .diagram .d-node--accent { fill: var(--accent-soft); stroke: var(--accent); }
 .diagram .d-node--ink { fill: var(--ink); stroke: var(--ink); }
@@ -1256,7 +1241,6 @@
 :where(.table, .prose table, .table-wrap table) th.num { text-align: right; }
 :where(.table, .prose table, .table-wrap table) td.mono { font-family: var(--font-mono); font-size: .8125rem; white-space: nowrap; color: var(--ink); }
 :where(.table, .prose table, .table-wrap table) code { font-size: .8em; }
-.table--mono td { font-family: var(--font-mono); font-size: .8125rem; }
 .table--compact td, .table--compact th { padding-block: 7px; }
 
 /* Status chips inside tables */
