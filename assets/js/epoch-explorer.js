@@ -62,6 +62,25 @@ const LABEL_MODES = [
   { key: 'more', budget: [30, 12] },
   { key: 'frontier', budget: [Infinity, Infinity] },
 ];
+// Anchors: models a general reader already knows, labelled first (in this order) when visible,
+// so the placer never spends the budget on obscure neighbours. Exact names from
+// data/epoch/notable_models.json; the value is the short label used on small screens.
+const ANCHORS = new Map([
+  ['GPT-4 (Mar 2023)', 'GPT-4'],
+  ['GPT-3 175B (davinci)', 'GPT-3'],
+  ['AlphaGo Lee', 'AlphaGo'],
+  ['AlexNet', 'AlexNet'],
+  ['Transformer', 'Transformer'],
+  ['BERT-Large', 'BERT'],
+  ['Gemini 1.0 Ultra', 'Gemini 1.0'],
+  ['Claude 3.7 Sonnet', 'Claude 3.7'],
+  ['Llama 3.1-405B', 'Llama 3.1'],
+]);
+// Density rule: dots stay fully opaque up to 600 visible points (the 543-model file and every
+// range of it), then opacity falls with the square root of N, floored at 0.35. Past about
+// 2,000 points the rule is to switch to hexbins; that part is stated on the page, not built.
+const DENSITY_N = 600;
+const densityOpacity = (n) => (n <= DENSITY_N ? 1 : Math.max(0.35, Math.sqrt(DENSITY_N / n)));
 const labelModeText = (key, compact) => {
   const m = LABEL_MODES.find((d) => d.key === key);
   if (key === 'frontier') return 'Frontier only';
@@ -276,7 +295,8 @@ function topCategories(models, field) {
 
 /* --------------------------------------------------------------------------
    Label placement
-   Candidates: the largest model inside its rolling 6-month window (rank 0), then
+   Candidates: first the visible anchors (ANCHORS, in order, at most budget - 2 so
+   two rolling-window labels remain), then the largest model inside its rolling 6-month window (rank 0), then
    rank 1 and 2. To spread labels along the frontier instead of piling them at the
    top right, candidates are taken in turns from equal time slots across the view
    (one slot per label in the budget). Each label is placed greedily at the first
@@ -307,6 +327,10 @@ function recordSetters(vis) {
 }
 function labelCandidates(vis, mode, budget, x0, x1) {
   if (mode === 'frontier') return recordSetters(vis).sort((a, b) => b.compute - a.compute);
+  const anchorRank = [...ANCHORS.keys()];
+  const anchors = vis.filter((p) => ANCHORS.has(p.model))
+    .sort((a, b) => anchorRank.indexOf(a.model) - anchorRank.indexOf(b.model))
+    .slice(0, Math.max(0, budget - 2));
   const rank = windowRanks(vis);
   const pool = vis.filter((p) => rank.get(p.id) <= 2);
   const k = Math.max(1, Math.min(budget, 40));
@@ -321,7 +345,8 @@ function labelCandidates(vis, mode, budget, x0, x1) {
     batch.sort((a, b) => rank.get(a.id) - rank.get(b.id) || b.compute - a.compute);
     order.push(...batch);
   }
-  return order;
+  const taken = new Set(anchors.map((p) => p.id));
+  return [...anchors, ...order.filter((p) => !taken.has(p.id))];
 }
 
 function rectsOverlap(a, b, pad = 2) {
@@ -578,8 +603,8 @@ class Explorer {
     });
     this.ro.observe(this.stage);
     document.addEventListener('themechange', () => this.render({ animate: false }), this.sig);
-    new MutationObserver(() => this.render({ animate: false }))
-      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    this.mo = new MutationObserver(() => this.render({ animate: false }));
+    this.mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     const dark = matchMedia('(prefers-color-scheme: dark)');
     if (dark.addEventListener) dark.addEventListener('change', () => this.render({ animate: false }), this.sig);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.render({ animate: false }));
@@ -592,7 +617,19 @@ class Explorer {
         if (es.some((e) => e.isIntersecting)) { io.disconnect(); this.drawIn(); }
       }, { threshold: 0.15 });
       io.observe(this.stage);
+      this.io = io;
     }
+  }
+
+  // F13: tear down one instance. Aborting the controller removes every listener it was
+  // passed to (controls, legend, stage, table, sheet, media queries, document).
+  destroy() {
+    this.ac.abort();
+    this.ro?.disconnect();
+    this.mo?.disconnect();
+    this.io?.disconnect();
+    clearTimeout(this.roT);
+    if (this.sheet?.open) this.sheet.close();
   }
 
   set(patch) {
@@ -618,11 +655,12 @@ class Explorer {
   }
   categories() {
     const names = this.cats[this.state.colorBy];
-    const list = names.map((n, i) => ({ key: n, label: shortName(n), slot: i }));
-    if (this.state.colorBy !== 'domain') list.push({ key: 'Other', label: 'Other', slot: -1 });
+    const list = names.filter((n) => n !== 'Other').map((n, i) => ({ key: n, label: shortName(n), slot: i }));
+    list.push({ key: 'Other', label: 'Other', slot: -1 }); // gray, in every Color-by mode
     return list;
   }
   colorFor(cat, T) {
+    if (cat === 'Other') return T.ink3;
     if (this.state.colorBy === 'domain') return T.series[DOMAIN_ORDER.indexOf(cat)] || T.ink3;
     const i = this.cats[this.state.colorBy].indexOf(cat);
     return i >= 0 ? T.series[i] : T.ink3;
@@ -741,7 +779,9 @@ class Explorer {
 
     // Points
     const focus = this.state.focus;
-    const isOther = (m) => this.state.colorBy !== 'domain' && m.cat === 'Other';
+    const isOther = (m) => m.cat === 'Other'; // gray context, drawn underneath
+    const full = densityOpacity(vis.length);
+    this.fullOpacity = full;
     for (const m of vis) { m.cat = this.catOf(m); m.color = this.colorFor(m.cat, T); }
     const sorted = [...vis].sort((a, b) => isOther(b) - isOther(a) || a.x - b.x);
     const dots = this.g.dots.selectAll('circle').data(sorted, (d) => d.id).join(
@@ -755,7 +795,7 @@ class Explorer {
       .attr('r', (d) => (d.speculative ? L.rad - 0.6 : L.rad))
       .attr('fill', (d) => (d.speculative ? T.paper : d.color))
       .attr('stroke', (d) => (d.speculative ? d.color : T.paper))
-      .attr('opacity', (d) => (!this.drawn ? 0 : focus && d.cat !== focus ? 0.12 : 1));
+      .attr('opacity', (d) => (!this.drawn ? 0 : focus && d.cat !== focus ? 0.12 : full));
 
     // Trend lines with the 90% confidence band of the fitted mean
     const fits = this.state.trend ? this.fits(vis) : [];
@@ -814,7 +854,7 @@ class Explorer {
     const maxChars = L.compact ? 18 : 26;
     const cands = labelCandidates(vis, mode, budget, r.start, DATA_END)
       .filter((m) => !focus || m.cat === focus)
-      .map((m) => ({ id: m.id, m, px: m.px, py: m.py, text: truncate(m.model, maxChars) }));
+      .map((m) => ({ id: m.id, m, px: m.px, py: m.py, text: L.compact && ANCHORS.has(m.model) ? ANCHORS.get(m.model) : truncate(m.model, maxChars) }));
     const placed = placeLabels(cands, {
       budget,
       bounds: { x0: 2, x1: L.iw + L.M.r - 2, y0: 2, y1: L.ih - 2 },
@@ -851,6 +891,7 @@ class Explorer {
     this.prev = { x, y };
     this.layoutNow = L;
     this.vis = vis;
+    this.byDate = [...vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
     this.delaunay = d3.Delaunay.from(vis, (d) => d.px, (d) => d.py);
     if (this.selected && !vis.includes(this.selected)) this.clearSelection();
     else if (this.selected) this.showTip(this.selected, { pinned: this.pinned, silent: true });
@@ -891,7 +932,7 @@ class Explorer {
     this.g.dots.selectAll('circle')
       .attr('opacity', 0)
       .transition().delay((d) => (d.px / L.iw) * 650).duration(320).ease(d3.easeCubicOut)
-      .attr('opacity', (d) => (focus && d.cat !== focus ? 0.12 : 1));
+      .attr('opacity', (d) => (focus && d.cat !== focus ? 0.12 : this.fullOpacity ?? 1));
     this.g.trend.selectAll('path').attr('opacity', 1).each(function () {
       const len = this.getTotalLength ? this.getTotalLength() : 0;
       d3.select(this).attr('stroke-dasharray', `${len} ${len}`).attr('stroke-dashoffset', len)
@@ -926,7 +967,7 @@ class Explorer {
   }
 
   peek(cat) {
-    this.g.dots.selectAll('circle').interrupt().attr('opacity', (d) => (cat && d.cat !== cat ? 0.12 : 1));
+    this.g.dots.selectAll('circle').interrupt().attr('opacity', (d) => (cat && d.cat !== cat ? 0.12 : this.fullOpacity ?? 1));
   }
 
   renderReadout(fits, vis) {
@@ -978,7 +1019,7 @@ class Explorer {
     }, this.sig);
     st.addEventListener('keydown', (e) => {
       if (!this.vis || !this.vis.length) return;
-      const byDate = [...this.vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
+      const byDate = this.byDate; // sorted once per render, not per keypress
       let i = this.selected ? byDate.indexOf(this.selected) : -1;
       if (e.key === 'ArrowRight' || e.key === 'ArrowUp') i = Math.min(byDate.length - 1, i + 1);
       else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') i = i < 0 ? byDate.length - 1 : Math.max(0, i - 1);
@@ -1136,10 +1177,12 @@ class TrendCards {
     this.live = root.querySelector('[data-ex-live]') || el('p', { class: 'ex-sr', 'aria-live': 'polite' });
     if (!this.live.isConnected) root.append(this.live);
     const radios = root.querySelectorAll('[data-ex-unit] input[type="radio"]');
-    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true)), this.sig);
+    radios.forEach((r) => r.addEventListener('change', () => r.checked && this.setUnit(r.value, true), this.sig));
     const checked = root.querySelector('[data-ex-unit] input:checked');
     this.setUnit(checked ? checked.value : 'x', false);
   }
+  destroy() { this.ac.abort(); }
+
   setUnit(unit, animate) {
     const u = UNITS[unit];
     if (!u) return;
@@ -1182,7 +1225,7 @@ async function boot() {
   if (!figs.length && !cards.length) return;
   for (const root of cards) {
     loadData(root.dataset.src || '/data/epoch/notable_models.json')
-      .then((data) => new TrendCards(root, data))
+      .then((data) => { root.trendCards = new TrendCards(root, data); })
       .catch((err) => console.error('[epoch-explorer] trend cards:', err));
   }
   if (!figs.length) return;

@@ -169,3 +169,6 @@
 .pr-lanes__v .sep { color: var(--ink-3); padding-inline: .25em; }
 @container (min-width: 520px) { .prose .pr-lanes > li { grid-template-columns: 8.5rem minmax(0, 1fr); align-items: baseline; } }
 .prose .pr-close, .pr-close { padding-top: var(--space-5); border-top: 1px solid var(--line); color: var(--ink); font-weight: var(--fw-medium); }
+
+/* Commits-per-day figures (F41): milestone rules are quiet dashed lines that stop at the bar tops. */
+.chart-svg .c-flag .c-flag-pole { stroke: var(--line-strong); stroke-dasharray: 3 3; }

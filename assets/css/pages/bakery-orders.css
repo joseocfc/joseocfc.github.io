@@ -206,6 +206,7 @@
 .bk-gallery img { object-fit: cover; object-position: top center; background: var(--paper); }
 .bk-crop { overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-media); background: var(--media-mat); }
 .bk-page .bk-crop img { width: var(--z, 100%); max-width: none; height: auto; aspect-ratio: auto; margin: var(--y, 0) 0 0 var(--x, 0); border: 0; border-radius: 0; object-fit: fill; }
+.bk-crop--ticket { --z: 208%; --x: -54%; --y: -6%; }
 @media (max-width: 599.98px) {
   .bk-gallery {
     grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; gap: var(--space-4);

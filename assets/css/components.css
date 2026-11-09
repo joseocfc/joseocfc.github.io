@@ -367,6 +367,9 @@
 }
 .eyebrow--accent { color: var(--accent-ink); }
 .eyebrow__seg { white-space: nowrap; }
+/* F40 (round 2): separators drawn in CSS so a wrapped line never starts with "·". Segments stay whole (nowrap). */
+.eyebrow--dots { display: flex; flex-wrap: wrap; }
+.eyebrow--dots .eyebrow__seg:not(:last-child)::after { content: "·"; padding-inline: 0.5em; }
 .eyebrow--dot::before {
   content: "";
   display: inline-block;
@@ -1332,3 +1335,6 @@
 @media (prefers-reduced-motion: reduce) {
   .js .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* F24 (round 2): a <picture> wrapper that lays out as its <img>; replaces style="display:contents". */
+.pic { display: contents; }
