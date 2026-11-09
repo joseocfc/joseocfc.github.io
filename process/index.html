@@ -89,7 +89,7 @@
 <main id="main" tabindex="-1">
 <div class="container">
 <header class="hero pr-hero">
-  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Process</span> · <span class="eyebrow__seg">How I work with AI</span></p>
+  <p class="eyebrow eyebrow--dots hero__eyebrow"><span class="eyebrow__seg">Process</span><span class="eyebrow__seg">How I work with AI</span></p>
   <h1 class="hero__title hero__title--h1">How I direct AI agents, and what review caught</h1>
   <p class="lead hero__dek">This is the method behind the bakery build, written down after launch as a playbook: its ten rules, the loop every change runs, the incidents that turned into rules, and the first outside review of this site.</p>
 </header>
@@ -174,7 +174,7 @@
 <p>The bakery retro found the process worked and cost too much: 1.09 million words of docs, and ticket prompts of 3,000 to 7,000 words. The playbook now sets budgets, including a cap of three parallel lanes; this site’s build is the one exception, running up to five at once. Review round 1, below, is the correction.</p>
   <figure class="figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
     <header>
-      <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Commits per day, all branches</span></p>
+      <p class="eyebrow eyebrow--dots"><span class="eyebrow__seg">Figure 1</span><span class="eyebrow__seg">Commits per day, all branches</span></p>
       <h3 class="figure-title">142 days from first commit to a live store</h3>
       <p class="figure-sub">Daily commits on the bakery plugin, 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
     </header>
@@ -191,7 +191,7 @@
 <h2 id="review-title">Review round 1: what four reviewers caught</h2>
 <p>After the site went live, four reviewer agents read it the way a hiring loop would: a design lead, a web engineer, a copy editor and a panel reading as Epoch AI. I read their reports alongside them. Every fix is in <a href="https://github.com/joseocfc/joseocfc.github.io/pull/1">the pull request</a>, one small commit per change. The first finding stands below as it was written; the other eight are summed up in three lines.</p>
 <ol>
-  <li><strong>The Epoch study’s premise was false.</strong> The study said Epoch’s chart cropped on a phone. That came from a headless Chrome window, which does not behave like a real phone screen. Three reviewers emulated a 390 px phone and the full axis rendered. The study was re-tested with Chrome DevTools Protocol device emulation at 390×844 and now describes what that test shows: the problem is density, not clipping. On a phone, 2010 to 2026 gets the right quarter of the plot and about 90% of the dots. The drawn “before” mock-up, which showed a label Epoch’s phone chart does not draw, is replaced by the real capture.</li>
+  <li><strong>The Epoch study’s premise was false.</strong> The study said Epoch’s chart cropped on a phone. That came from a headless Chrome window, which does not behave like a real phone screen. Three reviewers emulated a 390px phone and the full axis rendered. The study was re-tested with Chrome DevTools Protocol device emulation at 390×844 and now describes what that test shows: the problem is density, not clipping. On a phone, 2010 to 2026 gets the right quarter of the plot and about 90% of the dots. The drawn “before” mock-up, which showed a label Epoch’s phone chart does not draw, is replaced by the real capture.</li>
   <li><strong>What changed in the pages.</strong> The home page opens on the product, and the commits-per-day chart moved here as Figure&nbsp;1. The bakery study explains its 78-day slip as a choice, and each study names one decision, the alternative turned down, and why. The public pages now speak to every reader, not one employer.</li>
   <li><strong>What changed in the source.</strong> Every private file-and-line citation was removed, including those in the page source, and the live store is linked. Round 1 removed the visible scaffolding but left 22 orphan files reachable by URL; round 2 deleted them, and a reference check (<code>tools/check_refs.py</code>) now runs on every push to GitHub and fails if a page links to a missing file or a file nothing links to stays in the site.</li>
   <li><strong>What changed in the styles.</strong> Page styles moved into files built on the shared design values. 0 <code>&lt;style&gt;</code> blocks remain; 145 <code>style=</code> attributes remained and were removed in round 2.<!-- ORCH: true only once the F24 lane has removed the remaining style= attributes on Bakery, Epoch and the styleguide; recount before merge. --> The counts are in the next paragraph.</li>

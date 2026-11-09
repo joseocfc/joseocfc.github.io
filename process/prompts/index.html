@@ -88,7 +88,7 @@
 <main id="main" tabindex="-1">
 <div class="container">
 <header class="hero pp-hero">
-  <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg"><a href="/process/">Process</a></span> · <span class="eyebrow__seg">Prompts</span></p>
+  <p class="eyebrow eyebrow--dots hero__eyebrow"><span class="eyebrow__seg"><a href="/process/">Process</a></span><span class="eyebrow__seg">Prompts</span></p>
   <h1 class="hero__title hero__title--h1">One prompt, annotated</h1>
   <p class="lead hero__dek">Each agent that built this site started from a written prompt; this is the one given to the QA agent that checked every page, trimmed, with a note on what each part is for.</p>
 </header>
@@ -102,13 +102,13 @@ horizontal overflow at 390 …, missing alt, … [4]
 Then FIX what you find directly in the page files … and write
 lanes/notes/C1.md as a table: issue · page · severity · fixed? · how. [5]
 … Do not redesign anything; consistency and correctness only. Print DONE. [6]</code></pre>
-    <figcaption class="artefact__note">Prompt for the QA agent, November 7, 2026. Cuts are marked “…”; the numbers in brackets match the notes below.</figcaption>
+    <figcaption class="artefact__note">Prompt for the QA agent, 7&nbsp;November&nbsp;2026. Cuts are marked “…”; the numbers in brackets match the notes below.</figcaption>
   </figure>
   <ol>
     <li><strong>Read … SPEC.md and all lanes/notes.</strong> An agent starts with no memory of the build. The prompt names what to read first: the site’s written contract, and the notes earlier agents left behind.</li>
     <li><strong>390, 768 and 1440 in light and dark.</strong> Widths and themes are spelled out, so “check it on mobile” can’t shrink to one screenshot.</li>
     <li><strong>Read each PNG.</strong> Agents will save screenshots they never look at unless the prompt says to open them.</li>
-    <li><strong>headless Chrome … overflow at 390.</strong> Review round 1 found the gap here. A headless window set to 390 px does not behave like a phone, and the Epoch study’s false premise came from the same kind of check. The study was re-tested with device emulation.</li>
+    <li><strong>headless Chrome … overflow at 390.</strong> Review round 1 found the gap here. A headless window set to 390px does not behave like a phone, and the Epoch study’s false premise came from the same kind of check. The study was re-tested with device emulation.</li>
     <li><strong>as a table: issue · page · severity · fixed? · how.</strong> The output is a table I can check line by line.</li>
     <li><strong>Do not redesign anything.</strong> Scope. A QA agent that starts redesigning creates work that needs its own review.</li>
   </ol>
