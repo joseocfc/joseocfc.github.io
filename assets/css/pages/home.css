@@ -8,7 +8,7 @@
 .home-stats .stat-value + .stat-label { margin-top: var(--space-3); color: var(--ink-2); }
 
 /* Epoch card: a window onto A4's matplotlib render (assets/img/epoch/notable-models-mpl[-dark].png, 2400×1440),
-   x 980–2340 and y 290 down, so no frontier label is cut at the edge. Light and dark renders swap with the theme,
+   x 984–2340 and y 290 down, so every label is whole: the "2016" tick label (x 927–980) falls outside, "ResNeXt-101 32x48d" (from x 989) inside. Light and dark renders swap with the theme,
    like the live charts do; the hidden one is lazy and display:none, so it is never downloaded. */
 .epoch-thumb__frame {
   display: block;
@@ -27,17 +27,17 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 176.5%;          /* 2400 / 1360 */
+  width: 176.99%;         /* 2400 / 1356 */
   max-width: none;
   height: auto;
   border: 0;
   border-radius: 0;
   object-fit: fill;
-  translate: -40.83% -20.14%;   /* 980 / 2400, 290 / 1440 */
+  translate: -41% -20.14%;      /* 984 / 2400, 290 / 1440 */
 }
 @media (max-width: 899.98px) {
   /* 16:10 frame: start lower so the dense 2016–2026 cloud and its labels fill it. */
-  .work-card__media .epoch-thumb__frame img { translate: -40.83% -27.78%; }
+  .work-card__media .epoch-thumb__frame img { translate: -41% -27.78%; }
 }
 
 /* Project Net has no screenshots (research/other-projects.md §1). Its plate gets a quiet map texture instead
