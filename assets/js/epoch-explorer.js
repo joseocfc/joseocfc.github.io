@@ -477,9 +477,9 @@ class Explorer {
 
     this.toolbar = el('div', { class: 'ex-toolbar', role: 'group', 'aria-label': 'Chart settings' });
     this.groups = {
-      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v }), this.sig),
-      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null }), this.sig),
-      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v }), this.sig),
+      range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v }), this.ac.signal),
+      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null }), this.ac.signal),
+      labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v }), this.ac.signal),
       trend: this.buildSwitch(),
     };
     this.customize = el('button', { type: 'button', class: 'ex-customize', 'aria-haspopup': 'dialog' });
@@ -891,7 +891,12 @@ class Explorer {
     this.prev = { x, y };
     this.layoutNow = L;
     this.vis = vis;
-    this.byDate = [...vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
+    // Arrow-key order: re-sorted only when the filtered set changes (range), not per render or keypress.
+    const visKey = `${this.range().from}|${vis.length}`;
+    if (visKey !== this.byDateKey) {
+      this.byDate = [...vis].sort((a, b) => a.x - b.x || a.compute - b.compute);
+      this.byDateKey = visKey;
+    }
     this.delaunay = d3.Delaunay.from(vis, (d) => d.px, (d) => d.py);
     if (this.selected && !vis.includes(this.selected)) this.clearSelection();
     else if (this.selected) this.showTip(this.selected, { pinned: this.pinned, silent: true });
