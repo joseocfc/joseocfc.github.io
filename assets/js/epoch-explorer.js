@@ -450,7 +450,7 @@ class Explorer {
     this.toolbar = el('div', { class: 'ex-toolbar', role: 'group', 'aria-label': 'Chart settings' });
     this.groups = {
       range: segmented('range', 'Range', RANGES, this.state.range, (v) => this.set({ range: v })),
-      color: segmented('color', 'Colour by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null })),
+      color: segmented('color', 'Color by', COLOR_BY, this.state.colorBy, (v) => this.set({ colorBy: v, focus: null })),
       labels: segmented('labels', 'Labels', LABEL_MODES.map((m) => ({ key: m.key, label: labelModeText(m.key, false) })), this.state.labels, (v) => this.set({ labels: v })),
       trend: this.buildSwitch(),
     };
@@ -533,7 +533,7 @@ class Explorer {
       const input = opt.querySelector('input');
       opt.querySelector('span').textContent = labelModeText(input.value, this.compact);
     });
-    this.customize.setAttribute('aria-label', `Customize chart: colour by ${COLOR_BY.find((c) => c.key === this.state.colorBy).label}, ${labelModeText(this.state.labels, this.compact)} labels, trend ${this.state.trend ? 'on' : 'off'}`);
+    this.customize.setAttribute('aria-label', `Customize chart: color by ${COLOR_BY.find((c) => c.key === this.state.colorBy).label}, ${labelModeText(this.state.labels, this.compact)} labels, trend ${this.state.trend ? 'on' : 'off'}`);
   }
 
   openSheet() {

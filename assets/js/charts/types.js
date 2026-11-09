@@ -8,7 +8,7 @@ import { svg, legend, measure, fadeIn, hover, clientPoint } from './kit.js';
 const NAMES = { docs: 'docs', feat: 'feat', fix: 'fix', test: 'test', merge: 'merge', other: 'other', chore: 'chore' };
 const MEANING = {
   docs: 'Specs, hand-offs, status and review records',
-  feat: 'New behaviour',
+  feat: 'New behavior',
   fix: 'Bug fixes',
   test: 'Harness checks and assertions',
   merge: 'Branch merges',
