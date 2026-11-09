@@ -3,15 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
-<title>How I work with AI agents — José Ochoa</title>
-<meta name="description" content="Ten principles, one loop, and the real records: ticket prompts, hand-offs, review scores and a retro. Plus how this site was built in a night.">
+<title>How I direct AI agents, and what review caught — José Ochoa</title>
+<meta name="description" content="Ten rules, one loop, the incidents that became rules, and what four reviewers caught in this site, with links to every fix.">
 <meta name="author" content="José Ochoa">
 <link rel="canonical" href="https://joseocfc.github.io/process/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="José Ochoa">
-<meta property="og:title" content="I own the what and the done. Agents own the how.">
-<meta property="og:description" content="The method behind a production system built by AI agents, shown through its prompts, hand-offs, review gate and an honest retro.">
+<meta property="og:title" content="How I direct AI agents, and what review caught">
+<meta property="og:description" content="Ten rules, one loop, and what four reviewers caught in this site.">
 <meta property="og:url" content="https://joseocfc.github.io/process/">
 <meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
 <meta property="og:image:width" content="1200">
@@ -32,7 +31,6 @@
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
 <link rel="stylesheet" href="/assets/css/pages/process.css">
-<!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -85,31 +83,29 @@
 </header>
 
 <main id="main" tabindex="-1">
-<!-- PAGE CONTENT -->
 <div class="container">
 <header class="hero pr-hero">
   <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">Process</span> · <span class="eyebrow__seg">How I work with AI</span></p>
-  <h1 class="hero__title hero__title--h1">I own the what and the done. Agents own the how, and show proof.</h1>
-  <p class="lead hero__dek">This is the method behind the bakery build, written down after launch as a playbook. Below are its rules, the loop every change runs, excerpts from the real records, what the retro changed, and how this site was built the same way.</p>
+  <h1 class="hero__title hero__title--h1">How I direct AI agents, and what review caught</h1>
+  <p class="lead hero__dek">This is the method behind the bakery build, written down after launch as a playbook: its ten rules, the loop every change runs, the incidents that turned into rules, and the first outside review of this site.</p>
 </header>
 
 <div class="case-layout">
 <nav class="toc" aria-label="On this page"><p class="toc__title">On this page</p><ol class="toc__list">
 <li><a class="toc__link" href="#principles">Principles</a></li>
 <li><a class="toc__link" href="#loop">The loop</a></li>
-<li><a class="toc__link" href="#evidence">Evidence</a></li>
-<li><a class="toc__link" href="#retro">After the retro</a></li>
-<li><a class="toc__link" href="#this-site">This site</a></li>
+<li><a class="toc__link" href="#incidents">Incidents</a></li>
+<li><a class="toc__link" href="#review">Review round 1</a></li>
+<li><a class="toc__link" href="#glossary">Glossary</a></li>
 </ol></nav>
 
 <div class="pr-main">
 
-<!-- ============================================================ Principles -->
 <section class="prose" id="principles" aria-labelledby="principles-title">
 <h2 id="principles-title">Ten principles fit on one page</h2>
-<ol class="pr-principles reveal">
+<ol class="pr-principles">
   <li>I own the what and the “done”. Claude owns the how, and shows proof.</li>
-  <li>Proof, not summaries: the command and its output, and a screenshot for any screen change.</li>
+  <li>Proof means the command and its output, plus a screenshot for any screen change.</li>
   <li>The builder never grades its own work.</li>
   <li>Small steps, committed often, easy to undo.</li>
   <li>Staging first, always. I do the production push.</li>
@@ -121,12 +117,11 @@
 </ol>
 </section>
 
-<!-- ============================================================ The loop -->
 <section class="prose" id="loop" aria-labelledby="loop-title">
 <h2 id="loop-title">Every change runs the same loop</h2>
-<p>A change starts as a brief of one page or less and ends with my word on staging. The risk decides the middle: wording and layout get my staging check, while logic, money, data and permissions get a scored review.</p>
+<p>A change starts as a brief of one page or less and ends with my word on staging. The risk decides the middle: wording and layout get my staging check; logic, money, data and permissions get a scored review. The bakery store ran this loop, and my staging check caught a pricing bug that review had passed. This site skipped the staging step: it went live the night it was built.</p>
 
-<figure class="loop reveal" aria-labelledby="loop-title">
+<figure class="loop" aria-labelledby="loop-title">
   <ol class="loop__groups">
     <li class="loop__group loop__group--me">
       <p class="loop__owner">I own the what</p>
@@ -140,7 +135,7 @@
       <ol class="loop__steps">
         <li class="loop__step"><span class="loop__num" aria-hidden="true"></span><span class="loop__title">Build in a lane</span><span class="loop__sub">small steps, committed often</span></li>
         <li class="loop__step loop__step--review"><span class="loop__num" aria-hidden="true"></span><span class="loop__title">Fresh review</span><span class="loop__sub">9/10 to pass, at most 3 rounds</span><span class="sr-only">Below 9, the change goes back to the build with a new reviewer. The small lane skips this step and goes straight to staging.</span></li>
-        <li class="loop__step"><span class="loop__num" aria-hidden="true"></span><span class="loop__title">Staging</span><span class="loop__sub">staging first, always</span></li>
+        <li class="loop__step"><span class="loop__num" aria-hidden="true"></span><span class="loop__title">Staging</span><span class="loop__sub">before production</span></li>
       </ol>
       <span class="loop__back" aria-hidden="true"><span class="loop__tag">below 9</span></span>
       <span class="loop__skip" aria-hidden="true"><span class="loop__tag">small lane: no scored review</span></span>
@@ -157,121 +152,58 @@
 </figure>
 </section>
 
-<!-- ============================================================ Evidence -->
-<section class="prose" id="evidence" aria-labelledby="evidence-title">
-<h2 id="evidence-title">The evidence is in the records, not in adjectives</h2>
-<p>Three excerpts from the bakery repo, trimmed for length and otherwise as written, then two charts from its history.</p>
-
-<p class="pr-lead"><strong>A ticket prompt’s stop rules.</strong> Builders are told what is not a reason to stop:</p>
-<figure class="artefact reveal" id="ex-ticket">
-  <figcaption class="artefact__head"><span class="artefact__path">docs/agents/session-prompts/holiday-ticket-12-mixed-cart.md</span><span>243 lines · ticket #49</span></figcaption>
-  <pre class="artefact__body excerpt"><code><span class="ln"><span class="ln__n" aria-hidden="true">1</span><span class="ln__t"><span class="md-mark"># </span><span class="md-h">#49 (draft ticket 12) — Mixed cart: holiday is the third kind, and the department is decided at checkout</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">22</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">0. The goal, in José's words</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">38</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">1. Blocked by, and what you may assume has landed on <span class="md-mark">`</span><span class="md-code">holiday</span><span class="md-mark">`</span></span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">71</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">2. What you build (the ticket body on #49 is the contract; this is the order — seams first, screen last)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">128</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">3. The <span class="md-mark">`</span><span class="md-code">--only</span><span class="md-mark">`</span> list (the check files found by grep in the <span class="md-mark">`</span><span class="md-code">holiday</span><span class="md-mark">`</span> tree 2026-10-25 …)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">151</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">4. Check 47's <span class="md-mark">`</span><span class="md-code">47.12.*</span><span class="md-mark">`</span> sections (engine seam — library / stored data in → verdict out)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">191</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">5. The browser pass on Local (own orders, every tick by own order id)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">210</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">6. The review lane — PILLAR</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true"></span><span class="ln__t">The scored review of <span class="md-mark">`</span><span class="md-code">docs/agents/review-loop.md</span><span class="md-mark">`</span> by a <span class="md-mark">**</span><strong>fresh subagent</strong><span class="md-mark">**</span> each round <span class="md-elide">[…]</span> <span class="md-mark">**</span><strong>9/10 passes; below 9 → fix every MUST FIX → a NEW reviewer; at most 3 rounds; never hand back below 9.</strong><span class="md-mark">**</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">221</span><span class="ln__t"><span class="md-mark">## </span><span class="md-h">7. The Local lock, the stop rules, the 40% rule, the hand-back</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true"></span><span class="ln__t"><span class="md-mark">**</span><strong>Never push <span class="md-mark">`</span><span class="md-code">staging</span><span class="md-mark">`</span>, <span class="md-mark">`</span><span class="md-code">holiday</span><span class="md-mark">`</span> or <span class="md-mark">`</span><span class="md-code">main</span><span class="md-mark">`</span>; never merge; never edit <span class="md-mark">`</span><span class="md-code">STATUS.md</span><span class="md-mark">`</span></strong><span class="md-mark">**</span> <span class="md-elide">[…]</span> Never <span class="md-mark">`</span><span class="md-code">git stash</span><span class="md-mark">`</span>; never switch branches in José's checkout.</span></span><span class="ln is-hl"><span class="ln__n" aria-hidden="true"></span><span class="ln__t"><span class="md-h">A question only José can answer is not a stop: build the default named here or in the draft, record it as 'José's call (as built first)', go on. A bug outside this ticket: one 'found, not fixed' line under Owed, no fix.</span></span></span><span class="ln is-hl"><span class="ln__n" aria-hidden="true"></span><span class="ln__t"><span class="md-h"><span class="md-mark">**</span><strong>The 40% rule:</strong><span class="md-mark">**</span> past ~40% context before the ticket is done → stop at a clean pushed commit, write <span class="md-mark">`</span><span class="md-code">docs/agents/handoffs/ticket-49-&lt;date&gt;-&lt;time&gt;.md</span><span class="md-mark">`</span> <span class="md-elide">[…]</span> and tell the orchestrator <span class="md-mark">`</span><span class="md-code">handoff #49 &lt;hash&gt;</span><span class="md-mark">`</span>.</span></span></span></code></pre>
-  <p class="artefact__note"><span class="md-hl" aria-hidden="true"></span>Highlighted: the stop rules. Headings carry their line numbers; the rules sit in lines 210–217 and 221–243. Quoted in research/bakery-case-study.md, Part 4 §2.</p>
-</figure>
-
-<p class="pr-lead"><strong>A hand-off’s first lines.</strong> It claims no authority and states where everything is:</p>
-<figure class="artefact reveal" id="ex-handoff">
-  <figcaption class="artefact__head"><span class="artefact__path">docs/agents/handoffs/ticket-24-2026-10-24-rebase.md</span><span>94 lines · ticket #24</span></figcaption>
-  <pre class="artefact__body excerpt"><code><span class="ln"><span class="ln__n" aria-hidden="true">1</span><span class="ln__t"><span class="md-mark"># </span><span class="md-h">#24 — the rebase onto <span class="md-mark">`</span><span class="md-code">admin-polish</span><span class="md-mark">`</span> d51a677 (2026-10-24): hand-back</span></span></span><span class="ln is-hl"><span class="ln__n" aria-hidden="true">4</span><span class="ln__t"><span class="md-h">Nothing here is a decision; José's calls are in STATUS §4 / §6.</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">6</span><span class="ln__t"><span class="md-h">1. Where things are</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">8</span><span class="ln__t"><span class="md-mark">`</span><span class="md-code">ticket-24-change</span><span class="md-mark">`</span> = <span class="md-mark">`</span><span class="md-code">ticket-24-self-service</span><span class="md-mark">`</span> = <span class="md-mark">**</span><strong>this commit's parent <span class="md-mark">`</span><span class="md-code">daf95f5</span><span class="md-mark">`</span></strong><span class="md-mark">**</span> <span class="md-elide">[…]</span> 23 commits on <span class="md-mark">`</span><span class="md-code">admin-polish</span><span class="md-mark">`</span></span></span><span class="ln is-hl"><span class="ln__n" aria-hidden="true">12</span><span class="ln__t"><span class="md-h"><span class="md-mark">**</span><strong>Not on staging.</strong><span class="md-mark">**</span> The orchestrator fast-forwards <span class="md-mark">`</span><span class="md-code">admin-polish</span><span class="md-mark">`</span> and <span class="md-mark">`</span><span class="md-code">staging</span><span class="md-mark">`</span>; this lane never touched either.</span></span></span><span class="ln is-hl"><span class="ln__n" aria-hidden="true">13</span><span class="ln__t"><span class="md-h">Harness at <span class="md-mark">`</span><span class="md-code">f1aea63</span><span class="md-mark">`</span> <span class="md-elide">[…]</span> <span class="md-mark">`</span><span class="md-code">tests/cli/run.sh</span><span class="md-mark">`</span> <span class="md-mark">**</span><strong>3893 passed / 2 failed</strong><span class="md-mark">**</span> (check 18 A349; check 30's recorded intermittent variation-rename line, STATUS §4), <span class="md-mark">`</span><span class="md-code">tests/cli/run.sh --no-theme</span><span class="md-mark">`</span> <span class="md-mark">**</span><strong>3894 / 1</strong><span class="md-mark">**</span></span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">18</span><span class="ln__t">Local lane windows (all GO'd by the orchestrator, 'run ended' after each): 1 the five targeted runs; 2 the re-runs <span class="md-elide">[…]</span> 5 the reviewer's three runs. Between windows nothing ran on the DB.</span></span><span class="ln"><span class="ln__n" aria-hidden="true">21</span><span class="ln__t"><span class="md-h">2. The conflicts, file by file (what each resolution kept)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">46</span><span class="ln__t"><span class="md-h">3. Browser pass on Local (window 4) — all PASS</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">65</span><span class="ln__t"><span class="md-h">4. The review (round 1 — <span class="md-mark">`</span><span class="md-code">docs/agents/review-loop.md</span><span class="md-mark">`</span>, the hand-resolved-conflicts round)</span></span></span><span class="ln"><span class="ln__n" aria-hidden="true">88</span><span class="ln__t"><span class="md-h">5. Owed after this</span></span></span></code></pre>
-  <p class="artefact__note"><span class="md-hl" aria-hidden="true"></span>Highlighted: no authority claimed, and where things are. Quoted in research/bakery-case-study.md, Part 4 §2.</p>
-</figure>
-
-<p class="pr-lead"><strong>A register row.</strong> One of my decisions, recorded in my own words, typos included:</p>
-<figure class="artefact reveal" id="ex-register">
-  <figcaption class="artefact__head"><span class="artefact__path">docs/assumptions-register.md</span><span>row A960 · 1 of 1,594</span></figcaption>
-  <pre class="artefact__body excerpt"><code><span class="ln"><span class="ln__n" aria-hidden="true">913</span><span class="ln__t">A960 · <span class="md-mark">**</span><strong>Nothing prints on its own; a Print click goes on the site's print list and a runner next to the Epson prints it</strong><span class="md-mark">**</span> (José, 2026-10-20: 'i dont want tickets to automatically print when an order gets confirmed. just when me admin or a user (not yet created, bakery) clicks print'; the laptop reaches the printer only inside the co-op network, the site never does).</span></span></code></pre>
-  <p class="artefact__note">Quoted in research/bakery-case-study.md, Part 4 §4.</p>
-</figure>
-
-<div class="pr-figs">
-<figure class="figure reveal" data-chart="rounds" data-src="/data/bakery-metrics.json" id="fig-rounds">
-  <header>
-    <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Review rounds to a pass</span></p>
-    <h3 class="figure-title">Most changes passed review in one or two rounds</h3>
-    <p class="figure-sub">Mentions of “9/10 in N rounds” in the bakery records. A ticket can be mentioned more than once, so read the shape, not a count of tickets.</p>
-  </header>
-  <div class="chart" role="img" aria-label="Horizontal bars. One round 90 mentions, two rounds 69, three rounds 18, four rounds 2, five rounds 9. Scores of 10/10 appear 4 times."></div>
-  <figcaption>159 of 188 mentions are one or two rounds. In the retro’s words, every failed round found a real bug.</figcaption>
-  <footer class="figure-foot"><span>Source: grep across STATUS.md, docs/agents and docs/parity, computed 2026-11-07</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
-
-<figure class="figure reveal" data-chart="models" data-src="/data/bakery-metrics.json" id="fig-models">
-  <header>
-    <p class="eyebrow"><span class="eyebrow__seg">Figure 2</span> · <span class="eyebrow__seg">Co-author trailers by model</span></p>
-    <h3 class="figure-title">1,482 of 1,503 commits carry a Claude co-author trailer</h3>
-    <p class="figure-sub">Co-Authored-By trailers by model on the bakery plugin, all branches.</p>
-  </header>
-  <div class="chart" role="img" aria-label="Horizontal bars. Claude Fable 5.1 1,051; Claude Opus 5.5 238; Opus 5.5 with 1M context 117; Fable 5 58; Opus 5 with 1M context 14; Opus 4.8 with 1M context 4."></div>
-  <figcaption>Every commit is under my login; the trailer records which model wrote it.</figcaption>
-  <footer class="figure-foot"><span>Source: git log --all trailers, computed 2026-11-07</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
-</div>
+<section class="prose" id="incidents" aria-labelledby="incidents-title">
+<h2 id="incidents-title">Each incident became a rule</h2>
+<p>Overlapping test runs corrupted 16 settings, so runs take a lock; an agent resolved 13 review threads, so agents now answer threads but never resolve them. And because “Understood” was once taken as yes, a session now confirms its scope in one line before acting.</p>
+<p>The bakery retro found the process worked and cost too much: 1.09 million words of docs, and ticket prompts of 3,000 to 7,000 words. The playbook now sets budgets, including three parallel lanes at most. This site’s build broke that one too, running four and then five lanes at once. Review round 1, below, is the correction.</p>
+  <figure class="figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
+    <header>
+      <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Commits per day, all branches</span></p>
+      <h3 class="figure-title">142 days from first commit to a live store</h3>
+      <p class="figure-sub">Daily commits on the bakery plugin, 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
+    </header>
+    <div class="chart" role="img" aria-label="Bar chart of daily commits from June to November 2026. Summer is sparse, October is dense, the tallest bar is 307 commits on 26 October, and the store goes live on 1 November."></div>
+    <figcaption>The tallest bar is one night: 18 deli tickets built by an orchestrator and parallel builders, 307 commits dated 26 October.</figcaption>
+    <footer class="figure-foot">
+      <span>Source: git log --all on joseocfc/cfc-bakery-orders, computed 2026-11-07</span>
+      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span>
+    </footer>
+  </figure>
 </section>
 
-<!-- ============================================================ After the retro -->
-<section class="prose" id="retro" aria-labelledby="retro-title">
-<h2 id="retro-title">The retro made the method cheaper</h2>
-<p>The bakery retro found that the process worked and cost too much: 1.09 million words of docs, nearly half the commits docs-only, and ticket prompts of 3,000 to 7,000 words. The playbook now sets budgets: a CLAUDE.md of 150 lines at most, a one-page brief and status, three parallel lanes, three review rounds.</p>
-
-<div class="kcd reveal">
-  <div class="kcd__col kcd__col--keep"><p class="kcd__label">Keep</p><ul>
-    <li><strong>A fresh reviewer, 9/10, capped rounds</strong>Every failed round found a real bug.</li>
-    <li><strong>Staging, then my phone</strong>My staging check caught a pricing bug that review had passed.</li>
-    <li><strong>Record-and-ask; one decision at a time</strong></li>
-  </ul></div>
-  <div class="kcd__col kcd__col--change"><p class="kcd__label">Change</p><ul>
-    <li><strong>Ticket prompts of 3,000–7,000 words</strong><span class="kcd__now">Size tickets to fit one session; keep briefs to one page.</span></li>
-    <li><strong>Tests that pin markup and wording</strong><span class="kcd__now">Test behaviour; check looks by eye.</span></li>
-    <li><strong>One test database shared by parallel sessions</strong><span class="kcd__now">Each lane gets its own data.</span></li>
-  </ul></div>
-  <div class="kcd__col kcd__col--drop"><p class="kcd__label">Drop</p><ul>
-    <li><strong>Essay commits</strong></li>
-    <li><strong>History in code comments</strong></li>
-    <li><strong>“Known reds”</strong>One “base red” was a real bug.</li>
-  </ul></div>
-</div>
-
-<p>Each incident became a rule. Overlapping test runs corrupted 16 settings, so runs take a lock; an agent resolved 13 review threads, so agents now answer threads but never resolve them. And because “Understood” was once taken as yes, a session now confirms its scope in one line before acting.</p>
+<section class="prose" id="review" aria-labelledby="review-title">
+<h2 id="review-title">Review round 1: what four reviewers caught</h2>
+<p>After the site went live, four reviewer agents read it the way a hiring loop would: a design lead, a web engineer, a copy editor and a panel reading as Epoch AI. I read their reports alongside them. Every fix is in <a href="PR_URL_PLACEHOLDER">the pull request</a>, one small commit per change. These are the first nine findings, in the order they were ranked.</p>
+<ol>
+  <li><strong>The Epoch study’s premise was false.</strong> The study said Epoch’s chart cropped on a phone. That came from a headless Chrome window, which does not behave like a real phone screen. Three reviewers emulated a 390 px phone and the full axis rendered. The study was re-tested with device emulation at 390×844 and now describes what that test shows: on a phone, 2010 to 2026 is squeezed into the right fifth of the plot. The drawn “before” mock-up and its invented model label are gone.</li>
+  <li><strong>The home page led with commits per day.</strong> Four tiles and a chart measured how fast the agents worked, and one tile counted assumptions the bakery retro had disowned. The home page now opens on the product, the commit chart moved to this page as Figure 1, and that tile is gone.</li>
+  <li><strong>Scaffolding was live.</strong> A page template titled “«Page title»”, a prompt generator, an image manifest and comments naming build lanes were all public. They were deleted or moved out of the site. The two scripts the Epoch study links as source stay, on purpose.</li>
+  <li><strong>The site contradicted its own design-system pitch.</strong> About 1,400 lines of CSS sat inline across nine pages, with 102 hardcoded colors on the bakery page alone. Page styles moved into files built on the shared tokens, and color literals outside the token file went to zero.</li>
+  <li><strong>Citations pointed into a private repo.</strong> Dozens of file-and-line references opened nothing for a reader, and the live store was never linked. Unreadable citations were removed or replaced with excerpts, and the store is linked.</li>
+  <li><strong>The site was addressed to one employer.</strong> A “For Epoch” section on the About page told every other reader they were second choice, and it quoted the wrong job posting. The public pages are now neutral; the note to Epoch moved to an unlisted page that quotes the right posting.</li>
+  <li><strong>The bakery story had no outcome.</strong> It ended at “it shipped, 78 days late”. The outcome now explains the slip as a decision, names the measure that will decide success, and sets a date to report back.</li>
+  <li><strong>No page showed a decision I made.</strong> Each case study now has a section on one documented decision, the alternative I turned down, and why.</li>
+  <li><strong>This page undermined the method.</strong> It credited a build agent with the words on the page, published about 10,700 words of prompts, and contradicted itself twice: “Staging first, always” on a site that skipped staging, and a three-lane cap on a build that ran five. It was cut to the rules, the loop and this list, and the contradictions are now stated as what happened.</li>
+</ol>
+<p>Who wrote what: agents drafted this site’s words and code. Four reviewer agents and I reviewed them in this round. My own rewrite in my own voice is still to come.</p>
+<p>Every agent in these builds started from a written prompt. <a href="/process/prompts/">One of them, annotated</a>, shows what a prompt has to carry.</p>
 </section>
 
-<!-- ============================================================ This site -->
-<section class="prose" id="this-site" aria-labelledby="this-site-title">
-<h2 id="this-site-title">This site was built in one night by one orchestrator and <!--build:workers-->15<!--/build:workers--> worker terminals</h2>
-<p>The same method, smaller. On 7 November an orchestrator session opened four research lanes, read what they found, and wrote a 235-line spec that gives every file to exactly one lane. Then it opened five build lanes, each a terminal with one prompt (shell, charts, data, the Epoch study, and the words you’re reading), and after them the page lanes.</p>
-<p>My playbook caps parallel lanes at three. This build ran four, then five at once, because no two lanes share a file, so no two workers can collide.</p>
-
-<figure class="figure reveal" data-chart="build-log" data-src="/data/build-log.json" id="fig-build-log">
-  <header>
-    <p class="eyebrow"><span class="eyebrow__seg">Figure 3</span> · <span class="eyebrow__seg">This site’s build, by lane</span></p>
-    <h3 class="figure-title"><span data-build="duration">One night</span> from the first research lane to a deployable site</h3>
-    <p class="figure-sub">Start and end time of every lane, Pacific time, 7–8 November 2026.</p>
-  </header>
-  <div class="chart" role="img" aria-label="A Gantt chart. Four research lanes run in parallel first, then five build lanes in parallel, then the page lanes and a final QA lane."></div>
-  <figcaption>Lanes run in parallel only where the spec gives them separate files; the page lanes waited for the shell and the charts.</figcaption>
-  <footer class="figure-foot"><span>Source: lanes/logs, via data/build-log.json</span>
-    <span class="figure-actions"><button data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
-</figure>
-
-<p>Models: the orchestrator ran on Claude Fable 5.1, and every worker from the build phase on ran on Claude Opus 5.5. Each lane’s prompt is published as written:</p>
-<ul class="pr-lanes">
-  <li><span class="pr-lanes__k">Research</span><span class="pr-lanes__v"><a href="/process/prompts/#lane1-epoch">the Epoch dossier</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#lane2-bakery">the bakery case</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#lane3-theme">the theme and Figma</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#lane4-other">other work</a></span></li>
-  <li><span class="pr-lanes__k">Build</span><span class="pr-lanes__v"><a href="/process/prompts/#A1-shell">shell</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#A2-charts">charts</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#A3-data">data and images</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#A4-epoch">Epoch study</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#A5-copy">copy</a></span></li>
-<!--build:page-links-->
-  <li><span class="pr-lanes__k">Pages</span><span class="pr-lanes__v"><a href="/process/prompts/#B1-bakery">bakery case study</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#B2-design-system">design system</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#B3-process">this page</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#B4-home-about">home and about</a></span></li>
-  <li><span class="pr-lanes__k">QA and Figma</span><span class="pr-lanes__v"><a href="/process/prompts/#C1-qa">QA audit</a><span class="sep" aria-hidden="true">·</span> <a href="/process/prompts/#D1-figma">Figma file</a></span></li>
-<!--/build:page-links-->
+<section class="prose" id="glossary" aria-labelledby="glossary-title">
+<h2 id="glossary-title">Six words this page uses</h2>
+<ul>
+  <li><strong>Orchestrator.</strong> The agent session that splits a job into pieces, writes a prompt for each piece, and checks what comes back.</li>
+  <li><strong>Lane.</strong> One of those pieces: one agent in its own terminal, given its own files so no two agents edit the same one.</li>
+  <li><strong>Hook.</strong> A script that runs by itself whenever an agent edits a file, and blocks the edit if it breaks a rule, such as a hardcoded color.</li>
+  <li><strong>Token.</strong> A named design value, like a color or a spacing step, defined once so every page uses the same one.</li>
+  <li><strong>Parity check.</strong> A script that compares the tokens in code with the ones in Figma and lists any that differ.</li>
+  <li><strong>Assertion.</strong> One automated yes-or-no check inside a test. The bakery suite runs 6,089 of them.</li>
 </ul>
-<p><a class="link-arrow" href="/process/prompts/">Every prompt and the spec, on one page</a></p>
-
-<p class="pr-close">One exception to principle 5: this site went live the night it was built, because I asked for a hands-off run. What my phone finds becomes the first fix round, and it is logged on this page.</p>
 </section>
 
-</div><!-- /.pr-main -->
-</div><!-- /.case-layout -->
-</div><!-- /.container -->
-<!-- /PAGE CONTENT -->
+</div>
+</div>
+</div>
 </main>
 
 <footer class="site-footer">
@@ -283,7 +215,7 @@
     <nav class="site-footer__col" aria-label="Contact">
       <p class="site-footer__heading">Contact</p>
       <ul>
-        <li><a href="mailto:joseo@communityfood.coop">Email</a></li>
+        <li><a href="mailto:joseo@communityfood.coop">Email</a><!-- F17: José to replace with a personal address --></li>
         <li><a href="https://www.linkedin.com/in/jose-antonio-ochoa">LinkedIn</a></li>
         <li><a href="https://github.com/joseocfc">GitHub</a></li>
       </ul>
@@ -312,18 +244,6 @@
 <!-- PAGE SCRIPTS: pages with figures add these two lines (D3 first, then the chart core): -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" defer></script>
 <script type="module" src="/assets/js/charts/index.js"></script>
-<script type="module">
-/* Figure 3's title: the build's wall-clock span, computed from data/build-log.json (never typed by hand).
-   Shown only once every site lane has an end time; until then the static "One night" stays. */
-const out = document.querySelector('[data-build="duration"]');
-if (out) fetch('/data/build-log.json').then((r) => r.json()).then((d) => {
-  const lanes = (d.lanes || []).filter((l) => l.id !== 'orchestrator' && !/figma/i.test(`${l.id} ${l.phase}`));
-  if (!lanes.length || lanes.some((l) => !l.start || !l.end)) return;
-  const t0 = Math.min(...lanes.map((l) => +new Date(l.start))), t1 = Math.max(...lanes.map((l) => +new Date(l.end)));
-  const m = Math.round((t1 - t0) / 60000);
-  out.textContent = m >= 60 ? `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')} min` : `${m} minutes`;
-}).catch(() => {});
-</script>
 <script type="module" src="/assets/js/site.js"></script>
 </body>
 </html>
