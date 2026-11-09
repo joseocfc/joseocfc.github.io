@@ -96,13 +96,16 @@
   <h1 class="hero__title" id="hero-title">A bakery ordering system, designed and shipped by one designer directing AI&nbsp;agents</h1>
   <p class="lead hero__dek">Community Food Co-op’s custom cake orders arrived in a shared inbox and were copied by hand onto carbon tickets. I replaced that with a WooCommerce plugin: a pickup-first cake builder, staff dashboards, printed tickets, emails and a Thanksgiving deli layer, live since 1&nbsp;November&nbsp;2026.</p>
   <!-- src: docs/archive/architecture-plan.snapshot.md:22, :273; docs/archive/meeting-2026-07-29-brief.md:74-76; STATUS.md:161 -->
+  <div class="btn-row hero__actions">
+    <a class="btn btn--primary" href="https://communityfood.coop/bakery-orders/">See the live store <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
 
   <div class="stat-grid stat-grid--compact">
     <article class="stat-card">
       <p class="stat-label">Days</p>
       <p class="stat-value"><span data-count="142">142</span></p>
       <p class="stat-claim">From first commit to a live store.</p>
-      <footer class="stat-meta">git log · STATUS.md:161</footer>
+      <footer class="stat-meta">git log · project log</footer>
     </article>
     <article class="stat-card">
       <p class="stat-label">Commits</p>
@@ -114,7 +117,7 @@
       <p class="stat-label">Assertions</p>
       <p class="stat-value"><span data-count="6089">6,089</span></p>
       <p class="stat-claim">In a full test run, 1 known red.</p>
-      <footer class="stat-meta">tests/cli/README.md · <span class="nowrap">2026-11-05</span></footer>
+      <footer class="stat-meta">test harness · <span class="nowrap">2026-11-05</span></footer>
     </article>
     <article class="stat-card">
       <p class="stat-label">Tickets</p>
@@ -147,11 +150,12 @@
       <li><a class="toc__link" href="#problem"><span class="toc__num">01</span>The problem</a></li>
       <li><a class="toc__link" href="#research"><span class="toc__num">02</span>Research and requirements</a></li>
       <li><a class="toc__link" href="#insights"><span class="toc__num">03</span>Insights</a></li>
-      <li><a class="toc__link" href="#design"><span class="toc__num">04</span>Design</a></li>
-      <li><a class="toc__link" href="#build"><span class="toc__num">05</span>Build</a></li>
-      <li><a class="toc__link" href="#workflow"><span class="toc__num">06</span>The AI workflow</a></li>
-      <li><a class="toc__link" href="#outcome"><span class="toc__num">07</span>Outcome</a></li>
-      <li><a class="toc__link" href="#retro"><span class="toc__num">08</span>What I’d change</a></li>
+      <li><a class="toc__link" href="#decision"><span class="toc__num">04</span>A decision I made</a></li>
+      <li><a class="toc__link" href="#design"><span class="toc__num">05</span>Design</a></li>
+      <li><a class="toc__link" href="#build"><span class="toc__num">06</span>Build</a></li>
+      <li><a class="toc__link" href="#workflow"><span class="toc__num">07</span>The AI workflow</a></li>
+      <li><a class="toc__link" href="#outcome"><span class="toc__num">08</span>Outcome</a></li>
+      <li><a class="toc__link" href="#retro"><span class="toc__num">09</span>What I’d change</a></li>
     </ol>
   </nav>
 
@@ -162,19 +166,19 @@
   <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">01</span> · <span class="eyebrow__seg">The problem</span></p>
   <h2 id="problem-title">Orders arrived as email and were copied onto carbon tickets by hand</h2>
 
-  <p>The co-op sold custom cakes through Catapult/WebCart, its POS vendor’s storefront. Each order landed in a shared inbox and was re-keyed onto a three-colour carbon ticket: white for the store, yellow for the deli, pink for the bakery. Cancellations were phone calls.</p>
+  <p>The co-op sold custom cakes through Catapult/WebCart, its POS vendor’s storefront. Each order landed in a shared inbox and was re-keyed onto a three-color carbon ticket: white for the store, yellow for the deli, pink for the bakery. Cancellations were phone calls.</p>
   <!-- src: README.md:3-5; docs/archive/architecture-plan.snapshot.md:273, :464; docs/archive/meeting-2026-07-29-brief.md:74-76 -->
 
 
   <p>In October the deli joined the project. Until then the deli lead had run Thanksgiving pre-orders alone: every order arrived as an email that couldn’t be searched, and each one was typed three times, into a season master, a pickup-day sheet and the store’s guide.</p>
   <!-- src: docs/deli/requirements.md:37-40 -->
 
-  <p>The deli’s 25-sheet workbook showed why the numbers drifted. No formula on any sheet referenced another, so anything that appeared twice had been typed twice. The 2025 season had 42 orders; as the spec put it, “its cost is the retyping, not the volume.”</p>
+  <p>The deli’s 25-sheet workbook showed why the numbers drifted. No formula on any sheet referenced another, so anything that appeared twice had been typed twice. The 2025 season had only 42 orders. The spec put the whole cost in the retyping.</p>
   <!-- src: docs/deli/order-board-analysis.md:3-4, :45-46; docs/deli/spec.md:50-51 -->
 
   <figure class="quote reveal">
     <blockquote><p>“The amount of hours that I put in, putting this in here, is ridiculous.”</p></blockquote>
-    <figcaption>— The deli lead, discovery interview, October 2026 · <cite>docs/deli/conversation-digest.md:162-178</cite></figcaption>
+    <figcaption>— The deli lead, discovery interview, October 2026</figcaption>
   </figure>
 
   <p>Four groups use the system:</p>
@@ -195,7 +199,7 @@
   <p>Before any feature, I ran “grills”: the agent puts each open decision to me, one at a time, with a recommended answer. The grill of 6 July locked 12 product decisions and 8 build phases. Every later ticket opened the same way.</p>
   <!-- src: docs/build-roadmap.md:3-4, :66-118, :131-281; docs/parity/28/ledger.md:19-88 -->
 
-  <p>Two of the twelve shaped everything after: size is the only variation axis, with every other choice stored as structured data, “never a text blob”; and the browser “is fast but never trusted”.</p>
+  <p>Two of the twelve shaped everything after: size is the only variation axis, with every other choice stored as structured data; and the browser “is fast but never trusted”.</p>
   <!-- src: docs/build-roadmap.md:72-76, :94-96, :114-118 -->
 
   <p>Six hard rules open the agents’ manual. One says the plugin must still render correctly with the theme switched off.</p>
@@ -205,10 +209,10 @@
 
   <div class="table-wrap reveal">
     <table class="table bk-table">
-      <caption>Source: docs/deli/order-board-analysis.md · docs/deli/requirements.md:80 · includes/class-cancellation.php:19-30</caption>
+      <caption>Source: the project log’s cell-by-cell read of the deli’s 2025 workbook, and the deli requirements</caption>
       <thead><tr><th scope="col">What the 2025 workbook showed</th><th scope="col">The rule it became</th></tr></thead>
       <tbody>
-        <tr><td>A 2&nbsp;lb side was counted, not doubled: the master showed 9 where the weight was 18&nbsp;lb</td><td>Cooking totals are computed from order lines and a side-amounts table, never typed</td></tr>
+        <tr><td>A 2&nbsp;lb side was counted once: the master showed 9 where the weight was 18&nbsp;lb</td><td>Cooking totals are computed from order lines and a side-amounts table</td></tr>
         <tr><td>26 of 42 orders were picked up on the last day</td><td>Per-day, per-store sheets with slot numbers</td></tr>
         <tr><td>Only 20 of 44 guide rows carried the website’s order code</td><td>The order number and slot print on every sheet</td></tr>
         <tr><td>11 of 32 bundles took no pie, and 11 took no protein</td><td>Protein &amp; Dessert is an optional step with counters</td></tr>
@@ -226,8 +230,8 @@
     <table>
       <thead><tr><th scope="col">#</th><th scope="col">Assumption (trimmed)</th><th scope="col">Decided</th></tr></thead>
       <tbody>
-        <tr><td>A3</td><td>72-hour lead time means “today + 3 calendar days”, not a rolling clock; the hours are editable in Settings</td><td><span class="bk-ok">Signed off <span class="nowrap">2026-07-07</span></span></td></tr>
-        <tr><td>A349</td><td>Check 18 fails on six seasonal products that carry the Seasonal category but no season: “a finding, not fixed here”</td><td>Recorded; the data is mine to fix</td></tr>
+        <tr><td>A3</td><td>72-hour lead time means “today + 3 calendar days”, counted in whole days; the hours are editable in Settings</td><td><span class="bk-ok">Signed off <span class="nowrap">2026-07-07</span></span></td></tr>
+        <tr><td>A349</td><td>Check 18 fails on six seasonal products that carry the Seasonal category but no season, logged as a finding to fix in the data</td><td>Recorded; the data is mine to fix</td></tr>
         <tr><td>A960</td><td>“Nothing prints on its own; a Print click goes on the site’s print list and a runner next to the Epson prints it”</td><td>José, <span class="nowrap">2026-10-20</span></td></tr>
         <tr><td>A1306</td><td>An Undo doesn’t ask the holiday calendar; the checkout gate does</td><td>“José’s call, as built first”, <span class="nowrap">2026-10-26</span></td></tr>
         <tr><td>A2032</td><td>Each holiday side’s allergens sit below its ingredients; a blank one reads “None”</td><td>José, <span class="nowrap">2026-11-04</span></td></tr>
@@ -256,25 +260,25 @@
 <!-- ======================================================================= 03 -->
 <section class="prose bk-sec" id="insights" aria-labelledby="insights-title">
   <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">03</span> · <span class="eyebrow__seg">Insights</span></p>
-  <h2 id="insights-title">Five research findings changed what customers and staff actually do</h2>
+  <h2 id="insights-title">Five decisions that changed what customers and staff do</h2>
 
-  <p>The research produced 17 findings that changed the build. These five matter most to the people using it.</p>
+  <p>The research produced 17 findings that changed the build. These are the five decisions that matter most to the people using it.</p>
 
   <ol class="findings">
     <li class="finding">
-      <h3 class="finding__title">Run the counter, not the cap</h3>
+      <h3 class="finding__title">A counter from day one, and no cap yet</h3>
       <p class="finding__text">The bakery had no daily limit to give me, so the cap launched switched off while a counter ran from day one, derived from real orders with no stored total to drift. A real cap can come later, from data.</p>
-      <p class="finding__source">includes/class-capacity.php:2-17 · docs/build-roadmap.md:94-96</p>
+      <p class="finding__source">From the project log: the architecture plan also chose never to hold slots, judging the complexity and the room for abuse not worth it at about ten orders a day.</p>
     </li>
     <li class="finding">
-      <h3 class="finding__title">The cut-off is a minute, not a day</h3>
+      <h3 class="finding__title">The cut-off is a single minute: 12:00&nbsp;pm</h3>
       <p class="finding__text">Lead time moved from 72 hours to two days with a 12:00&nbsp;pm cut-off: an order placed before noon counts from today, and from noon it counts from tomorrow. A customer who opens the calendar at 11:55 and submits at 12:05 is refused by the server’s recheck, “as designed, no client timer”.</p>
-      <p class="finding__source">includes/helpers.php:907-911 · docs/assumptions-register.md:1291-1292 (A1504–A1505)</p>
+      <p class="finding__source">From the project log: the order-day rule is five lines of code. Before the cut-off minute it answers today, and from that minute on, tomorrow. A saved 72-hour setting reads as two days, so nothing had to migrate.</p>
     </li>
     <li class="finding">
       <h3 class="finding__title">Pickup comes first</h3>
       <p class="finding__text">Step 1 is the pickup: a store, then a calendar with exactly three day states, and the step can’t advance without a date the server marks open. A customer never designs a cake for a day the bakery can’t make.</p>
-      <p class="finding__source">docs/figma/figma-final-wireframe-plan.md:37-39 · tests/cli/checks/06-pickup-first.php:3-6</p>
+      <p class="finding__source">From the project log: the 5 August wireframe decisions put Pickup first of five steps, with the review card at the end of step 5. A server check refuses any cake added to the cart without an open date and an active store.</p>
       <!-- B1 addition for pacing (not in the copy file): A3's MANIFEST assigns this capture to the 'pickup first' insight; caption from its description. -->
       <figure class="media media--browser reveal">
         <img src="/assets/img/bakery/storefront-builder-step-1-pickup-1280.jpg" width="1280" height="919" loading="lazy" decoding="async" alt="Step one of the cake builder: a pickup calendar with available, unavailable and selected days, two store cards, and a running summary of the order.">
@@ -282,21 +286,48 @@
       </figure>
     </li>
     <li class="finding">
-      <h3 class="finding__title">Tickets print on a click, not on payment</h3>
-      <p class="finding__text">The plan said auto-print, but the web host can’t reach a printer on the store network, and on 20 October I ruled it out: “i dont want tickets to automatically print when an order gets confirmed.” Now a Print click puts the job on a list, and a small runner beside the receipt printer prints it.</p>
-      <p class="finding__source">docs/assumptions-register.md:913 (A960) · includes/class-print-agent.php:2-33</p>
+      <h3 class="finding__title">Tickets print when someone clicks Print</h3>
+      <p class="finding__text">The plan said tickets would print themselves on payment. I turned that down on 20 October, and the next section explains why.</p>
+      <p class="finding__source">From the project log: decision A960, 20 October 2026.</p>
     </li>
     <li class="finding">
       <h3 class="finding__title">One breakpoint, at 782&nbsp;px</h3>
       <p class="finding__text">The storefront CSS has exactly one media query, at 782&nbsp;px; there’s no tablet layout. A check hashes every byte outside that block, so the 375&nbsp;px layout I approved on my phone can’t move by accident.</p>
-      <p class="finding__source">docs/parity/28/ledger.md:42-43 · tests/cli/checks/33-desktop-pass.php:3-19</p>
+      <p class="finding__source">From the project log: the desktop pass agreed that desktop starts at 782&nbsp;px, the one breakpoint that already existed, and swapped screenshot review for a byte check on everything outside it.</p>
     </li>
   </ol>
 </section>
 
 <!-- ======================================================================= 04 -->
+<section class="prose bk-sec" id="decision" aria-labelledby="decision-title">
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">04</span> · <span class="eyebrow__seg">A decision I made</span></p>
+  <h2 id="decision-title">I chose a Print button over auto-print, because the website can’t reach the printer</h2>
+
+  <p>The architecture plan had every ticket print itself the moment an order was paid. The reason was the paper flow: the ticket replaced the handwritten step, so nobody should have to remember to make it.</p>
+  <!-- src: docs/archive/architecture-plan.snapshot.md:212-213 (research/bakery-case-study.md §c.7) -->
+
+  <p>Two facts stood in the way. The store runs on a web host that can’t see a printer on the co-op’s network, and the first version printed silently only because one Mac ran Chrome in kiosk mode. On 20 October I ruled it out: “i dont want tickets to automatically print when an order gets confirmed.”</p>
+  <!-- src: docs/archive/mvp-notes-running.md:33-37; docs/assumptions-register.md:913 (A960); research/bakery-case-study.md §c.7 and pull quote 6 -->
+
+  <aside class="callout">
+    <p class="callout__title">From the project log</p>
+    <p>Decision A960, 20 October 2026: nothing prints on its own. Only a computer inside the co-op’s network can reach the printer, so the job has to travel there.</p>
+  </aside>
+
+  <p>Now a person decides when a ticket prints. A Print click puts the job on a print list on the site; a small runner on a computer beside the receipt printer collects it, prints the same ticket and reports back. The browser’s own print dialog stays as a fallback, labeled “Print on this computer”.</p>
+  <!-- src: includes/class-print-agent.php:2-33; tools/print-agent/README.md:3-20 (research/bakery-case-study.md §c.7) -->
+
+  <p>The cost is the step the plan wanted to remove: someone has to click. The staff rules say so plainly. A ticket marked printed only means the print was sent, and the fix for a lost ticket is to print it again.</p>
+  <!-- src: docs/launch/staff-rules.md:21-26 (research/bakery-case-study.md §c.7) -->
+
+  <p>It wasn’t the only rule I changed late. On 28 October I replaced the 72-hour lead time with two days and a 12:00&nbsp;pm cut-off, the second decision above.</p>
+  <!-- src: STATUS.md:124-125, #57 (research/bakery-case-study.md §c.2) -->
+  <!-- F8: José to confirm and add the decision the agents cannot know -->
+</section>
+
+<!-- ======================================================================= 05 -->
 <section class="prose bk-sec" id="design" aria-labelledby="design-title">
-  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">04</span> · <span class="eyebrow__seg">Design</span></p>
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">05</span> · <span class="eyebrow__seg">Design</span></p>
   <h2 id="design-title">The Figma journey was the spec, and every deviation was logged</h2>
 
   <p>The flow was designed at 375&nbsp;px in the co-op’s design-system file, from library tokens and components only, with each backend rule annotated on its frame in Dev Mode.</p>
@@ -311,7 +342,7 @@
   <p>An overnight agent run on 5–6 August built 30 components, a 97-row copy map and 13 screens with 35 annotations. Its audit read 0 raw fills, 0 raw strokes, 0 raw font sizes and 0 raw radii.</p>
   <!-- src: docs/figma/figma-build-report.md:8-21, :82-98, :119-123 -->
 
-  <p>I approved the structure and sent back the styling. The diff became a register of 30 deviations, 16 global and 14 per screen, plus seven calls left for me that would be “chipped, not silently decided”. An earlier pass had felt “too big, too bold-y”; the audit traced it to desktop text styles on 375&nbsp;px frames.</p>
+  <p>On 6 August I approved the architecture, the journey and the annotations, and sent back the styles, the layout details and the elements the run had dropped from my 750&nbsp;px wireframe. The diff became a register of 30 deviations, 16 global and 14 per screen, plus seven calls left open for me to make. An earlier pass had felt “too big, too bold-y”; the audit traced it to desktop text styles on 375&nbsp;px frames.</p>
   <!-- src: docs/figma/figma-visual-review-feedback.md:3-6; docs/figma/figma-deviation-register.md:134-150, :278-408, :432; docs/archive/overnight-design-v2-review.md:3-4, :11-16 -->
 
   <p>The copywriters edited a duplicate of the journey. A read-only diff compared 691 text layers, found 91 copy edits and 54 comment threads, and changed nothing until I approved: “No node was mutated.”</p>
@@ -335,9 +366,9 @@
   <!-- src: docs/parity/20/ledger.md:15-16; STATUS.md:200 (2026-10-20) -->
 </section>
 
-<!-- ======================================================================= 05 -->
+<!-- ======================================================================= 06 -->
 <section class="prose bk-sec" id="build" aria-labelledby="build-title">
-  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">05</span> · <span class="eyebrow__seg">Build</span></p>
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">06</span> · <span class="eyebrow__seg">Build</span></p>
   <h2 id="build-title">WooCommerce does the plumbing; 64 modules do the bakery</h2>
 
   <p>The plugin doesn’t rebuild commerce. WooCommerce handles payment, cart and checkout; the plugin adds the builder, capacity, order statuses, tickets, emails and the staff screens.</p>
@@ -596,7 +627,7 @@
         <p class="bk-ctx__code"><span class="bk-swatch" aria-hidden="true"></span><span>style="color:<wbr>#284734"</span></p>
       </li>
     </ol>
-    <figcaption id="tokens-cap">One token name, three ways to resolve it. Source: docs/design-tokens.md:73-85 · includes/tokens.php:131, :158, :365-392 · assets/css/print.css:4-5</figcaption>
+    <figcaption id="tokens-cap">One token name, three ways to resolve it.</figcaption>
   </figure>
   <!-- src: docs/design-tokens.md:73-85; includes/tokens.php:131, :365-392; assets/css/print.css:4-5 -->
 
@@ -616,10 +647,10 @@
   </figure>
 </section>
 
-<!-- ======================================================================= 06 -->
+<!-- ======================================================================= 07 -->
 <section class="prose bk-sec" id="workflow" aria-labelledby="workflow-title">
-  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">06</span> · <span class="eyebrow__seg">The AI workflow</span></p>
-  <h2 id="workflow-title">Agents built it; a fresh reviewer and my phone decided when it was done</h2>
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">07</span> · <span class="eyebrow__seg">The AI workflow</span></p>
+  <h2 id="workflow-title">A fresh reviewer and my phone decided when the agents’ work was done</h2>
 
   <p>Every commit is authored under my GitHub login, and 1,482 of 1,503 carry a Claude co-author trailer. My part is on either side of the code: the decisions and rules before it, and the verdict after.</p>
   <!-- src: bakery-metrics.json timeline.contributor_note, ai_coauthorship -->
@@ -781,7 +812,7 @@
       <p>“you are the orchestrator … starting as many sessions as you need”</p>
       <p>“I will leave this plugged in until you are done”</p>
     </blockquote>
-    <figcaption>— José, 2026-10-25 · <cite>docs/agents/handoffs/holiday-orchestrator.md:11-14</cite></figcaption>
+    <figcaption>— José, 2026-10-25, briefing the orchestrator</figcaption>
   </figure>
 
   <p>By the next morning all 18 deli tickets were merged and on staging.</p>
@@ -812,7 +843,7 @@
   <p>When a builder passes about 40% of its context window, it stops at a clean commit and writes a hand-off for a fresh session. Hand-backs read like lab notes:</p>
 
   <figure class="artefact reveal">
-    <figcaption class="artefact__head"><span class="artefact__path">docs/agents/handoffs/ticket-68-hand-back.md:63-73</span><span>excerpt</span></figcaption>
+    <figcaption class="artefact__head"><span class="artefact__path">docs/agents/handoffs/ticket-68-hand-back.md</span><span>excerpt</span></figcaption>
     <pre class="bk-lines"><span>Review R1: <mark>8/10, FIX</mark>. Two must-fixes <span class="bk-dim">[…]</span> Fix round 1 (12577ab).</span><span>Review R2: <mark>9/10, PASS</mark>. Browser pass on 12577ab: PASS <span class="bk-dim">[…]</span> Fix round 2 (ce2e87d).</span><span>Review R3: <mark>9/10, PASS</mark>. <span class="bk-dim">[…]</span></span><span>Full suite on the final tree: 6088 passed / 1 failed theme on, 6083 / 1 theme off (f38fd9e).</span></pre>
   </figure>
   <!-- src: docs/agents/handoffs/ticket-68-hand-back.md:63-73; 40% rule holiday-preamble.md:131-134 -->
@@ -821,7 +852,7 @@
 
   <figure class="quote reveal">
     <blockquote><p>“It does not trust the builder’s word.”</p></blockquote>
-    <figcaption><cite>docs/agents/review-loop.md:28</cite></figcaption>
+    <figcaption>— The review rules every agent works under</figcaption>
   </figure>
 
   <p>I raised the cap from three rounds to five after one ticket needed five (7, 8, 8, 7, 9) and every failed round had found a real bug.</p>
@@ -831,16 +862,16 @@
     <header>
       <p class="eyebrow"><span class="eyebrow__seg">Figure 4</span> · <span class="eyebrow__seg">Review rounds to a pass</span></p>
       <h3 class="figure-title">Most changes passed review in one or two rounds</h3>
-      <p class="figure-sub">Mentions of “9/10 in N rounds” across the status file and the agent records. A ticket can be mentioned more than once, so read the shape, not a count of tickets.</p>
+      <p class="figure-sub">Mentions of “9/10 in N rounds” across the status file and the agent records. A ticket can be mentioned more than once, so the bars overstate the number of tickets; their shape is the point.</p>
     </header>
     <div class="chart" role="img" aria-label="Horizontal bars. One round 90 mentions, two rounds 69, three rounds 18, four rounds 2, five rounds 9. Scores of 10/10 appear 4 times."></div>
     <figcaption>159 of 188 mentions are one or two rounds. Perfect scores are rare: four in the whole record.</figcaption>
-    <footer class="figure-foot"><span>Source: grep across STATUS.md, docs/agents and docs/parity, computed <span class="nowrap">2026-11-07</span></span>
+    <footer class="figure-foot"><span>Source: grep across the project log, agent records and parity ledgers, computed <span class="nowrap">2026-11-07</span></span>
       <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
   </figure>
 
   <!-- The next two paragraphs are swapped against the copy file (harness first, then record-and-ask) so a paragraph sits between Figure 5 and the Figure 6/7 pair. -->
-  <p>The test harness asserts at one seam, data in and verdict out, never through a browser, with the theme on and off. After two overlapping runs lost 16 settings on 20 October, every run takes a lock. The one standing red is a data problem of mine, and every report names it.</p>
+  <p>The test harness asserts at one seam, data in and verdict out, without a browser, with the theme on and off. After two overlapping runs lost 16 settings on 20 October, every run takes a lock. The one standing red is a data problem of mine, and every report names it.</p>
   <!-- src: tests/cli/README.md:3-6, :12-13, :36-40; faster-rounds.md:40 ("never 'green' while check 18 fails") -->
 
   <figure class="figure reveal" data-chart="issues" data-src="/data/bakery-metrics.json" id="fig-issues">
@@ -855,7 +886,7 @@
       <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
   </figure>
 
-  <p>A bug found outside a ticket gets a row and a question, never a quiet fix: “No fix without José’s word — not even a one-liner.” The status file uses the phrase “record-and-ask” 99 times.</p>
+  <p>A bug found outside a ticket gets a row and a question for me: “No fix without José’s word — not even a one-liner.” The status file uses the phrase “record-and-ask” 99 times.</p>
   <!-- src: docs/agents/session-prompts/holiday-preamble.md:181-185; STATUS.md grep count (research Part 4 §4) -->
 
   <div class="figure-pair">
@@ -887,13 +918,16 @@
   </div>
 </section>
 
-<!-- ======================================================================= 07 -->
+<!-- ======================================================================= 08 -->
 <section class="prose bk-sec" id="outcome" aria-labelledby="outcome-title">
-  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">07</span> · <span class="eyebrow__seg">Outcome</span></p>
-  <h2 id="outcome-title">Live on 1 November; Thanksgiving orders opened three days later</h2>
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">08</span> · <span class="eyebrow__seg">Outcome</span></p>
+  <h2 id="outcome-title">Live 78 days late, with the bakery and the deli on one store</h2>
 
-  <p>The roadmap’s target was 15 August. The store went live on 1 November, 78 days later, after the deli layer joined the scope in October.</p>
-  <!-- src: docs/build-roadmap.md:12; bakery-metrics.json timeline.days_late_vs_target 78 -->
+  <p>The plan said 15 August. In August and September the work was the Figma journey, the spec and the test harness; the first tickets closed on 15 September, and the storefront reached staging on 12 October.</p>
+
+  <p>Then the deli joined, and I had a choice: launch the bakery alone right away, or build one store for both counters. I chose one store. The deli’s Thanksgiving layer went into the same plugin, cart and checkout, and the store went live on 1 November at <a href="https://communityfood.coop/bakery-orders/">communityfood.coop/bakery-orders</a>, 78 days after the target.</p>
+  <!-- src: docs/build-roadmap.md:12; bakery-metrics.json timeline.days_late_vs_target 78 and milestones (2026-08-06, 09-10, 09-15, 10-12, 10-26, 11-01); research/bakery-parts/06-outcomes.md "Schedule honesty" -->
+  <!-- F7: the slip framed as a choice follows the integrated review; José to confirm it and add what else held up August and September -->
 
   <figure class="figure reveal" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline" data-labels="6" data-labels-mobile="3">
     <header>
@@ -907,15 +941,18 @@
       <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span></footer>
   </figure>
 
+  <p>The first signal came three days after launch. Thanksgiving ordering opened on 4 November, and by the next day the print runner on the bakery’s PC was connected to the live store. The project log holds no production order count, and the store’s sales are the co-op’s numbers to share.</p>
+  <!-- src: research/bakery-parts/06-outcomes.md "What is live" (opens 11-04; bakery PC connected to production, 2026-11-05) and "Volume" -->
+
   <!-- The quote moves above the launch-week table so the chart and the table don't sit back to back. -->
   <figure class="quote reveal">
     <blockquote><p>“all passed. push to main”</p></blockquote>
-    <figcaption>— José, 2026-11-04 · <cite>STATUS.md:179</cite></figcaption>
+    <figcaption>— José, 4 November 2026, sending a round of fixes to production</figcaption>
   </figure>
 
   <div class="table-wrap reveal">
     <table class="table bk-launch">
-      <caption>Source: STATUS.md:161-183</caption>
+      <caption>Source: the project log, 1–5 November 2026</caption>
       <thead><tr><th scope="col">Date</th><th scope="col">Launch week</th></tr></thead>
       <tbody>
         <tr><td>1 Nov, evening</td><td>Live on production. A round of launch fixes is built overnight in two lanes, both reviewed 9/10</td></tr>
@@ -952,13 +989,14 @@
     </figure>
   </div>
 
-  <p>I’m not showing order volume. The repo doesn’t record it, and the store’s sales are the co-op’s numbers.</p>
-  <!-- src: research/bakery-case-study.md Part 5 §g "Volume" -->
+  <p>One measure decides whether this worked: the deli lead’s hours. Last season every Thanksgiving order was typed three times by hand, the cost this page opens with. This season the sheets, totals and pickup lists print from the orders themselves. I’ll measure those hours with the deli lead after the Thanksgiving pickups and report the result here in December 2026.</p>
+  <!-- src: docs/deli/requirements.md:37-40; docs/deli/spec.md:50-51; holiday prints (research/bakery-architecture.md, holiday_prints) -->
+  <!-- F7: José to add week-one numbers and a post-launch deli quote -->
 </section>
 
-<!-- ======================================================================= 08 -->
+<!-- ======================================================================= 09 -->
 <section class="prose bk-sec" id="retro" aria-labelledby="retro-title">
-  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">08</span> · <span class="eyebrow__seg">What I’d change</span></p>
+  <p class="eyebrow eyebrow--rule bk-num"><span class="eyebrow__seg">09</span> · <span class="eyebrow__seg">What I’d change</span></p>
   <h2 id="retro-title">It worked, and it cost more process than it needed</h2>
 
   <p>I wrote a retro on 4 November and turned it into a playbook. Three things stay, three change, two go.</p>
@@ -985,7 +1023,7 @@
       <h3 class="kcd__label">Drop</h3>
       <ul>
         <li><strong>Essay commits and history in code comments.</strong>The average commit subject ran to 243 characters.</li>
-        <li><strong>“Known reds”.</strong>Check 18 failed on every run for weeks, for a data reason; next time it gets fixed, not reported.</li>
+        <li><strong>“Known reds”.</strong>Check 18 failed on every run for weeks, for a data reason; next time it gets fixed.</li>
       </ul>
     </div>
   </div>
@@ -993,8 +1031,10 @@
 
   <figure class="quote quote--small reveal">
     <blockquote><p>“the bakery project wrote 1.09 million words of docs (about 12 novels). STATUS reached 99,000 words and contradicted itself, and 45% of the decision rows were never signed off.”</p></blockquote>
-    <figcaption><cite>~/ai-playbook/PLAYBOOK.md:216-218</cite></figcaption>
+    <figcaption>— My playbook, revised after the bakery retro</figcaption>
   </figure>
+
+  <p class="section-foot">Want to talk about this work? <a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a><!-- F17: José to replace with a personal address --></p>
 
   <nav class="case-nav" aria-label="More case studies">
     <a class="case-nav__link case-nav__link--prev" href="/work/epoch-explorer/"><span class="case-nav__dir">Previous</span><span class="case-nav__title">Notable AI models, redrawn for a phone</span></a>
