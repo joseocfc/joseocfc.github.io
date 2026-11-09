@@ -53,6 +53,7 @@ function syncThemeColor() {
 function initTheme() {
   if (!root.dataset.theme) root.dataset.theme = stored() || (darkMQ.matches ? 'dark' : 'light');
   syncToggles();
+  syncThemeColor(); // F20: a stored choice that differs from the OS must reach the browser chrome on load, not only on toggle
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-theme-toggle]');
     if (btn) theme.set(theme.get() === 'dark' ? 'light' : 'dark');
