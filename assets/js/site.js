@@ -5,11 +5,10 @@
  *                  while the reader has not chosen, and dispatches `themechange` on document
  *                  (detail: { theme }) so charts re-render.
  *  2. Navigation — mobile disclosure (<768px), the "Work" dropdown, aria-current, scrolled header.
- *  3. Reveal     — .reveal elements fade/rise in on first intersection, staggered per batch.
- *  4. Count-up   — [data-count] numbers count from 0 on first view (thousands separators).
- *                  Optional: data-decimals="1". Respects prefers-reduced-motion.
- *  5. TOC        — .toc links (href="#id") get aria-current="true" for the section in view.
- *  6. Links      — external links get rel="noopener".
+ *  3. Reveal     — .reveal elements fade/rise in on first intersection (no stagger). Stat
+ *                  tiles are never hidden: their server-rendered numbers show with or without JS.
+ *  4. TOC        — .toc links (href="#id") get aria-current="true" for the section in view.
+ *  5. Links      — external links get rel="noopener".
  *
  *  Public helpers (import { theme } from '/assets/js/site.js'): theme.get(), theme.set('dark').
  */
@@ -146,81 +145,24 @@ const normalise = (p) => (p.replace(/index\.html$/, '').replace(/\/?$/, '/') || 
 
 /* --------------------------------------------------------------- 3. Reveal */
 function initReveal() {
-  const els = [...document.querySelectorAll('.reveal')];
-  if (!els.length) return;
+  const all = [...document.querySelectorAll('.reveal')];
+  if (!all.length) return;
+  // Stat numbers render statically: never fade a tile that holds one.
+  const isStat = (el) => el.matches('.stat-card, .stat-value') || el.querySelector('.stat-value');
+  const els = all.filter((el) => !isStat(el));
+  all.filter(isStat).forEach((el) => el.classList.add('is-visible'));
   if (reduced() || !('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('is-visible')); return; }
   const io = new IntersectionObserver((entries) => {
-    entries
-      .filter((e) => e.isIntersecting)
-      .map((e) => e.target)
-      .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
-      .forEach((el, i) => {
-        el.style.setProperty('--reveal-i', String(Math.min(i, 8)));
-        el.classList.add('is-visible');
-        io.unobserve(el);
-        el.addEventListener('transitionend', () => el.style.removeProperty('--reveal-i'), { once: true });
-      });
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
   els.forEach((el) => io.observe(el));
 }
 
-/* ------------------------------------------------------------- 4. Count-up */
-const fmtCache = new Map();
-const fmt = (n, d) => {
-  if (!fmtCache.has(d)) fmtCache.set(d, new Intl.NumberFormat('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }));
-  return fmtCache.get(d).format(n);
-};
-// Write only the number: the first non-empty text node, so units in child spans survive.
-function numberNode(el) {
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (/\d/.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP) });
-  return walker.nextNode() || el.appendChild(document.createTextNode(''));
-}
-
-function initCount() {
-  const els = [...document.querySelectorAll('[data-count]')];
-  if (!els.length) return;
-  const prep = (el) => {
-    const raw = el.dataset.count.replace(/[,\s ]/g, '');
-    const target = Number(raw);
-    if (!Number.isFinite(target)) return null;
-    const decimals = el.dataset.decimals != null ? Number(el.dataset.decimals) : (raw.split('.')[1] || '').length;
-    const node = numberNode(el);
-    const [, pre = '', post = ''] = node.nodeValue.match(/^(\D*)[\d., ]*(.*)$/s) || [];
-    return { el, target, decimals, node, pre, post };
-  };
-  const items = els.map(prep).filter(Boolean);
-  items.forEach((it) => { it.node.nodeValue = it.pre + fmt(it.target, it.decimals) + it.post; });
-  if (reduced() || !('IntersectionObserver' in window)) return;
-
-  const run = (it) => {
-    const dur = parseFloat(getComputedStyle(root).getPropertyValue('--dur-count')) || 900;
-    const t0 = performance.now();
-    const tick = (now) => {
-      const p = Math.min(1, (now - t0) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      it.node.nodeValue = it.pre + fmt(it.target * eased, it.decimals) + it.post;
-      if (p < 1) requestAnimationFrame(tick);
-      else it.el.removeAttribute('aria-busy');
-    };
-    it.el.setAttribute('aria-busy', 'true');
-    requestAnimationFrame(tick);
-  };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      io.unobserve(e.target);
-      const it = items.find((x) => x.el === e.target);
-      if (it) run(it);
-    });
-  }, { threshold: 0.6 });
-  items.forEach((it) => {
-    // Numbers already on screen at load count too; everything starts at zero only when JS will animate it.
-    it.node.nodeValue = it.pre + fmt(0, it.decimals) + it.post;
-    io.observe(it.el);
-  });
-}
-
-/* ------------------------------------------------------------------ 5. TOC */
+/* ------------------------------------------------------------------ 4. TOC */
 function initToc() {
   const toc = document.querySelector('.toc');
   if (!toc || !('IntersectionObserver' in window)) return;
@@ -265,7 +207,7 @@ function initToc() {
   pairs.forEach((p) => io.observe(p.el));
 }
 
-/* ---------------------------------------------------------------- 6. Links */
+/* ---------------------------------------------------------------- 5. Links */
 function initLinks() {
   document.querySelectorAll('a[href]').forEach((a) => {
     let url;
@@ -283,7 +225,6 @@ function boot() {
   initNav();
   initLinks();
   initReveal();
-  initCount();
   initToc();
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
