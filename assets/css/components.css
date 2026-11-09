@@ -775,7 +775,7 @@
     color: var(--ink-3);
   }
 }
-.steps--vertical { grid-auto-flow: row; grid-template-columns: 1fr !important; gap: 0; }
+.steps.steps--vertical { grid-auto-flow: row; grid-template-columns: 1fr; gap: 0; }
 .steps--vertical .step { display: grid; grid-template-columns: 3rem minmax(0, 1fr); padding-block: var(--space-5); }
 .steps--vertical .step::before { margin: .35em 0 0; }
 .steps--vertical .step::after { display: none; }
@@ -786,7 +786,7 @@
    Tags
    ========================================================================== */
 .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; }
-.tags > li { margin: 0 !important; }
+.tags > li, .prose .tags > li { margin: 0; }
 .tag {
   display: inline-flex;
   align-items: center;
@@ -880,18 +880,18 @@
 
 /* Duo: desktop capture with the phone capture overlapping, on a plate */
 .work-card__media--duo img { position: absolute; height: auto; object-fit: initial; }
-.work-card__shot {
+.work-card__media--duo .work-card__shot {
   left: 7%;
   top: 9%;
-  width: 78% !important;
+  width: 78%;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--paper);
 }
-.work-card__phone {
+.work-card__media--duo .work-card__phone {
   right: 7%;
   top: 30%;
-  width: 21% !important;
+  width: 21%;
   border: 1px solid var(--line-strong);
   border-radius: 12px;
   box-shadow: 0 0 0 4px var(--paper-2);
@@ -1109,8 +1109,8 @@
   scroll-padding-inline: var(--gutter);
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black var(--gutter), black calc(100% - var(--gutter)), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, black var(--gutter), black calc(100% - var(--gutter)), transparent 100%);
 }
 .toc__list::-webkit-scrollbar { display: none; }
 .toc__list li { flex: none; scroll-snap-align: start; }

@@ -31,32 +31,8 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
+<link rel="stylesheet" href="/assets/css/pages/about.css">
 <!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
-<style>
-/* About · lane B4 · page-scoped. The page's sections sit inside .prose (A1's case layout), so these rules
-   undo .prose's list indents for the timeline, findings and contact components and set section rhythm. */
-.about-bio { max-width: 40rem; margin-top: var(--space-5); }
-.about-bio > * + * { margin-top: var(--space-4); }
-.about-hero { padding-bottom: clamp(var(--space-7), 6vw, var(--space-8)); }
-.about-layout { padding-bottom: clamp(var(--space-8), 8vw, var(--space-9)); }
-
-.about-layout .prose > .about-section + .about-section { margin-top: clamp(var(--space-8), 8vw, var(--space-9)); }
-.about-section > * + * { margin-top: var(--space-6); }
-.about-section > h2 { text-wrap: balance; }
-.about-layout .prose :is(.timeline, .findings, .contact-list) { padding-left: 0; }
-.about-layout .prose :is(.timeline, .findings, .contact-list) li + li { margin-top: 0; }
-.about-layout .timeline__text { font-size: var(--fs-body); line-height: 1.55; }
-.about-layout .timeline__text strong { font-weight: var(--fw-semi); }
-.about-layout .timeline__item:last-child { padding-bottom: 0; }
-.about-bring .finding:last-child { border-bottom: 1px solid var(--line); }
-.about-bring .finding__title { color: var(--ink); }   /* .prose p would grey it */
-.about-bring .finding__text { color: var(--ink-2); }
-
-/* The chip strip under 1024px is sticky below the header: keep jumped-to headings clear of it. */
-@media (max-width: 1023.98px) {
-  .about-section { scroll-margin-top: 56px; }
-}
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

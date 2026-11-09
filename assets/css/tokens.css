@@ -25,7 +25,7 @@
   --ink:          #121412;
   --ink-2:        #4A4F4B;
   --ink-3:        #7A807B;   /* muted: axis ticks, rules, icons, placeholders */
-  --ink-meta:     #646A66;   /* AA-safe muted text for small meta (≥4.5:1 on paper and paper-2) */
+  --ink-meta:     #5C625E;   /* AA-safe muted text for small meta: 5.7 / 5.2 / 4.8:1 on paper / paper-2 / paper-3 (F15) */
   --line:         #DAD6CC;
   --line-strong:  #C6C1B5;   /* baselines, emphasised dividers */
 
@@ -35,6 +35,10 @@
   --accent-strong:#256ABF;   /* filled controls; white text clears 5.4:1 */
   --accent-strong-hover: #1C5CAB;
   --on-accent:    #FFFFFF;
+
+  /* ---- Theme-invariant literals (declared once on :root, so light and dark share them; F4) */
+  --media-mat:    #FFFFFF;   /* white mat behind light-UI screenshot crops */
+  --swatch-hardcoded: #284734; /* the literal hex quoted in the bakery case study's hard-coded-colour example */
 
   /* ---- Status --------------------------------------------------------- */
   --good:         #1a7f37;

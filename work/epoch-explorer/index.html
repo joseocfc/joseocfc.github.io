@@ -30,76 +30,8 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
+<link rel="stylesheet" href="/assets/css/pages/epoch-explorer.css">
 <!-- Page styles for the Epoch study (lane A4). The explorer module injects its own scoped .ex-* styles. -->
-<style>
-  html:not(.js) .ex-unit { display: none; }
-  .ex-hero-meta { margin-top: var(--space-7); }
-  .ex-crop { display: grid; gap: var(--space-5); margin-block: var(--space-7); }
-  @media (min-width: 640px) { .ex-crop { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .ex-crop figure { margin: 0; padding: var(--space-5) var(--space-5) var(--space-4); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper-2); }
-  .ex-crop svg { display: block; width: 100%; max-width: 340px; height: auto; margin-inline: auto; overflow: visible; }
-  .ex-crop figcaption { margin-top: var(--space-3); font-size: var(--fs-small); line-height: 1.5; color: var(--ink-2); }
-  .ex-crop figcaption .eyebrow { margin-bottom: 4px; }
-  .ex-crop .ex-phone { fill: var(--paper); stroke: var(--line-strong); stroke-width: 1.25; }
-  .ex-crop .ex-notch { fill: var(--line-strong); }
-  .ex-crop .ex-screen { fill: var(--paper); }
-  .ex-crop .ex-ghost { opacity: .32; }
-  .ex-crop .ex-ghost-frame { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
-  .ex-crop .ex-d { stroke: var(--paper); stroke-width: .8; }
-  .ex-crop .ex-d1 { fill: var(--series-1); } .ex-crop .ex-d2 { fill: var(--series-2); } .ex-crop .ex-d3 { fill: var(--series-3); }
-  .ex-crop .ex-pill { fill: var(--paper-2); stroke: var(--line-strong); stroke-width: .75; }
-  .ex-crop .ex-pill--on { fill: var(--ink); stroke: var(--ink); }
-  .ex-crop .ex-pill--on + text { fill: var(--paper); }
-  .ex-crop .ex-edge { stroke: var(--accent); stroke-width: 1.5; }
-  .ex-crop .ex-gridl { stroke: var(--grid); stroke-width: .75; }
-  .ex-crop .ex-fitl { stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
-  .ex-crop .ex-tiny { font-size: 8.5px; font-weight: 600; }
-  .ex-crop .ex-tiny2 { font-size: 6.5px; letter-spacing: 0; }
-  .ex-crop .ex-halo { paint-order: stroke; stroke: var(--paper); stroke-width: 3px; font-weight: 500; font-size: 7.5px; }
-  .ex-crop .d-meta { font-size: 10px; }
-  /* C1 QA: these schematics use the shell's .d-* classes outside .diagram, so they had no fill/stroke
-     (text defaulted to black: invisible in dark; the axis line had no stroke). Same paint as .diagram. */
-  .ex-crop .d-label { fill: var(--ink); }
-  .ex-crop .d-meta { fill: var(--ink-meta); }
-  .ex-crop .d-edge { fill: none; stroke: var(--ink-3); stroke-width: 1; }
-  .ex-crop .d-meta.ex-tiny2 { font-size: 6.5px; } /* C1 QA: the .d-meta rule above overrode .ex-tiny2, so pill labels overflowed their pills */
-  .ex-rules { display: grid; gap: 0; max-width: 880px; margin-block: var(--space-6) 0; }
-  .ex + .prose { margin-top: var(--space-8); }
-  .ex-trend-grid + .prose { margin-top: var(--space-7); }
-  .ex-twin + .prose { margin-top: var(--space-5); }
-  .findings + .callout { margin-top: var(--space-6); }
-  .ex-attrib { display: grid; gap: var(--space-3); padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-5) + 2px); border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: var(--r-control); background: var(--paper-2); }
-  .ex-attrib p { margin: 0; font-size: var(--fs-small); line-height: 1.55; color: var(--ink); }
-  .ex-attrib ul { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: var(--fs-micro); }
-  .ex-attrib a { color: var(--accent-ink); }
-  .ex-trend-grid { margin-top: 0; }
-  .ex-trend-grid .stat-value { min-height: 1em; }
-  .ex-grammar td, .ex-grammar th[scope="row"] { white-space: normal; min-width: 8.5rem; }
-  .ex-grammar td:nth-child(3) { min-width: 15rem; }
-  .ex-grammar code { font-size: .78rem; white-space: nowrap; }
-  .ex-code pre { max-height: 34rem; overflow: auto; margin: 0; padding: var(--space-4) var(--space-5); font-size: .78rem; line-height: 1.6; tab-size: 4; }
-  .ex-twin img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--r-media); }
-  .ex-twin .ex-twin__dark { display: none; }
-  :root[data-theme="dark"] .ex-twin .ex-twin__light { display: none; }
-  :root[data-theme="dark"] .ex-twin .ex-twin__dark { display: block; }
-  .prose > .findings { padding-left: 0; }
-  @media (max-width: 639.98px) {
-    .ex-grammar-wrap { overflow: visible; }
-    .ex-grammar, .ex-grammar tbody, .ex-grammar tr, .ex-grammar th, .ex-grammar td { display: block; width: 100%; }
-    .ex-grammar thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-    .ex-grammar tr { padding: var(--space-4) 0; border-bottom: 1px solid var(--line); }
-    .ex-grammar tbody th[scope="row"] { padding: 0 0 var(--space-2); border: 0; font-weight: var(--fw-semi); }
-    .ex-grammar td { position: relative; min-width: 0 !important; padding: 4px 0 4px 6.25rem; border: 0; }
-    .ex-grammar td::before { content: attr(data-label); position: absolute; left: 0; top: 6px; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-meta); }
-    .ex-grammar code { white-space: normal; }
-    .ex-grammar caption { display: block; }
-  }
-  .ex-next { counter-reset: nx; list-style: none; padding: 0 !important; }
-  .ex-next > li { counter-increment: nx; position: relative; padding: var(--space-4) 0 var(--space-4) 2.75rem; border-top: 1px solid var(--line); margin: 0 !important; }
-  .ex-next > li:last-child { border-bottom: 1px solid var(--line); }
-  .ex-next > li::before { content: counter(nx, decimal-leading-zero); position: absolute; left: 0; top: calc(var(--space-4) + .2em); font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--accent-ink); }
-  .ex-next strong { display: block; margin-bottom: 2px; color: var(--ink); font-weight: var(--fw-semi); }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

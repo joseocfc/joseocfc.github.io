@@ -285,7 +285,7 @@ a:not([class]):visited { color: var(--accent-ink); }
 /* ---- Print ------------------------------------------------------------ */
 @media print {
   .site-header, .site-footer, .skip, .toc, .theme-toggle, .figure-actions { display: none !important; }
-  body { background: #fff; color: #000; }
+  body { background: white; color: black; }  /* print: plain keywords, outside the theme */
   .section { padding-block: 1.5rem; }
   a { color: inherit; }
 }
