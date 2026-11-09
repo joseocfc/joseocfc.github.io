@@ -1105,7 +1105,7 @@ class Explorer {
     const rows = this.rows();
     const cols = ['model', 'organization', 'date', 'domain', 'domain_group', 'country', 'compute', 'parameters', 'dataset_size', 'notability', 'confidence'];
     const esc = (v) => (v == null ? '' : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
-    const head = `# Source: Epoch AI, 'Notable AI Models' (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/notable-ai-models. Trimmed and redrawn by José Ochoa; not affiliated with Epoch AI. View: ${this.range().label}.`;
+    const head = `# Source: Epoch AI, 'Notable AI Models' (CC BY 4.0), downloaded 2026-11-07 from epoch.ai/data/ai-models. Trimmed and redrawn by José Ochoa; not affiliated with Epoch AI. View: ${this.range().label}.`;
     const csv = [head, cols.join(','), ...rows.map((m) => cols.map((c) => esc(m[c])).join(','))].join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const a = el('a', { href: URL.createObjectURL(blob), download: `epoch-notable-models-${this.state.range}.csv` });
