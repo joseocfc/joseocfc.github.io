@@ -57,3 +57,6 @@
 /* Contact block on Home: keep the label column narrow enough for the location line. */
 .home-about .contact-list__value { color: var(--ink); }
 .home-about .btn-row { margin-top: var(--space-5); }
+
+/* Review round 1 (F2): second link in the bakery card, lifted above the card's stretched title link */
+.work-card__live { position: relative; z-index: 2; white-space: nowrap; }

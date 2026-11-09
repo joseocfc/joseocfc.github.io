@@ -3,20 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- PAGE META: replace the four «…» values on every page. Title ≤60 chars, description ≤155. -->
-<title>Systems that stay coherent at AI speed — José Ochoa</title>
-<meta name="description" content="Product and web designer. A bakery system shipped by directing AI agents, a design system held in parity with Figma, and charts built on real data.">
+<title>José Ochoa: product designer who directs AI agents</title>
+<meta name="description" content="I design software and direct the AI agents that build it, with no developers on the team.">
 <meta name="author" content="José Ochoa">
 <link rel="canonical" href="https://joseocfc.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="José Ochoa">
-<meta property="og:title" content="José Ochoa: I design systems that stay coherent at AI speed">
-<meta property="og:description" content="One designer, zero developers, one live store. Case studies where every chart is computed from real data, with the source attached.">
+<meta property="og:title" content="José Ochoa: I design software and direct the AI agents that build it">
+<meta property="og:description" content="I design software and direct the AI agents that build it, with no developers on the team. A live bakery store, a design system and a chart study, with sources.">
 <meta property="og:url" content="https://joseocfc.github.io/">
 <meta property="og:image" content="https://joseocfc.github.io/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="I design systems that stay coherent at AI speed. José Ochoa, product and web designer.">
+<meta property="og:image:alt" content="José Ochoa, product and web designer: I design software and direct the AI agents that build it, with no developers on the team.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121412" media="(prefers-color-scheme: dark)">
@@ -32,7 +31,6 @@
 <link rel="stylesheet" href="/assets/css/components.css">
 <link rel="stylesheet" href="/assets/css/charts.css">
 <link rel="stylesheet" href="/assets/css/pages/home.css">
-<!-- PAGE HEAD: page-specific <link>/<style> go here (keep it empty if not needed). -->
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -86,65 +84,50 @@
 
 <main id="main" tabindex="-1">
 <!-- PAGE CONTENT -->
-<!-- Home · lane B4 (Phase B) · copy: content/home.md (A5), verbatim. Structure: SPEC §7 Home. -->
+<!-- Home · copy: content/home.md -->
 
 <section class="hero hero--wide container" aria-labelledby="hero-title">
   <p class="eyebrow hero__eyebrow"><span class="eyebrow__seg">José Ochoa</span> · <span class="eyebrow__seg">Product &amp; web design</span> · <span class="eyebrow__seg">Data visualization</span></p>
-  <h1 class="hero__title" id="hero-title">I design systems that stay coherent at <em>AI&nbsp;speed.</em></h1>
-  <p class="lead hero__dek">On 1 November 2026, a bakery ordering system I designed went live at Community Food <span class="nowrap">Co-op</span>, built by AI agents I directed and checked by 6,089 automated assertions. It sits on the co-op’s design system, which I keep in parity across theme.json, CSS and Figma so an agent can’t hardcode a value without it surfacing.</p>
-  <!-- src: launch STATUS.md:161 and 6,089 tests/cli/README.md Count line, via research/bakery-case-study.md Part 5 §g; hook research/design-system-case.md §0, §7 -->
+  <h1 class="hero__title" id="hero-title">I design software and direct the AI agents that build it, with no developers on the&nbsp;team</h1>
+  <p class="lead hero__dek">On November 1, 2026, a bakery ordering system I designed went live at Community Food <span class="nowrap">Co-op</span>. AI agents I directed built it, and 6,089 automated assertions check it. It runs on the co-op’s design system, which keeps theme.json, CSS and Figma in parity so a value an agent hardcodes shows up in review.</p>
+  <!-- src: launch date and 6,089 tests/cli/README.md Count line, via research/bakery-case-study.md Part 5 §g; hook research/design-system-case.md §0, §7 -->
   <div class="btn-row hero__actions">
     <a class="btn btn--primary" href="/work/bakery-orders/">Read the bakery case study <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <a class="btn btn--ghost" href="/process/">How I work</a>
   </div>
 
-  <figure class="figure hero__figure" data-chart="timeline" data-src="/data/bakery-metrics.json" id="fig-timeline">
-    <header>
-      <p class="eyebrow"><span class="eyebrow__seg">Figure 1</span> · <span class="eyebrow__seg">Commits per day, all branches</span></p>
-      <h2 class="figure-title">142 days from first commit to a live store</h2>
-      <p class="figure-sub">Daily commits on the bakery plugin, 12 June to 5 November 2026, with milestones. October alone holds 1,174 of 1,503.</p>
-    </header>
-    <div class="chart" role="img" aria-label="Bar chart of daily commits from June to November 2026. Summer is sparse, October is dense, the tallest bar is 307 commits on 26 October, and the store goes live on 1 November."></div>
-    <figcaption>The tallest bar is one night: 18 deli tickets built by an orchestrator and parallel builders, 307 commits dated 26 October.</figcaption>
-    <footer class="figure-foot">
-      <span>Source: git log --all on joseocfc/cfc-bakery-orders, computed 2026-11-07</span>
-      <span class="figure-actions"><button type="button" data-action="table">Table</button><a data-action="download" download>Data</a></span>
-    </footer>
+  <figure class="media-row hero__figure" id="fig-product">
+    <div class="media media--browser"><img src="/assets/img/bakery/admin-bakery-dashboard-day-view-1280.jpg" width="1265" height="1622" decoding="async" alt="Staff dashboard with a rail of pickup days and a month calendar on the left and a list of the next day’s orders on the right."></div>
+    <div class="media media--phone"><img src="/assets/img/bakery/storefront-builder-step-4-build-sheet-375.jpg" width="750" height="1624" decoding="async" alt="The cake builder on a phone, with the sheet that summarizes the cake so far open over the frosting step."></div>
+    <figcaption><strong>Figure 1.</strong> The bakery system from both counters: the staff dashboard’s day view (left) and the customer’s cake builder on a phone (right). Both were captured from a local copy with demo orders, so no customer names appear. <a href="https://communityfood.coop/bakery-orders/">The live store</a> is public.</figcaption>
   </figure>
-  <!-- src: data/bakery-metrics.json timeline.days_to_launch 142, timeline.total_commits 1503, commits_by_month 2026-10 = 1174, busiest_days[0] 2026-10-26 = 307 -->
+  <!-- src: captures and descriptions from the bakery case study; the commits-per-day chart moved to /process/ -->
 </section>
 
 <section class="section section--tight home-stats" id="numbers" aria-labelledby="numbers-title">
   <div class="container">
-    <h2 class="visually-hidden" id="numbers-title">The work in four numbers</h2>
+    <h2 class="visually-hidden" id="numbers-title">The work in three numbers</h2>
     <div class="stat-grid">
-      <article class="stat-card reveal">
-        <p class="stat-value"><span data-count="1">1</span></p>
+      <article class="stat-card">
+        <p class="stat-value">1</p>
         <p class="stat-label">Designer, 0 developers</p>
-        <p class="stat-claim">One live store since 1 November 2026, for bakery and Thanksgiving deli orders.</p>
-        <footer class="stat-meta">git log --all: 1 author · STATUS.md:161</footer>
+        <p class="stat-claim">One live store since November 1, 2026, for bakery and Thanksgiving deli orders.</p>
+        <footer class="stat-meta">git log: 1 author</footer>
       </article>
-      <article class="stat-card reveal">
-        <p class="stat-value"><span data-count="6089">6,089</span></p>
+      <article class="stat-card">
+        <p class="stat-value">6,089</p>
         <p class="stat-label">Automated assertions</p>
         <p class="stat-claim">In a full test run, with 1 known red that every report names.</p>
-        <footer class="stat-meta">tests/cli/README.md · <span class="nowrap">2026-11-05</span></footer>
+        <footer class="stat-meta">Full test run · <span class="nowrap">Nov 5, 2026</span></footer>
       </article>
-      <article class="stat-card reveal">
-        <p class="stat-value"><span data-count="1594">1,594</span></p>
-        <p class="stat-label">Assumptions written down</p>
-        <p class="stat-claim">Numbered A1 to A2121, each with a status: signed off, superseded or waiting on me.</p>
-        <footer class="stat-meta">docs/assumptions-register.md · <span class="nowrap">2026-11-05</span></footer>
-      </article>
-      <article class="stat-card reveal">
-        <p class="stat-value"><span data-count="94">94</span></p>
+      <article class="stat-card">
+        <p class="stat-value">94</p>
         <p class="stat-label">Design tokens</p>
         <p class="stat-claim">1 source of truth, mirrored to Figma, with 0 unexplained deltas either way.</p>
-        <footer class="stat-meta">figma-parity-check.py · last run <span class="nowrap">2026-08-21</span></footer>
+        <footer class="stat-meta">Parity check · last run <span class="nowrap">Aug 21, 2026</span></footer>
       </article>
     </div>
-    <!-- src: card 1 data/bakery-metrics.json timeline.contributors = 1; card 2 harness.latest_count_line (6089);
-         card 3 assumptions_register.rows_in_file 1594, highest_a_number 2121; card 4 data/design-system-metrics.json tokens.contract_total 94 -->
+    <!-- src: card 1 data/bakery-metrics.json timeline.contributors = 1; card 2 harness.latest_count_line (6089); card 3 data/design-system-metrics.json tokens.contract_total 94. The assumptions tile was dropped in review round 1 (F2). -->
   </div>
 </section>
 
@@ -152,7 +135,7 @@
   <div class="container">
     <header class="section-head reveal">
       <p class="eyebrow">Selected work</p>
-      <h2 id="work-title">Two systems in production and one study for Epoch</h2>
+      <h2 id="work-title">Two systems in production and an unsolicited study</h2>
     </header>
 
     <div class="work-list">
@@ -164,9 +147,9 @@
         <div class="work-card__body">
           <p class="eyebrow"><span class="eyebrow__seg">Case study</span> · <span class="eyebrow__seg">Community Food <span class="nowrap">Co-op</span></span> · <span class="eyebrow__seg">2026</span></p>
           <h3 class="work-card__title"><a href="/work/bakery-orders/">A bakery ordering system, shipped by one designer directing AI agents</a></h3>
-          <p class="work-card__text">A pickup-first cake builder, staff dashboards, printed tickets and a Thanksgiving deli layer.</p>
+          <p class="work-card__text">A pickup-first cake builder, staff dashboards, printed tickets and a Thanksgiving deli layer. <a class="work-card__live" href="https://communityfood.coop/bakery-orders/">Visit the live store</a></p>
           <ul class="tags" aria-label="Disciplines"><li class="tag">Product design</li><li class="tag">Figma</li><li class="tag">AI orchestration</li><li class="tag">WooCommerce</li></ul>
-          <span class="work-card__cta" aria-hidden="true">Read the case study</span>
+          <span class="work-card__cta" aria-hidden="true">How it shipped, and what slipped</span>
         </div>
       </article>
 
@@ -179,7 +162,7 @@
           <h3 class="work-card__title"><a href="/work/design-system/">One system in both directions</a></h3>
           <p class="work-card__text">theme.json, CSS and Figma held in parity by a drift checker and a hook that stops agents hardcoding values.</p>
           <ul class="tags" aria-label="Disciplines"><li class="tag">Design systems</li><li class="tag">Tokens</li><li class="tag">Figma variables</li></ul>
-          <span class="work-card__cta" aria-hidden="true">Read the case study</span>
+          <span class="work-card__cta" aria-hidden="true">See the hook that blocks hardcoded values</span>
         </div>
       </article>
 
@@ -190,10 +173,10 @@
         </div>
         <div class="work-card__body">
           <p class="eyebrow"><span class="eyebrow__seg">Study</span> · <span class="eyebrow__seg">Epoch AI data</span> · <span class="eyebrow__seg">2026</span></p>
-          <h3 class="work-card__title"><a href="/work/epoch-explorer/">Notable AI models, redrawn for a phone</a></h3>
-          <p class="work-card__text">Epoch’s CC-BY data rebuilt as a chart that reflows at 390&nbsp;px instead of cropping.</p>
+          <h3 class="work-card__title"><a href="/work/epoch-explorer/">Redrawing a dense scatter plot for a phone</a></h3>
+          <p class="work-card__text">An unsolicited study of Epoch’s AI Models explorer, rebuilt from its CC-BY data for a 390&nbsp;px screen.</p>
           <ul class="tags" aria-label="Disciplines"><li class="tag">Data visualization</li><li class="tag">D3</li><li class="tag">matplotlib</li></ul>
-          <span class="work-card__cta" aria-hidden="true">Read the study</span>
+          <span class="work-card__cta" aria-hidden="true">See the phone redraw</span>
         </div>
       </article>
     </div>
@@ -207,7 +190,7 @@
           </div>
           <div class="work-card__body">
             <h4 class="work-card__title">Project Net</h4>
-            <p class="work-card__text">A community map of tension nets in Bellingham, with location privacy built into the data model.</p>
+            <p class="work-card__text">A community map of the hammock-like paracord nets weavers hang between trees in Bellingham. Public locations are deliberately fuzzed.</p>
             <ul class="tags" aria-label="Disciplines"><li class="tag">Product design</li><li class="tag">Maps</li><li class="tag">Next.js</li></ul>
           </div>
         </article>
@@ -232,8 +215,8 @@
   <div class="container">
     <header class="section-head reveal">
       <p class="eyebrow">How I work</p>
-      <h2 id="how-title">I specify, agents build, and nothing ships without proof</h2>
-      <p class="lead">I don’t write the code. I specify it, direct the agents that do, and prove it works.</p>
+      <h2 id="how-title">Every change ships with its evidence</h2>
+      <p class="lead">The agents write the code. My job is the specification, and the evidence that the code meets it.</p>
     </header>
     <ol class="steps">
       <li class="step reveal">
@@ -242,11 +225,11 @@
       </li>
       <li class="step reveal">
         <h3 class="step__title">Direct</h3>
-        <p class="step__text">An orchestrator splits the work into lanes, each builder works on its own branch, and a fresh reviewer scores every risky change. Below 9/10, it goes back.</p>
+        <p class="step__text">An orchestrator agent splits the work into parallel jobs, each builder works on its own branch, and a fresh reviewer scores every risky change. Below 9/10, it goes back.</p>
       </li>
       <li class="step reveal">
         <h3 class="step__title">Prove</h3>
-        <p class="step__text">Test output and screenshots, never summaries. Then I walk staging on my phone, and production moves only on my word.</p>
+        <p class="step__text">I read test output and screenshots, and skip the agents’ own summaries. Then I walk staging on my phone, and production moves only on my word.</p>
       </li>
     </ol>
     <p class="section-foot"><a class="btn btn--ghost" href="/process/">The method, with the evidence <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
@@ -262,13 +245,13 @@
       <div class="btn-row"><a class="btn btn--ghost" href="/about/">More about me <svg class="btn__arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     </div>
     <ul class="contact-list reveal" aria-label="Contact">
-      <li><span class="contact-list__label">Email</span><a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a></li>
+      <li><span class="contact-list__label">Email</span><a href="mailto:joseo@communityfood.coop">joseo@communityfood.coop</a><!-- F17: José to replace with a personal address --></li>
       <li><span class="contact-list__label">LinkedIn</span><a href="https://www.linkedin.com/in/jose-antonio-ochoa">in/jose-antonio-ochoa</a></li>
       <li><span class="contact-list__label">GitHub</span><a href="https://github.com/joseocfc">github.com/joseocfc</a></li>
       <li><span class="contact-list__label">Location</span><span class="contact-list__value">Bellingham, WA · Pacific · <span class="nowrap">9–2 PT</span> overlaps <span class="nowrap">12–5 ET</span></span></li>
     </ul>
     <!-- Email: the co-op work address is the fallback content/home.md allows until José picks an address for applications.
-         LinkedIn: kept to match the shared footer; public visibility is off (research/jose-profile.md flag 4) — see lanes/notes/B4.md. -->
+         LinkedIn: kept to match the shared footer; public visibility is off (research/jose-profile.md flag 4). -->
   </div>
 </section>
 <!-- /PAGE CONTENT -->
@@ -283,7 +266,7 @@
     <nav class="site-footer__col" aria-label="Contact">
       <p class="site-footer__heading">Contact</p>
       <ul>
-        <li><a href="mailto:joseo@communityfood.coop">Email</a></li>
+        <li><a href="mailto:joseo@communityfood.coop">Email</a><!-- F17: José to replace with a personal address --></li>
         <li><a href="https://www.linkedin.com/in/jose-antonio-ochoa">LinkedIn</a></li>
         <li><a href="https://github.com/joseocfc">GitHub</a></li>
       </ul>
